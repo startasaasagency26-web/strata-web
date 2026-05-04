@@ -7,6 +7,7 @@ import { cn } from '../lib/utils';
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,88 +27,126 @@ export const Navbar = () => {
 
   return (
     <>
-      <header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300 md:px-8 px-4 pt-4 md:pt-8',
-        )}
+      <motion.header
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-8 md:pt-6"
       >
         <div className={cn(
-          "mx-auto flex items-center justify-between rounded-full px-6 py-3 transition-all duration-300 border",
-          isScrolled ? "bg-surface/90 backdrop-blur-md border-border/50 shadow-sm" : "bg-transparent border-transparent"
+          "mx-auto flex items-center justify-between rounded-full px-5 transition-all duration-500",
+          "bg-[#050505] border border-white/[0.08] text-white",
+          isScrolled ? "py-2 backdrop-blur-xl bg-[#000000]/90 shadow-[0_4px_30px_rgba(0,0,0,0.5)]" : "py-3 bg-[#050505]/95 backdrop-blur-md"
         )}>
-          <a href="#" className="relative z-50 flex-shrink-0">
-            <Logo className="h-8" />
+          {/* Logo - Left */}
+          <a href="#" className="relative z-50 flex-shrink-0 flex items-center group">
+            <Logo className="transition-transform duration-300 group-hover:scale-105" />
           </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
-            <ul className="flex items-center gap-8">
+          {/* Desktop Nav - Center */}
+          <nav className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2">
+            <ul className="flex items-center gap-1 p-1">
               {navLinks.map((link) => (
-                <li key={link.name}>
+                <li key={link.name} className="relative">
                   <a 
                     href={link.href}
-                    className="text-xs font-mono font-bold tracking-widest text-primary/80 hover:text-primary transition-colors"
+                    className="relative z-10 px-4 py-2 block text-[11px] font-mono font-bold tracking-[0.2em] transition-colors duration-300 text-white/70 hover:text-white"
+                    onMouseEnter={() => setHoveredLink(link.name)}
+                    onMouseLeave={() => setHoveredLink(null)}
                   >
                     {link.name}
                   </a>
+                  {hoveredLink === link.name && (
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 bg-white/10 rounded-full z-0 pointer-events-none"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
                 </li>
               ))}
             </ul>
           </nav>
 
-          <div className="hidden lg:flex items-center gap-4">
-            <a href="#demo" className="text-xs font-mono font-bold tracking-widest px-6 py-2.5 rounded-full border border-border/50 hover:bg-border/20 transition-colors">
-              REQUEST A DEMO
-            </a>
-            <a href="#contact" className="text-xs font-mono font-bold tracking-widest px-6 py-2.5 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors">
-              BUILD WITH US
-            </a>
-            <button className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90 transition-colors">
-              <Menu size={18} />
-            </button>
+          {/* CTA & Menu - Right */}
+          <div className="flex items-center gap-3 relative z-50">
+            <div className="hidden lg:flex items-center gap-3">
+              <motion.a 
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
+                href="#demo" 
+                className="text-[11px] font-mono font-bold tracking-widest px-5 py-2.5 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300"
+              >
+                REQUEST A DEMO
+              </motion.a>
+              <motion.a 
+                whileHover={{ y: -2, boxShadow: "0 0 20px rgba(255,255,255,0.2)" }}
+                whileTap={{ y: 0 }}
+                href="#contact" 
+                className="text-[11px] font-mono font-bold tracking-widest px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 transition-all duration-300"
+              >
+                BUILD WITH US
+              </motion.a>
+            </div>
+            
+            <motion.button 
+              whileHover={{ rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="w-10 h-10 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors duration-300"
+              aria-label="Toggle Menu"
+            >
+              {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+            </motion.button>
           </div>
-
-          {/* Mobile Toggle */}
-          <button 
-            className="lg:hidden relative z-50 text-primary p-2 w-10 h-10 rounded-full bg-white/50 border border-border/50 flex items-center justify-center"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle Menu"
-          >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-surface/95 backdrop-blur-xl flex flex-col justify-center items-center"
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-40 bg-[#050505]/95 flex flex-col justify-center items-center px-6"
           >
-            <ul className="flex flex-col items-center gap-8">
-              {navLinks.map((link) => (
-                <li key={link.name}>
+            <ul className="flex flex-col items-center gap-6 w-full">
+              {navLinks.map((link, idx) => (
+                <motion.li 
+                  key={link.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + idx * 0.05 }}
+                  className="overflow-hidden"
+                >
                   <a 
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-3xl font-display font-bold text-primary hover:text-primary/70 transition-colors uppercase tracking-wide"
+                    className="text-4xl font-display font-bold text-white hover:text-white/70 transition-colors uppercase tracking-tight"
                   >
                     {link.name}
                   </a>
-                </li>
+                </motion.li>
               ))}
-              <li className="mt-8 flex flex-col gap-4 w-full px-8">
-                <a href="#demo" className="text-center text-sm font-mono font-bold tracking-widest w-full py-4 rounded-full border border-border/50 hover:bg-border/20 transition-colors">
+              <motion.li 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="mt-8 flex flex-col gap-4 w-full max-w-xs"
+              >
+                <a href="#demo" className="text-center text-xs font-mono font-bold tracking-widest w-full py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-colors">
                   REQUEST A DEMO
                 </a>
-                <a href="#contact" className="text-center text-sm font-mono font-bold tracking-widest w-full py-4 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors">
+                <a href="#contact" className="text-center text-xs font-mono font-bold tracking-widest w-full py-4 rounded-full bg-white text-black hover:bg-white/90 transition-colors">
                   BUILD WITH US
                 </a>
-              </li>
+              </motion.li>
             </ul>
           </motion.div>
         )}
