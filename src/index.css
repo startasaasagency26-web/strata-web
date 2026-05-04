@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-accent font-sans antialiased selection:bg-primary/30 selection:text-white;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight text-white;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/[0.05] backdrop-blur-xl border border-white/[0.1] shadow-[0_4px_30px_rgba(0,0,0,0.2)];
+  }
+  
+  .glow-text {
+    text-shadow: 0 0 20px rgba(0, 85, 255, 0.5);
+  }
+  
+  .glow-box {
+    box-shadow: 0 0 40px -10px rgba(138, 43, 226, 0.4);
+  }
+}
