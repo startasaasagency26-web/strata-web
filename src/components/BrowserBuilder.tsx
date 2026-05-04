@@ -20,7 +20,7 @@ export const BrowserBuilder = ({ className = '' }: { className?: string }) => {
       transition: {
         duration: DURATION,
         repeat: Infinity,
-        ease: "easeOut",
+        ease: "easeOut" as const,
         times: [0, start, fadeIn, fadeOutStart, fadeOutEnd, 1]
       }
     };
@@ -32,7 +32,7 @@ export const BrowserBuilder = ({ className = '' }: { className?: string }) => {
     transition: {
       duration: DURATION,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
       // Scroll starts at 4.5s, ends at 8.5s. Rests until 12s. Snaps back at end.
       times: [0, 4.5/DURATION, 8.5/DURATION, 12/DURATION, 12.5/DURATION, 1]
     }
@@ -44,7 +44,7 @@ export const BrowserBuilder = ({ className = '' }: { className?: string }) => {
     transition: {
       duration: DURATION,
       repeat: Infinity,
-      ease: "linear",
+      ease: "linear" as const,
       times: [0, 0.1, 3/DURATION, 4/DURATION, 12/DURATION, 1]
     }
   };
