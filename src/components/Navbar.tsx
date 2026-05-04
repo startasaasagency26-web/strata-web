@@ -34,27 +34,29 @@ export const Navbar = () => {
         className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-8 md:pt-6"
       >
         <div className={cn(
-          "mx-auto flex items-center justify-between rounded-full px-5 transition-all duration-500",
+          "mx-auto flex items-center justify-between w-full max-w-[1800px] rounded-full px-4 md:px-5 transition-all duration-500",
           "bg-[#050505] border border-white/[0.08] text-white",
           isScrolled ? "py-2 backdrop-blur-xl bg-[#000000]/90 shadow-[0_4px_30px_rgba(0,0,0,0.5)]" : "py-3 bg-[#050505]/95 backdrop-blur-md"
         )}>
           {/* Logo - Left */}
-          <a 
-            href="#" 
-            className="relative z-50 shrink-0 flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-            aria-label="Strata Agency Home"
-          >
-            <Logo className="transition-transform duration-300 group-hover:scale-105" />
-          </a>
+          <div className="flex-shrink-0 flex items-center">
+            <a 
+              href="#" 
+              className="relative z-50 flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              aria-label="Strata Agency Home"
+            >
+              <Logo className="transition-transform duration-300 group-hover:scale-105" />
+            </a>
+          </div>
 
           {/* Desktop Nav - Center */}
-          <nav className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2">
+          <nav className="hidden xl:flex flex-1 items-center justify-center px-4 min-w-0">
             <ul className="flex items-center gap-1 p-1">
               {navLinks.map((link) => (
                 <li key={link.name} className="relative">
                   <a 
                     href={link.href}
-                    className="relative z-10 px-4 py-2 block text-[11px] font-mono font-bold tracking-[0.2em] transition-colors duration-300 text-white/70 hover:text-white"
+                    className="relative z-10 px-4 py-2 block text-[11px] font-mono font-bold tracking-[0.2em] transition-colors duration-300 text-white/70 hover:text-white whitespace-nowrap"
                     onMouseEnter={() => setHoveredLink(link.name)}
                     onMouseLeave={() => setHoveredLink(null)}
                   >
@@ -76,32 +78,30 @@ export const Navbar = () => {
           </nav>
 
           {/* CTA & Menu - Right */}
-          <div className="flex items-center gap-3 relative z-50">
-            <div className="hidden lg:flex items-center gap-3">
-              <motion.a 
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
-                href="#demo" 
-                className="text-[11px] font-mono font-bold tracking-widest px-5 py-2.5 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300"
-              >
-                REQUEST A DEMO
-              </motion.a>
-              <motion.a 
-                whileHover={{ y: -2, boxShadow: "0 0 20px rgba(255,255,255,0.2)" }}
-                whileTap={{ y: 0 }}
-                href="#contact" 
-                className="text-[11px] font-mono font-bold tracking-widest px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 transition-all duration-300"
-              >
-                BUILD WITH US
-              </motion.a>
-            </div>
+          <div className="flex-shrink-0 flex items-center justify-end gap-2 md:gap-3 relative z-50">
+            <motion.a 
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+              href="#demo" 
+              className="hidden lg:inline-flex items-center justify-center text-[11px] font-mono font-bold tracking-widest px-5 py-2.5 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 whitespace-nowrap"
+            >
+              REQUEST A DEMO
+            </motion.a>
+            <motion.a 
+              whileHover={{ y: -2, boxShadow: "0 0 20px rgba(255,255,255,0.2)" }}
+              whileTap={{ y: 0 }}
+              href="#contact" 
+              className="hidden md:inline-flex items-center justify-center text-[11px] font-mono font-bold tracking-widest px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 transition-all duration-300 whitespace-nowrap"
+            >
+              BUILD WITH US
+            </motion.a>
             
             <motion.button 
               whileHover={{ rotate: 90 }}
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-10 h-10 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors duration-300"
+              className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors duration-300 shrink-0 ml-1"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
