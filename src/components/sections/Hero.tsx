@@ -11,45 +11,49 @@ export const Hero = () => {
         </p>
       </div>
 
-      {/* Main Massive Typography Background Layer */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden mt-12 md:mt-0">
-        <h1 className="text-[25vw] md:text-[22vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap opacity-95">
-          BUILD
-        </h1>
-        <h1 className="text-[25vw] md:text-[22vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap opacity-95">
-          FUTURES
-        </h1>
-      </div>
+      {/* Main Hero Composition Container */}
+      <div className="relative flex-1 flex flex-col items-center justify-center py-20 md:py-0">
+        
+        {/* Background Typography (Behind Browser) */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden z-0">
+          <h1 className="text-[24vw] md:text-[22vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap opacity-[0.98]">
+            BUILD
+          </h1>
+          <h1 className="text-[24vw] md:text-[22vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap opacity-[0.98]">
+            FUTURES
+          </h1>
+        </div>
 
-      {/* Animated Browser Builder Sequence */}
-      <div className="relative z-10 w-full flex items-center justify-center mt-32 md:mt-12 h-[50vh] md:h-[60vh] pointer-events-none">
-        <BrowserBuilder className="w-[90%] md:w-[700px] xl:w-[800px]" />
-      </div>
+        {/* Animated Browser Builder (Overlapping Typography) */}
+        <div className="relative z-10 w-full flex items-center justify-center md:justify-end md:pr-[8%] lg:pr-[12%] mt-8 md:mt-32 pointer-events-none">
+          <BrowserBuilder className="w-[92%] md:w-[clamp(520px,44vw,780px)] h-[340px] md:h-[clamp(360px,32vw,540px)]" />
+        </div>
 
-      {/* Floating Pills (Positioned around the hero) */}
-      <div className="absolute z-20 top-1/3 left-[10%] md:left-[20%]">
-        <div className="glass-pill px-6 py-2 rounded-full font-mono text-xs font-bold tracking-widest">
-          DESIGN
+        {/* Floating Pills (Positioned around the composition) */}
+        <div className="absolute z-20 top-[20%] left-[5%] md:left-[15%] pointer-events-auto">
+          <div className="glass-pill px-6 py-2 rounded-full font-mono text-[10px] md:text-xs font-bold tracking-widest">
+            DESIGN
+          </div>
         </div>
-      </div>
-      <div className="absolute z-20 top-[45%] right-[5%] md:right-[15%]">
-        <div className="glass-pill px-6 py-2 rounded-full font-mono text-xs font-bold tracking-widest">
-          DEVELOP
+        <div className="absolute z-20 top-[35%] right-[2%] md:right-[10%] pointer-events-auto">
+          <div className="glass-pill px-6 py-2 rounded-full font-mono text-[10px] md:text-xs font-bold tracking-widest">
+            DEVELOP
+          </div>
         </div>
-      </div>
-      <div className="absolute z-20 bottom-1/3 left-[5%] md:left-[15%]">
-        <div className="glass-pill px-6 py-2 rounded-full font-mono text-xs font-bold tracking-widest">
-          OPTIMIZE
+        <div className="absolute z-20 bottom-[35%] left-[2%] md:left-[8%] pointer-events-auto">
+          <div className="glass-pill px-6 py-2 rounded-full font-mono text-[10px] md:text-xs font-bold tracking-widest">
+            OPTIMIZE
+          </div>
         </div>
-      </div>
-      <div className="absolute z-20 bottom-[20%] right-[10%] md:right-[25%] hidden md:block">
-        <div className="glass-pill px-6 py-2 rounded-full font-mono text-xs font-bold tracking-widest">
-          SCALE
+        <div className="absolute z-20 bottom-[25%] right-[8%] md:right-[20%] hidden md:block pointer-events-auto">
+          <div className="glass-pill px-6 py-2 rounded-full font-mono text-[10px] md:text-xs font-bold tracking-widest">
+            SCALE
+          </div>
         </div>
       </div>
 
       {/* Bottom Content Area */}
-      <div className="absolute bottom-4 md:bottom-12 left-4 md:left-12 right-4 md:right-12 z-20 flex flex-col md:flex-row justify-between items-end gap-8">
+      <div className="relative mt-auto z-30 flex flex-col md:flex-row justify-between items-end gap-8 pb-4 md:pb-0">
         
         {/* Subheadline and tags */}
         <div className="max-w-md">
@@ -57,19 +61,20 @@ export const Hero = () => {
             We don't just design websites — we architect digital systems that convert, scale, and compound.
           </p>
           <div className="flex flex-wrap gap-2">
-            <span className="border border-primary/30 rounded-full px-4 py-1.5 text-xs font-mono font-bold tracking-widest">PREMIUM INTERFACE</span>
-            <span className="border border-primary/30 rounded-full px-4 py-1.5 text-xs font-mono font-bold tracking-widest">FAST ARCHITECTURE</span>
+            <span className="border border-primary/30 rounded-full px-4 py-1.5 text-[10px] font-mono font-bold tracking-widest">PREMIUM INTERFACE</span>
+            <span className="border border-primary/30 rounded-full px-4 py-1.5 text-[10px] font-mono font-bold tracking-widest">FAST ARCHITECTURE</span>
           </div>
         </div>
 
         {/* Founder Card */}
-        <div className="bg-primary text-white p-4 md:p-6 rounded-[24px] max-w-sm flex items-center gap-4 shadow-xl">
-          <div className="w-12 h-12 rounded-full bg-white/20 flex-shrink-0 border border-white/10" />
-          <p className="text-xs font-mono leading-relaxed">
+        <div className="bg-primary text-white p-5 md:p-6 rounded-[28px] max-w-sm flex items-center gap-4 shadow-2xl border border-white/5">
+          <div className="w-12 h-12 rounded-full bg-white/10 flex-shrink-0 border border-white/10 flex items-center justify-center overflow-hidden">
+             <div className="w-6 h-6 bg-white/20 rounded-sm rotate-45" />
+          </div>
+          <p className="text-[11px] font-mono leading-relaxed text-white/90">
             Hi, we're Strata — your digital architecture partner for the next decade. Let's engineer your next era.
           </p>
         </div>
-
       </div>
     </section>
   );
