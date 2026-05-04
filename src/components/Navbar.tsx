@@ -39,7 +39,11 @@ export const Navbar = () => {
           isScrolled ? "py-2 backdrop-blur-xl bg-[#000000]/90 shadow-[0_4px_30px_rgba(0,0,0,0.5)]" : "py-3 bg-[#050505]/95 backdrop-blur-md"
         )}>
           {/* Logo - Left */}
-          <a href="#" className="relative z-50 flex-shrink-0 flex items-center group">
+          <a 
+            href="#" 
+            className="relative z-50 shrink-0 flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            aria-label="Strata Agency Home"
+          >
             <Logo className="transition-transform duration-300 group-hover:scale-105" />
           </a>
 
