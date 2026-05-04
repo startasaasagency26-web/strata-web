@@ -7,17 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#050505',
-        primary: '#0055FF',
-        secondary: '#8A2BE2',
-        accent: '#E0E0E0',
-        card: '#111111',
-        border: '#222222',
-        muted: '#8A8A93'
+        background: '#E5E5E2',
+        surface: '#F1F1EF',
+        primary: '#050505',
+        muted: '#4B4B4B',
+        border: '#C8C8C8',
+        accent: '#D9D9D9'
       },
       fontFamily: {
-        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        display: ['Oswald', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['Space Mono', 'monospace'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

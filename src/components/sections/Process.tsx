@@ -1,77 +1,58 @@
 import { motion } from 'framer-motion';
 
 const steps = [
-  {
-    num: "01",
-    title: "Brand Direction",
-    description: "We define the visual language, typography, and mood that aligns perfectly with your brand's premium positioning."
-  },
-  {
-    num: "02",
-    title: "Wireframe & Strategy",
-    description: "Structuring the user journey for maximum conversion, ensuring intuitive navigation and clear information architecture."
-  },
-  {
-    num: "03",
-    title: "High-Fidelity UI Design",
-    description: "Crafting the pixel-perfect cinematic interfaces, integrating glassmorphism, glow effects, and modern aesthetics."
-  },
-  {
-    num: "04",
-    title: "Responsive Development",
-    description: "Translating the design into a fast, scalable React architecture, fully optimized for mobile, tablet, and desktop."
-  },
-  {
-    num: "05",
-    title: "Launch & Optimization",
-    description: "Rigorous testing, SEO setup, and performance tuning before deploying the site to a global edge network."
-  }
+  { num: "01", title: "DISCOVER", desc: "Deep dive into business logic, user flow, and technical requirements to define scope." },
+  { num: "02", title: "ARCHITECT", desc: "Wireframing the conversion funnel and planning the data structures and tech stack." },
+  { num: "03", title: "DESIGN", desc: "Crafting the premium visual interface, defining typography, motion, and interaction states." },
+  { num: "04", title: "BUILD", desc: "Translating the design into a fast, scalable frontend architecture using modern frameworks." },
+  { num: "05", title: "LAUNCH", desc: "Rigorous QA testing, accessibility audits, and performance tuning before deployment." },
+  { num: "06", title: "OPTIMIZE", desc: "Post-launch monitoring, SEO tracking, and iterative growth system improvements." }
 ];
 
 export const Process = () => {
   return (
-    <section id="process" className="py-24 md:py-32 relative bg-black/40">
+    <section id="process" className="py-24 md:py-32 relative bg-surface border-b border-border/50">
       <div className="container mx-auto px-6 md:px-12">
         
-        <div className="mb-16 md:mb-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6">
-            <span className="text-xs font-medium text-white tracking-wider uppercase">How we work</span>
+        <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-6">
+          <div>
+            <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">Phase Delivery System</p>
+            <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary">
+              TECHNICAL BLUEPRINT
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-5xl font-serif text-white max-w-2xl">
-            A structured approach to <span className="text-primary">premium delivery</span>
-          </h2>
+          <div className="font-mono text-xs text-primary max-w-xs uppercase tracking-widest border border-border/50 p-4 bg-background">
+            <span className="block mb-2 text-muted">Status:</span>
+            Standardized Deployment Protocol Active
+          </div>
         </div>
 
-        <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-[27px] md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-secondary/20 to-transparent transform md:-translate-x-1/2" />
-
-          <div className="space-y-12 md:space-y-24">
-            {steps.map((step, idx) => (
-              <div key={idx} className={`relative flex flex-col md:flex-row items-start md:items-center ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                
-                {/* Node */}
-                <div className="absolute left-0 md:left-1/2 top-0 md:top-1/2 transform -translate-x-1/2 md:-translate-y-1/2 w-[56px] h-[56px] bg-background border-2 border-primary rounded-full flex items-center justify-center z-10 shadow-[0_0_20px_rgba(0,85,255,0.4)]">
-                  <span className="text-white font-serif font-bold text-lg">{step.num}</span>
+        {/* Blueprint Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-border/50 border border-border/50">
+          {steps.map((step, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="bg-surface p-8 md:p-10 group hover:bg-background transition-colors duration-300 relative overflow-hidden"
+            >
+              {/* Blueprint Grid Background Pattern (Subtle) */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-4xl font-display font-bold text-primary/10 group-hover:text-primary transition-colors duration-300">{step.num}</span>
+                  <div className="w-2 h-2 rounded-full bg-border group-hover:bg-primary transition-colors duration-300" />
                 </div>
-
-                {/* Content */}
-                <div className={`ml-20 md:ml-0 md:w-1/2 ${idx % 2 === 0 ? 'md:pl-20' : 'md:pr-20 text-left md:text-right'}`}>
-                  <motion.div
-                    initial={{ opacity: 0, x: idx % 2 === 0 ? 30 : -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6 }}
-                    className="p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] transition-colors"
-                  >
-                    <h3 className="text-2xl font-serif text-white mb-3">{step.title}</h3>
-                    <p className="text-muted leading-relaxed">{step.description}</p>
-                  </motion.div>
-                </div>
-
+                <h3 className="text-xl font-mono font-bold tracking-widest text-primary mb-4">{step.title}</h3>
+                <p className="text-muted font-sans text-sm leading-relaxed mt-auto">
+                  {step.desc}
+                </p>
               </div>
-            ))}
-          </div>
+            </motion.div>
+          ))}
         </div>
         
       </div>

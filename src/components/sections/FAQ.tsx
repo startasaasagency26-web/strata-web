@@ -1,27 +1,27 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   {
-    question: "What does Strata Web build?",
-    answer: "We build premium, conversion-focused websites and web applications. This ranges from luxury landing pages and corporate sites to complex interactive web apps using modern frameworks like React and Next.js."
+    question: "WHAT EXACTLY DOES STRATA BUILD?",
+    answer: "We engineer premium, conversion-focused websites and web applications. This ranges from luxury landing pages and corporate sites to complex interactive web apps using modern frameworks like React and Next.js."
   },
   {
-    question: "Is the website mobile responsive?",
-    answer: "Absolutely. We employ a mobile-first philosophy. Every website is meticulously crafted to ensure a flawless experience across all devices—smartphones, tablets, and desktops."
+    question: "IS THE ARCHITECTURE MOBILE RESPONSIVE?",
+    answer: "Absolutely. We employ a mobile-first philosophy. Every interface is meticulously crafted to ensure flawless performance and accessibility across all devices and screen sizes."
   },
   {
-    question: "Can you optimize for SEO?",
-    answer: "Yes, technical SEO is built directly into our development process. We ensure proper semantic HTML, lightning-fast load times, metadata optimization, and structured data setup."
+    question: "HOW IS SEO HANDLED?",
+    answer: "Technical SEO is built directly into our deployment protocol. We ensure proper semantic HTML, lightning-fast load times, Core Web Vitals optimization, and structured data setup."
   },
   {
-    question: "How long does a website take?",
-    answer: "A standard landing page takes 2-3 weeks, while comprehensive multi-page corporate sites or web applications can take 6-12 weeks depending on complexity and features required."
+    question: "WHAT IS THE DEPLOYMENT TIMELINE?",
+    answer: "A standard brand foundation takes 2-4 weeks. Comprehensive multi-page corporate systems or web applications take 6-12 weeks depending on technical complexity and feature requirements."
   },
   {
-    question: "Can this be expanded later?",
-    answer: "Yes. We build with scalability in mind. Our code architecture allows for easy expansion, whether you need to add e-commerce capabilities, new pages, or complex integrations in the future."
+    question: "CAN THE SYSTEM BE SCALED LATER?",
+    answer: "Yes. We build modular, scalable architectures. Our code structure allows for seamless expansion, whether you need to add e-commerce capabilities, complex integrations, or new product verticals in the future."
   }
 ];
 
@@ -29,53 +29,63 @@ export const FAQ = () => {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 relative bg-black/40 border-t border-white/5">
-      <div className="container mx-auto px-6 md:px-12 max-w-4xl">
+    <section id="faq" className="py-24 md:py-32 relative bg-surface border-b border-border/50">
+      <div className="container mx-auto px-6 md:px-12 max-w-5xl">
         
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">Frequently Asked Questions</h2>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+          
+          <div className="lg:col-span-4">
+            <div className="sticky top-24">
+              <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">Knowledge Base</p>
+              <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary mb-6">SYSTEM <br/> QUERIES</h2>
+              <p className="text-muted font-sans text-sm leading-relaxed">
+                Clear answers to common questions about our technical capabilities and deployment processes.
+              </p>
+            </div>
+          </div>
 
-        <div className="space-y-4">
-          {faqs.map((faq, idx) => {
-            const isOpen = openIdx === idx;
-            return (
-              <div 
-                key={idx} 
-                className="rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden transition-colors hover:bg-white/[0.04]"
-              >
-                <button
-                  onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
-                >
-                  <span className="text-lg font-medium text-white">{faq.question}</span>
-                  <motion.div
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="shrink-0 ml-4"
+          <div className="lg:col-span-8">
+            <div className="border-t border-border/50">
+              {faqs.map((faq, idx) => {
+                const isOpen = openIdx === idx;
+                return (
+                  <div 
+                    key={idx} 
+                    className="border-b border-border/50 group"
                   >
-                    <ChevronDown className={isOpen ? "text-primary" : "text-muted"} size={20} />
-                  </motion.div>
-                </button>
-                
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
+                    <button
+                      onClick={() => setOpenIdx(isOpen ? null : idx)}
+                      className="w-full py-6 md:py-8 flex items-center justify-between text-left focus:outline-none"
                     >
-                      <div className="px-6 pb-6 pt-2 text-muted leading-relaxed">
-                        {faq.answer}
+                      <span className={`text-base md:text-lg font-mono font-bold tracking-wide pr-8 transition-colors ${isOpen ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>
+                        {faq.question}
+                      </span>
+                      <div className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${isOpen ? 'bg-primary text-white border-primary' : 'bg-transparent text-primary border-border/50 group-hover:border-primary'}`}>
+                        {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+                    </button>
+                    
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pb-8 pt-2 pr-12 text-muted font-sans leading-relaxed text-sm md:text-base">
+                            {faq.answer}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
         </div>
         
       </div>

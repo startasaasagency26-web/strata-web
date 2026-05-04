@@ -1,109 +1,101 @@
-import { GlassCard } from '../ui/GlassCard';
-import { Button } from '../ui/Button';
 import { Check } from 'lucide-react';
 
 const plans = [
   {
-    name: "Strata Launch",
-    price: "$599",
-    description: "Perfect for new brands needing a strong foundation.",
+    name: "LAUNCH",
+    price: "$5k",
+    description: "For emerging brands needing a strong, conversion-focused digital foundation.",
     features: [
-      "Custom 3-Page Website",
-      "Mobile Responsive Design",
-      "Basic SEO Setup",
-      "Contact Form Integration",
-      "2 Rounds of Revisions"
+      "Custom 5-Page Architecture",
+      "Native Responsive Design",
+      "Core SEO Implementation",
+      "Analytics Integration",
+      "Standard Performance Tuning"
     ],
     featured: false,
     cta: "Start Project"
   },
   {
-    name: "Strata Growth",
-    price: "$1,895",
-    description: "Comprehensive solution for growing businesses.",
+    name: "GROWTH",
+    price: "$15k",
+    description: "Comprehensive scalable systems for established businesses looking to dominate.",
     features: [
-      "Up to 8 Custom Pages",
-      "Premium Animations",
-      "Advanced SEO Optimization",
-      "CMS Integration",
-      "Performance Optimization",
-      "Priority Support"
+      "Up to 15 Custom Pages",
+      "Advanced Motion & Interactions",
+      "Technical SEO Foundation",
+      "Headless CMS Integration",
+      "Premium Performance Score",
+      "Dedicated Strategy Sessions"
     ],
     featured: true,
-    cta: "Book Strategy Call"
+    cta: "Book Consultation"
   },
   {
-    name: "Strata Scale",
-    price: "$3,995+",
-    description: "Custom web applications and enterprise sites.",
+    name: "SCALE",
+    price: "$40k",
+    description: "Bespoke digital ecosystems and web applications for enterprise operations.",
     features: [
-      "Unlimited Pages",
+      "Unlimited Page Architecture",
       "Custom Web App Functionality",
-      "E-commerce Integration",
-      "Advanced Database Setup",
-      "Dedicated Project Manager",
-      "24/7 Technical Support"
+      "Complex API Integrations",
+      "Advanced Database Architecture",
+      "Dedicated Engineering Team",
+      "Ongoing Retainer Options"
     ],
     featured: false,
-    cta: "Contact Sales"
+    cta: "Contact Partners"
   }
 ];
 
 export const Pricing = () => {
   return (
-    <section id="pricing" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[600px] bg-secondary/10 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
+    <section id="pricing" className="py-24 md:py-32 relative bg-surface border-b border-border/50">
+      <div className="container mx-auto px-6 md:px-12">
         
-        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-24">
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">Transparent investment</h2>
-          <p className="text-muted text-lg">
-            Choose the right foundation for your business. No hidden fees, just premium delivery.
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+          <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">Engagement Models</p>
+          <h2 className="text-5xl md:text-6xl font-display font-bold leading-none tracking-tight text-primary mb-6">INVESTMENT ARCHITECTURE</h2>
+          <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
+            We don't do cheap. We build premium, high-converting digital assets that generate compounding ROI for your business. Choose your deployment tier.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-start max-w-6xl mx-auto">
           {plans.map((plan, idx) => (
-            <GlassCard 
+            <div 
               key={idx} 
-              className={`flex flex-col h-full ${plan.featured ? 'border-primary shadow-[0_0_30px_rgba(0,85,255,0.2)] md:scale-105 z-10' : 'border-white/10'}`}
+              className={`flex flex-col h-full bg-white border rounded-[24px] overflow-hidden transition-all duration-300 ${plan.featured ? 'border-primary shadow-xl md:-mt-4 md:mb-4' : 'border-border/50 shadow-sm hover:shadow-md'}`}
             >
-              {plan.featured && (
-                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary to-secondary" />
-              )}
-              
-              <div className="mb-8">
-                <h3 className="text-xl font-medium text-white mb-2">{plan.name}</h3>
-                <p className="text-muted text-sm min-h-[40px]">{plan.description}</p>
-              </div>
-              
-              <div className="mb-8">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-serif text-white">{plan.price}</span>
-                  {plan.name !== "Strata Scale" && <span className="text-muted">/project</span>}
+              <div className={`p-8 border-b ${plan.featured ? 'bg-primary text-white border-primary' : 'bg-surface border-border/50 text-primary'}`}>
+                <h3 className="text-xl font-mono font-bold tracking-widest uppercase mb-4">{plan.name}</h3>
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="text-sm font-mono opacity-80">Starting at</span>
+                  <span className={`text-5xl font-display font-bold ${plan.featured ? 'text-white' : 'text-primary'}`}>{plan.price}</span>
                 </div>
+                <p className={`text-sm font-sans leading-relaxed min-h-[60px] ${plan.featured ? 'text-white/80' : 'text-muted'}`}>{plan.description}</p>
               </div>
               
-              <div className="flex-grow">
-                <ul className="space-y-4 mb-8">
+              <div className="p-8 flex-grow flex flex-col bg-white">
+                <ul className="space-y-4 mb-8 flex-grow">
                   {plan.features.map((feature, fIdx) => (
                     <li key={fIdx} className="flex items-start gap-3">
-                      <Check className="text-primary shrink-0 mt-0.5" size={18} />
-                      <span className="text-sm text-white/80">{feature}</span>
+                      <Check className="text-primary shrink-0 mt-0.5" size={16} />
+                      <span className="text-sm font-sans text-muted">{feature}</span>
                     </li>
                   ))}
                 </ul>
+                
+                <button 
+                  className={`w-full py-4 rounded-full font-mono text-xs font-bold tracking-widest uppercase transition-colors ${
+                    plan.featured 
+                      ? 'bg-primary text-white hover:bg-primary/90' 
+                      : 'bg-surface border border-border/50 text-primary hover:bg-border/20'
+                  }`}
+                >
+                  {plan.cta}
+                </button>
               </div>
-              
-              <Button 
-                variant={plan.featured ? 'primary' : 'outline'} 
-                className="w-full"
-              >
-                {plan.cta}
-              </Button>
-            </GlassCard>
+            </div>
           ))}
         </div>
         
