@@ -11,22 +11,22 @@ export const Hero = () => {
         </p>
       </div>
 
-      {/* Main Hero Composition Container */}
-      <div className="relative flex-1 flex flex-col items-center justify-center py-20 md:py-0">
+      {/* Main Hero Composition - Vertical Stack */}
+      <div className="flex-1 flex flex-col items-center justify-center pt-16 md:pt-24 pb-12 md:pb-24">
         
-        {/* Background Typography (Behind Browser) */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden z-0">
-          <h1 className="text-[24vw] md:text-[22vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap opacity-[0.98]">
+        {/* Main Headline - Fully readable and dominant */}
+        <div className="relative flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden">
+          <h1 className="text-[24vw] md:text-[21vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap">
             BUILD
           </h1>
-          <h1 className="text-[24vw] md:text-[22vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap opacity-[0.98]">
+          <h1 className="text-[24vw] md:text-[21vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap">
             FUTURES
           </h1>
         </div>
 
-        {/* Animated Browser Builder (Overlapping Typography) */}
-        <div className="relative z-10 w-full flex items-center justify-center md:justify-end md:pr-[8%] lg:pr-[12%] mt-8 md:mt-32 pointer-events-none">
-          <BrowserBuilder className="w-[92%] md:w-[clamp(560px,42vw,760px)] h-[360px] md:h-[clamp(380px,34vw,560px)]" />
+        {/* Animated Browser Builder - Placed BELOW the headline */}
+        <div className="relative w-full flex items-center justify-center mt-6 md:mt-12 pointer-events-none z-10">
+          <BrowserBuilder className="w-[94%] md:w-[clamp(620px,48vw,860px)] h-[360px] md:h-[clamp(380px,30vw,520px)]" />
         </div>
       </div>
 
