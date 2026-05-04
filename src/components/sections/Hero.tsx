@@ -1,4 +1,4 @@
-import { HeroEngine } from '../HeroEngine';
+import { BrowserBuilder } from '../BrowserBuilder';
 
 export const Hero = () => {
   return (
@@ -21,9 +21,9 @@ export const Hero = () => {
         </h1>
       </div>
 
-      {/* 3D Object Centerpiece */}
+      {/* Animated Browser Builder Sequence */}
       <div className="relative z-10 w-full flex items-center justify-center mt-32 md:mt-12 h-[50vh] md:h-[60vh] pointer-events-none">
-        <HeroEngine className="w-[300px] h-[400px] md:w-[600px] md:h-[800px]" />
+        <BrowserBuilder className="w-[90%] md:w-[700px] xl:w-[800px]" />
       </div>
 
       {/* Floating Pills (Positioned around the hero) */}
