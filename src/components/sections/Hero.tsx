@@ -26,29 +26,7 @@ export const Hero = () => {
 
         {/* Animated Browser Builder (Overlapping Typography) */}
         <div className="relative z-10 w-full flex items-center justify-center md:justify-end md:pr-[8%] lg:pr-[12%] mt-8 md:mt-32 pointer-events-none">
-          <BrowserBuilder className="w-[92%] md:w-[clamp(520px,44vw,780px)] h-[340px] md:h-[clamp(360px,32vw,540px)]" />
-        </div>
-
-        {/* Floating Pills (Positioned around the composition) */}
-        <div className="absolute z-20 top-[20%] left-[5%] md:left-[15%] pointer-events-auto">
-          <div className="glass-pill px-6 py-2 rounded-full font-mono text-[10px] md:text-xs font-bold tracking-widest">
-            DESIGN
-          </div>
-        </div>
-        <div className="absolute z-20 top-[35%] right-[2%] md:right-[10%] pointer-events-auto">
-          <div className="glass-pill px-6 py-2 rounded-full font-mono text-[10px] md:text-xs font-bold tracking-widest">
-            DEVELOP
-          </div>
-        </div>
-        <div className="absolute z-20 bottom-[35%] left-[2%] md:left-[8%] pointer-events-auto">
-          <div className="glass-pill px-6 py-2 rounded-full font-mono text-[10px] md:text-xs font-bold tracking-widest">
-            OPTIMIZE
-          </div>
-        </div>
-        <div className="absolute z-20 bottom-[25%] right-[8%] md:right-[20%] hidden md:block pointer-events-auto">
-          <div className="glass-pill px-6 py-2 rounded-full font-mono text-[10px] md:text-xs font-bold tracking-widest">
-            SCALE
-          </div>
+          <BrowserBuilder className="w-[92%] md:w-[clamp(560px,42vw,760px)] h-[360px] md:h-[clamp(380px,34vw,560px)]" />
         </div>
       </div>
 
