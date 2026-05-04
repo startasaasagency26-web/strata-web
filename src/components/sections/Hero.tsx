@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { HeroEngine } from '../HeroEngine';
 
 export const Hero = () => {
   return (
@@ -21,20 +21,9 @@ export const Hero = () => {
         </h1>
       </div>
 
-      {/* 3D Object Placeholder Centerpiece */}
+      {/* 3D Object Centerpiece */}
       <div className="relative z-10 w-full flex items-center justify-center mt-32 md:mt-12 h-[50vh] md:h-[60vh] pointer-events-none">
-        {/* We use a stylized chrome-like abstract structure as placeholder for the 3D visual */}
-        <motion.div 
-          animate={{ y: [-10, 10, -10] }}
-          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-          className="relative w-[300px] h-[400px] md:w-[450px] md:h-[600px] flex items-center justify-center"
-        >
-          <div className="absolute inset-0 bg-gradient-to-tr from-white via-[#E5E5E2] to-[#C8C8C8] rounded-[60px] shadow-2xl border border-white rotate-12 transform origin-center mix-blend-overlay opacity-80" />
-          <div className="absolute inset-10 bg-gradient-to-bl from-white via-transparent to-[#4B4B4B] rounded-[40px] shadow-inner border border-white/50 -rotate-6 backdrop-blur-sm" />
-          <div className="absolute inset-20 bg-primary/5 rounded-[20px] backdrop-blur-md border border-white/80 rotate-3 flex items-center justify-center">
-             <span className="font-mono text-xs tracking-widest text-muted">3D_ASSET_RENDER</span>
-          </div>
-        </motion.div>
+        <HeroEngine className="w-[300px] h-[400px] md:w-[600px] md:h-[800px]" />
       </div>
 
       {/* Floating Pills (Positioned around the hero) */}
