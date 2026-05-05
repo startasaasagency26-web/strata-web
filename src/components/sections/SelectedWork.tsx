@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
-type ProjectVariant = "jarmor" | "thunderfix" | "ros";
+type ProjectPreviewType = "desktop" | "mobile" | "dashboard";
 
 type Project = {
   title: string;
@@ -10,8 +10,9 @@ type Project = {
   tags: string[];
   cta: string;
   href: string;
-  variant: ProjectVariant;
   image: string;
+  imageAlt: string;
+  previewType: ProjectPreviewType;
 };
 
 const projects: Project[] = [
@@ -23,8 +24,9 @@ const projects: Project[] = [
     tags: ["Product Brand", "Trust Architecture", "Premium UI"],
     cta: "View Project",
     href: "https://www.j-armor.net",
-    variant: "jarmor",
-    image: "/work/jarmor-desktop.jpg",
+    image: "/work/jarmor-desktop.png",
+    imageAlt: "J-Armor desktop brand website preview",
+    previewType: "desktop",
   },
   {
     title: "THUNDERFIX SERVICE WEBSITE",
@@ -34,8 +36,9 @@ const projects: Project[] = [
     tags: ["Service Website", "Branch Flow", "Enquiry System"],
     cta: "View Project",
     href: "https://thunderfix.online",
-    variant: "thunderfix",
-    image: "/work/thunderfix-desktop.jpg",
+    image: "/work/thunderfix-mobile.png",
+    imageAlt: "Thunderfix mobile service website preview",
+    previewType: "mobile",
   },
   {
     title: "ONE MOBILE ROS APP",
@@ -45,58 +48,123 @@ const projects: Project[] = [
     tags: ["Operations Dashboard", "KPI Tracking", "Revenue Visibility"],
     cta: "View System",
     href: "#",
-    variant: "ros",
-    image: "/work/one-mobile-ros-dashboard.jpg",
+    image: "/work/one-mobile-ros-dashboard.png",
+    imageAlt: "One Mobile ROS owner dashboard preview",
+    previewType: "dashboard",
   },
 ];
 
-const BrowserChrome = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative w-full overflow-hidden rounded-[24px] border border-black/10 bg-[#f8f7f2] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)]">
-    <div className="flex h-11 items-center gap-2 border-b border-black/10 bg-[#f4f2ed] px-5">
-      <span className="h-3 w-3 rounded-full bg-[#ef6a5b]" />
-      <span className="h-3 w-3 rounded-full bg-[#f3bd4f]" />
-      <span className="h-3 w-3 rounded-full bg-[#61c454]" />
-      <div className="mx-auto h-3 w-40 rounded-full bg-white/80" />
-    </div>
-    {children}
-  </div>
-);
+/**
+ * Image component mimicking next/image for Vite environment
+ */
+const Image = ({
+  src,
+  alt,
+  fill,
+  className,
+  onError,
+}: {
+  src: string;
+  alt: string;
+  fill?: boolean;
+  sizes?: string;
+  className?: string;
+  onError?: () => void;
+}) => {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={cn(
+        className,
+        fill && "absolute inset-0 h-full w-full"
+      )}
+      onError={onError}
+    />
+  );
+};
 
-const ProjectImage = ({ src, alt }: { src: string; alt: string }) => {
+function cn(...classes: (string | boolean | undefined)[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const ProjectImage = ({
+  src,
+  alt,
+  previewType,
+}: {
+  src: string;
+  alt: string;
+  previewType: ProjectPreviewType;
+}) => {
   const [error, setError] = useState(false);
 
-  return (
-    <div className="absolute inset-0 bg-[#F9F9F9] pt-8">
-      <div className="relative h-full w-full overflow-hidden">
-        {error ? (
-          <div className="flex h-full w-full flex-col items-center justify-center bg-[#f0f0f0] p-6 text-center">
-            <div className="mb-2 h-12 w-12 rounded-full bg-black/5 flex items-center justify-center">
-              <div className="h-6 w-6 rounded-sm border-2 border-black/10" />
-            </div>
-            <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-black/30">
-              Project preview unavailable
-            </p>
-          </div>
-        ) : (
-          <img
-            src={src}
-            alt={alt}
-            className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.015]"
-            onError={() => setError(true)}
-          />
-        )}
+  const scaleClass =
+    previewType === "mobile"
+      ? "group-hover:scale-[1.02]"
+      : "group-hover:scale-[1.015]";
+
+  if (error) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center bg-[#f0f0f0] p-6 text-center">
+        <div className="mb-2 h-12 w-12 rounded-full bg-black/5 flex items-center justify-center">
+          <div className="h-6 w-6 rounded-sm border-2 border-black/10" />
+        </div>
+        <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-black/30">
+          Project preview unavailable
+        </p>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      className={cn(
+        "object-cover object-top transition-transform duration-700",
+        scaleClass
+      )}
+      onError={() => setError(true)}
+    />
   );
 };
 
 const ProjectPreview = ({ project }: { project: Project }) => {
-  return (
-    <BrowserChrome>
-      <div className="relative aspect-[16/10] w-full overflow-hidden">
-        <ProjectImage src={project.image} alt={project.title} />
+  if (project.previewType === "mobile") {
+    return (
+      <div className="flex h-[420px] items-center justify-center rounded-[28px] bg-[#ebe9e4] p-8">
+        <div className="relative aspect-[9/19.5] w-[190px] overflow-hidden rounded-[34px] border-[7px] border-black bg-black shadow-2xl transition-all duration-500 group-hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.5)]">
+          <ProjectImage
+            src={project.image}
+            alt={project.imageAlt}
+            previewType="mobile"
+          />
+        </div>
       </div>
-    </BrowserChrome>
+    );
+  }
+
+  return (
+    <div className="relative overflow-hidden rounded-[24px] border border-black/10 bg-black shadow-2xl transition-all duration-500 group-hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.5)]">
+      <div className="flex h-10 items-center gap-2 border-b border-black/10 bg-[#f4f2ed] px-5">
+        <div className="flex gap-1.5">
+          <span className="h-3 w-3 rounded-full bg-[#ef6a5b]" />
+          <span className="h-3 w-3 rounded-full bg-[#f3bd4f]" />
+          <span className="h-3 w-3 rounded-full bg-[#61c454]" />
+        </div>
+        <div className="mx-auto h-3 w-40 rounded-full bg-white/80" />
+      </div>
+
+      <div className="relative h-[360px] w-full overflow-hidden bg-black">
+        <ProjectImage
+          src={project.image}
+          alt={project.imageAlt}
+          previewType={project.previewType}
+        />
+      </div>
+    </div>
   );
 };
 
@@ -133,7 +201,7 @@ export const SelectedWork = () => {
             return (
               <article
                 key={project.title}
-                className="group overflow-hidden rounded-[32px] border border-border/50 bg-surface shadow-[0_24px_80px_-60px_rgba(0,0,0,0.45)] transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/20 hover:shadow-[0_34px_90px_-55px_rgba(0,0,0,0.5)] motion-reduce:transform-none motion-reduce:transition-none"
+                className="group overflow-hidden rounded-[32px] border border-border/50 bg-surface shadow-[0_24px_80px_-60px_rgba(0,0,0,0.45)] transition-all duration-[400ms] cubic-bezier(0.16,1,0.3,1) hover:-translate-y-[6px] hover:border-primary/20 hover:shadow-[0_34px_90px_-55px_rgba(0,0,0,0.5)] motion-reduce:transform-none motion-reduce:transition-none"
               >
                 <div
                   className={[
