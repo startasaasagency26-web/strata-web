@@ -1,5 +1,6 @@
 import { Logo } from './Logo';
 import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
@@ -7,7 +8,9 @@ export const Footer = () => {
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-16">
           <div className="md:col-span-1">
-            <Logo className="h-10 origin-left mb-6 justify-start" />
+            <Link to="/">
+              <Logo className="h-10 origin-left mb-6 justify-start" />
+            </Link>
             <p className="text-muted text-sm font-sans leading-relaxed mb-6">
               Strata Agency builds premium digital foundations for serious brands. We combine high-end interfaces with conversion-first architecture.
             </p>
@@ -21,10 +24,11 @@ export const Footer = () => {
           <div>
             <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">QUICK LINKS</h4>
             <ul className="space-y-4">
-              <li><a href="#work" className="text-muted hover:text-primary font-sans transition-colors text-sm">Selected Work</a></li>
-              <li><a href="#process" className="text-muted hover:text-primary font-sans transition-colors text-sm">Our Process</a></li>
-              <li><a href="#pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Pricing</a></li>
-              <li><a href="#faq" className="text-muted hover:text-primary font-sans transition-colors text-sm">FAQ</a></li>
+              <li><Link to="/about" className="text-muted hover:text-primary font-sans transition-colors text-sm">About Strata</Link></li>
+              <li><Link to="/#selected-work" className="text-muted hover:text-primary font-sans transition-colors text-sm">Selected Work</Link></li>
+              <li><Link to="/#process" className="text-muted hover:text-primary font-sans transition-colors text-sm">Our Process</Link></li>
+              <li><Link to="/#pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Pricing</Link></li>
+              <li><Link to="/#faq" className="text-muted hover:text-primary font-sans transition-colors text-sm">FAQ</Link></li>
             </ul>
           </div>
           

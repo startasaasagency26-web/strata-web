@@ -90,7 +90,7 @@ const carePlans = [
 
 export const Pricing = () => {
   return (
-    <section id="pricing" className="py-24 md:py-32 relative bg-surface border-b border-border/50">
+    <section id="pricing" className="relative border-b border-border/50 bg-surface py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-12">
         
         {/* Header Section */}

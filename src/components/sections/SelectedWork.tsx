@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
-type ProjectPreviewType = "desktop" | "mobile" | "dashboard";
+type ProjectPreviewType = "desktop" | "dashboard";
 
 type Project = {
   title: string;
@@ -67,7 +67,6 @@ const Image = ({
   src: string;
   alt: string;
   fill?: boolean;
-  sizes?: string;
   className?: string;
   onError?: () => void;
 }) => {
@@ -75,10 +74,7 @@ const Image = ({
     <img
       src={src}
       alt={alt}
-      className={cn(
-        className,
-        fill && "absolute inset-0 h-full w-full"
-      )}
+      className={cn(className, fill && "absolute inset-0 h-full w-full")}
       onError={onError}
     />
   );
@@ -99,14 +95,6 @@ const ProjectImage = ({
 }) => {
   const [error, setError] = useState(false);
 
-  const scaleClass =
-    previewType === "mobile"
-      ? "group-hover:scale-[1.01]"
-      : "group-hover:scale-[1.015]";
-
-  const objectClass =
-    previewType === "mobile" ? "object-contain" : "object-cover";
-
   if (error) {
     return (
       <div className="flex h-full w-full flex-col items-center justify-center bg-[#f0f0f0] p-6 text-center">
@@ -126,9 +114,7 @@ const ProjectImage = ({
       alt={alt}
       fill
       className={cn(
-        objectClass,
-        "object-top transition-transform duration-700",
-        scaleClass
+        "object-contain object-top transition-transform duration-700 group-hover:scale-[1.015]"
       )}
       onError={() => setError(true)}
     />
@@ -136,32 +122,23 @@ const ProjectImage = ({
 };
 
 const ProjectPreview = ({ project }: { project: Project }) => {
-  if (project.previewType === "mobile") {
-    return (
-      <div className="flex h-[420px] items-center justify-center rounded-[28px] bg-[#ebe9e4] p-8">
-        <div className="relative aspect-[9/19.5] w-[220px] overflow-hidden rounded-[34px] border-[7px] border-black bg-[#f7f5ef] shadow-2xl transition-all duration-500 group-hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.5)]">
-          <ProjectImage
-            src={project.image}
-            alt={project.imageAlt}
-            previewType="mobile"
-          />
-        </div>
-      </div>
-    );
-  }
-
+  // Common browser/dashboard frame style
+  const isDashboard = project.previewType === "dashboard";
+  
   return (
-    <div className="relative overflow-hidden rounded-[24px] border border-black/10 bg-black shadow-2xl transition-all duration-500 group-hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.5)]">
+    <div className="relative overflow-hidden rounded-[24px] border border-black/10 bg-[#f7f5ef] shadow-2xl transition-all duration-500 group-hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.5)]">
+      {/* Browser Chrome */}
       <div className="flex h-10 items-center gap-2 border-b border-black/10 bg-[#f4f2ed] px-5">
         <div className="flex gap-1.5">
           <span className="h-3 w-3 rounded-full bg-[#ef6a5b]" />
           <span className="h-3 w-3 rounded-full bg-[#f3bd4f]" />
           <span className="h-3 w-3 rounded-full bg-[#61c454]" />
         </div>
-        <div className="mx-auto h-3 w-40 rounded-full bg-white/80" />
+        <div className="mx-auto h-3 w-32 md:w-40 rounded-full bg-white/80" />
       </div>
 
-      <div className="relative h-[360px] w-full overflow-hidden bg-black">
+      {/* Main Preview Area with Responsive Height */}
+      <div className="relative h-[240px] sm:h-[300px] lg:h-[360px] w-full overflow-hidden bg-[#f7f5ef]">
         <ProjectImage
           src={project.image}
           alt={project.imageAlt}
@@ -174,7 +151,7 @@ const ProjectPreview = ({ project }: { project: Project }) => {
 
 export const SelectedWork = () => {
   return (
-    <section id="work" className="relative border-b border-border/50 bg-background py-24 md:py-32">
+    <section id="selected-work" className="relative border-b border-border/50 bg-background py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-12">
         <div className="mb-14 flex flex-col gap-6 md:mb-20 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">

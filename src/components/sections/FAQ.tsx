@@ -29,7 +29,7 @@ export const FAQ = () => {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 md:py-32 relative bg-surface border-b border-border/50">
+    <section id="faq" className="relative border-b border-border/50 bg-surface py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-12 max-w-5xl">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">

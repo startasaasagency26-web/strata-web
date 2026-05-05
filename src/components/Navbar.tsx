@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
 import { cn } from '../lib/utils';
 
@@ -18,11 +19,11 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'LAB', href: '#lab' },
-    { name: 'SERVICES', href: '#services' },
-    { name: 'TECH', href: '#tech' },
-    { name: 'INDUSTRIES', href: '#industries' },
-    { name: 'ABOUT', href: '#about' },
+    { name: 'LAB', href: '/#lab' },
+    { name: 'SERVICES', href: '/#services' },
+    { name: 'TECH', href: '/#tech' },
+    { name: 'INDUSTRIES', href: '/#industries' },
+    { name: 'ABOUT', href: '/about' },
   ];
 
   return (
@@ -40,13 +41,14 @@ export const Navbar = () => {
         )}>
           {/* Logo - Left */}
           <div className="flex-shrink-0 flex items-center">
-            <a 
-              href="#" 
+            <Link 
+              to="/" 
               className="relative z-50 flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/50"
               aria-label="Strata Agency Home"
+              onClick={() => setMobileMenuOpen(false)}
             >
               <Logo className="transition-transform duration-300 group-hover:scale-105" />
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Nav - Center */}
@@ -54,14 +56,14 @@ export const Navbar = () => {
             <ul className="flex items-center gap-1 p-1">
               {navLinks.map((link) => (
                 <li key={link.name} className="relative">
-                  <a 
-                    href={link.href}
+                  <Link 
+                    to={link.href}
                     className="relative z-10 px-4 py-2 block text-[11px] font-mono font-bold tracking-[0.2em] transition-colors duration-300 text-white/70 hover:text-white whitespace-nowrap"
                     onMouseEnter={() => setHoveredLink(link.name)}
                     onMouseLeave={() => setHoveredLink(null)}
                   >
                     {link.name}
-                  </a>
+                  </Link>
                   {hoveredLink === link.name && (
                     <motion.div
                       layoutId="nav-pill"
@@ -129,13 +131,13 @@ export const Navbar = () => {
                   transition={{ delay: 0.1 + idx * 0.05 }}
                   className="overflow-hidden"
                 >
-                  <a 
-                    href={link.href}
+                  <Link 
+                    to={link.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-4xl font-display font-bold text-white hover:text-white/70 transition-colors uppercase tracking-tight"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
               <motion.li 

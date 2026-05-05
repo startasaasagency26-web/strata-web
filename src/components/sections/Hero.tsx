@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { BrowserBuilder } from '../BrowserBuilder';
 
 export const Hero = () => {
@@ -45,14 +46,17 @@ export const Hero = () => {
         </div>
 
         {/* Founder Card */}
-        <div className="bg-primary text-white p-5 md:p-6 rounded-[28px] max-w-sm flex items-center gap-4 shadow-2xl border border-white/5">
+        <Link to="/about" className="bg-primary text-white p-5 md:p-6 rounded-[28px] max-w-sm flex items-center gap-4 shadow-2xl border border-white/5 transition-transform hover:scale-[1.02] active:scale-[0.98]">
           <div className="w-12 h-12 rounded-full bg-white/10 flex-shrink-0 border border-white/10 flex items-center justify-center overflow-hidden">
-             <div className="w-6 h-6 bg-white/20 rounded-sm rotate-45" />
+             <img src="/founder.jpg" alt="Amirul Afiz" className="w-full h-full object-cover" />
           </div>
-          <p className="text-[11px] font-mono leading-relaxed text-white/90">
-            Hi, we're Strata — your digital architecture partner for the next decade. Let's engineer your next era.
-          </p>
-        </div>
+          <div className="flex flex-col">
+            <p className="text-[10px] font-mono font-bold tracking-widest text-white/50 uppercase mb-1">Founder-led Studio</p>
+            <p className="text-[11px] font-mono leading-tight text-white/90 uppercase">
+              Build your digital foundation with Amirul Afiz & Strata.
+            </p>
+          </div>
+        </Link>
       </div>
     </section>
   );
