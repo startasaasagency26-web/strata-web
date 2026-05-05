@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
-type ProjectPreviewType = "desktop" | "dashboard";
-
 type Project = {
   title: string;
   category: string;
@@ -12,7 +10,6 @@ type Project = {
   href: string;
   image: string;
   imageAlt: string;
-  previewType: ProjectPreviewType;
 };
 
 const projects: Project[] = [
@@ -26,7 +23,6 @@ const projects: Project[] = [
     href: "https://www.j-armor.net",
     image: "/work/jarmor-desktop.png",
     imageAlt: "J-Armor desktop brand website preview",
-    previewType: "desktop",
   },
   {
     title: "THUNDERFIX SERVICE WEBSITE",
@@ -38,7 +34,6 @@ const projects: Project[] = [
     href: "https://thunderfix.online",
     image: "/work/thunderfix-desktop.png",
     imageAlt: "Thunderfix desktop service website preview",
-    previewType: "desktop",
   },
   {
     title: "ONE MOBILE ROS APP",
@@ -50,7 +45,6 @@ const projects: Project[] = [
     href: "#",
     image: "/work/one-mobile-ros-dashboard.png",
     imageAlt: "One Mobile ROS owner dashboard preview",
-    previewType: "dashboard",
   },
 ];
 
@@ -87,11 +81,9 @@ function cn(...classes: (string | boolean | undefined)[]) {
 const ProjectImage = ({
   src,
   alt,
-  previewType,
 }: {
   src: string;
   alt: string;
-  previewType: ProjectPreviewType;
 }) => {
   const [error, setError] = useState(false);
 
@@ -122,9 +114,6 @@ const ProjectImage = ({
 };
 
 const ProjectPreview = ({ project }: { project: Project }) => {
-  // Common browser/dashboard frame style
-  const isDashboard = project.previewType === "dashboard";
-  
   return (
     <div className="relative overflow-hidden rounded-[24px] border border-black/10 bg-[#f7f5ef] shadow-2xl transition-all duration-500 group-hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.5)]">
       {/* Browser Chrome */}
@@ -142,7 +131,6 @@ const ProjectPreview = ({ project }: { project: Project }) => {
         <ProjectImage
           src={project.image}
           alt={project.imageAlt}
-          previewType={project.previewType}
         />
       </div>
     </div>
