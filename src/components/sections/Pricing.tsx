@@ -109,20 +109,30 @@ export const Pricing = () => {
           {mainPackages.map((plan, idx) => (
             <div 
               key={idx} 
-              className={`flex flex-col h-full bg-white border rounded-[24px] overflow-hidden transition-all duration-300 group hover:-translate-y-[6px] hover:shadow-2xl cursor-default ${
-                plan.featured ? 'border-primary ring-1 ring-primary' : 'border-border/50 hover:border-primary/50'
+              className={`flex flex-col h-full bg-white border rounded-[24px] overflow-hidden transition-all duration-500 group cursor-default relative ${
+                plan.featured 
+                  ? 'border-[#111111] border-2 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] z-10 hover:-translate-y-[8px] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)]' 
+                  : 'border-border/50 shadow-sm hover:border-primary/30 hover:-translate-y-[6px] hover:shadow-2xl'
               }`}
             >
+              {plan.featured && (
+                <div className="absolute top-4 right-6">
+                  <span className="bg-primary text-white text-[8px] font-mono font-bold tracking-[0.2em] px-3 py-1 rounded-full uppercase">
+                    RECOMMENDED
+                  </span>
+                </div>
+              )}
+
               <div className={`p-6 border-b transition-colors duration-300 ${
-                plan.featured ? 'bg-primary text-white border-primary' : 'bg-surface/50 border-border/50 text-primary group-hover:bg-white'
+                plan.featured ? 'bg-white border-[#111111]/10 text-primary' : 'bg-surface/50 border-border/50 text-primary group-hover:bg-white'
               }`}>
-                <h3 className={`text-sm font-mono font-bold tracking-widest uppercase mb-4 ${plan.featured ? 'text-white' : 'text-muted opacity-80'}`}>
+                <h3 className={`text-sm font-mono font-bold tracking-widest uppercase mb-4 ${plan.featured ? 'text-primary' : 'text-muted opacity-80'}`}>
                   {plan.name}
                 </h3>
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className={`text-4xl font-display font-bold ${plan.featured ? 'text-white' : 'text-primary'}`}>{plan.price}</span>
+                  <span className="text-4xl font-display font-bold text-primary">{plan.price}</span>
                 </div>
-                <p className={`text-xs font-sans leading-relaxed min-h-[60px] ${plan.featured ? 'text-white/70' : 'text-muted'}`}>
+                <p className={`text-xs font-sans leading-relaxed min-h-[60px] ${plan.featured ? 'text-primary/70' : 'text-muted'}`}>
                   {plan.description}
                 </p>
               </div>
@@ -140,7 +150,7 @@ export const Pricing = () => {
                 <button 
                   className={`w-full py-4 rounded-full font-mono text-[10px] font-bold tracking-widest uppercase transition-all duration-300 transform group-hover:scale-[1.02] ${
                     plan.featured 
-                      ? 'bg-primary text-white hover:bg-primary/90' 
+                      ? 'bg-primary text-white hover:bg-primary/90 shadow-md' 
                       : 'bg-white border border-border text-primary hover:bg-primary hover:text-white'
                   }`}
                 >
