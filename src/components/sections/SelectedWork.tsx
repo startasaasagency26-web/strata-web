@@ -36,9 +36,9 @@ const projects: Project[] = [
     tags: ["Service Website", "Branch Flow", "Enquiry System"],
     cta: "View Project",
     href: "https://thunderfix.online",
-    image: "/work/thunderfix-mobile.png",
-    imageAlt: "Thunderfix mobile service website preview",
-    previewType: "mobile",
+    image: "/work/thunderfix-desktop.png",
+    imageAlt: "Thunderfix desktop service website preview",
+    previewType: "desktop",
   },
   {
     title: "ONE MOBILE ROS APP",
