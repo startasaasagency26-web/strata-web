@@ -4,63 +4,69 @@ const projects = [
   {
     title: "J-ARMOR BRAND WEBSITE",
     category: "BRAND WEBSITE",
-    detail: "Product Brand + Trust Architecture",
+    detail: "PRODUCT BRAND + TRUST ARCHITECTURE",
     description: "A product-led brand website built to communicate protection, quality, product clarity, and customer trust through a polished digital presence.",
-    image: "/work/jarmor-brand-website.png",
-    imageAlt: "J-Armor brand website homepage preview",
+    mobileImage: "/work/jarmor-mobile.png",
+    imageAlt: "J-Armor mobile brand website preview",
     href: "https://www.j-armor.net",
     type: "image"
   },
   {
     title: "THUNDERFIX SERVICE WEBSITE",
     category: "SERVICE BUSINESS WEBSITE",
-    detail: "Branch Flow + Enquiry System",
+    detail: "BRANCH FLOW + ENQUIRY SYSTEM",
     description: "A repair business website built around trust, service clarity, branch discovery, Google/Waze navigation, and WhatsApp-led customer enquiries.",
-    image: "/work/thunderfix-service-website.png",
-    imageAlt: "Thunderfix service business website preview",
+    mobileImage: "/work/thunderfix-mobile.png",
+    imageAlt: "Thunderfix mobile service website preview",
     href: "https://thunderfix.online",
     type: "image"
   },
   {
     title: "ONE MOBILE ROS APP",
     category: "DIGITAL GROWTH SYSTEM",
-    detail: "Operations Dashboard + KPI Tracking",
+    detail: "OPERATIONS DASHBOARD + KPI TRACKING",
     description: "An internal repair operations system that turns jobs, revenue, technician performance, attribution, and pipeline visibility into a clean owner dashboard.",
     type: "dashboard"
   }
 ];
 
-const DashboardMockup = () => (
-  <div className="p-4 flex flex-col gap-4 h-full bg-white">
-    {/* KPI Grid */}
-    <div className="grid grid-cols-4 gap-2">
+const MobileDashboardMockup = () => (
+  <div className="flex flex-col h-full bg-[#FDFDFD] p-3 gap-3">
+    {/* Header */}
+    <div className="flex justify-between items-center mb-1">
+      <div className="w-16 h-2 bg-primary/10 rounded" />
+      <div className="w-6 h-6 rounded-full bg-primary/5" />
+    </div>
+
+    {/* KPI Cards */}
+    <div className="grid grid-cols-2 gap-2">
       {[1, 2, 3, 4].map(i => (
-        <div key={i} className="h-12 bg-surface rounded border border-border/20 p-2 flex flex-col justify-between">
-          <div className="w-full h-1 bg-primary/10 rounded" />
-          <div className="w-2/3 h-2 bg-primary/20 rounded" />
+        <div key={i} className="bg-surface rounded-lg border border-border/10 p-2 space-y-1.5">
+          <div className="w-full h-1 bg-primary/5 rounded" />
+          <div className="w-2/3 h-2.5 bg-primary/20 rounded" />
         </div>
       ))}
     </div>
     
-    {/* Revenue Chart */}
-    <div className="flex-grow bg-surface rounded border border-border/20 p-3 flex flex-col gap-3">
-      <div className="flex justify-between items-center">
-        <div className="w-24 h-2 bg-primary/20 rounded" />
-        <div className="w-12 h-1.5 bg-primary/10 rounded" />
-      </div>
-      <div className="flex-grow flex items-end gap-1.5 pt-4">
-        {[40, 70, 50, 90, 60, 80, 45, 85, 55, 75].map((h, i) => (
-          <div key={i} style={{ height: `${h}%` }} className="flex-grow bg-primary/10 rounded-t-sm transition-all duration-500 group-hover:bg-primary/20" />
+    {/* Main Chart */}
+    <div className="bg-surface rounded-xl border border-border/10 p-3 flex flex-col gap-3 flex-grow">
+      <div className="w-20 h-1.5 bg-primary/10 rounded" />
+      <div className="flex-grow flex items-end gap-1 pt-2">
+        {[30, 50, 40, 80, 60, 45, 70, 55].map((h, i) => (
+          <div key={i} style={{ height: `${h}%` }} className="flex-grow bg-primary/10 rounded-t-[2px]" />
         ))}
       </div>
     </div>
 
-    {/* Status Rows */}
-    <div className="space-y-2">
-      {[1, 2].map(i => (
-        <div key={i} className="h-8 bg-surface rounded border border-border/20 flex items-center px-3 justify-between">
-          <div className="w-32 h-1.5 bg-primary/10 rounded" />
-          <div className="w-12 h-4 bg-primary/5 rounded-full" />
+    {/* Status Items */}
+    <div className="space-y-2 pb-2">
+      {[1, 2, 3].map(i => (
+        <div key={i} className="flex items-center gap-3 bg-surface p-2 rounded-lg border border-border/5">
+          <div className="w-6 h-6 rounded bg-primary/5" />
+          <div className="flex-grow space-y-1">
+            <div className="w-full h-1 bg-primary/10 rounded" />
+            <div className="w-1/2 h-1 bg-primary/5 rounded" />
+          </div>
         </div>
       ))}
     </div>
@@ -92,30 +98,26 @@ export const SelectedWork = () => {
               key={idx} 
               className="group flex flex-col h-full bg-surface border border-border/50 p-2 rounded-[24px] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] hover:border-primary/20 motion-reduce:transform-none motion-reduce:transition-none"
             >
-              {/* Browser Mockup Area */}
-              <div className="h-64 md:h-80 w-full bg-[#E5E5E2] rounded-[16px] relative overflow-hidden flex flex-col border border-border/30">
-                {/* Browser Header */}
-                <div className="h-8 w-full border-b border-border/40 bg-surface flex items-center px-4 gap-1.5 shrink-0">
-                  <div className="w-2 h-2 rounded-full bg-border" />
-                  <div className="w-2 h-2 rounded-full bg-border" />
-                  <div className="w-2 h-2 rounded-full bg-border" />
-                </div>
-                
-                {/* Mockup Canvas */}
-                <div className="flex-grow overflow-hidden relative group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-                  {project.type === 'image' ? (
-                    <div className="absolute inset-x-4 -bottom-10 top-4 bg-white rounded-t-xl border-x border-t border-border/30 shadow-lg overflow-hidden">
+              {/* Mobile Preview Area */}
+              <div className="h-80 md:h-[400px] w-full bg-[#F5F5F3] rounded-[16px] relative overflow-hidden flex items-center justify-center border border-border/30">
+                {/* Phone Frame */}
+                <div className="w-[180px] md:w-[200px] aspect-[9/19] bg-[#1A1A1A] rounded-[36px] border-[6px] border-[#1A1A1A] relative shadow-2xl overflow-hidden transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:-translate-y-2">
+                  {/* Phone Screen */}
+                  <div className="absolute inset-0 bg-white overflow-hidden">
+                    {project.type === 'image' ? (
                       <img 
-                        src={project.image} 
+                        src={project.mobileImage} 
                         alt={project.imageAlt} 
-                        className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+                        className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                       />
-                    </div>
-                  ) : (
-                    <div className="absolute inset-x-4 -bottom-10 top-4 bg-white rounded-t-xl border-x border-t border-border/30 shadow-lg overflow-hidden opacity-90 group-hover:opacity-100 transition-opacity duration-500">
-                      <DashboardMockup />
-                    </div>
-                  )}
+                    ) : (
+                      <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+                        <MobileDashboardMockup />
+                      </div>
+                    )}
+                  </div>
+                  {/* Phone Notch/Dynamic Island area subtle cue */}
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-14 h-4 bg-black rounded-full opacity-90 z-10" />
                 </div>
               </div>
               
