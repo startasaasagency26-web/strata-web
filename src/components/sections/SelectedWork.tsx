@@ -43,7 +43,7 @@ const projects: Project[] = [
     tags: ["Operations Dashboard", "KPI Tracking", "Revenue Visibility"],
     cta: "View System",
     href: "#",
-    image: "/work/one-mobile-ros-dashboard.png",
+    image: "/work/one-mobile-ros-dashboard.jpg",
     imageAlt: "One Mobile ROS owner dashboard preview",
   },
 ];
@@ -106,7 +106,7 @@ const ProjectImage = ({
       alt={alt}
       fill
       className={cn(
-        "object-contain object-top transition-transform duration-700 group-hover:scale-[1.015]"
+        "object-cover object-top transition-transform duration-700 group-hover:scale-[1.015]"
       )}
       onError={() => setError(true)}
     />
@@ -115,7 +115,7 @@ const ProjectImage = ({
 
 const ProjectPreview = ({ project }: { project: Project }) => {
   return (
-    <div className="relative overflow-hidden rounded-[24px] border border-black/10 bg-[#f7f5ef] shadow-2xl transition-all duration-500 group-hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.5)]">
+    <div className="relative w-full overflow-hidden rounded-[24px] border border-black/10 bg-[#f7f5ef] shadow-[0_30px_80px_-35px_rgba(0,0,0,0.35)]">
       {/* Browser Chrome */}
       <div className="flex h-10 items-center gap-2 border-b border-black/10 bg-[#f4f2ed] px-5">
         <div className="flex gap-1.5">
@@ -127,7 +127,7 @@ const ProjectPreview = ({ project }: { project: Project }) => {
       </div>
 
       {/* Main Preview Area with Responsive Height */}
-      <div className="relative h-[240px] sm:h-[300px] lg:h-[360px] w-full overflow-hidden bg-[#f7f5ef]">
+      <div className="relative h-[300px] w-full overflow-hidden bg-black sm:h-[380px] lg:h-[430px]">
         <ProjectImage
           src={project.image}
           alt={project.imageAlt}
@@ -174,13 +174,13 @@ export const SelectedWork = () => {
               >
                 <div
                   className={[
-                    "grid min-h-[520px] grid-cols-1 lg:grid-cols-[1.35fr_0.65fr]",
-                    reverse ? "lg:grid-cols-[0.65fr_1.35fr]" : "",
+                    "grid min-h-[520px] grid-cols-1 lg:grid-cols-[1.45fr_0.75fr]",
+                    reverse ? "lg:grid-cols-[0.75fr_1.45fr]" : "",
                   ].join(" ")}
                 >
                   <div
                     className={[
-                      "relative flex items-center justify-center overflow-hidden bg-[#e9e8e4] p-6 md:p-10 lg:p-12",
+                      "relative flex items-center justify-center overflow-hidden bg-[#e9e8e4] p-6 md:p-12 lg:p-16",
                       reverse ? "lg:order-2" : "",
                     ].join(" ")}
                   >
@@ -190,7 +190,7 @@ export const SelectedWork = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col justify-center bg-white p-8 md:p-12">
+                  <div className="flex flex-col justify-center bg-white p-8 md:p-12 lg:p-14">
                     <div className="mb-8 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted/70">
                       {project.category}
                     </div>

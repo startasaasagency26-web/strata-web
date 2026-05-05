@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { cn } from "../lib/utils";
 
 export const About = () => {
   return (
@@ -234,45 +235,89 @@ export const About = () => {
         <div className="mx-auto max-w-6xl space-y-4">
           {[
             {
-              title: "J-ARMOR",
-              desc: "Brand website for product positioning and customer education.",
+              name: "J-ARMOR",
+              description: "Brand website for product positioning and customer education.",
+              href: "https://www.j-armor.net",
             },
             {
-              title: "J-ARMOR SHOP",
-              desc: "E-commerce product store built for online sales.",
+              name: "J-ARMOR SHOP",
+              description: "E-commerce product store built for online sales.",
+              href: "https://www.j-armor.shop",
             },
             {
-              title: "THUNDERFIX",
-              desc: "Service business website with modern layout, trust structure, and conversion-focused customer flow.",
+              name: "THUNDERFIX",
+              description: "Service business website with modern layout, trust structure, and conversion-focused customer flow.",
+              href: "https://www.thunderfix.online",
             },
             {
-              title: "ONESPECIALIST",
-              desc: "Local service website structured for lead generation.",
+              name: "ONESPECIALIST",
+              description: "Local service website structured for lead generation.",
+              href: "https://www.onespecialist.my",
             },
             {
-              title: "1MOBILE ROS",
-              desc: "Operational web system / dashboard built around repair business visibility, workflow, and customer flow.",
+              name: "1MOBILE ROS",
+              description: "Operational web system / dashboard built around repair business visibility, workflow, and customer flow.",
+              href: null,
+              badge: "INTERNAL SYSTEM",
             },
-          ].map((project, idx) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="flex items-center justify-between rounded-2xl border border-primary/5 bg-[#fcfbf9] px-8 py-6 transition-all hover:bg-white hover:shadow-md"
-            >
-              <div>
-                <h4 className="text-sm font-bold tracking-widest text-primary">
-                  {project.title}
-                </h4>
-                <p className="mt-1 text-xs text-primary/50">
-                  {project.desc}
-                </p>
+          ].map((project, idx) => {
+            const isLinked = Boolean(project.href);
+            
+            const content = (
+              <div className="flex w-full items-center justify-between px-8 py-6">
+                <div>
+                  <h4 className="text-sm font-bold tracking-widest text-primary">
+                    {project.name}
+                  </h4>
+                  <p className="mt-1 text-xs text-primary/50">
+                    {project.description}
+                  </p>
+                </div>
+                
+                {isLinked ? (
+                  <ArrowUpRight className="h-5 w-5 text-primary/20 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1" />
+                ) : (
+                  <span className="rounded-full bg-primary/5 px-3 py-1 font-mono text-[8px] font-bold uppercase tracking-widest text-primary/40">
+                    {project.badge}
+                  </span>
+                )}
               </div>
-              <ArrowUpRight className="h-5 w-5 text-primary/20 transition-all hover:text-primary" />
-            </motion.div>
-          ))}
+            );
+
+            const commonClasses = "flex items-center justify-between rounded-2xl border border-primary/5 bg-[#fcfbf9] transition-all duration-300 outline-none";
+
+            return isLinked ? (
+              <motion.a
+                key={project.name}
+                href={project.href!}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className={cn(
+                  commonClasses,
+                  "group block hover:bg-white hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary/20"
+                )}
+                aria-label={`Open ${project.name} website in a new tab`}
+              >
+                {content}
+              </motion.a>
+            ) : (
+              <motion.article
+                key={project.name}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className={commonClasses}
+                aria-label={`${project.name} is an internal system project`}
+              >
+                {content}
+              </motion.article>
+            );
+          })}
         </div>
       </section>
 
@@ -368,15 +413,46 @@ export const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative overflow-hidden rounded-[48px] bg-primary px-8 py-20 text-center text-white lg:py-32"
+          className="relative overflow-hidden rounded-[48px] border border-white/10 bg-[#050505] px-8 py-20 text-center text-white shadow-[0_0_80px_rgba(255,255,255,0.08)] lg:py-32"
         >
-          <div className="relative z-10 mx-auto max-w-3xl">
-            <h2 className="mb-8 text-4xl font-black tracking-tight md:text-5xl lg:text-7xl leading-tight">
-              Ready to Build a Digital Foundation That Supports Your Business?
-            </h2>
+          {/* Subtle ambient radial glow behind text */}
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-[120px]" />
+
+          <div className="relative z-10 mx-auto max-w-4xl">
+            <div className="relative mb-8">
+              {/* Glow layer duplicate */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 flex items-center justify-center text-center font-display text-4xl font-black uppercase leading-[1.1] tracking-tight text-white/40 blur-2xl md:text-5xl lg:text-7xl"
+              >
+                Ready to Build a Digital Foundation That Supports Your Business?
+              </div>
+
+              {/* Main Headline with text-shadow */}
+              <motion.h2 
+                animate={{ 
+                  opacity: [0.9, 1, 0.9],
+                  textShadow: [
+                    "0 0 15px rgba(255,255,255,0.25), 0 0 30px rgba(255,255,255,0.1)",
+                    "0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)",
+                    "0 0 15px rgba(255,255,255,0.25), 0 0 30px rgba(255,255,255,0.1)"
+                  ]
+                }}
+                transition={{ 
+                  duration: 5, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+                className="relative z-10 font-display text-4xl font-black uppercase leading-[1.1] tracking-tight text-white md:text-5xl lg:text-7xl"
+              >
+                Ready to Build a Digital Foundation That Supports Your Business?
+              </motion.h2>
+            </div>
+
             <p className="mb-12 text-lg text-white/60 md:text-xl">
               Book a Strata strategy call and we’ll help clarify the right website, platform, or system for your business stage.
             </p>
+            
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <button className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-white px-10 text-sm font-bold uppercase tracking-widest text-primary transition-transform active:scale-95 sm:w-auto">
                 <span className="relative z-10">Book a Strategy Call</span>
