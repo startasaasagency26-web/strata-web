@@ -105,18 +105,20 @@ export const Pricing = () => {
         </div>
 
         {/* Main Packages Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4 items-start max-w-7xl mx-auto mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4 items-start max-w-7xl mx-auto">
           {mainPackages.map((plan, idx) => (
             <div 
               key={idx} 
-              className={`flex flex-col h-full bg-white border rounded-[24px] overflow-hidden transition-all duration-300 group hover:shadow-xl ${
-                plan.featured ? 'border-primary ring-1 ring-primary' : 'border-border/50'
+              className={`flex flex-col h-full bg-white border rounded-[24px] overflow-hidden transition-all duration-300 group hover:-translate-y-[6px] hover:shadow-2xl cursor-default ${
+                plan.featured ? 'border-primary ring-1 ring-primary' : 'border-border/50 hover:border-primary/50'
               }`}
             >
               <div className={`p-6 border-b transition-colors duration-300 ${
                 plan.featured ? 'bg-primary text-white border-primary' : 'bg-surface/50 border-border/50 text-primary group-hover:bg-white'
               }`}>
-                <h3 className="text-sm font-mono font-bold tracking-widest uppercase mb-4 opacity-80">{plan.name}</h3>
+                <h3 className={`text-sm font-mono font-bold tracking-widest uppercase mb-4 ${plan.featured ? 'text-white' : 'text-muted opacity-80'}`}>
+                  {plan.name}
+                </h3>
                 <div className="flex items-baseline gap-2 mb-4">
                   <span className={`text-4xl font-display font-bold ${plan.featured ? 'text-white' : 'text-primary'}`}>{plan.price}</span>
                 </div>
@@ -150,7 +152,7 @@ export const Pricing = () => {
         </div>
 
         {/* Care Plans Section */}
-        <div className="max-w-5xl mx-auto mb-24">
+        <div className="max-w-5xl mx-auto mt-24">
           <div className="text-center mb-12">
             <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">OPTIONAL WEBSITE CARE</p>
             <h3 className="text-3xl md:text-4xl font-display font-bold text-primary mb-4">
@@ -163,38 +165,12 @@ export const Pricing = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {carePlans.map((plan, idx) => (
-              <div key={idx} className="p-8 bg-white border border-border/50 rounded-[20px] hover:shadow-lg transition-all duration-300">
+              <div key={idx} className="p-8 bg-white border border-border/50 rounded-[20px] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                 <h4 className="text-xs font-mono font-bold tracking-widest uppercase text-muted mb-2">{plan.name}</h4>
                 <p className="text-2xl font-display font-bold text-primary mb-3">{plan.price}</p>
                 <p className="text-xs font-sans text-muted leading-relaxed">{plan.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Payment Structure Strip */}
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-primary text-white rounded-[24px] p-8 md:p-12 overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl" />
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-display font-bold uppercase tracking-tight">Simple Payment<br/>Structure</h3>
-              </div>
-              <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                  <p className="text-[10px] font-mono tracking-widest uppercase text-white/50 mb-2">Standard Projects</p>
-                  <p className="text-sm font-sans text-white/80">50% deposit to start the project.</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-mono tracking-widest uppercase text-white/50 mb-2">Custom Projects</p>
-                  <p className="text-sm font-sans text-white/80">50% deposit, 30% at checkpoint, 20% before launch.</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-mono tracking-widest uppercase text-white/50 mb-2">Flexible Upgrade Path</p>
-                  <p className="text-sm font-sans text-white/80">Start with a smaller package and upgrade later as your business grows.</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         
