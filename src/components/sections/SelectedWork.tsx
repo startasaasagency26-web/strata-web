@@ -43,7 +43,7 @@ const projects: Project[] = [
     tags: ["Operations Dashboard", "KPI Tracking", "Revenue Visibility"],
     cta: "View System",
     href: "#",
-    image: "/work/one-mobile-ros-dashboard.jpg",
+    image: "/work/One Mobile ROS Dashboard.png",
     imageAlt: "One Mobile ROS owner dashboard preview",
   },
 ];
