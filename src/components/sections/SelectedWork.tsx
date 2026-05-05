@@ -101,8 +101,11 @@ const ProjectImage = ({
 
   const scaleClass =
     previewType === "mobile"
-      ? "group-hover:scale-[1.02]"
+      ? "group-hover:scale-[1.01]"
       : "group-hover:scale-[1.015]";
+
+  const objectClass =
+    previewType === "mobile" ? "object-contain" : "object-cover";
 
   if (error) {
     return (
@@ -123,7 +126,8 @@ const ProjectImage = ({
       alt={alt}
       fill
       className={cn(
-        "object-cover object-top transition-transform duration-700",
+        objectClass,
+        "object-top transition-transform duration-700",
         scaleClass
       )}
       onError={() => setError(true)}
@@ -135,7 +139,7 @@ const ProjectPreview = ({ project }: { project: Project }) => {
   if (project.previewType === "mobile") {
     return (
       <div className="flex h-[420px] items-center justify-center rounded-[28px] bg-[#ebe9e4] p-8">
-        <div className="relative aspect-[9/19.5] w-[190px] overflow-hidden rounded-[34px] border-[7px] border-black bg-black shadow-2xl transition-all duration-500 group-hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.5)]">
+        <div className="relative aspect-[9/19.5] w-[220px] overflow-hidden rounded-[34px] border-[7px] border-black bg-[#f7f5ef] shadow-2xl transition-all duration-500 group-hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.5)]">
           <ProjectImage
             src={project.image}
             alt={project.imageAlt}
