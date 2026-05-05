@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 type ProjectVariant = "jarmor" | "thunderfix" | "ros";
@@ -10,6 +11,7 @@ type Project = {
   cta: string;
   href: string;
   variant: ProjectVariant;
+  image: string;
 };
 
 const projects: Project[] = [
@@ -22,6 +24,7 @@ const projects: Project[] = [
     cta: "View Project",
     href: "https://www.j-armor.net",
     variant: "jarmor",
+    image: "/work/jarmor-desktop.jpg",
   },
   {
     title: "THUNDERFIX SERVICE WEBSITE",
@@ -32,6 +35,7 @@ const projects: Project[] = [
     cta: "View Project",
     href: "https://thunderfix.online",
     variant: "thunderfix",
+    image: "/work/thunderfix-desktop.jpg",
   },
   {
     title: "ONE MOBILE ROS APP",
@@ -42,6 +46,7 @@ const projects: Project[] = [
     cta: "View System",
     href: "#",
     variant: "ros",
+    image: "/work/one-mobile-ros-dashboard.jpg",
   },
 ];
 
@@ -57,153 +62,42 @@ const BrowserChrome = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const JarmorPreview = () => (
-  <BrowserChrome>
-    <div className="relative min-h-[320px] overflow-hidden bg-[#050505] p-8 text-white">
-      <div className="absolute right-8 top-8 rounded-full border border-[#bfa449]/40 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#d2b45c]">
-        Partner
-      </div>
+const ProjectImage = ({ src, alt }: { src: string; alt: string }) => {
+  const [error, setError] = useState(false);
 
-      <div className="relative z-10 max-w-[320px]">
-        <div className="mb-10 text-4xl font-black tracking-tight text-[#d2b45c]">
-          J-ARMOR
-        </div>
-
-        <div className="mb-6 inline-flex rounded-full border border-[#d2b45c]/30 bg-[#d2b45c]/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#d2b45c]">
-          Built to Protect
-        </div>
-
-        <h3 className="mb-6 text-5xl font-black leading-[0.92] tracking-tight">
-          Protection.
-          <br />
-          <span className="italic text-[#d2b45c]">Precision.</span>
-          <br />
-          Scale.
-        </h3>
-
-        <p className="max-w-[280px] text-sm leading-relaxed text-white/60">
-          Premium screen protection systems built for retail-ready application and trust.
-        </p>
-      </div>
-
-      <div className="absolute bottom-8 right-8 h-44 w-36 rounded-[28px] border border-[#d2b45c]/20 bg-gradient-to-br from-[#1a1a1a] to-black shadow-2xl" />
-      <div className="absolute bottom-0 left-0 h-px w-full bg-[#d2b45c]/30" />
-    </div>
-  </BrowserChrome>
-);
-
-const ThunderfixPreview = () => (
-  <BrowserChrome>
-    <div className="relative min-h-[320px] overflow-hidden bg-[#f5f1e8] p-8">
-      <div className="mb-10 flex items-center justify-between">
-        <div className="text-2xl font-black tracking-tight text-black">thunderFix</div>
-        <div className="rounded-full bg-black px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-white">
-          Repair Lab
-        </div>
-      </div>
-
-      <div className="max-w-[420px]">
-        <div className="mb-5 inline-flex rounded-full bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-black/50 shadow-sm">
-          One of the best repair labs in the region
-        </div>
-
-        <h3 className="mb-6 text-5xl font-black leading-[0.9] tracking-tight text-black">
-          Surgical Precision
-          <br />
-          <span className="text-black/35">For Your Tech</span>
-        </h3>
-
-        <p className="max-w-[380px] text-sm leading-relaxed text-black/55">
-          Restore devices with service clarity, branch discovery, directions, and WhatsApp-led enquiries.
-        </p>
-      </div>
-
-      <div className="absolute bottom-8 right-8 w-64 rounded-[22px] border border-black/10 bg-white p-5 shadow-2xl">
-        <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-black/45">
-          Branch Finder
-        </div>
-        <div className="mb-4 h-20 rounded-2xl bg-[#e6e1d6]" />
-        <div className="flex gap-2">
-          <div className="flex-1 rounded-full bg-black px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-white">
-            WhatsApp
-          </div>
-          <div className="flex-1 rounded-full bg-[#d1ad5f] px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-white">
-            Waze
-          </div>
-        </div>
-      </div>
-    </div>
-  </BrowserChrome>
-);
-
-const RosPreview = () => (
-  <BrowserChrome>
-    <div className="relative min-h-[320px] overflow-hidden bg-[#f4f4f1] p-7">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-black/40">
-            One Mobile ROS
-          </div>
-          <div className="mt-2 text-2xl font-black tracking-tight text-black">
-            Owner Dashboard
-          </div>
-        </div>
-        <div className="rounded-full bg-black px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-white">
-          Live Ops
-        </div>
-      </div>
-
-      <div className="mb-5 grid grid-cols-4 gap-3">
-        {["Revenue", "Active Jobs", "Completed", "Close Rate"].map((label) => (
-          <div key={label} className="rounded-2xl border border-black/10 bg-white p-4">
-            <div className="mb-4 h-2 w-12 rounded-full bg-black/15" />
-            <div className="mb-2 h-5 w-20 rounded bg-black/20" />
-            <div className="text-[9px] font-bold uppercase tracking-[0.18em] text-black/35">
-              {label}
+  return (
+    <div className="absolute inset-0 bg-[#F9F9F9] pt-8">
+      <div className="relative h-full w-full overflow-hidden">
+        {error ? (
+          <div className="flex h-full w-full flex-col items-center justify-center bg-[#f0f0f0] p-6 text-center">
+            <div className="mb-2 h-12 w-12 rounded-full bg-black/5 flex items-center justify-center">
+              <div className="h-6 w-6 rounded-sm border-2 border-black/10" />
             </div>
+            <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-black/30">
+              Project preview unavailable
+            </p>
           </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-[1.25fr_0.75fr] gap-4">
-        <div className="rounded-[22px] border border-black/10 bg-white p-5">
-          <div className="mb-6 flex items-center justify-between">
-            <div className="h-2 w-28 rounded-full bg-black/15" />
-            <div className="h-5 w-14 rounded-full bg-black/5" />
-          </div>
-          <div className="flex h-32 items-end gap-2">
-            {[35, 52, 42, 76, 61, 88, 57, 70, 48, 82].map((height, index) => (
-              <div
-                key={index}
-                className="flex-1 rounded-t bg-black/15"
-                style={{ height: `${height}%` }}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          {["Attribution", "Pipeline", "Technicians"].map((label) => (
-            <div key={label} className="rounded-2xl border border-black/10 bg-white p-4">
-              <div className="mb-3 text-[9px] font-bold uppercase tracking-[0.18em] text-black/35">
-                {label}
-              </div>
-              <div className="space-y-2">
-                <div className="h-2 rounded-full bg-black/15" />
-                <div className="h-2 w-2/3 rounded-full bg-black/10" />
-              </div>
-            </div>
-          ))}
-        </div>
+        ) : (
+          <img
+            src={src}
+            alt={alt}
+            className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.015]"
+            onError={() => setError(true)}
+          />
+        )}
       </div>
     </div>
-  </BrowserChrome>
-);
+  );
+};
 
-const ProjectPreview = ({ variant }: { variant: ProjectVariant }) => {
-  if (variant === "jarmor") return <JarmorPreview />;
-  if (variant === "thunderfix") return <ThunderfixPreview />;
-  return <RosPreview />;
+const ProjectPreview = ({ project }: { project: Project }) => {
+  return (
+    <BrowserChrome>
+      <div className="relative aspect-[16/10] w-full overflow-hidden">
+        <ProjectImage src={project.image} alt={project.title} />
+      </div>
+    </BrowserChrome>
+  );
 };
 
 export const SelectedWork = () => {
@@ -255,7 +149,7 @@ export const SelectedWork = () => {
                   >
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.9),rgba(255,255,255,0)_55%)]" />
                     <div className="relative w-full transition-transform duration-500 group-hover:scale-[1.01] motion-reduce:transition-none">
-                      <ProjectPreview variant={project.variant} />
+                      <ProjectPreview project={project} />
                     </div>
                   </div>
 
