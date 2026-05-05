@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const FinalCTA = () => {
@@ -26,22 +26,30 @@ export const FinalCTA = () => {
             </div>
           </div>
           
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tighter mb-8 uppercase">
-            INITIATE <br/> DEPLOYMENT
+          <h2 className="text-4xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tighter mb-8 uppercase">
+            Ready to architect your <br/> business presence online?
           </h2>
           
           <p className="text-white/70 font-sans text-lg md:text-xl max-w-2xl mx-auto mb-16 leading-relaxed">
-            Stop losing premium clients to inferior competitors with better websites. Upgrade your digital infrastructure today.
+            Book a Strata strategy call. We’ll confirm your scope, recommend the right package, and start once the deposit is paid.
           </p>
           
-          <button className="group relative inline-flex items-center justify-center gap-4 bg-white text-primary px-12 py-6 rounded-full font-mono font-bold tracking-widest uppercase hover:bg-surface transition-colors duration-300">
-            <span>Book Strategy Call</span>
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white group-hover:bg-primary/90 transition-colors duration-300 group-hover:translate-x-1">
-              <ArrowRight size={16} />
-            </div>
-          </button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <button className="group relative inline-flex items-center justify-center gap-4 bg-white text-primary px-10 py-6 rounded-full font-mono font-bold tracking-widest uppercase hover:bg-surface transition-colors duration-300 w-full sm:w-auto">
+              <span>Book Strategy Call</span>
+              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white group-hover:bg-primary/90 transition-colors duration-300 group-hover:translate-x-1">
+                <ArrowRight size={16} />
+              </div>
+            </button>
+
+            <button className="group inline-flex items-center justify-center gap-4 border border-white/30 text-white px-10 py-6 rounded-full font-mono font-bold tracking-widest uppercase hover:bg-white/10 transition-colors duration-300 w-full sm:w-auto">
+              <MessageSquare size={20} className="text-white/70" />
+              <span>WhatsApp Us</span>
+            </button>
+          </div>
         </motion.div>
       </div>
     </section>
   );
 };
+
