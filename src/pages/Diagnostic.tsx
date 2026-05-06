@@ -56,9 +56,12 @@ export const Diagnostic = () => {
     name: "",
     company: "",
     email: "",
-    whatsapp: "",
+    whatsapp: "", // full normalized: +60...
+    whatsappLocal: "", // raw input
     role: "",
-    location: "",
+    location: "Malaysia",
+    timezone: "Asia/Kuala_Lumpur",
+    utcOffset: "GMT+8",
     language: "English",
     businessType: "",
     requirement: "",
@@ -70,10 +73,32 @@ export const Diagnostic = () => {
     budget: "",
     preferredDate: "",
     preferredTime: "",
-    timezone: "",
+    callTimezone: "GMT+8", // specific to call time step
     notes: "",
     consent: false
   });
+
+  const [phoneError, setPhoneError] = useState("");
+
+  const handlePhoneChange = (val: string) => {
+    // Only allow digits
+    const cleaned = val.replace(/\D/g, "");
+    
+    // Auto-remove leading 0
+    const formatted = cleaned.startsWith("0") ? cleaned.substring(1) : cleaned;
+    
+    setFormData(prev => ({
+      ...prev,
+      whatsappLocal: formatted,
+      whatsapp: formatted ? `+60${formatted}` : ""
+    }));
+
+    if (formatted && (formatted.length < 8 || formatted.length > 11)) {
+      setPhoneError("Enter your Malaysia number without the country code (8-11 digits).");
+    } else {
+      setPhoneError("");
+    }
+  };
 
   const nextStep = () => {
     if (step < totalSteps) setStep(step + 1);
@@ -86,13 +111,33 @@ export const Diagnostic = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, send data to backend here
-    navigate("/request-demo/received", { state: { submission: formData } });
+    
+    // Normalize data for submission
+    const submissionData = {
+      ...formData,
+      phone_country_code: "+60",
+      phone_local_number: formData.whatsappLocal,
+      phone_full: formData.whatsapp,
+      country: "Malaysia",
+      timezone: "Asia/Kuala_Lumpur",
+      utc_offset: "GMT+8",
+    };
+
+    navigate("/request-demo/received", { state: { submission: submissionData } });
   };
 
   const isStepValid = () => {
     switch(step) {
-      case 1: return formData.name && formData.company && formData.email && formData.whatsapp;
+      case 1: 
+        return (
+          formData.name && 
+          formData.company && 
+          formData.email && 
+          formData.whatsappLocal.length >= 8 && 
+          formData.whatsappLocal.length <= 11 &&
+          formData.role &&
+          !phoneError
+        );
       case 2: return formData.businessType;
       case 3: return formData.requirement;
       case 4: return formData.problem.length > 10;
@@ -250,9 +295,11 @@ export const Diagnostic = () => {
                   {step === 1 && (
                     <div className="space-y-8">
                       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                        {/* Name & Company */}
                         <div className="space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Full Name</label>
+                          <label htmlFor="full-name" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Full Name</label>
                           <input 
+                            id="full-name"
                             required
                             type="text" 
                             className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
@@ -262,8 +309,9 @@ export const Diagnostic = () => {
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Company Name</label>
+                          <label htmlFor="company-name" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Company Name</label>
                           <input 
+                            id="company-name"
                             required
                             type="text" 
                             className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
@@ -272,9 +320,12 @@ export const Diagnostic = () => {
                             onChange={(e) => setFormData({...formData, company: e.target.value})}
                           />
                         </div>
+
+                        {/* Email & Phone */}
                         <div className="space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Work Email</label>
+                          <label htmlFor="work-email" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Work Email</label>
                           <input 
+                            id="work-email"
                             required
                             type="email" 
                             className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
@@ -284,38 +335,63 @@ export const Diagnostic = () => {
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">WhatsApp / Phone</label>
-                          <input 
-                            required
-                            type="tel" 
-                            className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
-                            placeholder="+60 12-345 6789"
-                            value={formData.whatsapp}
-                            onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
-                          />
+                          <label htmlFor="whatsapp-phone" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">WhatsApp / Phone</label>
+                          <div className={cn(
+                            "flex items-center rounded-2xl border bg-[#fcfbf9] px-4 transition-all duration-300",
+                            phoneError ? "border-red-500/50" : "border-primary/10 focus-within:border-primary"
+                          )}>
+                            <div className="flex h-10 items-center justify-center rounded-lg bg-primary/5 px-3 font-mono text-xs font-bold text-primary/40">
+                              +60
+                            </div>
+                            <input 
+                              id="whatsapp-phone"
+                              required
+                              type="tel" 
+                              className="w-full bg-transparent px-4 py-4 text-sm font-medium text-primary outline-none"
+                              placeholder="12-345 6789"
+                              value={formData.whatsappLocal}
+                              onChange={(e) => handlePhoneChange(e.target.value)}
+                            />
+                          </div>
+                          {phoneError && (
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-red-500">{phoneError}</p>
+                          )}
                         </div>
+
+                        {/* Role & Country */}
                         <div className="space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Role in Business</label>
-                          <input 
-                            type="text" 
-                            className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
-                            placeholder="Founder / CEO"
+                          <label htmlFor="role" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Role in Business</label>
+                          <select 
+                            id="role"
+                            required
+                            className="w-full appearance-none rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
                             value={formData.role}
                             onChange={(e) => setFormData({...formData, role: e.target.value})}
-                          />
+                          >
+                            <option value="" disabled>Select your role</option>
+                            {[
+                              "Founder / Owner", "CEO / Director", "Marketing Lead", 
+                              "Operations Lead", "Manager", "Freelancer / Consultant", "Other"
+                            ].map(opt => (
+                              <option key={opt} value={opt}>{opt}</option>
+                            ))}
+                          </select>
                         </div>
                         <div className="space-y-2">
                           <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Country / Timezone</label>
-                          <input 
-                            type="text" 
-                            className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
-                            placeholder="Malaysia (GMT+8)"
-                            value={formData.location}
-                            onChange={(e) => setFormData({...formData, location: e.target.value})}
-                          />
+                          <div className="flex items-center justify-between rounded-2xl border border-primary/5 bg-primary/[0.02] px-6 py-4 opacity-70">
+                            <span className="text-sm font-medium text-primary/60">Malaysia / GMT+8</span>
+                            <div className="text-primary/20">
+                              <div className="h-4 w-4 rounded-md border-2 border-current flex items-center justify-center">
+                                 <div className="h-1.5 w-1.5 rounded-full bg-current" />
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="space-y-4">
+
+                      {/* Language */}
+                      <div className="space-y-4 pt-4">
                         <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Preferred Language</label>
                         <div className="flex flex-wrap gap-3">
                           {["English", "Bahasa Melayu", "Mandarin"].map((lang) => (
@@ -324,9 +400,9 @@ export const Diagnostic = () => {
                               type="button"
                               onClick={() => setFormData({...formData, language: lang})}
                               className={cn(
-                                "rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-widest transition-all",
+                                "rounded-full px-8 py-3 text-[10px] font-bold uppercase tracking-widest transition-all",
                                 formData.language === lang 
-                                  ? "bg-primary text-white" 
+                                  ? "bg-primary text-white shadow-xl" 
                                   : "bg-[#f4f2ed] text-primary/60 hover:bg-[#eceae4]"
                               )}
                             >
@@ -540,13 +616,9 @@ export const Diagnostic = () => {
                           </div>
                           <div className="space-y-2">
                             <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Timezone</label>
-                            <input 
-                              type="text" 
-                              className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
-                              placeholder="GMT+8"
-                              value={formData.timezone}
-                              onChange={(e) => setFormData({...formData, timezone: e.target.value})}
-                            />
+                            <div className="flex h-14 items-center rounded-2xl border border-primary/5 bg-primary/[0.02] px-6 py-4 opacity-70">
+                              <span className="text-sm font-medium text-primary/60">GMT+8 (Kuala Lumpur)</span>
+                            </div>
                           </div>
                         </div>
                         <div className="space-y-2">
@@ -628,55 +700,76 @@ export const Diagnostic = () => {
           </div>
 
           {/* Qualification Side */}
-          <div className="space-y-12">
-            {/* Good Fit Card */}
+          <div className="lg:sticky lg:top-32 h-fit">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-[32px] border border-primary/5 bg-[#fcfbf9] p-8"
+              className="overflow-hidden rounded-[36px] border border-white/10 bg-[#0B0B0B] text-white shadow-2xl"
             >
-              <h3 className="mb-8 text-xl font-bold uppercase tracking-tight text-primary">Good Fit for Strata</h3>
-              <ul className="space-y-4">
-                {[
-                  "Malaysian SMEs that need a stronger digital foundation",
-                  "Service businesses with weak lead capture",
-                  "Brands with unclear websites or poor mobile flow",
-                  "Operators replacing manual workflows",
-                  "E-commerce businesses needing clearer product journeys",
-                  "Founders who want strategy before design"
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                    <span className="text-xs leading-relaxed text-primary/60">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+              <div className="p-8 lg:p-10">
+                <span className="mb-6 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/30">
+                  QUALIFICATION FILTER
+                </span>
+                <h3 className="mb-4 text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
+                  Built for serious operators.
+                </h3>
+                <p className="mb-10 text-sm leading-relaxed text-white/50">
+                  Strata works best with businesses that need structure, clarity, and a digital system that supports growth.
+                </p>
 
-            {/* Not a Fit Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="rounded-[32px] border border-red-500/10 bg-red-50/30 p-8"
-            >
-              <h3 className="mb-8 text-xl font-bold uppercase tracking-tight text-red-900">Not a Fit If</h3>
-              <ul className="space-y-4 text-red-900/60">
-                {[
-                  "You only want the cheapest template",
-                  "You have no clear business goal",
-                  "You are not ready to provide project details",
-                  "You want visuals without structure",
-                  "You expect premium work at throwaway pricing"
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <Minus className="mt-1 h-4 w-4 shrink-0" />
-                    <span className="text-xs leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
+                {/* Section 1: Good Fit */}
+                <div className="space-y-6">
+                  <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-white/20">
+                    GOOD FIT
+                  </span>
+                  <ul className="space-y-4">
+                    {[
+                      "Malaysian SMEs that need a stronger digital foundation",
+                      "Service businesses with weak lead capture",
+                      "Brands with unclear websites or poor mobile flow",
+                      "Operators replacing manual workflows",
+                      "E-commerce businesses needing clearer product journeys",
+                      "Founders who want strategy before design"
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-4">
+                        <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/40" />
+                        <span className="text-xs leading-relaxed text-white/70">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="my-10 h-px w-full bg-white/5" />
+
+                {/* Section 2: Not a Fit */}
+                <div className="space-y-6">
+                  <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-white/20">
+                    NOT A FIT
+                  </span>
+                  <ul className="space-y-4">
+                    {[
+                      "You only want the cheapest template",
+                      "You have no clear business goal",
+                      "You are not ready to provide project details",
+                      "You want visuals without structure",
+                      "You expect premium work at throwaway pricing"
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-4">
+                        <div className="mt-[9px] h-0.5 w-1.5 shrink-0 bg-white/20" />
+                        <span className="text-xs leading-relaxed text-white/40">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Bottom Strip */}
+              <div className="border-t border-white/5 bg-white/[0.02] p-6 text-center">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/30">
+                  Not sure if you fit? Submit the diagnostic and we’ll review honestly.
+                </p>
+              </div>
             </motion.div>
           </div>
         </div>
