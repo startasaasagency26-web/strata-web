@@ -180,7 +180,7 @@ export const About = () => {
             <div className="relative overflow-hidden rounded-[32px] border border-primary/5 bg-white p-4 shadow-2xl">
               <div className="aspect-[3/4] overflow-hidden rounded-[24px]">
                 <img
-                  src="/khairul-azril.jpg"
+                  src="/Khai.jpeg"
                   alt="Khairul Azril - Sales Specialist & Manager"
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                 />
