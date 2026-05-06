@@ -19,7 +19,6 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'LAB', href: '/#lab' },
     { name: 'SERVICES', href: '/#services' },
     { name: 'TECH', href: '/#tech' },
     { name: 'INDUSTRIES', href: '/#industries' },
@@ -83,18 +82,10 @@ export const Navbar = () => {
           <div className="flex-shrink-0 flex items-center justify-end gap-2 md:gap-3 relative z-50">
             <Link 
               to="/request-demo"
-              className="hidden lg:inline-flex items-center justify-center text-[11px] font-mono font-bold tracking-widest px-5 py-2.5 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 whitespace-nowrap"
+              className="hidden lg:inline-flex items-center justify-center text-[11px] font-mono font-bold tracking-widest px-6 py-2.5 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 whitespace-nowrap"
             >
               REQUEST A DEMO
             </Link>
-            <motion.a 
-              whileHover={{ y: -2, boxShadow: "0 0 20px rgba(255,255,255,0.2)" }}
-              whileTap={{ y: 0 }}
-              href="#contact" 
-              className="hidden md:inline-flex items-center justify-center text-[11px] font-mono font-bold tracking-widest px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 transition-all duration-300 whitespace-nowrap"
-            >
-              BUILD WITH US
-            </motion.a>
             
             <motion.button 
               whileHover={{ rotate: 90 }}
@@ -147,13 +138,10 @@ export const Navbar = () => {
                 <Link 
                   to="/request-demo" 
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-center text-xs font-mono font-bold tracking-widest w-full py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-colors"
+                  className="text-center text-[10px] font-mono font-bold tracking-[0.2em] w-full py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-colors"
                 >
                   REQUEST A DEMO
                 </Link>
-                <a href="#contact" className="text-center text-xs font-mono font-bold tracking-widest w-full py-4 rounded-full bg-white text-black hover:bg-white/90 transition-colors">
-                  BUILD WITH US
-                </a>
               </motion.li>
             </ul>
           </motion.div>

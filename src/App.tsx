@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Diagnostic } from "./pages/Diagnostic";
 import { DiagnosticReceived } from "./pages/DiagnosticReceived";
+import { BuildWithUs } from "./pages/BuildWithUs";
 import { Footer } from "./components/Footer";
 
 // Scroll to top on route change
@@ -39,6 +40,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/request-demo" element={<Diagnostic />} />
               <Route path="/request-demo/received" element={<DiagnosticReceived />} />
+              <Route path="/build-with-us" element={<BuildWithUs />} />
             </Routes>
           </main>
           <div className="relative z-10">
