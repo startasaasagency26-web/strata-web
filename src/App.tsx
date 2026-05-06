@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
+import { Diagnostic } from "./pages/Diagnostic";
+import { DiagnosticReceived } from "./pages/DiagnosticReceived";
 import { Footer } from "./components/Footer";
 
 // Scroll to top on route change
@@ -35,6 +37,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/request-demo" element={<Diagnostic />} />
+              <Route path="/request-demo/received" element={<DiagnosticReceived />} />
             </Routes>
           </main>
           <div className="relative z-10">
