@@ -22,4 +22,72 @@
   .glass-pill {
     @apply bg-white/80 backdrop-blur-md border border-border/50 text-primary shadow-sm hover:shadow-md transition-all duration-300;
   }
+
+  .final-cta-blueprint {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+    mask-image: radial-gradient(ellipse at 50% 26%, black 0%, rgba(0, 0, 0, 0.78) 42%, rgba(0, 0, 0, 0.24) 66%, transparent 84%);
+    transform: translateX(-50%) perspective(1100px) rotateX(62deg) scale(1.08);
+    transform-origin: top center;
+  }
+
+  .final-cta-system-card {
+    animation: final-cta-card-drift 18s ease-in-out infinite;
+  }
+
+  .final-cta-radar-sweep {
+    animation: final-cta-radar-sweep 18s linear infinite;
+  }
+
+  .final-cta-pulse-ring {
+    animation: final-cta-pulse-ring 4.8s ease-in-out infinite;
+  }
+}
+
+@keyframes final-cta-card-drift {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    opacity: 0.94;
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes final-cta-radar-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes final-cta-pulse-ring {
+  0%,
+  100% {
+    opacity: 0.22;
+    transform: scale(0.75);
+  }
+
+  48% {
+    opacity: 0.58;
+    transform: scale(1.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final-cta-system-card,
+  .final-cta-radar-sweep,
+  .final-cta-pulse-ring {
+    animation: none;
+  }
 }
