@@ -167,6 +167,111 @@ export const About = () => {
         </div>
       </section>
 
+      {/* SECTION 3.5 — SALES SPECIALIST SECTION */}
+      <section className="bg-[#fcfbf9] px-6 py-24 lg:px-20 lg:py-32">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="order-1 lg:order-1 relative"
+          >
+            <div className="relative overflow-hidden rounded-[32px] border border-primary/5 bg-white p-4 shadow-2xl">
+              <div className="aspect-[3/4] overflow-hidden rounded-[24px]">
+                <img
+                  src="/khairul-azril.jpg"
+                  alt="Khairul Azril - Sales Specialist & Manager"
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+              </div>
+              <div className="mt-6 flex flex-col items-center text-center px-4 pb-4">
+                <span className="text-sm font-bold uppercase tracking-widest text-primary">
+                  Khairul Azril
+                </span>
+                <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-primary/40">
+                  Sales Specialist & Manager
+                </span>
+                <div className="mt-4 flex flex-wrap justify-center gap-2">
+                   {["Client Communication", "Sales Strategy", "Follow-Up"].map((skill) => (
+                     <span key={skill} className="rounded-full bg-primary/5 px-3 py-1 text-[8px] font-bold uppercase tracking-wider text-primary/60">
+                       {skill}
+                     </span>
+                   ))}
+                </div>
+              </div>
+            </div>
+            {/* Credibility Badge */}
+            <div className="absolute -top-4 -left-4 rounded-2xl bg-primary p-4 text-white shadow-xl lg:left-4">
+              <div className="font-mono text-[8px] font-bold uppercase tracking-widest opacity-60">
+                Credibility
+              </div>
+              <div className="mt-1 text-xs font-bold uppercase tracking-wider">
+                10+ Years Experience
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="order-2 lg:order-2"
+          >
+            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">
+              CLIENT RELATIONSHIPS
+            </span>
+            <h2 className="mb-8 text-4xl font-black tracking-tight text-primary md:text-5xl lg:text-6xl">
+              Sales Guidance Backed by Real Customer Experience
+            </h2>
+            <p className="mb-10 text-lg leading-relaxed text-primary/60">
+              Khairul Azril supports Strata as a Sales Specialist & Manager, bringing over 10 years of frontline sales, customer service, telemarketing, store operations, and team supervision experience. His role is to help business owners feel understood, clarify what they actually need, and guide them toward the right digital solution without confusion or pressure.
+            </p>
+            
+            <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+              {[
+                {
+                  title: "10+ Years Experience",
+                  desc: "In customer-facing sales and service roles across multiple industries."
+                },
+                {
+                  title: "Skilled Communicator",
+                  desc: "Expert in prospect communication, follow-up, and objection handling."
+                },
+                {
+                  title: "Solution Oriented",
+                  desc: "Translates business pain points into clear website and system requirements."
+                },
+                {
+                  title: "Multilingual Support",
+                  desc: "Fluent in English, Bahasa Melayu, and Mandarin for diverse Malaysian businesses."
+                }
+              ].map((item, i) => (
+                <div key={i} className="flex gap-4">
+                  <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/5 text-primary">
+                    <CheckCircle2 size={14} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold uppercase tracking-tight text-primary">{item.title}</h4>
+                    <p className="mt-1 text-xs leading-relaxed text-primary/50">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-[32px] border border-primary/5 bg-[#f4f2ed]/50 p-8 lg:p-10">
+              <p className="mb-8 text-sm font-medium italic text-primary/70">
+                "Speak with a team that understands both websites and real customer conversations."
+              </p>
+              <button className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
+                <span className="relative z-10">Book a Strategy Call</span>
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* SECTION 4 — WHAT STRATA BUILDS */}
       <section className="bg-[#f4f2ed] px-6 py-24 lg:px-20 lg:py-32">
         <div className="mb-16">
