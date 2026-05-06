@@ -291,7 +291,7 @@ export const About = () => {
             },
             {
               title: "Service Business Platforms",
-              desc: "Websites for repair shops, local services, clinics, consultants, and operators that need clear service flow, location visibility, and customer action.",
+              desc: "Websites for repair shops, technical services, local retail, consultants, and operators that need clear service flow, location visibility, and customer action.",
             },
             {
               title: "E-Commerce Experiences",

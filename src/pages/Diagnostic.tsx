@@ -422,7 +422,7 @@ export const Diagnostic = () => {
                         {[
                           "Service business", "Local retail business", "E-commerce brand",
                           "Repair / technical service business", "Consultant / professional service",
-                          "Clinic / beauty / wellness", "Education / coaching", "Internal operations team", "Other"
+                          "Education / coaching", "Internal operations team", "Other"
                         ].map((type) => (
                           <button
                             key={type}

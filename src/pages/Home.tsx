@@ -7,12 +7,14 @@ import { Benefits } from '../components/sections/Benefits';
 import { Pricing } from '../components/sections/Pricing';
 import { FAQ } from '../components/sections/FAQ';
 import { FinalCTA } from '../components/sections/FinalCTA';
+import { Industries } from '../components/sections/Industries';
 
 export const Home = () => {
   return (
     <>
       <Hero />
       <Services />
+      <Industries />
       <Benefits />
       <Process />
       <SelectedWork />
