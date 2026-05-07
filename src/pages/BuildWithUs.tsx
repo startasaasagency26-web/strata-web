@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CONTACT } from "../config/contact";
 
 export const BuildWithUs = () => {
   return (
@@ -46,7 +47,7 @@ export const BuildWithUs = () => {
             Back to Home
           </Link>
           <Link 
-            to="/request-demo" 
+            to={CONTACT.requestDemoPath} 
             className="group flex h-14 items-center justify-center gap-3 rounded-full bg-primary px-8 text-[11px] font-bold uppercase tracking-widest text-white transition-all active:scale-95"
           >
             Request a Diagnostic

@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
 import { cn } from '../lib/utils';
+import { CONTACT } from '../config/contact';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -82,7 +83,7 @@ export const Navbar = () => {
           {/* CTA & Menu - Right */}
           <div className="flex-shrink-0 flex items-center justify-end gap-2 md:gap-3 relative z-50">
             <Link 
-              to="/request-demo"
+              to={CONTACT.requestDemoPath}
               className="hidden lg:inline-flex items-center justify-center text-[11px] font-mono font-bold tracking-widest px-6 py-2.5 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 whitespace-nowrap"
             >
               REQUEST A DEMO
@@ -137,7 +138,7 @@ export const Navbar = () => {
                 className="mt-8 flex flex-col gap-4 w-full max-w-xs"
               >
                 <Link 
-                  to="/request-demo" 
+                  to={CONTACT.requestDemoPath} 
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-center text-[10px] font-mono font-bold tracking-[0.2em] w-full py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-colors"
                 >

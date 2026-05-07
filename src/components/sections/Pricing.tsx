@@ -1,4 +1,6 @@
 import { Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { CONTACT } from '../../config/contact';
 
 const mainPackages = [
   {
@@ -147,15 +149,16 @@ export const Pricing = () => {
                   ))}
                 </ul>
                 
-                <button 
-                  className={`w-full py-4 rounded-full font-mono text-[10px] font-bold tracking-widest uppercase transition-all duration-300 transform group-hover:scale-[1.02] ${
+                <Link 
+                  to={CONTACT.requestDemoPath}
+                  className={`block w-full rounded-full py-4 text-center font-mono text-[10px] font-bold uppercase tracking-widest transition-all duration-300 transform group-hover:scale-[1.02] ${
                     plan.featured 
                       ? 'bg-primary text-white hover:bg-primary/90 shadow-md' 
                       : 'bg-white border border-border text-primary hover:bg-primary hover:text-white'
                   }`}
                 >
                   {plan.cta}
-                </button>
+                </Link>
               </div>
             </div>
           ))}
@@ -188,4 +191,3 @@ export const Pricing = () => {
     </section>
   );
 };
-

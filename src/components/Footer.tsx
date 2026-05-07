@@ -1,6 +1,8 @@
 import { Logo } from './Logo';
 import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { CONTACT } from '../config/contact';
+import { WhatsAppChoice } from './WhatsAppChoice';
 
 export const Footer = () => {
   return (
@@ -15,9 +17,26 @@ export const Footer = () => {
               Strata Agency builds premium digital foundations for serious brands. We combine high-end interfaces with conversion-first architecture.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-primary hover:text-primary/70 transition-colors"><Mail size={20} /></a>
-              <a href="#" className="text-primary hover:text-primary/70 transition-colors"><Phone size={20} /></a>
-              <a href="#" className="text-primary hover:text-primary/70 transition-colors"><MapPin size={20} /></a>
+              <a
+                href={CONTACT.mailto}
+                aria-label={`Email Strata at ${CONTACT.email}`}
+                className="text-primary hover:text-primary/70 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/40"
+              >
+                <Mail size={20} />
+              </a>
+              <WhatsAppChoice
+                ariaLabel="Choose a Strata WhatsApp contact"
+                className="text-primary hover:text-primary/70 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/40"
+              >
+                <Phone size={20} />
+              </WhatsAppChoice>
+              <Link
+                to="/about"
+                aria-label="View Strata agency details"
+                className="text-primary hover:text-primary/70 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/40"
+              >
+                <MapPin size={20} />
+              </Link>
             </div>
           </div>
           
@@ -35,18 +54,21 @@ export const Footer = () => {
           <div>
             <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">SERVICES</h4>
             <ul className="space-y-4">
-              <li><a href="#" className="text-muted hover:text-primary font-sans transition-colors text-sm">Premium Web Design</a></li>
-              <li><a href="#" className="text-muted hover:text-primary font-sans transition-colors text-sm">Web Development</a></li>
-              <li><a href="#" className="text-muted hover:text-primary font-sans transition-colors text-sm">SEO & Performance</a></li>
-              <li><a href="#" className="text-muted hover:text-primary font-sans transition-colors text-sm">Brand Systems</a></li>
+              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">Premium Web Design</Link></li>
+              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">Web Development</Link></li>
+              <li><Link to="/#tech" className="text-muted hover:text-primary font-sans transition-colors text-sm">SEO & Performance</Link></li>
+              <li><Link to="/#products" className="text-muted hover:text-primary font-sans transition-colors text-sm">Brand Systems</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">READY TO SCALE?</h4>
             <p className="text-muted font-sans text-sm mb-4">Book a call to discuss your project requirements.</p>
-            <a href="#" className="inline-flex items-center gap-2 font-mono tracking-widest text-primary hover:text-primary/70 transition-colors text-sm font-bold border-b border-primary pb-1">
-              HELLO@STRATA.AGENCY <ArrowRight size={16} />
+            <Link to={CONTACT.requestDemoPath} className="inline-flex items-center gap-2 font-mono tracking-widest text-primary hover:text-primary/70 transition-colors text-sm font-bold border-b border-primary pb-1">
+              BOOK STRATEGY CALL <ArrowRight size={16} />
+            </Link>
+            <a href={CONTACT.mailto} className="mt-4 block break-all font-mono text-xs font-bold tracking-widest text-muted transition-colors hover:text-primary">
+              {CONTACT.email}
             </a>
           </div>
         </div>

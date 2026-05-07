@@ -7,6 +7,7 @@ import { Diagnostic } from "./pages/Diagnostic";
 import { DiagnosticReceived } from "./pages/DiagnosticReceived";
 import { BuildWithUs } from "./pages/BuildWithUs";
 import { Footer } from "./components/Footer";
+import { CONTACT } from "./config/contact";
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -38,8 +39,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/request-demo" element={<Diagnostic />} />
-              <Route path="/request-demo/received" element={<DiagnosticReceived />} />
+              <Route path={CONTACT.requestDemoPath} element={<Diagnostic />} />
+              <Route path={`${CONTACT.requestDemoPath}/received`} element={<DiagnosticReceived />} />
               <Route path="/build-with-us" element={<BuildWithUs />} />
             </Routes>
           </main>

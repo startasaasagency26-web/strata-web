@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowRight, 
@@ -10,7 +10,11 @@ import {
   Minus
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { CONTACT } from "../config/contact";
 import { cn } from "../lib/utils";
+import type { LeadApiResponse, LeadFieldErrors } from "../lib/crm/types";
+
+const clientEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,6 +56,31 @@ export const Diagnostic = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const previousTitle = document.title;
+    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    const previousDescription = description?.content;
+    const activeDescription = description ?? document.createElement("meta");
+
+    if (!description) {
+      activeDescription.name = "description";
+      document.head.appendChild(activeDescription);
+    }
+
+    document.title = "Request a Strata Diagnostic | Website & Digital System Strategy";
+    activeDescription.content = "Tell Strata what is broken in your website, customer journey, or workflow. Request a diagnostic call to define the right digital build direction.";
+
+    return () => {
+      document.title = previousTitle;
+
+      if (previousDescription !== undefined) {
+        activeDescription.content = previousDescription;
+      } else {
+        activeDescription.remove();
+      }
+    };
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -79,8 +108,23 @@ export const Diagnostic = () => {
   });
 
   const [phoneError, setPhoneError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<LeadFieldErrors>({});
+  const [submitError, setSubmitError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const clearFieldError = (field: keyof LeadFieldErrors) => {
+    setSubmitError("");
+    setFieldErrors(prev => {
+      if (!prev[field]) return prev;
+
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  };
 
   const handlePhoneChange = (val: string) => {
+    clearFieldError("whatsappPhone");
     // Only allow digits
     const cleaned = val.replace(/\D/g, "");
     
@@ -109,21 +153,74 @@ export const Diagnostic = () => {
     window.scrollTo({ top: formRef.current?.offsetTop ? formRef.current.offsetTop - 100 : 0, behavior: "smooth" });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Normalize data for submission
-    const submissionData = {
+  const buildLeadPayload = () => ({
+    fullName: formData.name,
+    companyName: formData.company,
+    workEmail: formData.email,
+    whatsappPhone: formData.whatsapp,
+    roleInBusiness: formData.role,
+    countryTimezone: `${formData.location} / ${formData.utcOffset}`,
+    preferredLanguage: formData.language,
+    businessType: formData.businessType,
+    serviceNeed: formData.requirement,
+    websiteUrl: formData.websiteUrl,
+    currentProblem: formData.problem,
+    budgetRange: formData.budget,
+    timeline: formData.timeline,
+    sourcePage: CONTACT.requestDemoPath,
+    consent: formData.consent,
+    rawPayload: {
       ...formData,
       phone_country_code: "+60",
       phone_local_number: formData.whatsappLocal,
       phone_full: formData.whatsapp,
-      country: "Malaysia",
-      timezone: "Asia/Kuala_Lumpur",
-      utc_offset: "GMT+8",
-    };
+      country: formData.location,
+      timezone: formData.timezone,
+      utc_offset: formData.utcOffset,
+    },
+  });
 
-    navigate("/request-demo/received", { state: { submission: submissionData } });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!isStepValid() || isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitError("");
+    setFieldErrors({});
+
+    const leadPayload = buildLeadPayload();
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(leadPayload),
+      });
+      const result = (await response.json()) as LeadApiResponse;
+
+      if (!response.ok || !result.ok) {
+        setFieldErrors(!result.ok && result.fieldErrors ? result.fieldErrors : {});
+        setSubmitError("We couldn’t submit your request yet. Please check the required fields or try again.");
+        return;
+      }
+
+      navigate(`${CONTACT.requestDemoPath}/received`, {
+        state: {
+          submission: {
+            ...formData,
+            ...leadPayload,
+            leadId: result.leadId,
+          },
+        },
+      });
+    } catch {
+      setSubmitError("We couldn’t submit your request yet. Please check the required fields or try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const isStepValid = () => {
@@ -132,7 +229,7 @@ export const Diagnostic = () => {
         return (
           formData.name && 
           formData.company && 
-          formData.email && 
+          clientEmailPattern.test(formData.email.trim()) && 
           formData.whatsappLocal.length >= 8 && 
           formData.whatsappLocal.length <= 11 &&
           formData.role &&
@@ -149,12 +246,6 @@ export const Diagnostic = () => {
 
   return (
     <div className="flex flex-col">
-      {/* SEO METADATA MOCKUP */}
-      <head>
-        <title>Request a Strata Diagnostic | Website & Digital System Strategy</title>
-        <meta name="description" content="Tell Strata what is broken in your website, customer journey, or workflow. Request a diagnostic call to define the right digital build direction." />
-      </head>
-
       {/* SECTION 1 — HERO */}
       <section className="relative px-6 py-20 lg:px-20 lg:py-32">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
@@ -302,11 +393,22 @@ export const Diagnostic = () => {
                             id="full-name"
                             required
                             type="text" 
-                            className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                            aria-invalid={Boolean(fieldErrors.fullName)}
+                            aria-describedby={fieldErrors.fullName ? "full-name-error" : undefined}
+                            className={cn(
+                              "w-full rounded-2xl border bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none transition-colors focus:border-primary",
+                              fieldErrors.fullName ? "border-red-500/50" : "border-primary/10"
+                            )}
                             placeholder="Ahmad Zulkifli"
                             value={formData.name}
-                            onChange={(e) => setFormData({...formData, name: e.target.value})}
+                            onChange={(e) => {
+                              clearFieldError("fullName");
+                              setFormData({...formData, name: e.target.value});
+                            }}
                           />
+                          {fieldErrors.fullName && (
+                            <p id="full-name-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.fullName}</p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <label htmlFor="company-name" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Company Name</label>
@@ -314,11 +416,22 @@ export const Diagnostic = () => {
                             id="company-name"
                             required
                             type="text" 
-                            className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                            aria-invalid={Boolean(fieldErrors.companyName)}
+                            aria-describedby={fieldErrors.companyName ? "company-name-error" : undefined}
+                            className={cn(
+                              "w-full rounded-2xl border bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none transition-colors focus:border-primary",
+                              fieldErrors.companyName ? "border-red-500/50" : "border-primary/10"
+                            )}
                             placeholder="Zul Trading Sdn Bhd"
                             value={formData.company}
-                            onChange={(e) => setFormData({...formData, company: e.target.value})}
+                            onChange={(e) => {
+                              clearFieldError("companyName");
+                              setFormData({...formData, company: e.target.value});
+                            }}
                           />
+                          {fieldErrors.companyName && (
+                            <p id="company-name-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.companyName}</p>
+                          )}
                         </div>
 
                         {/* Email & Phone */}
@@ -328,17 +441,28 @@ export const Diagnostic = () => {
                             id="work-email"
                             required
                             type="email" 
-                            className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                            aria-invalid={Boolean(fieldErrors.workEmail)}
+                            aria-describedby={fieldErrors.workEmail ? "work-email-error" : undefined}
+                            className={cn(
+                              "w-full rounded-2xl border bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none transition-colors focus:border-primary",
+                              fieldErrors.workEmail ? "border-red-500/50" : "border-primary/10"
+                            )}
                             placeholder="ahmad@company.com"
                             value={formData.email}
-                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            onChange={(e) => {
+                              clearFieldError("workEmail");
+                              setFormData({...formData, email: e.target.value});
+                            }}
                           />
+                          {fieldErrors.workEmail && (
+                            <p id="work-email-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.workEmail}</p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <label htmlFor="whatsapp-phone" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">WhatsApp / Phone</label>
                           <div className={cn(
                             "flex items-center rounded-2xl border bg-[#fcfbf9] px-4 transition-all duration-300",
-                            phoneError ? "border-red-500/50" : "border-primary/10 focus-within:border-primary"
+                            phoneError || fieldErrors.whatsappPhone ? "border-red-500/50" : "border-primary/10 focus-within:border-primary"
                           )}>
                             <div className="flex h-10 items-center justify-center rounded-lg bg-primary/5 px-3 font-mono text-xs font-bold text-primary/40">
                               +60
@@ -347,14 +471,16 @@ export const Diagnostic = () => {
                               id="whatsapp-phone"
                               required
                               type="tel" 
+                              aria-invalid={Boolean(phoneError || fieldErrors.whatsappPhone)}
+                              aria-describedby={phoneError || fieldErrors.whatsappPhone ? "whatsapp-phone-error" : undefined}
                               className="w-full bg-transparent px-4 py-4 text-sm font-medium text-primary outline-none"
                               placeholder="12-345 6789"
                               value={formData.whatsappLocal}
                               onChange={(e) => handlePhoneChange(e.target.value)}
                             />
                           </div>
-                          {phoneError && (
-                            <p className="text-[10px] font-bold uppercase tracking-wider text-red-500">{phoneError}</p>
+                          {(phoneError || fieldErrors.whatsappPhone) && (
+                            <p id="whatsapp-phone-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{phoneError || fieldErrors.whatsappPhone}</p>
                           )}
                         </div>
 
@@ -364,9 +490,17 @@ export const Diagnostic = () => {
                           <select 
                             id="role"
                             required
-                            className="w-full appearance-none rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                            aria-invalid={Boolean(fieldErrors.roleInBusiness)}
+                            aria-describedby={fieldErrors.roleInBusiness ? "role-error" : undefined}
+                            className={cn(
+                              "w-full appearance-none rounded-2xl border bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none transition-colors focus:border-primary",
+                              fieldErrors.roleInBusiness ? "border-red-500/50" : "border-primary/10"
+                            )}
                             value={formData.role}
-                            onChange={(e) => setFormData({...formData, role: e.target.value})}
+                            onChange={(e) => {
+                              clearFieldError("roleInBusiness");
+                              setFormData({...formData, role: e.target.value});
+                            }}
                           >
                             <option value="" disabled>Select your role</option>
                             {[
@@ -376,6 +510,9 @@ export const Diagnostic = () => {
                               <option key={opt} value={opt}>{opt}</option>
                             ))}
                           </select>
+                          {fieldErrors.roleInBusiness && (
+                            <p id="role-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.roleInBusiness}</p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Country / Timezone</label>
@@ -387,6 +524,9 @@ export const Diagnostic = () => {
                               </div>
                             </div>
                           </div>
+                          {fieldErrors.countryTimezone && (
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.countryTimezone}</p>
+                          )}
                         </div>
                       </div>
 
@@ -398,7 +538,10 @@ export const Diagnostic = () => {
                             <button
                               key={lang}
                               type="button"
-                              onClick={() => setFormData({...formData, language: lang})}
+                              onClick={() => {
+                                clearFieldError("preferredLanguage");
+                                setFormData({...formData, language: lang});
+                              }}
                               className={cn(
                                 "rounded-full px-8 py-3 text-[10px] font-bold uppercase tracking-widest transition-all",
                                 formData.language === lang 
@@ -410,6 +553,9 @@ export const Diagnostic = () => {
                             </button>
                           ))}
                         </div>
+                        {fieldErrors.preferredLanguage && (
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.preferredLanguage}</p>
+                        )}
                       </div>
                     </div>
                   )}
@@ -652,6 +798,15 @@ export const Diagnostic = () => {
                 </motion.div>
               </AnimatePresence>
 
+              {submitError && (
+                <div
+                  role="alert"
+                  className="rounded-2xl border border-red-500/15 bg-red-500/[0.06] px-5 py-4 text-xs font-bold uppercase tracking-wider text-red-600"
+                >
+                  {submitError}
+                </div>
+              )}
+
               {/* Form Navigation */}
               <div className="flex flex-wrap items-center justify-between gap-6 pt-12 border-t border-primary/5">
                 {step > 1 ? (
@@ -683,15 +838,16 @@ export const Diagnostic = () => {
                 ) : (
                   <button
                     type="submit"
-                    disabled={!isStepValid()}
+                    disabled={!isStepValid() || isSubmitting}
+                    aria-busy={isSubmitting}
                     className={cn(
                       "group flex h-14 items-center justify-center gap-4 rounded-full px-12 text-sm font-bold uppercase tracking-widest transition-all active:scale-95",
-                      isStepValid() 
+                      isStepValid() && !isSubmitting
                         ? "bg-primary text-white shadow-xl" 
                         : "bg-[#f4f2ed] text-primary/20 cursor-not-allowed"
                     )}
                   >
-                    <span>Submit Diagnostic Request</span>
+                    <span>{isSubmitting ? "Submitting..." : "Submit Diagnostic Request"}</span>
                     <ArrowRight size={18} />
                   </button>
                 )}

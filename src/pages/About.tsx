@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CONTACT } from "../config/contact";
 import { cn } from "../lib/utils";
 
 export const About = () => {
@@ -24,9 +25,9 @@ export const About = () => {
               Founded in mid-2025, Strata is a founder-led digital architecture studio helping Malaysian SMEs build websites, service platforms, and web systems that create trust, clarify offers, and capture better enquiries.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
+              <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
                 <span className="relative z-10">Book a Strategy Call</span>
-              </button>
+              </Link>
               <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>
               </Link>
@@ -264,9 +265,9 @@ export const About = () => {
               <p className="mb-8 text-sm font-medium italic text-primary/70">
                 "Speak with a team that understands both websites and real customer conversations."
               </p>
-              <button className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
+              <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
                 <span className="relative z-10">Book a Strategy Call</span>
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -559,9 +560,9 @@ export const About = () => {
             </p>
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <button className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-white px-10 text-sm font-bold uppercase tracking-widest text-primary transition-transform active:scale-95 sm:w-auto">
+              <Link to={CONTACT.requestDemoPath} className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-white px-10 text-sm font-bold uppercase tracking-widest text-primary transition-transform active:scale-95 sm:w-auto">
                 <span className="relative z-10">Book a Strategy Call</span>
-              </button>
+              </Link>
               <Link to="/#selected-work" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-white/20 px-10 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white/10 active:scale-95 sm:w-auto">
                 <span className="relative z-10">View Selected Work</span>
               </Link>

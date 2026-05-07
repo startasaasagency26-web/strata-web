@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { CONTACT } from "../config/contact";
 
 export const DiagnosticReceived = () => {
   const location = useLocation();
@@ -35,7 +36,7 @@ export const DiagnosticReceived = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-12 text-lg leading-relaxed text-primary/60 md:text-xl"
         >
-          We’ll review your business details and contact you with the next step. Strong submissions get sharper recommendations, so check your email or WhatsApp.
+          Thanks — your request has been received. The Strata team will review your details and contact you via email or WhatsApp.
         </motion.p>
 
         {/* Submission Summary */}
@@ -77,12 +78,12 @@ export const DiagnosticReceived = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          <button className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
+          <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
             <span className="relative z-10 flex items-center gap-2">
               Add More Project Details
               <ArrowUpRight size={16} />
             </span>
-          </button>
+          </Link>
           <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
             <span className="relative z-10 flex items-center gap-2">
               <ArrowLeft size={16} />
