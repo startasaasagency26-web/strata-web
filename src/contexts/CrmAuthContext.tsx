@@ -22,6 +22,7 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [error, setError] = useState<string | null>(null);
 
   const fetchProfile = async (uid: string) => {
+    console.log('[auth] Fetching profile for:', uid);
     try {
       setError(null);
       const { data, error: profileError } = await supabase
@@ -31,9 +32,8 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
         .single();
 
       if (profileError) {
-        // Special case: Row not found is a specific authorization error, not a network error
         if (profileError.code === 'PGRST116') {
-          console.warn('[auth] No CRM profile found for user:', uid);
+          console.warn('[auth] No CRM profile found for UID:', uid);
         } else {
           console.error('[auth] Profile lookup failed:', profileError);
           setError('CRM profile verification failed. Please check your connection.');
@@ -41,6 +41,7 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return null;
       }
 
+      console.log('[auth] Profile loaded:', data.full_name, '(', data.role, ')');
       return {
         id: data.id,
         email: data.email,
@@ -51,7 +52,7 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
         updatedAt: data.updated_at,
       } as CrmUserProfile;
     } catch (err) {
-      console.error('[auth] Unexpected error:', err);
+      console.error('[auth] Unexpected error during fetchProfile:', err);
       setError('An unexpected error occurred while verifying your account.');
       return null;
     }
@@ -65,35 +66,75 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   useEffect(() => {
-    // 1. Initial session check
-    const initSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
+    let mounted = true;
+
+    // 1. Robust initialization
+    const init = async () => {
+      console.log('[auth] Initializing session...');
       
-      if (session?.user) {
-        const p = await fetchProfile(session.user.id);
-        setProfile(p);
+      // Safety timeout: 10 seconds
+      const timeout = setTimeout(() => {
+        if (mounted && isLoading) {
+          console.warn('[auth] Initialization timed out after 10s.');
+          setError('Verification timed out. Please check your connection.');
+          setIsLoading(false);
+        }
+      }, 10000);
+
+      try {
+        // Use getUser() for server-side validation as requested
+        const { data: { user: authUser }, error: authError } = await supabase.auth.getUser();
+        
+        if (!mounted) return;
+
+        if (authError) {
+          console.log('[auth] No active session found.');
+          setUser(null);
+          setProfile(null);
+        } else if (authUser) {
+          console.log('[auth] User authenticated:', authUser.email);
+          setUser(authUser);
+          const p = await fetchProfile(authUser.id);
+          if (mounted) setProfile(p);
+        }
+      } catch (err) {
+        console.error('[auth] Fatal initialization error:', err);
+        if (mounted) setError('System failed to initialize. Please refresh.');
+      } finally {
+        clearTimeout(timeout);
+        if (mounted) {
+          console.log('[auth] Initialization complete. Loading: false');
+          setIsLoading(false);
+        }
       }
-      setIsLoading(false);
     };
 
-    initSession();
+    init();
 
     // 2. Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setUser(session?.user ?? null);
+      console.log('[auth] Auth state change:', event);
       
-      if (event === 'SIGNED_IN' && session?.user) {
-        const p = await fetchProfile(session.user.id);
-        setProfile(p);
+      if (!mounted) return;
+
+      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        const authUser = session?.user ?? null;
+        setUser(authUser);
+        if (authUser) {
+          const p = await fetchProfile(authUser.id);
+          if (mounted) setProfile(p);
+        }
       } else if (event === 'SIGNED_OUT') {
+        setUser(null);
         setProfile(null);
+        setError(null);
       }
       
-      setIsLoading(false);
+      if (mounted) setIsLoading(false);
     });
 
     return () => {
+      mounted = false;
       subscription.unsubscribe();
     };
   }, []);
