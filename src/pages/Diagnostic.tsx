@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CONTACT } from "../config/contact";
 import { cn } from "../lib/utils";
 import type { LeadApiResponse, LeadFieldErrors } from "../lib/crm/types";
+import { supabase } from "../lib/supabase";
 
 const clientEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -192,18 +193,31 @@ export const Diagnostic = () => {
     const leadPayload = buildLeadPayload();
 
     try {
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(leadPayload),
-      });
-      const result = (await response.json()) as LeadApiResponse;
+      // Direct Supabase Ingestion
+      const { data, error } = await supabase
+        .from('leads')
+        .insert({
+          full_name: leadPayload.fullName,
+          company_name: leadPayload.companyName,
+          work_email: leadPayload.workEmail,
+          whatsapp_phone: leadPayload.whatsappPhone,
+          role_in_business: leadPayload.roleInBusiness,
+          country_timezone: leadPayload.countryTimezone,
+          preferred_language: leadPayload.preferredLanguage,
+          business_type: leadPayload.businessType,
+          service_need: leadPayload.serviceNeed,
+          website_url: leadPayload.websiteUrl,
+          current_problem: leadPayload.currentProblem,
+          budget_range: leadPayload.budgetRange,
+          timeline: leadPayload.timeline,
+          raw_payload: leadPayload.rawPayload
+        })
+        .select()
+        .single();
 
-      if (!response.ok || !result.ok) {
-        setFieldErrors(!result.ok && result.fieldErrors ? result.fieldErrors : {});
-        setSubmitError("We couldn’t submit your request yet. Please check the required fields or try again.");
+      if (error) {
+        console.error('Supabase Error:', error);
+        setSubmitError("We couldn’t submit your request yet. Please try again.");
         return;
       }
 
@@ -212,16 +226,18 @@ export const Diagnostic = () => {
           submission: {
             ...formData,
             ...leadPayload,
-            leadId: result.leadId,
+            leadId: data.id,
           },
         },
       });
-    } catch {
-      setSubmitError("We couldn’t submit your request yet. Please check the required fields or try again.");
+    } catch (err) {
+      console.error('Submission Error:', err);
+      setSubmitError("An unexpected error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
+
 
   const isStepValid = () => {
     switch(step) {

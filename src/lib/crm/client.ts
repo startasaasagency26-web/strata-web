@@ -1,3 +1,4 @@
+import { supabase } from "../supabase";
 import type { 
   Lead, 
   DashboardMetrics, 
@@ -6,165 +7,185 @@ import type {
   CrmSettings 
 } from "../../types/crm";
 
-// Mock data generator helpers
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-const MOCK_LEADS: Lead[] = [
-  {
-    id: "lead-1",
-    createdAt: "2024-05-01T10:00:00Z",
-    updatedAt: "2024-05-01T10:00:00Z",
-    fullName: "Amirul Hakim",
-    companyName: "TechCraft Malaysia",
-    workEmail: "amirul@techcraft.my",
-    whatsappPhone: "+60123456789",
-    roleInBusiness: "Founder",
-    countryTimezone: "Malaysia (GMT+8)",
-    preferredLanguage: "English",
-    businessType: "Software Agency",
-    serviceNeed: "Website & Digital System",
-    websiteUrl: "https://techcraft.my",
-    currentProblem: "Manual lead management is slowing us down.",
-    projectGoal: "Automate intake and professionalize brand.",
-    budgetRange: "RM 15k - 25k",
-    selectedPackage: "Strata Growth",
-    timeline: "1-2 months",
-    sourcePage: "/request-demo",
-    status: "new",
-    priority: "hot",
-    assignedTo: "Khairul",
-    notesCount: 2,
-    rawPayload: {}
-  },
-  {
-    id: "lead-2",
-    createdAt: "2024-04-28T14:30:00Z",
-    updatedAt: "2024-04-29T09:15:00Z",
-    fullName: "Sarah Chen",
-    companyName: "Luxe Decor",
-    workEmail: "sarah@luxedecor.com",
-    whatsappPhone: "+60198765432",
-    roleInBusiness: "Marketing Director",
-    countryTimezone: "Malaysia (GMT+8)",
-    preferredLanguage: "English",
-    businessType: "E-commerce & Product Brand",
-    serviceNeed: "E-commerce Experience",
-    websiteUrl: "https://luxedecor.com",
-    currentProblem: "Current site is slow and doesn't convert.",
-    projectGoal: "High-end visual overhaul and speed optimization.",
-    budgetRange: "RM 25k+",
-    selectedPackage: "Strata Scale",
-    timeline: "Immediate",
-    status: "contacted",
-    priority: "warm",
-    assignedTo: "Nick",
-    lastContactedAt: "2024-04-29T09:00:00Z",
-    nextFollowUpAt: "2024-05-02T10:00:00Z",
-    notesCount: 1,
-    sourcePage: "/request-demo",
-    rawPayload: {}
-  }
-];
+// Mapping helpers
+const mapDbLead = (dbLead: any): Lead => ({
+  id: dbLead.id,
+  createdAt: dbLead.created_at,
+  updatedAt: dbLead.updated_at,
+  fullName: dbLead.full_name,
+  workEmail: dbLead.work_email,
+  whatsappPhone: dbLead.whatsapp_phone,
+  companyName: dbLead.company_name,
+  roleInBusiness: dbLead.role_in_business,
+  businessType: dbLead.business_type,
+  serviceNeed: dbLead.service_need,
+  websiteUrl: dbLead.website_url,
+  budgetRange: dbLead.budget_range,
+  timeline: dbLead.timeline,
+  currentProblem: dbLead.current_problem,
+  projectGoal: dbLead.project_goal,
+  selectedPackage: dbLead.selected_package,
+  status: dbLead.status,
+  priority: dbLead.priority,
+  assignedTo: dbLead.assigned_to,
+  lastContactedAt: dbLead.last_contacted_at,
+  nextFollowUpAt: dbLead.next_follow_up_at,
+  rawPayload: dbLead.raw_payload || {}
+});
 
 export const getDashboard = async (): Promise<DashboardMetrics> => {
-  await sleep(800);
-  return {
-    totalLeads: 42,
-    newLeads: 5,
-    contactedLeads: 12,
-    qualifiedLeads: 8,
-    proposalSent: 4,
-    won: 3,
-    lost: 2,
-    conversionRate: 7.1,
-    leadsThisWeek: 8
+  const { data: leads, error } = await supabase.from('leads').select('status, created_at');
+  if (error) throw error;
+
+  const metrics: DashboardMetrics = {
+    totalLeads: leads.length,
+    newLeads: leads.filter(l => l.status === 'new').length,
+    contactedLeads: leads.filter(l => l.status === 'contacted').length,
+    qualifiedLeads: leads.filter(l => l.status === 'qualified').length,
+    proposalSent: leads.filter(l => l.status === 'proposal_sent').length,
+    won: leads.filter(l => l.status === 'won').length,
+    lost: leads.filter(l => l.status === 'lost').length,
+    conversionRate: leads.length > 0 ? (leads.filter(l => l.status === 'won').length / leads.length) * 100 : 0,
+    leadsThisWeek: leads.filter(l => {
+      const weekAgo = new Date();
+      weekAgo.setDate(weekAgo.getDate() - 7);
+      return new Date(l.created_at) > weekAgo;
+    }).length
   };
+
+  return metrics;
 };
 
 export const getLeads = async (): Promise<Lead[]> => {
-  await sleep(1000);
-  return MOCK_LEADS;
+  const { data, error } = await supabase
+    .from('leads')
+    .select('*')
+    .order('created_at', { ascending: false });
+  
+  if (error) throw error;
+  return data.map(mapDbLead);
 };
 
 export const getLead = async (id: string): Promise<Lead | null> => {
-  await sleep(600);
-  return MOCK_LEADS.find(l => l.id === id) || null;
+  const { data, error } = await supabase
+    .from('leads')
+    .select('*')
+    .eq('id', id)
+    .single();
+  
+  if (error) return null;
+  return mapDbLead(data);
 };
 
 export const updateLead = async (id: string, payload: Partial<Lead>): Promise<Lead> => {
-  await sleep(800);
-  const lead = MOCK_LEADS.find(l => l.id === id);
-  if (!lead) throw new Error("Lead not found");
-  return { ...lead, ...payload, updatedAt: new Date().toISOString() };
+  // Map frontend keys to snake_case for DB
+  const dbPayload: any = {};
+  if (payload.status) dbPayload.status = payload.status;
+  if (payload.priority) dbPayload.priority = payload.priority;
+  if (payload.assignedTo) dbPayload.assigned_to = payload.assignedTo;
+  if (payload.lastContactedAt) dbPayload.last_contacted_at = payload.lastContactedAt;
+  if (payload.nextFollowUpAt) dbPayload.next_follow_up_at = payload.nextFollowUpAt;
+  
+  const { data, error } = await supabase
+    .from('leads')
+    .update({ ...dbPayload, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single();
+  
+  if (error) throw error;
+  return mapDbLead(data);
 };
 
 export const getLeadNotes = async (id: string): Promise<LeadNote[]> => {
-  await sleep(500);
-  return [
-    {
-      id: "note-1",
-      leadId: id,
-      note: "Initial contact via WhatsApp. Lead is very interested in the Growth package.",
-      type: "whatsapp",
-      createdBy: "Khairul",
-      createdAt: "2024-04-29T10:00:00Z"
-    },
-    {
-      id: "note-2",
-      leadId: id,
-      note: "Scheduled discovery call for next Tuesday.",
-      type: "user",
-      createdBy: "Khairul",
-      createdAt: "2024-04-30T14:00:00Z"
-    }
-  ];
+  const { data, error } = await supabase
+    .from('lead_notes')
+    .select('*')
+    .eq('lead_id', id)
+    .order('created_at', { ascending: false });
+  
+  if (error) throw error;
+  return data.map(n => ({
+    id: n.id,
+    leadId: n.lead_id,
+    note: n.note,
+    type: n.type,
+    createdBy: n.created_by,
+    createdAt: n.created_at
+  }));
 };
 
-export const createLeadNote = async (id: string, note: string): Promise<LeadNote> => {
-  await sleep(600);
+export const createLeadNote = async (id: string, note: string, type: string = 'internal'): Promise<LeadNote> => {
+  const { data, error } = await supabase
+    .from('lead_notes')
+    .insert({
+      lead_id: id,
+      note,
+      type,
+      created_by: 'Nick' // Mocked for now, will come from auth
+    })
+    .select()
+    .single();
+  
+  if (error) throw error;
   return {
-    id: `note-${Math.random().toString(36).substr(2, 9)}`,
-    leadId: id,
-    note,
-    type: "user",
-    createdBy: "Current User",
-    createdAt: new Date().toISOString()
+    id: data.id,
+    leadId: data.lead_id,
+    note: data.note,
+    type: data.type,
+    createdBy: data.created_by,
+    createdAt: data.created_at
   };
 };
 
 export const getFollowUps = async (): Promise<FollowUp[]> => {
-  await sleep(700);
-  return [
-    {
-      id: "fw-1",
-      leadId: "lead-2",
-      title: "Follow up on proposal feedback",
-      dueAt: new Date().toISOString(),
-      status: "pending",
-      assignedTo: "Nick",
-      createdAt: "2024-04-30T08:00:00Z"
-    }
-  ];
+  const { data, error } = await supabase
+    .from('follow_ups')
+    .select('*')
+    .order('due_at', { ascending: true });
+  
+  if (error) throw error;
+  return data.map(f => ({
+    id: f.id,
+    leadId: f.lead_id,
+    title: f.title,
+    dueAt: f.due_at,
+    status: f.status,
+    completedAt: f.completed_at,
+    assignedTo: f.assigned_to,
+    createdAt: f.created_at
+  }));
 };
 
 export const updateFollowUp = async (id: string, payload: Partial<FollowUp>): Promise<FollowUp> => {
-  await sleep(500);
+  const dbPayload: any = {};
+  if (payload.status) dbPayload.status = payload.status;
+  if (payload.completedAt) dbPayload.completed_at = payload.completedAt;
+  
+  const { data, error } = await supabase
+    .from('follow_ups')
+    .update(dbPayload)
+    .eq('id', id)
+    .select()
+    .single();
+  
+  if (error) throw error;
   return {
-    id,
-    leadId: "lead-2",
-    title: "Updated Follow Up",
-    dueAt: new Date().toISOString(),
-    status: "completed",
-    assignedTo: "Nick",
-    createdAt: "2024-04-30T08:00:00Z",
-    ...payload
+    id: data.id,
+    leadId: data.lead_id,
+    title: data.title,
+    dueAt: data.due_at,
+    status: data.status,
+    completedAt: data.completed_at,
+    assignedTo: data.assigned_to,
+    createdAt: data.created_at
   };
 };
 
 export const getCrmSettings = async (): Promise<CrmSettings> => {
-  await sleep(400);
+  // This could come from a settings table later
   return {
-    isConfigured: false,
+    isConfigured: true,
     contactEmail: "hello@strata.agency",
     whatsappNumber: "+60123456789",
     teamMembers: ["Nick", "Khairul"],
