@@ -7,6 +7,8 @@ interface CrmAuthContextType {
   profile: CrmUserProfile | null;
   isLoading: boolean;
   role: CrmRole | null;
+  error: string | null;
+  isAuthorized: boolean;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
 }
@@ -17,21 +19,28 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [user, setUser] = useState<any | null>(null);
   const [profile, setProfile] = useState<CrmUserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchProfile = async (uid: string) => {
     try {
-      const { data, error } = await supabase
+      setError(null);
+      const { data, error: profileError } = await supabase
         .from('crm_profiles')
         .select('*')
         .eq('id', uid)
         .single();
 
-      if (error) {
-        console.error('[auth] Error fetching profile:', error);
+      if (profileError) {
+        // Special case: Row not found is a specific authorization error, not a network error
+        if (profileError.code === 'PGRST116') {
+          console.warn('[auth] No CRM profile found for user:', uid);
+        } else {
+          console.error('[auth] Profile lookup failed:', profileError);
+          setError('CRM profile verification failed. Please check your connection.');
+        }
         return null;
       }
 
-      // Map DB snake_case to camelCase
       return {
         id: data.id,
         email: data.email,
@@ -42,7 +51,8 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
         updatedAt: data.updated_at,
       } as CrmUserProfile;
     } catch (err) {
-      console.error('[auth] Unexpected error fetching profile:', err);
+      console.error('[auth] Unexpected error:', err);
+      setError('An unexpected error occurred while verifying your account.');
       return null;
     }
   };
@@ -92,12 +102,18 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
     await supabase.auth.signOut();
   };
 
+  const isAuthorized = !!profile && 
+    profile.status === 'active' && 
+    (profile.role === 'admin' || profile.role === 'manager');
+
   return (
     <CrmAuthContext.Provider value={{ 
       user, 
       profile, 
       isLoading, 
       role: profile?.role ?? null,
+      error,
+      isAuthorized,
       signOut,
       refreshProfile
     }}>

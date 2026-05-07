@@ -12,7 +12,7 @@ export const ProtectedCrmRoute: React.FC<ProtectedCrmRouteProps> = ({
   children, 
   requireAdmin = false 
 }) => {
-  const { user, profile, isLoading, role } = useCrmAuth();
+  const { user, profile, isLoading, role, isAuthorized, error } = useCrmAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -28,14 +28,39 @@ export const ProtectedCrmRoute: React.FC<ProtectedCrmRouteProps> = ({
     return <Navigate to="/crm/login" state={{ from: location }} replace />;
   }
 
-  // 2. Logged in but no profile yet (e.g. fresh auth but not in crm_profiles)
-  // This can happen if the user is in Auth but not in our CRM profiles table.
-  if (!profile) {
+  // 2. Technical error during profile lookup
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center p-6 text-center">
+        <h1 className="text-2xl font-display font-bold text-white mb-4 uppercase">Verification Error</h1>
+        <p className="text-white/60 font-mono text-xs uppercase tracking-widest max-w-md">
+          {error}
+        </p>
+        <button 
+          onClick={() => window.location.reload()}
+          className="mt-8 px-6 py-2 border border-white/10 text-white/40 hover:text-white font-mono text-[10px] uppercase tracking-widest rounded-lg transition-all"
+        >
+          Retry Connection
+        </button>
+      </div>
+    );
+  }
+
+  // 3. Logged in but not authorized (no profile, wrong status, or wrong role)
+  if (!isAuthorized) {
+    let message = 'Your account is not authorized to access the CRM. Please contact an administrator.';
+    
+    if (profile && profile.status !== 'active') {
+      message = `Your account status is "${profile.status}". Access is currently restricted.`;
+    } else if (profile && profile.role !== 'admin' && profile.role !== 'manager') {
+      message = 'Your role does not have sufficient permissions to access the CRM dashboard.';
+    }
+
     return (
       <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center p-6 text-center">
         <h1 className="text-2xl font-display font-bold text-white mb-4 uppercase">Access Denied</h1>
-        <p className="text-white/60 font-mono text-xs uppercase tracking-widest max-w-md">
-          Your account is not authorized to access the CRM. Please contact an administrator.
+        <p className="text-white/60 font-mono text-xs uppercase tracking-widest max-w-md leading-loose">
+          {message}
         </p>
         <button 
           onClick={() => window.location.href = '/'}
@@ -47,7 +72,7 @@ export const ProtectedCrmRoute: React.FC<ProtectedCrmRouteProps> = ({
     );
   }
 
-  // 3. Admin requirement check
+  // 4. Admin requirement check
   if (requireAdmin && role !== 'admin') {
     return <Navigate to="/crm" replace />;
   }
