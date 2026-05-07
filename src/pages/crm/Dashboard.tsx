@@ -53,29 +53,21 @@ export const Dashboard = () => {
           <MetricCard 
             label="Total Leads" 
             value={metrics.totalLeads} 
-            trend="12%" 
-            trendUp={true}
             icon={<Users size={16} />}
           />
           <MetricCard 
             label="Qualified" 
             value={metrics.qualifiedLeads} 
-            trend="8%" 
-            trendUp={true}
             icon={<TrendingUp size={16} />}
           />
           <MetricCard 
             label="Won" 
             value={metrics.won} 
-            trend="3%" 
-            trendUp={true}
             icon={<CheckCircle2 size={16} />}
           />
           <MetricCard 
             label="Conversion" 
-            value={`${metrics.conversionRate}%`} 
-            trend="1.2%" 
-            trendUp={false}
+            value={`${metrics.conversionRate.toFixed(1)}%`} 
             icon={<ArrowUpRight size={16} />}
           />
         </div>
@@ -102,28 +94,39 @@ export const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5">
-                    {recentLeads.map((lead) => (
-                      <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors group">
-                        <td className="px-6 py-4">
-                          <div className="font-bold text-sm text-white">{lead.fullName}</div>
-                          <div className="text-[10px] font-mono text-white/40 uppercase">{lead.companyName}</div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <StatusBadge status={lead.status} />
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className="text-[10px] font-mono text-white/60">{lead.budgetRange}</span>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <Link 
-                            to={`/crm/leads/${lead.id}`}
-                            className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white transition-all"
-                          >
-                            <ChevronRight size={14} />
-                          </Link>
+                    {recentLeads.length > 0 ? (
+                      recentLeads.map((lead) => (
+                        <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors group">
+                          <td className="px-6 py-4">
+                            <div className="font-bold text-sm text-white">{lead.fullName}</div>
+                            <div className="text-[10px] font-mono text-white/40 uppercase">{lead.companyName}</div>
+                          </td>
+                          <td className="px-6 py-4">
+                            <StatusBadge status={lead.status} />
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className="text-[10px] font-mono text-white/60">{lead.budgetRange}</span>
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <Link 
+                              to={`/crm/leads/${lead.id}`}
+                              className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white transition-all"
+                            >
+                              <ChevronRight size={14} />
+                            </Link>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={4} className="px-6 py-20 text-center">
+                          <p className="text-sm text-white font-bold uppercase tracking-tight mb-2">No leads yet</p>
+                          <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em]">
+                            New diagnostic submissions will appear here once customers submit the form.
+                          </p>
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -140,8 +143,8 @@ export const Dashboard = () => {
                     <Clock size={20} />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-white">3 Follow-ups Today</div>
-                    <div className="text-[9px] font-mono text-white/40 uppercase">Check task manager</div>
+                    <div className="text-xs font-bold text-white">0 Follow-ups Today</div>
+                    <div className="text-[9px] font-mono text-white/40 uppercase">Clean schedule</div>
                   </div>
                 </div>
 
@@ -150,7 +153,7 @@ export const Dashboard = () => {
                     <AlertCircle size={20} />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-white">5 New Leads</div>
+                    <div className="text-xs font-bold text-white">{metrics.newLeads} New Leads</div>
                     <div className="text-[9px] font-mono text-white/40 uppercase">Ready for qualification</div>
                   </div>
                 </div>
@@ -158,10 +161,10 @@ export const Dashboard = () => {
 
               <div className="pt-6 border-t border-white/5">
                 <div className="text-[10px] font-mono font-bold tracking-widest text-white/20 uppercase mb-4">Pipeline Value</div>
-                <div className="text-2xl font-display font-bold text-white uppercase tracking-tight">RM 142,500</div>
-                <div className="mt-2 flex items-center gap-2 text-emerald-400">
+                <div className="text-2xl font-display font-bold text-white uppercase tracking-tight">RM 0</div>
+                <div className="mt-2 flex items-center gap-2 text-white/20">
                   <TrendingUp size={12} />
-                  <span className="text-[10px] font-mono font-bold uppercase">+14% vs last month</span>
+                  <span className="text-[10px] font-mono font-bold uppercase">Stable vs last month</span>
                 </div>
               </div>
             </div>

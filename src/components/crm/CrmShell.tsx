@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Logo } from '../Logo';
 import { cn } from '../../lib/utils';
+import { useCrmAuth } from '../../contexts/CrmAuthContext';
 
 interface CrmShellProps {
   children: React.ReactNode;
@@ -26,6 +27,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { profile, signOut } = useCrmAuth();
 
   const navItems = [
     { name: 'Dashboard', href: '/crm', icon: <LayoutDashboard size={20} /> },
@@ -40,8 +42,8 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
     return location.pathname.startsWith(href);
   };
 
-  const handleLogout = () => {
-    // Mock logout
+  const handleLogout = async () => {
+    await signOut();
     navigate('/crm/login');
   };
 
@@ -136,11 +138,11 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
             </button>
             <div className="flex items-center gap-3 pl-6 border-l border-white/10">
               <div className="text-right hidden sm:block">
-                <p className="text-[10px] font-mono font-bold tracking-widest uppercase">Nick</p>
-                <p className="text-[8px] font-mono text-white/40 uppercase">Admin</p>
+                <p className="text-[10px] font-mono font-bold tracking-widest uppercase">{profile?.fullName || 'User'}</p>
+                <p className="text-[8px] font-mono text-white/40 uppercase">{profile?.role || 'Guest'}</p>
               </div>
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/10 flex items-center justify-center font-mono text-xs font-bold">
-                N
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/10 flex items-center justify-center font-mono text-xs font-bold uppercase">
+                {profile?.fullName?.charAt(0) || profile?.email?.charAt(0) || '?'}
               </div>
             </div>
           </div>

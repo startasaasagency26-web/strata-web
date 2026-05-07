@@ -74,6 +74,26 @@ export interface DashboardMetrics {
   leadsThisWeek: number;
 }
 
+export type CrmRole = "admin" | "manager";
+
+export interface CrmUserProfile {
+  id: string;
+  email: string;
+  fullName: string;
+  role: CrmRole;
+  status: "active" | "invited" | "disabled";
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CrmPermissions {
+  canManageTeam: boolean;
+  canChangeRoles: boolean;
+  canEditSettings: boolean;
+  canAccessDangerZone: boolean;
+  canEditLeads: boolean;
+}
+
 export interface CrmSettings {
   isConfigured: boolean;
   contactEmail: string;

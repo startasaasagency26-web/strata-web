@@ -210,16 +210,15 @@ export const CrmRepository = {
     weekAgo.setDate(weekAgo.getDate() - 7);
 
     const metrics: DashboardMetrics = {
-      totalLeads: leads.length,
-      newLeads: leads.filter(l => l.status === 'new').length,
-      contactedLeads: leads.filter(l => l.status === 'contacted').length,
-      qualifiedLeads: leads.filter(l => l.status === 'qualified').length,
-      proposalSent: leads.filter(l => l.status === 'proposal_sent').length,
-      won: leads.filter(l => l.status === 'won').length,
-      lost: leads.filter(l => l.status === 'lost').length,
-      conversionRate: leads.length > 0 ? (leads.filter(l => l.status === 'won').length / leads.length) * 100 : 0,
-      leadsThisWeek: leads.filter(l => new Date(l.created_at) > weekAgo).length,
-      // Add extra metrics for internal use if needed
+      totalLeads: leads?.length || 0,
+      newLeads: (leads || []).filter(l => l.status === 'new').length,
+      contactedLeads: (leads || []).filter(l => l.status === 'contacted').length,
+      qualifiedLeads: (leads || []).filter(l => l.status === 'qualified').length,
+      proposalSent: (leads || []).filter(l => l.status === 'proposal_sent').length,
+      won: (leads || []).filter(l => l.status === 'won').length,
+      lost: (leads || []).filter(l => l.status === 'lost').length,
+      conversionRate: (leads?.length || 0) > 0 ? ((leads || []).filter(l => l.status === 'won').length / leads!.length) * 100 : 0,
+      leadsThisWeek: (leads || []).filter(l => new Date(l.created_at) > weekAgo).length,
     };
 
     return metrics;
@@ -254,7 +253,7 @@ export const CrmRepository = {
       lastContactedAt: db.last_contacted_at,
       nextFollowUpAt: db.next_follow_up_at,
       notesCount: Number(db.notes_count ?? 0),
-      rawPayload: db.raw_payload
+      rawPayload: db.raw_payload ?? {}
     };
   },
 

@@ -10,6 +10,9 @@ import { Footer } from "./components/Footer";
 import { CONTACT } from "./config/contact";
 
 // CRM Pages
+// CRM Auth & Protection
+import { CrmAuthProvider } from "./contexts/CrmAuthContext";
+import { ProtectedCrmRoute } from "./components/crm/ProtectedCrmRoute";
 import { Login as CrmLogin } from "./pages/crm/Login";
 import { Dashboard as CrmDashboard } from "./pages/crm/Dashboard";
 import { Leads as CrmLeads } from "./pages/crm/Leads";
@@ -72,27 +75,30 @@ function PublicShell({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <NoIndex />
-      <Routes>
-        {/* CRM Routes - No Shell */}
-        <Route path="/crm/login" element={<CrmLogin />} />
-        <Route path="/crm" element={<CrmDashboard />} />
-        <Route path="/crm/leads" element={<CrmLeads />} />
-        <Route path="/crm/leads/:id" element={<CrmLeadDetail />} />
-        <Route path="/crm/pipeline" element={<CrmPipeline />} />
-        <Route path="/crm/follow-ups" element={<CrmFollowUps />} />
-        <Route path="/crm/settings" element={<CrmSettings />} />
+    <CrmAuthProvider>
+      <Router>
+        <ScrollToTop />
+        <NoIndex />
+        <Routes>
+          {/* CRM Routes - No Shell */}
+          <Route path="/crm/login" element={<CrmLogin />} />
+          
+          <Route path="/crm" element={<ProtectedCrmRoute><CrmDashboard /></ProtectedCrmRoute>} />
+          <Route path="/crm/leads" element={<ProtectedCrmRoute><CrmLeads /></ProtectedCrmRoute>} />
+          <Route path="/crm/leads/:id" element={<ProtectedCrmRoute><CrmLeadDetail /></ProtectedCrmRoute>} />
+          <Route path="/crm/pipeline" element={<ProtectedCrmRoute><CrmPipeline /></ProtectedCrmRoute>} />
+          <Route path="/crm/follow-ups" element={<ProtectedCrmRoute><CrmFollowUps /></ProtectedCrmRoute>} />
+          <Route path="/crm/settings" element={<ProtectedCrmRoute><CrmSettings /></ProtectedCrmRoute>} />
 
-        {/* Public Routes - With Shell */}
-        <Route path="/" element={<PublicShell><Home /></PublicShell>} />
-        <Route path="/about" element={<PublicShell><About /></PublicShell>} />
-        <Route path={CONTACT.requestDemoPath} element={<PublicShell><Diagnostic /></PublicShell>} />
-        <Route path={`${CONTACT.requestDemoPath}/received`} element={<PublicShell><DiagnosticReceived /></PublicShell>} />
-        <Route path="/build-with-us" element={<PublicShell><BuildWithUs /></PublicShell>} />
-      </Routes>
-    </Router>
+          {/* Public Routes - With Shell */}
+          <Route path="/" element={<PublicShell><Home /></PublicShell>} />
+          <Route path="/about" element={<PublicShell><About /></PublicShell>} />
+          <Route path={CONTACT.requestDemoPath} element={<PublicShell><Diagnostic /></PublicShell>} />
+          <Route path={`${CONTACT.requestDemoPath}/received`} element={<PublicShell><DiagnosticReceived /></PublicShell>} />
+          <Route path="/build-with-us" element={<PublicShell><BuildWithUs /></PublicShell>} />
+        </Routes>
+      </Router>
+    </CrmAuthProvider>
   );
 }
 

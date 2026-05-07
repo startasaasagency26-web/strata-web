@@ -1,7 +1,9 @@
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Loader2 } from 'lucide-react';
+import { supabase } from '../../lib/supabase/browser';
+import { useCrmAuth } from '../../contexts/CrmAuthContext';
 import { Logo } from '../../components/Logo';
 import { CrmInput } from '../../components/crm/CrmUI';
 
@@ -10,23 +12,47 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { user, isLoading: isAuthLoading } = useCrmAuth();
   const navigate = useNavigate();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (!isAuthLoading && user) {
+      navigate('/crm');
+    }
+  }, [user, isAuthLoading, navigate]);
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
-    // Mock login delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
 
-    if (email === 'admin@strata.agency' && password === 'strata2024') {
-      navigate('/crm');
-    } else {
-      setError('Invalid credentials. Please try again.');
+      if (authError) {
+        throw authError;
+      }
+
+      if (data.user) {
+        navigate('/crm');
+      }
+    } catch (err: any) {
+      setError(err.message || 'Invalid credentials. Please try again.');
       setIsLoading(false);
     }
   };
+
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+        <Loader2 className="animate-spin text-white/20" size={32} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6 relative overflow-hidden">

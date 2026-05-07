@@ -3,8 +3,9 @@ import type {
   Lead, 
   DashboardMetrics, 
   LeadNote, 
-  FollowUp, 
-  CrmSettings 
+  FollowUp,
+  CrmSettings,
+  CrmUserProfile
 } from "../../types/crm";
 
 /**
@@ -26,10 +27,36 @@ const handleResponse = async (res: Response) => {
 };
 
 export const getDashboard = async (): Promise<DashboardMetrics> => {
-  const headers = await getAuthHeader();
-  const res = await fetch('/api/crm/dashboard', { headers: headers as HeadersInit });
-  const data = await handleResponse(res);
-  return data.metrics;
+  try {
+    const headers = await getAuthHeader();
+    const res = await fetch('/api/crm/dashboard', { headers: headers as HeadersInit });
+    const data = await handleResponse(res);
+    return data.metrics || {
+      totalLeads: 0,
+      newLeads: 0,
+      contactedLeads: 0,
+      qualifiedLeads: 0,
+      proposalSent: 0,
+      won: 0,
+      lost: 0,
+      conversionRate: 0,
+      leadsThisWeek: 0
+    };
+  } catch (err) {
+    console.error('[crm/client] Error fetching dashboard:', err);
+    // Return empty metrics instead of throwing if it's just a data issue
+    return {
+      totalLeads: 0,
+      newLeads: 0,
+      contactedLeads: 0,
+      qualifiedLeads: 0,
+      proposalSent: 0,
+      won: 0,
+      lost: 0,
+      conversionRate: 0,
+      leadsThisWeek: 0
+    };
+  }
 };
 
 export const getLeads = async (params?: {
@@ -51,7 +78,7 @@ export const getLeads = async (params?: {
 
   const res = await fetch(`/api/crm/leads?${query.toString()}`, { headers: headers as HeadersInit });
   const data = await handleResponse(res);
-  return data.leads;
+  return data.leads || [];
 };
 
 export const getLead = async (id: string): Promise<Lead | null> => {
@@ -114,17 +141,76 @@ export const updateFollowUp = async (id: string, payload: Partial<FollowUp>): Pr
 };
 
 export const getCrmSettings = async (): Promise<CrmSettings> => {
-  // Static for now, can be moved to API if needed
+  const { data, error } = await supabase
+    .from('crm_settings')
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[crm/client] Error fetching settings:', error);
+    return {
+      isConfigured: false,
+      contactEmail: "hello@strata.agency",
+      whatsappNumber: "+60123456789",
+      teamMembers: [],
+      leadStatuses: ["new", "contacted", "qualified", "won", "lost"]
+    };
+  }
+
   return {
-    isConfigured: true,
-    contactEmail: "hello@strata.agency",
-    whatsappNumber: "+60123456789",
-    teamMembers: ["Nick", "Khairul"],
-    leadStatuses: [
-      "new", "contacted", "qualified", "discovery_scheduled", 
-      "proposal_sent", "negotiating", "won", "lost", "unresponsive"
-    ]
+    isConfigured: data.is_configured,
+    contactEmail: data.contact_email,
+    whatsappNumber: data.whatsapp_number,
+    teamMembers: [], // This will be handled by getTeamMembers
+    leadStatuses: ["new", "contacted", "qualified", "discovery_scheduled", "proposal_sent", "negotiating", "won", "lost", "unresponsive"]
   };
+};
+
+export const updateCrmSettings = async (payload: Partial<CrmSettings>): Promise<void> => {
+  const { error } = await supabase
+    .from('crm_settings')
+    .update({
+      contact_email: payload.contactEmail,
+      whatsapp_number: payload.whatsappNumber,
+      is_configured: payload.isConfigured,
+      updated_at: new Date().toISOString()
+    })
+    .eq('is_configured', true); // Update the active config
+
+  if (error) throw error;
+};
+
+export const getTeamMembers = async (): Promise<CrmUserProfile[]> => {
+  const { data, error } = await supabase
+    .from('crm_profiles')
+    .select('*')
+    .order('full_name');
+
+  if (error) throw error;
+
+  return (data || []).map(d => ({
+    id: d.id,
+    email: d.email,
+    fullName: d.full_name,
+    role: d.role,
+    status: d.status,
+    createdAt: d.created_at,
+    updatedAt: d.updated_at
+  }));
+};
+
+export const updateProfile = async (id: string, payload: Partial<CrmUserProfile>): Promise<void> => {
+  const { error } = await supabase
+    .from('crm_profiles')
+    .update({
+      full_name: payload.fullName,
+      role: payload.role,
+      status: payload.status,
+      updated_at: new Date().toISOString()
+    })
+    .eq('id', id);
+
+  if (error) throw error;
 };
 
 export const checkHealth = async () => {

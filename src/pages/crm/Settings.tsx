@@ -8,20 +8,37 @@ import {
 } from 'lucide-react';
 import { CrmShell } from '../../components/crm/CrmShell';
 import { LoadingState, ErrorState, CrmInput } from '../../components/crm/CrmUI';
-import { getCrmSettings } from '../../lib/crm/client';
-import type { CrmSettings } from '../../types/crm';
+import { getCrmSettings, getTeamMembers, updateCrmSettings } from '../../lib/crm/client';
+import type { CrmSettings, CrmUserProfile } from '../../types/crm';
 import { cn } from '../../lib/utils';
+import { useCrmAuth } from '../../contexts/CrmAuthContext';
+import { getPermissions } from '../../lib/crm/permissions';
 
 export const Settings = () => {
   const [settings, setSettings] = useState<CrmSettings | null>(null);
+  const [team, setTeam] = useState<CrmUserProfile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  
+  const { profile } = useCrmAuth();
+  const permissions = getPermissions(profile?.role || 'manager');
+
+  const [email, setEmail] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getCrmSettings();
-        setSettings(data);
+        const [settingsData, teamData] = await Promise.all([
+          getCrmSettings(),
+          getTeamMembers()
+        ]);
+        setSettings(settingsData);
+        setTeam(teamData);
+        setEmail(settingsData.contactEmail);
+        setWhatsapp(settingsData.whatsappNumber);
       } catch (err) {
         setError('Failed to load settings.');
       } finally {
@@ -30,6 +47,25 @@ export const Settings = () => {
     };
     fetchData();
   }, []);
+
+  const handleUpdateEndpoints = async () => {
+    if (!permissions.canEditSettings) return;
+    setIsSaving(true);
+    setError('');
+    setSuccess('');
+    try {
+      await updateCrmSettings({
+        contactEmail: email,
+        whatsappNumber: whatsapp,
+        isConfigured: true
+      });
+      setSuccess('Settings updated successfully.');
+    } catch (err: any) {
+      setError(err.message || 'Failed to update settings.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   if (isLoading) return <CrmShell><LoadingState message="Accessing system configuration..." /></CrmShell>;
   if (error) return <CrmShell><ErrorState message={error} /></CrmShell>;
@@ -91,21 +127,41 @@ export const Settings = () => {
               
               <div className="bg-white/5 border border-white/10 rounded-[32px] overflow-hidden">
                 <div className="divide-y divide-white/5">
-                  {settings.teamMembers.map((member, i) => (
-                    <div key={i} className="px-8 py-6 flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center font-mono text-sm font-bold">{member.charAt(0)}</div>
-                        <div>
-                          <p className="font-bold text-white">{member}</p>
-                          <p className="text-[10px] font-mono text-white/20 uppercase">Strategist</p>
+                  {team.length > 0 ? (
+                    team.map((member) => (
+                      <div key={member.id} className="px-8 py-6 flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-mono text-sm font-bold uppercase">
+                            {member.fullName.charAt(0)}
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <p className="font-bold text-white">{member.fullName}</p>
+                              {member.id === profile?.id && (
+                                <span className="text-[8px] font-mono bg-white/10 text-white/40 px-1.5 py-0.5 rounded uppercase">You</span>
+                              )}
+                            </div>
+                            <p className="text-[10px] font-mono text-white/20 uppercase tracking-widest">{member.role}</p>
+                          </div>
                         </div>
+                        {permissions.canChangeRoles && member.id !== profile?.id && (
+                          <button className="text-[9px] font-mono font-bold tracking-widest text-white/20 hover:text-white uppercase transition-colors">
+                            Manage
+                          </button>
+                        )}
                       </div>
-                      <button className="text-[9px] font-mono font-bold tracking-widest text-white/20 hover:text-white uppercase transition-colors">Edit Access</button>
+                    ))
+                  ) : (
+                    <div className="px-8 py-10 text-center text-white/20 font-mono text-[10px] uppercase tracking-widest">
+                      No team members found.
                     </div>
-                  ))}
-                  <button className="w-full py-6 text-[10px] font-mono font-bold tracking-widest text-white/40 hover:text-white hover:bg-white/5 uppercase transition-all">
-                    Invite Team Member
-                  </button>
+                  )}
+                  
+                  {permissions.canManageTeam && (
+                    <button className="w-full py-6 text-[10px] font-mono font-bold tracking-widest text-white/40 hover:text-white hover:bg-white/5 uppercase transition-all">
+                      Invite Team Member
+                    </button>
+                  )}
                 </div>
               </div>
             </section>
@@ -121,23 +177,53 @@ export const Settings = () => {
               
               <div className="bg-[#0A0A0A] border border-white/10 rounded-[32px] p-8 space-y-6">
                 <div className="space-y-4">
-                  <CrmInput label="System Email" defaultValue={settings.contactEmail} />
-                  <CrmInput label="Primary WhatsApp" defaultValue={settings.whatsappNumber} />
+                  <CrmInput 
+                    label="System Email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={!permissions.canEditSettings}
+                  />
+                  <CrmInput 
+                    label="Primary WhatsApp" 
+                    value={whatsapp} 
+                    onChange={(e) => setWhatsapp(e.target.value)}
+                    disabled={!permissions.canEditSettings}
+                  />
                 </div>
-                <button className="w-full py-4 rounded-xl border border-white/10 text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all">
-                  Update Endpoints
+                
+                {success && (
+                  <p className="text-[9px] font-mono font-bold text-emerald-400 uppercase tracking-widest text-center">{success}</p>
+                )}
+                {error && (
+                  <p className="text-[9px] font-mono font-bold text-red-400 uppercase tracking-widest text-center">{error}</p>
+                )}
+
+                <button 
+                  onClick={handleUpdateEndpoints}
+                  disabled={!permissions.canEditSettings || isSaving}
+                  className="w-full py-4 rounded-xl border border-white/10 text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  {isSaving ? 'Saving...' : permissions.canEditSettings ? 'Update Endpoints' : 'Admin access required'}
                 </button>
               </div>
             </section>
 
-            <section className="bg-red-500/5 border border-red-500/10 rounded-[32px] p-8 space-y-4">
+            <section className={cn(
+              "rounded-[32px] p-8 space-y-4 transition-all",
+              permissions.canAccessDangerZone 
+                ? "bg-red-500/5 border border-red-500/10" 
+                : "bg-white/5 border border-white/10 opacity-40"
+            )}>
               <div className="flex items-center gap-2 text-red-400">
                 <AlertTriangle size={16} />
                 <h3 className="text-xs font-mono font-bold uppercase tracking-widest">Danger Zone</h3>
               </div>
               <p className="text-[10px] text-red-400/60 leading-relaxed uppercase font-mono">Irreversible system actions</p>
-              <button className="w-full py-3 rounded-xl border border-red-500/20 text-red-500 text-[10px] font-mono font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all">
-                Purge All Mock Data
+              <button 
+                disabled={!permissions.canAccessDangerZone}
+                className="w-full py-3 rounded-xl border border-red-500/20 text-red-500 text-[10px] font-mono font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all disabled:cursor-not-allowed"
+              >
+                {permissions.canAccessDangerZone ? 'Factory Reset CRM' : 'Admin access required'}
               </button>
             </section>
           </div>
