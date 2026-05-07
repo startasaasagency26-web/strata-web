@@ -13,10 +13,10 @@ export const env = {
   },
   // Private keys (server only)
   admin: {
-    serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-    adminEmails: (process.env.CRM_ADMIN_EMAILS || 'admin@strata.agency').split(',').map((e: string) => e.trim().toLowerCase()),
+    serviceRoleKey: typeof process !== 'undefined' ? process.env?.SUPABASE_SERVICE_ROLE_KEY : undefined,
+    adminEmails: (typeof process !== 'undefined' ? process.env?.CRM_ADMIN_EMAILS || 'admin@strata.agency' : 'admin@strata.agency').split(',').map((e: string) => e.trim().toLowerCase()),
   },
-  isProd: (import.meta as any).env.PROD || process.env.NODE_ENV === 'production',
+  isProd: (import.meta as any).env.PROD || (typeof process !== 'undefined' && process.env?.NODE_ENV === 'production'),
 };
 
 export const validateEnv = () => {
