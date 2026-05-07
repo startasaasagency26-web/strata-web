@@ -36,7 +36,7 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
           console.warn('[auth] No CRM profile found for UID:', uid);
         } else {
           console.error('[auth] Profile lookup failed:', profileError);
-          setError('CRM profile verification failed. Please check your connection.');
+          setError(`CRM profile verification failed (Error: ${profileError.code || 'Unknown'}). Please check your connection.`);
         }
         return null;
       }
