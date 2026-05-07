@@ -54,7 +54,7 @@ export type LeadApiSuccess = {
 
 export type LeadApiError = {
   ok: false;
-  error: "VALIDATION_ERROR" | "CRM_NOT_CONFIGURED" | "CRM_SUBMISSION_FAILED" | "METHOD_NOT_ALLOWED" | "INVALID_JSON" | "PAYLOAD_TOO_LARGE";
+  error: "VALIDATION_ERROR" | "CRM_NOT_CONFIGURED" | "CRM_SUBMISSION_FAILED" | "METHOD_NOT_ALLOWED" | "INVALID_JSON" | "PAYLOAD_TOO_LARGE" | "SUPABASE_INSERT_FAILED" | "INTERNAL_SERVER_ERROR";
   message: string;
   fieldErrors?: LeadFieldErrors;
 };

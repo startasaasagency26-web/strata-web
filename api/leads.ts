@@ -1,4 +1,3 @@
-import type { IncomingMessage, ServerResponse } from "node:http";
 import { validateEnv } from "../src/lib/env";
 import { CrmRepository } from "../src/lib/crm/repository";
 import { validateLeadPayload } from "../src/lib/crm/lead-schema";
@@ -6,14 +5,14 @@ import type { LeadApiResponse } from "../src/lib/crm/types";
 
 const MAX_BODY_BYTES = 64 * 1024;
 
-const sendJson = (response: ServerResponse, status: number, body: LeadApiResponse) => {
+const sendJson = (response: any, status: number, body: LeadApiResponse) => {
   response.statusCode = status;
   response.setHeader("Content-Type", "application/json; charset=utf-8");
   response.setHeader("Cache-Control", "no-store");
   response.end(JSON.stringify(body));
 };
 
-const readBody = async (request: IncomingMessage) =>
+const readBody = async (request: any) =>
   new Promise<string>((resolve, reject) => {
     let body = "";
     let size = 0;
@@ -34,7 +33,7 @@ const readBody = async (request: IncomingMessage) =>
     request.on("error", reject);
   });
 
-export default async function handler(request: IncomingMessage, response: ServerResponse) {
+export default async function handler(request: any, response: any) {
   // 1. Method Check
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
@@ -70,7 +69,7 @@ export default async function handler(request: IncomingMessage, response: Server
       sourcePage: payload.sourcePage || "/request-demo" 
     });
 
-    if (!validation.ok) {
+    if (validation.ok === false) {
       sendJson(response, 400, {
         ok: false,
         error: "VALIDATION_ERROR",

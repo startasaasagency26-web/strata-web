@@ -1,9 +1,8 @@
-import type { IncomingMessage, ServerResponse } from "node:http";
-import { validateEnv, env } from "../../../src/lib/env";
-import { supabaseAdmin } from "../../../src/lib/supabase/admin";
-import { sendSuccess, sendError } from "../../../src/lib/crm/auth";
+import { validateEnv } from "../../src/lib/env";
+import { supabaseAdmin } from "../../src/lib/supabase/admin";
+import { sendSuccess, sendError } from "../../src/lib/crm/auth";
 
-export default async function handler(request: IncomingMessage, response: ServerResponse) {
+export default async function handler(_request: any, response: any) {
   try {
     validateEnv();
 
@@ -17,7 +16,7 @@ export default async function handler(request: IncomingMessage, response: Server
     };
 
     // Check connection and tables
-    const { data: leads, error } = await supabaseAdmin
+    const { error } = await supabaseAdmin
       .from('crm_leads')
       .select('id')
       .limit(1);

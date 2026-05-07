@@ -58,6 +58,8 @@ export interface FollowUp {
   assignedTo: string;
   completedAt?: string;
   createdAt: string;
+  leadName?: string;
+  leadCompany?: string;
 }
 
 export interface DashboardMetrics {

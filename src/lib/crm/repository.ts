@@ -1,5 +1,5 @@
 import { supabaseAdmin } from '../supabase/admin';
-import type { Lead, LeadNote, FollowUp, DashboardMetrics } from './types';
+import type { Lead, LeadNote, FollowUp, DashboardMetrics } from '../../types/crm';
 
 /**
  * Supabase Repository for Strata CRM.
@@ -206,14 +206,6 @@ export const CrmRepository = {
     
     if (leadError) throw leadError;
 
-    const { data: followUps, error: fuError } = await supabaseAdmin
-      .from('crm_follow_ups')
-      .select('status, due_at')
-      .eq('status', 'pending');
-
-    if (fuError) throw fuError;
-
-    const now = new Date();
     const weekAgo = new Date();
     weekAgo.setDate(weekAgo.getDate() - 7);
 
@@ -245,8 +237,8 @@ export const CrmRepository = {
       workEmail: db.work_email,
       whatsappPhone: db.whatsapp_phone,
       roleInBusiness: db.role_in_business,
-      countryTimezone: db.country_timezone,
-      preferredLanguage: db.preferred_language,
+      countryTimezone: db.country_timezone ?? "",
+      preferredLanguage: db.preferred_language ?? "",
       businessType: db.business_type,
       serviceNeed: db.service_need,
       websiteUrl: db.website_url,
@@ -255,11 +247,13 @@ export const CrmRepository = {
       budgetRange: db.budget_range,
       timeline: db.timeline,
       selectedPackage: db.selected_package,
+      sourcePage: db.source_page ?? "",
       status: db.status,
       priority: db.priority,
       assignedTo: db.assigned_to,
       lastContactedAt: db.last_contacted_at,
       nextFollowUpAt: db.next_follow_up_at,
+      notesCount: Number(db.notes_count ?? 0),
       rawPayload: db.raw_payload
     };
   },

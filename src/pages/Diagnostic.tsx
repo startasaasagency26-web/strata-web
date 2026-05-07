@@ -12,7 +12,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { CONTACT } from "../config/contact";
 import { cn } from "../lib/utils";
-import type { LeadApiResponse, LeadFieldErrors } from "../lib/crm/types";
+import type { LeadFieldErrors } from "../lib/crm/types";
 import { supabase } from "../lib/supabase";
 
 const clientEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -210,6 +210,7 @@ export const Diagnostic = () => {
           current_problem: leadPayload.currentProblem,
           budget_range: leadPayload.budgetRange,
           timeline: leadPayload.timeline,
+          source_page: leadPayload.sourcePage,
           raw_payload: leadPayload.rawPayload
         })
         .select()

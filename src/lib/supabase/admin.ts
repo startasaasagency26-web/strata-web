@@ -8,7 +8,7 @@ import { env } from '../env';
  * WARNING: NEVER import this into client components.
  */
 export const createAdminClient = () => {
-  if (typeof window !== 'undefined') {
+  if (typeof (globalThis as any).window !== 'undefined') {
     throw new Error('Admin client cannot be initialized in the browser.');
   }
 

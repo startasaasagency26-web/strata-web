@@ -18,7 +18,7 @@ const getAuthHeader = async () => {
 };
 
 const handleResponse = async (res: Response) => {
-  const data = await res.json();
+  const data = (await res.json()) as any;
   if (!res.ok || !data.ok) {
     throw new Error(data.message || 'API request failed');
   }
@@ -27,7 +27,7 @@ const handleResponse = async (res: Response) => {
 
 export const getDashboard = async (): Promise<DashboardMetrics> => {
   const headers = await getAuthHeader();
-  const res = await fetch('/api/crm/dashboard', { headers });
+  const res = await fetch('/api/crm/dashboard', { headers: headers as any });
   const data = await handleResponse(res);
   return data.metrics;
 };
@@ -49,14 +49,14 @@ export const getLeads = async (params?: {
     });
   }
 
-  const res = await fetch(`/api/crm/leads?${query.toString()}`, { headers });
+  const res = await fetch(`/api/crm/leads?${query.toString()}`, { headers: headers as any });
   const data = await handleResponse(res);
   return data.leads;
 };
 
 export const getLead = async (id: string): Promise<Lead | null> => {
   const headers = await getAuthHeader();
-  const res = await fetch(`/api/crm/leads/${id}`, { headers });
+  const res = await fetch(`/api/crm/leads/${id}`, { headers: headers as any });
   if (res.status === 404) return null;
   const data = await handleResponse(res);
   return data.lead;
@@ -66,7 +66,7 @@ export const updateLead = async (id: string, payload: Partial<Lead>): Promise<Le
   const headers = await getAuthHeader();
   const res = await fetch(`/api/crm/leads/${id}`, {
     method: 'PATCH',
-    headers: { ...headers, 'Content-Type': 'application/json' },
+    headers: { ...headers, 'Content-Type': 'application/json' } as any,
     body: JSON.stringify(payload)
   });
   const data = await handleResponse(res);
@@ -75,7 +75,7 @@ export const updateLead = async (id: string, payload: Partial<Lead>): Promise<Le
 
 export const getLeadNotes = async (id: string): Promise<LeadNote[]> => {
   const headers = await getAuthHeader();
-  const res = await fetch(`/api/crm/notes?leadId=${id}`, { headers });
+  const res = await fetch(`/api/crm/notes?leadId=${id}`, { headers: headers as any });
   const data = await handleResponse(res);
   return data.notes;
 };
@@ -84,7 +84,7 @@ export const createLeadNote = async (id: string, note: string, type: string = 'g
   const headers = await getAuthHeader();
   const res = await fetch('/api/crm/notes', {
     method: 'POST',
-    headers: { ...headers, 'Content-Type': 'application/json' },
+    headers: { ...headers, 'Content-Type': 'application/json' } as any,
     body: JSON.stringify({ leadId: id, note, noteType: type })
   });
   const data = await handleResponse(res);
@@ -97,7 +97,7 @@ export const getFollowUps = async (params?: { leadId?: string; status?: string }
   if (params?.leadId) query.set('leadId', params.leadId);
   if (params?.status) query.set('status', params.status);
 
-  const res = await fetch(`/api/crm/follow-ups?${query.toString()}`, { headers });
+  const res = await fetch(`/api/crm/follow-ups?${query.toString()}`, { headers: headers as any });
   const data = await handleResponse(res);
   return data.followUps;
 };
@@ -106,7 +106,7 @@ export const updateFollowUp = async (id: string, payload: Partial<FollowUp>): Pr
   const headers = await getAuthHeader();
   const res = await fetch(`/api/crm/follow-ups?id=${id}`, {
     method: 'PATCH',
-    headers: { ...headers, 'Content-Type': 'application/json' },
+    headers: { ...headers, 'Content-Type': 'application/json' } as any,
     body: JSON.stringify(payload)
   });
   const data = await handleResponse(res);

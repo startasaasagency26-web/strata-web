@@ -1,17 +1,16 @@
-import type { IncomingMessage, ServerResponse } from "node:http";
 import { protectCrmRoute, sendSuccess, sendError } from "../../src/lib/crm/auth";
 import { CrmRepository } from "../../src/lib/crm/repository";
 import { URL } from "node:url";
 
-const readBody = async (request: IncomingMessage) => {
+const readBody = async (request: any) => {
   return new Promise<string>((resolve) => {
     let body = "";
-    request.on("data", chunk => body += chunk.toString());
+    request.on("data", (chunk: any) => body += chunk.toString());
     request.on("end", () => resolve(body));
   });
 };
 
-export default async function handler(request: IncomingMessage, response: ServerResponse) {
+export default async function handler(request: any, response: any) {
   const auth = await protectCrmRoute(request, response);
   if (!auth.ok) return;
 
@@ -38,7 +37,7 @@ export default async function handler(request: IncomingMessage, response: Server
       const note = await CrmRepository.insertNote(payload.leadId, {
         note: payload.note,
         noteType: payload.noteType,
-        createdBy: auth.user.email
+        createdBy: (auth as any).user.email
       });
       
       sendSuccess(response, { note });

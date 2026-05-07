@@ -1,11 +1,11 @@
-import type { IncomingMessage, ServerResponse } from "node:http";
+// import type { IncomingMessage, ServerResponse } from "http";
 import { createServerClient } from "../supabase/server";
 import { env } from "../env";
 
 /**
  * Protects CRM routes by validating the user session and email allowlist.
  */
-export const protectCrmRoute = async (request: IncomingMessage, response: ServerResponse) => {
+export const protectCrmRoute = async (request: any, _response: any) => {
   const supabase = createServerClient();
   
   // 1. Get user from session
@@ -36,13 +36,13 @@ export const protectCrmRoute = async (request: IncomingMessage, response: Server
   return { ok: true, user };
 };
 
-export const sendError = (response: ServerResponse, status: number, message: string) => {
+export const sendError = (response: any, status: number, message: string) => {
   response.statusCode = status;
   response.setHeader("Content-Type", "application/json");
   response.end(JSON.stringify({ ok: false, message }));
 };
 
-export const sendSuccess = (response: ServerResponse, data: any) => {
+export const sendSuccess = (response: any, data: any) => {
   response.statusCode = 200;
   response.setHeader("Content-Type", "application/json");
   response.end(JSON.stringify({ ok: true, ...data }));

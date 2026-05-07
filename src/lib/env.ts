@@ -3,18 +3,20 @@
  * Ensures required keys are present at runtime.
  */
 
+declare const process: any;
+
 export const env = {
   // Public keys (available in browser and server)
   supabase: {
-    url: import.meta.env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL,
-    anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY,
+    url: (import.meta as any).env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL,
+    anonKey: (import.meta as any).env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY,
   },
   // Private keys (server only)
   admin: {
     serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-    adminEmails: (process.env.CRM_ADMIN_EMAILS || 'admin@strata.agency').split(',').map(e => e.trim().toLowerCase()),
+    adminEmails: (process.env.CRM_ADMIN_EMAILS || 'admin@strata.agency').split(',').map((e: string) => e.trim().toLowerCase()),
   },
-  isProd: import.meta.env.PROD || process.env.NODE_ENV === 'production',
+  isProd: (import.meta as any).env.PROD || process.env.NODE_ENV === 'production',
 };
 
 export const validateEnv = () => {
@@ -24,7 +26,7 @@ export const validateEnv = () => {
   if (!env.supabase.anonKey) missing.push('VITE_SUPABASE_ANON_KEY');
 
   // Only validate admin keys on the server
-  if (typeof window === 'undefined') {
+  if (typeof (globalThis as any).window === 'undefined') {
     if (!env.admin.serviceRoleKey) missing.push('SUPABASE_SERVICE_ROLE_KEY');
   }
 
