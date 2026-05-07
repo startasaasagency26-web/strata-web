@@ -1,6 +1,7 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { CONTACT } from "../src/config/contact";
-import { handleLeadSubmission } from "../src/lib/crm/lead-handler";
+import { validateEnv } from "../src/lib/env";
+import { CrmRepository } from "../src/lib/crm/repository";
+import { validateLeadPayload } from "../src/lib/crm/lead-schema";
 import type { LeadApiResponse } from "../src/lib/crm/types";
 
 const MAX_BODY_BYTES = 64 * 1024;
@@ -34,6 +35,7 @@ const readBody = async (request: IncomingMessage) =>
   });
 
 export default async function handler(request: IncomingMessage, response: ServerResponse) {
+  // 1. Method Check
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
     sendJson(response, 405, {
@@ -45,8 +47,12 @@ export default async function handler(request: IncomingMessage, response: Server
   }
 
   try {
+    // 2. Validate Environment
+    validateEnv();
+
+    // 3. Read & Parse Body
     const rawBody = await readBody(request);
-    let payload: unknown;
+    let payload: any;
 
     try {
       payload = rawBody ? JSON.parse(rawBody) : {};
@@ -59,24 +65,60 @@ export default async function handler(request: IncomingMessage, response: Server
       return;
     }
 
-    const result = await handleLeadSubmission(
-      payload,
-      {
-        CRM_PROVIDER: process.env.CRM_PROVIDER,
-        CRM_WEBHOOK_URL: process.env.CRM_WEBHOOK_URL,
-        CRM_API_KEY: process.env.CRM_API_KEY,
-        NODE_ENV: process.env.NODE_ENV,
-        VERCEL_ENV: process.env.VERCEL_ENV,
-      },
-      typeof payload === "object" &&
-        payload !== null &&
-        !Array.isArray(payload) &&
-        typeof (payload as { sourcePage?: unknown }).sourcePage === "string"
-        ? (payload as { sourcePage: string }).sourcePage
-        : CONTACT.requestDemoPath,
-    );
+    // 4. Validate & Normalize Lead Data
+    const validation = validateLeadPayload(payload, { 
+      sourcePage: payload.sourcePage || "/request-demo" 
+    });
 
-    sendJson(response, result.status, result.body);
+    if (!validation.ok) {
+      sendJson(response, 400, {
+        ok: false,
+        error: "VALIDATION_ERROR",
+        message: "Please check the required fields.",
+        fieldErrors: validation.fieldErrors,
+      });
+      return;
+    }
+
+    const lead = validation.lead;
+
+    // 5. Insert into Supabase via Repository
+    try {
+      const insertedLead = await CrmRepository.insertLead({
+        full_name: lead.fullName,
+        company_name: lead.companyName,
+        work_email: lead.workEmail,
+        whatsapp_phone: lead.whatsappPhone,
+        role_in_business: lead.roleInBusiness,
+        country_timezone: lead.countryTimezone,
+        preferred_language: lead.preferredLanguage,
+        business_type: lead.businessType,
+        service_need: lead.serviceNeed,
+        website_url: lead.websiteUrl,
+        current_problem: lead.currentProblem,
+        project_goal: lead.projectGoal,
+        budget_range: lead.budgetRange,
+        selected_package: lead.selectedPackage,
+        timeline: lead.timeline,
+        source_page: lead.sourcePage,
+        consent: lead.consent,
+        raw_payload: lead.rawPayload || {}
+      });
+
+      // 6. Return Success
+      sendJson(response, 200, {
+        ok: true,
+        leadId: insertedLead.id,
+        message: "Lead submitted successfully.",
+      });
+    } catch (dbError) {
+      console.error("[api/leads] Supabase insertion failed:", dbError);
+      sendJson(response, 502, {
+        ok: false,
+        error: "SUPABASE_INSERT_FAILED",
+        message: "We could not submit your request right now.",
+      });
+    }
   } catch (error) {
     if (error instanceof Error && error.message === "PAYLOAD_TOO_LARGE") {
       sendJson(response, 413, {
@@ -87,10 +129,12 @@ export default async function handler(request: IncomingMessage, response: Server
       return;
     }
 
+    console.error("[api/leads] Unexpected error:", error);
     sendJson(response, 500, {
       ok: false,
-      error: "CRM_SUBMISSION_FAILED",
-      message: "Lead submission could not be completed.",
+      error: "INTERNAL_SERVER_ERROR",
+      message: "An unexpected error occurred.",
     });
   }
 }
+
