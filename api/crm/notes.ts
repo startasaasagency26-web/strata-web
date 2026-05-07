@@ -37,7 +37,7 @@ export default async function handler(request: any, response: any) {
       const note = await CrmRepository.insertNote(payload.leadId, {
         note: payload.note,
         noteType: payload.noteType,
-        createdBy: (auth as any).user.email
+        createdBy: auth.ok ? auth.user.email : 'system'
       });
       
       sendSuccess(response, { note });

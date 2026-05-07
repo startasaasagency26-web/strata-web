@@ -2,17 +2,17 @@
 import { createServerClient } from "../supabase/server";
 import { env } from "../env";
 
+export type AuthResult = 
+  | { ok: true; user: any } 
+  | { ok: false; status: number; message: string };
+
 /**
  * Protects CRM routes by validating the user session and email allowlist.
  */
-export const protectCrmRoute = async (request: any, _response: any) => {
+export const protectCrmRoute = async (request: any, _response: any): Promise<AuthResult> => {
   const supabase = createServerClient();
   
   // 1. Get user from session
-  // Note: For serverless functions, the session usually comes from cookies or headers
-  // Supabase SSR handles this, but since we are using standard supabase-js, 
-  // we might need to manually check the Authorization header.
-  
   const authHeader = request.headers.authorization;
   if (!authHeader) {
     return { ok: false, status: 401, message: "Authentication required." };
