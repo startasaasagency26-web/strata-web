@@ -57,26 +57,32 @@ const projects: Project[] = [
 ];
 
 // ── Browser preview with chrome ─────────────────────────────────────────────
+// Layout model:
+//   outer card  → aspect-[16/10], rounded, shadow, overflow:hidden
+//   chrome bar  → fixed 44px, flex, sits at top
+//   viewport    → remaining height below chrome, fills 100%, overflow hidden
+//   image       → absolute inset-0, object-cover, object-top-center
 
-type ImageFit = "contain" | "cover";
+const CHROME_H = 44; // px — keep in sync with h-11 (44px)
 
 interface ProjectPreviewProps {
   project: Project;
-  imageFit?: ImageFit;
-  imagePosition?: string;
 }
 
-const ProjectPreview = ({
-  project,
-  imageFit = "contain",
-  imagePosition = "top",
-}: ProjectPreviewProps) => {
+const ProjectPreview = ({ project }: ProjectPreviewProps) => {
   const [error, setError] = useState(false);
 
   return (
-    <div className="relative w-full overflow-hidden rounded-[24px] border border-black/[0.09] bg-[#f7f7f8] shadow-[0_24px_72px_-16px_rgba(0,0,0,0.22)]">
-      {/* Browser chrome */}
-      <div className="flex h-11 items-center gap-3 border-b border-black/[0.07] bg-[#F2F2F4] px-5">
+    /* Outer card: owns the aspect-ratio + shadow */
+    <div
+      className="relative w-full overflow-hidden rounded-[24px] border border-black/[0.09] shadow-[0_24px_72px_-16px_rgba(0,0,0,0.22)]"
+      style={{ aspectRatio: "16 / 10" }}
+    >
+      {/* ── Browser chrome ── fixed at top, does NOT take space from aspect-ratio */}
+      <div
+        className="absolute inset-x-0 top-0 z-10 flex items-center gap-3 border-b border-black/[0.07] bg-[#F2F2F4] px-5"
+        style={{ height: CHROME_H }}
+      >
         <div className="flex items-center gap-1.5 flex-shrink-0">
           <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
           <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
@@ -84,14 +90,19 @@ const ProjectPreview = ({
         </div>
         <div className="flex-1 flex justify-center">
           <div className="bg-white/80 border border-black/[0.07] rounded-md px-3 py-0.5 max-w-[200px] w-full flex items-center justify-center">
-            <span className="text-[10px] font-mono text-muted/80 truncate">{project.urlLabel}</span>
+            <span className="text-[10px] font-mono text-muted/80 truncate">
+              {project.urlLabel}
+            </span>
           </div>
         </div>
         <div className="w-[54px] flex-shrink-0" />
       </div>
 
-      {/* Screenshot */}
-      <div className="relative w-full aspect-[16/10] bg-[#f5f5f7] overflow-hidden">
+      {/* ── Browser viewport ── fills everything below the chrome ── */}
+      <div
+        className="absolute inset-x-0 bottom-0 overflow-hidden bg-[#f5f5f7]"
+        style={{ top: CHROME_H }}
+      >
         {error ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#f0f0f0] p-6 text-center">
             <div className="mb-2 h-10 w-10 rounded-full bg-black/5 flex items-center justify-center">
@@ -107,8 +118,8 @@ const ProjectPreview = ({
             alt={project.imageAlt}
             className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.012]"
             style={{
-              objectFit: imageFit,
-              objectPosition: imagePosition,
+              objectFit: "cover",
+              objectPosition: "top center",
             }}
             onError={() => setError(true)}
           />
@@ -219,13 +230,8 @@ export const SelectedWork = () => {
                     )}
                   </div>
 
-                  {/* Preview column */}
                   <div className={`w-full ${!isEven ? "lg:[direction:ltr]" : ""}`}>
-                    <ProjectPreview
-                      project={project}
-                      imageFit="contain"
-                      imagePosition="top"
-                    />
+                    <ProjectPreview project={project} />
                   </div>
                 </div>
               </motion.article>
