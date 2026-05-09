@@ -1,6 +1,6 @@
-import { ConsoleCrmAdapter } from "./adapters/console-crm-adapter";
-import { WebhookCrmAdapter } from "./adapters/webhook-crm-adapter";
-import type { CrmSubmitResult, Lead } from "./types";
+import { ConsoleCrmAdapter } from "./adapters/console-crm-adapter.js";
+import { WebhookCrmAdapter } from "./adapters/webhook-crm-adapter.js";
+import type { CrmSubmitResult, Lead } from "./types.js";
 
 export type CrmEnvironment = {
   CRM_PROVIDER?: string;

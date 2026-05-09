@@ -1,5 +1,5 @@
-import { supabaseAdmin } from '../supabase/admin';
-import type { Lead, LeadNote, FollowUp, DashboardMetrics } from '../../types/crm';
+import { supabaseAdmin } from '../supabase/admin.js';
+import type { Lead, LeadNote, FollowUp, DashboardMetrics } from '../../types/crm.js';
 
 /**
  * Supabase Repository for Strata CRM.

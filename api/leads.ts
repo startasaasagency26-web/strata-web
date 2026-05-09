@@ -1,7 +1,7 @@
-import { validateEnv } from "../src/lib/env";
-import { CrmRepository } from "../src/lib/crm/repository";
-import { validateLeadPayload } from "../src/lib/crm/lead-schema";
-import type { LeadApiResponse } from "../src/lib/crm/types";
+import { validateEnv } from "../src/lib/env.js";
+import { CrmRepository } from "../src/lib/crm/repository.js";
+import { validateLeadPayload } from "../src/lib/crm/lead-schema.js";
+import type { LeadApiResponse } from "../src/lib/crm/types.js";
 
 const MAX_BODY_BYTES = 64 * 1024;
 

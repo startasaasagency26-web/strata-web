@@ -1,7 +1,7 @@
-import { createCrmAdapter, type CrmEnvironment } from "./crm-adapter";
-import { CONTACT } from "../../config/contact";
-import { validateLeadPayload } from "./lead-schema";
-import type { LeadApiResponse } from "./types";
+import { createCrmAdapter, type CrmEnvironment } from "./crm-adapter.js";
+import { CONTACT } from "../../config/contact.js";
+import { validateLeadPayload } from "./lead-schema.js";
+import type { LeadApiResponse } from "./types.js";
 
 export type LeadHandlerResult = {
   status: number;

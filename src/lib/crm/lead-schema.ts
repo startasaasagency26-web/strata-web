@@ -1,4 +1,4 @@
-import type { Lead, LeadFieldErrors, LeadValidationResult } from "./types";
+import type { Lead, LeadFieldErrors, LeadValidationResult } from "./types.js";
 
 type LeadPayloadContext = {
   sourcePage?: string;

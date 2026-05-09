@@ -1,6 +1,6 @@
-import { validateEnv } from "../../src/lib/env";
-import { supabaseAdmin } from "../../src/lib/supabase/admin";
-import { sendSuccess, sendError } from "../../src/lib/crm/auth";
+import { validateEnv } from "../../src/lib/env.js";
+import { supabaseAdmin } from "../../src/lib/supabase/admin.js";
+import { sendSuccess, sendError } from "../../src/lib/crm/auth.js";
 
 export default async function handler(_request: any, response: any) {
   try {

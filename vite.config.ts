@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import type { IncomingMessage, ServerResponse } from 'node:http'
-import { CONTACT } from './src/config/contact'
-import { handleLeadSubmission } from './src/lib/crm/lead-handler'
-import type { LeadApiResponse } from './src/lib/crm/types'
+import { CONTACT } from './src/config/contact.js'
+import { handleLeadSubmission } from './src/lib/crm/lead-handler.js'
+import type { LeadApiResponse } from './src/lib/crm/types.js'
 
 const MAX_BODY_BYTES = 64 * 1024
 

@@ -1,5 +1,5 @@
-import { protectCrmRoute, sendSuccess, sendError } from "../../src/lib/crm/auth";
-import { CrmRepository } from "../../src/lib/crm/repository";
+import { protectCrmRoute, sendSuccess, sendError } from "../../src/lib/crm/auth.js";
+import { CrmRepository } from "../../src/lib/crm/repository.js";
 
 export default async function handler(request: any, response: any) {
   const auth = await protectCrmRoute(request, response);

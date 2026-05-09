@@ -1,4 +1,4 @@
-import { supabase } from "../supabase/browser";
+import { supabase } from "../supabase/browser.js";
 import type { 
   Lead, 
   DashboardMetrics, 
@@ -6,7 +6,7 @@ import type {
   FollowUp,
   CrmSettings,
   CrmUserProfile
-} from "../../types/crm";
+} from "../../types/crm.js";
 
 /**
  * CRM API Client for Strata.

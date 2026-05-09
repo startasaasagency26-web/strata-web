@@ -1,4 +1,4 @@
-import type { CrmRole, CrmPermissions } from "../../types/crm";
+import type { CrmRole, CrmPermissions } from "../../types/crm.js";
 
 /**
  * Permission mapping based on CRM roles.

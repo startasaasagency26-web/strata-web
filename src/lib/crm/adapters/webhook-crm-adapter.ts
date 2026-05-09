@@ -1,5 +1,5 @@
-import type { CrmAdapter } from "../crm-adapter";
-import type { CrmSubmitResult, Lead } from "../types";
+import type { CrmAdapter } from "../crm-adapter.js";
+import type { CrmSubmitResult, Lead } from "../types.js";
 
 type WebhookCrmAdapterOptions = {
   webhookUrl: string;

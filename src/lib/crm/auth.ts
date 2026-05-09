@@ -1,6 +1,6 @@
 // import type { IncomingMessage, ServerResponse } from "http";
-import { createServerClient } from "../supabase/server";
-import { env } from "../env";
+import { createServerClient } from "../supabase/server.js";
+import { env } from "../env.js";
 
 export type AuthResult = 
   | { ok: true; user: any } 
