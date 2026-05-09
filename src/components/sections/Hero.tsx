@@ -16,11 +16,11 @@ export const Hero = () => {
       <div className="flex-1 flex flex-col items-center justify-center pt-16 md:pt-24 pb-12 md:pb-24">
         
         {/* Main Headline - Fully readable and dominant */}
-        <div className="relative flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden">
-          <h1 className="text-[clamp(2rem,14vw,24rem)] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap">
+        <div className="relative flex flex-col items-center justify-center gap-2 md:gap-4 pointer-events-none select-none overflow-hidden mt-4 md:mt-6">
+          <h1 className="text-[clamp(2rem,12vw,21rem)] font-display font-bold leading-[0.9] tracking-tighter text-primary whitespace-nowrap">
             BUILD SYSTEMS
           </h1>
-          <h1 className="text-[clamp(2rem,14vw,24rem)] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap">
+          <h1 className="text-[clamp(2rem,12vw,21rem)] font-display font-bold leading-[0.9] tracking-tighter text-primary whitespace-nowrap">
             THAT SELL
           </h1>
         </div>
