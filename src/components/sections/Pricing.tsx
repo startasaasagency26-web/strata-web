@@ -153,8 +153,8 @@ export const Pricing = () => {
                 {plan.featured ? (
                   <Button 
                     asChild 
-                    variant="cool" 
-                    className="w-full py-6 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
+                    variant="liquidDark"
+                    className="w-full py-6 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest h-auto"
                   >
                     <Link to={CONTACT.requestDemoPath}>
                       {plan.cta}

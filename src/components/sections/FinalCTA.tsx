@@ -154,13 +154,13 @@ export const FinalCTA = () => {
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Button 
               asChild 
-              variant="cool" 
+              variant="liquidDark"
               size="lg"
-              className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
+              className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest border-white/15"
             >
               <Link to={CONTACT.requestDemoPath} className="flex items-center gap-4">
                 <span>Book Strategy Call</span>
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white transition-colors duration-300 group-hover:translate-x-1 group-hover:bg-primary/90">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 transition-colors duration-300">
                   <ArrowRight size={16} />
                 </div>
               </Link>

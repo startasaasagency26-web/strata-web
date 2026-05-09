@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,10 +7,12 @@
 @layer base {
   body {
     @apply bg-background text-primary font-sans antialiased selection:bg-primary selection:text-white;
+    letter-spacing: -0.01em;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-normal text-primary uppercase;
+    @apply font-display text-primary;
+    /* Individual components control uppercase/letter-spacing — not forced globally */
   }
 }
 
@@ -18,7 +20,7 @@
   .glass-panel {
     @apply bg-white/70 backdrop-blur-2xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.04)];
   }
-  
+
   .glass-pill {
     @apply bg-white/40 backdrop-blur-xl border border-white/10 text-primary shadow-sm hover:shadow-md hover:bg-white/60 transition-all duration-500;
   }
