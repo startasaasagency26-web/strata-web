@@ -22,7 +22,6 @@
   },
   "include": [
     "vite.config.ts",
-    "api/**/*.ts",
     "src/config/**/*.ts",
     "src/lib/env.ts",
     "src/lib/crm/**/*.ts",
