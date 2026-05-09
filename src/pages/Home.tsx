@@ -8,6 +8,7 @@ import { Pricing } from '../components/sections/Pricing';
 import { FAQ } from '../components/sections/FAQ';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import { Industries } from '../components/sections/Industries';
+import LiquidGlassDemo from '../components/sections/LiquidGlassDemo';
 
 export const Home = () => {
   return (
@@ -19,6 +20,7 @@ export const Home = () => {
       <Process />
       <SelectedWork />
       <Technology />
+      <LiquidGlassDemo />
       <Pricing />
       <FAQ />
       <FinalCTA />

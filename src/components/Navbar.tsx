@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
 import { cn } from '../lib/utils';
 import { CONTACT } from '../config/contact';
+import { Button } from './ui/liquid-glass-button';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -82,12 +83,16 @@ export const Navbar = () => {
 
           {/* CTA & Menu - Right */}
           <div className="flex-shrink-0 flex items-center justify-end gap-2 md:gap-3 relative z-50">
-            <Link 
-              to={CONTACT.requestDemoPath}
-              className="hidden lg:inline-flex items-center justify-center text-[10px] font-mono font-bold tracking-[0.2em] px-6 py-2.5 rounded-full border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-500 whitespace-nowrap"
+            <Button 
+              asChild 
+              variant="cool" 
+              size="sm"
+              className="hidden lg:inline-flex rounded-full text-[10px] font-mono font-bold tracking-[0.2em] px-6 h-auto py-2.5"
             >
-              REQUEST A DEMO
-            </Link>
+              <Link to={CONTACT.requestDemoPath}>
+                REQUEST A DEMO
+              </Link>
+            </Button>
             
             <motion.button 
               whileHover={{ rotate: 90 }}
@@ -137,13 +142,18 @@ export const Navbar = () => {
                 transition={{ delay: 0.4 }}
                 className="mt-8 flex flex-col gap-4 w-full max-w-xs"
               >
-                <Link 
-                  to={CONTACT.requestDemoPath} 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-center text-[10px] font-mono font-bold tracking-[0.2em] w-full py-4 rounded-full border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-500"
+                <Button 
+                  asChild 
+                  variant="cool" 
+                  className="w-full py-4 rounded-full text-[10px] font-mono font-bold tracking-[0.2em]"
                 >
-                  REQUEST A DEMO
-                </Link>
+                  <Link 
+                    to={CONTACT.requestDemoPath} 
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    REQUEST A DEMO
+                  </Link>
+                </Button>
               </motion.li>
             </ul>
           </motion.div>

@@ -1,6 +1,7 @@
 import { Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CONTACT } from '../../config/contact';
+import { Button, MetalButton } from '../ui/liquid-glass-button';
 
 const mainPackages = [
   {
@@ -149,16 +150,27 @@ export const Pricing = () => {
                   ))}
                 </ul>
                 
-                <Link 
-                  to={CONTACT.requestDemoPath}
-                  className={`block w-full rounded-full py-4 text-center font-mono text-[10px] font-bold uppercase tracking-widest transition-all duration-300 transform group-hover:scale-[1.02] ${
-                    plan.featured 
-                      ? 'bg-primary text-white hover:bg-primary/90 shadow-md' 
-                      : 'bg-white border border-border text-primary hover:bg-primary hover:text-white'
-                  }`}
-                >
-                  {plan.cta}
-                </Link>
+                {plan.featured ? (
+                  <Button 
+                    asChild 
+                    variant="cool" 
+                    className="w-full py-6 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
+                  >
+                    <Link to={CONTACT.requestDemoPath}>
+                      {plan.cta}
+                    </Link>
+                  </Button>
+                ) : (
+                  <MetalButton 
+                    asChild
+                    className="w-full font-mono text-[10px] font-bold uppercase tracking-widest"
+                    variant={idx === 0 ? "default" : idx === 2 ? "primary" : "gold"}
+                  >
+                    <Link to={CONTACT.requestDemoPath}>
+                      {plan.cta}
+                    </Link>
+                  </MetalButton>
+                )}
               </div>
             </div>
           ))}

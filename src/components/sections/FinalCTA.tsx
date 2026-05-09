@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { CONTACT } from '../../config/contact';
 import { WhatsAppChoice } from '../WhatsAppChoice';
+import { Button } from '../ui/liquid-glass-button';
 
 const systemCards = [
   {
@@ -151,12 +152,19 @@ export const FinalCTA = () => {
           </p>
 
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
-            <Link to={CONTACT.requestDemoPath} className="group relative inline-flex w-full items-center justify-center gap-4 rounded-full bg-white px-10 py-6 font-mono font-bold uppercase tracking-widest text-primary transition-colors duration-300 hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/70 sm:w-auto">
-              <span>Book Strategy Call</span>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white transition-colors duration-300 group-hover:translate-x-1 group-hover:bg-primary/90">
-                <ArrowRight size={16} />
-              </div>
-            </Link>
+            <Button 
+              asChild 
+              variant="cool" 
+              size="lg"
+              className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
+            >
+              <Link to={CONTACT.requestDemoPath} className="flex items-center gap-4">
+                <span>Book Strategy Call</span>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white transition-colors duration-300 group-hover:translate-x-1 group-hover:bg-primary/90">
+                  <ArrowRight size={16} />
+                </div>
+              </Link>
+            </Button>
 
             <WhatsAppChoice className="group inline-flex w-full items-center justify-center gap-4 rounded-full border border-white/30 px-10 py-6 font-mono font-bold uppercase tracking-widest text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/50 sm:w-auto">
               <MessageSquare size={20} className="text-white/70" />
