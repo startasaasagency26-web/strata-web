@@ -112,7 +112,6 @@ type ColorVariant =
 interface MetalButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ColorVariant
-  asChild?: boolean
 }
 
 const colorVariants: Record<
@@ -238,7 +237,7 @@ const ShineEffect = ({ isPressed }: { isPressed: boolean }) => {
 export const MetalButton = React.forwardRef<
   HTMLButtonElement,
   MetalButtonProps
->(({ children, className, variant = "default", asChild = false, ...props }, ref) => {
+>(({ children, className, variant = "default", ...props }, ref) => {
   const [isPressed, setIsPressed] = React.useState(false)
   const [isHovered, setIsHovered] = React.useState(false)
   const [isTouchDevice, setIsTouchDevice] = React.useState(false)
@@ -248,12 +247,11 @@ export const MetalButton = React.forwardRef<
   }, [])
 
   const variants = metalButtonVariants(variant, isPressed, isHovered, isTouchDevice)
-  const Comp = asChild ? Slot : "button"
 
   return (
     <div className={variants.wrapper} style={variants.wrapperStyle}>
       <div className={variants.inner} style={variants.innerStyle} />
-      <Comp
+      <button
         ref={ref}
         className={cn(variants.button, className)}
         style={variants.buttonStyle}
@@ -271,7 +269,7 @@ export const MetalButton = React.forwardRef<
         {isHovered && !isPressed && !isTouchDevice && (
           <div className="pointer-events-none absolute inset-0 rounded-md bg-gradient-to-t from-transparent to-white/5" />
         )}
-      </Comp>
+      </button>
     </div>
   )
 })

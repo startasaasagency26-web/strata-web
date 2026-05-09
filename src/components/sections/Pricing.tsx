@@ -161,15 +161,14 @@ export const Pricing = () => {
                     </Link>
                   </Button>
                 ) : (
-                  <MetalButton 
-                    asChild
-                    className="w-full font-mono text-[10px] font-bold uppercase tracking-widest"
-                    variant={idx === 0 ? "default" : idx === 2 ? "primary" : "gold"}
-                  >
-                    <Link to={CONTACT.requestDemoPath}>
+                  <Link to={CONTACT.requestDemoPath} className="block w-full">
+                    <MetalButton 
+                      className="w-full font-mono text-[10px] font-bold uppercase tracking-widest"
+                      variant={idx === 0 ? "default" : idx === 2 ? "primary" : "gold"}
+                    >
                       {plan.cta}
-                    </Link>
-                  </MetalButton>
+                    </MetalButton>
+                  </Link>
                 )}
               </div>
             </div>
