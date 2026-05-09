@@ -80,6 +80,7 @@ function App() {
       <Router>
         <ScrollToTop />
         <NoIndex />
+        <SpeedInsights />
         <Routes>
           {/* CRM Routes - No Shell */}
           <Route path="/crm/login" element={<CrmLogin />} />
