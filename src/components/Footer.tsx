@@ -3,7 +3,7 @@ import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CONTACT } from '../config/contact';
 import { WhatsAppChoice } from './WhatsAppChoice';
-import { MetalButton } from './ui/liquid-glass-button';
+import { Button } from './ui/liquid-glass-button';
 
 export const Footer = () => {
   return (
@@ -65,16 +65,15 @@ export const Footer = () => {
           <div>
             <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">READY TO SCALE?</h4>
             <p className="text-muted font-sans text-sm mb-4">Book a call to discuss your project requirements.</p>
-            <Link to={CONTACT.requestDemoPath} className="block mt-2 w-full sm:w-auto">
-              <MetalButton 
-                variant="primary"
-                className="w-full font-mono tracking-widest text-[10px] font-bold uppercase"
-              >
-                <span className="flex items-center gap-2">
-                  BOOK STRATEGY CALL <ArrowRight size={16} />
-                </span>
-              </MetalButton>
-            </Link>
+            <Button
+              asChild
+              variant="glassStrong"
+              className="mt-2 w-full sm:w-auto rounded-full font-mono tracking-widest text-[10px] font-bold uppercase h-auto py-3 px-6"
+            >
+              <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
+                BOOK STRATEGY CALL <ArrowRight size={16} />
+              </Link>
+            </Button>
             <a href={CONTACT.mailto} className="mt-4 block break-all font-mono text-xs font-bold tracking-widest text-muted transition-colors hover:text-primary">
               {CONTACT.email}
             </a>

@@ -87,7 +87,7 @@ export const Hero = () => {
         >
           <Button
             asChild
-            variant="liquidDark"
+            variant="glassStrong"
             size="lg"
             className="rounded-full font-mono font-bold tracking-[0.16em] text-[10px] uppercase px-8 h-12"
           >
@@ -99,7 +99,7 @@ export const Hero = () => {
 
           <Button
             asChild
-            variant="liquidLight"
+            variant="glass"
             size="lg"
             className="rounded-full font-mono font-bold tracking-[0.16em] text-[10px] uppercase px-8 h-12"
           >

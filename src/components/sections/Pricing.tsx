@@ -1,7 +1,7 @@
 import { Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CONTACT } from '../../config/contact';
-import { Button, MetalButton } from '../ui/liquid-glass-button';
+import { Button } from '../ui/liquid-glass-button';
 
 const mainPackages = [
   {
@@ -150,26 +150,15 @@ export const Pricing = () => {
                   ))}
                 </ul>
                 
-                {plan.featured ? (
-                  <Button 
-                    asChild 
-                    variant="liquidDark"
-                    className="w-full py-6 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest h-auto"
-                  >
-                    <Link to={CONTACT.requestDemoPath}>
-                      {plan.cta}
-                    </Link>
-                  </Button>
-                ) : (
-                  <Link to={CONTACT.requestDemoPath} className="block w-full">
-                    <MetalButton 
-                      className="w-full font-mono text-[10px] font-bold uppercase tracking-widest"
-                      variant={idx === 0 ? "default" : idx === 2 ? "primary" : "gold"}
-                    >
-                      {plan.cta}
-                    </MetalButton>
+                <Button
+                  asChild
+                  variant={plan.featured ? "glassStrong" : "glass"}
+                  className="w-full h-auto rounded-full px-6 py-5 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
+                >
+                  <Link to={CONTACT.requestDemoPath}>
+                    {plan.cta}
                   </Link>
-                )}
+                </Button>
               </div>
             </div>
           ))}

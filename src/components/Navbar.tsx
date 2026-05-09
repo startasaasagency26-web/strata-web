@@ -30,43 +30,35 @@ export const Navbar = () => {
     <>
       <motion.header
         initial={{ y: -24, opacity: 0 }}
-        animate={{ y: 0,   opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-8 md:pt-5"
       >
         <div
           className={cn(
-            // Dark liquid-glass capsule
-            "mx-auto relative flex items-center justify-between w-full max-w-[1800px] rounded-full px-4 md:px-5 transition-all duration-500",
-            "bg-[rgba(17,17,19,0.78)] backdrop-blur-2xl",
-            "border border-white/[0.10]",
-            // outer glow + inner top-gloss
-            "shadow-[0_1px_0_0_rgba(255,255,255,0.10)_inset,0_18px_60px_rgba(0,0,0,0.22)]",
+            // Solid dark graphite — NOT liquid glass
+            "mx-auto flex items-center justify-between w-full max-w-[1800px] rounded-full px-4 md:px-5 transition-all duration-500",
+            "bg-[#1D1D1F]",
+            "border border-white/10",
+            "shadow-[0_18px_60px_rgba(0,0,0,0.20)]",
             isScrolled ? "py-2" : "py-3",
           )}
         >
-          {/* Subtle top-gloss overlay inside pill */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-full bg-gradient-to-b from-white/[0.09] to-transparent"
-          />
-
-          {/* Logo */}
-          <div className="relative z-10 flex-shrink-0 flex items-center">
+          {/* Logo — inverted white on dark bg */}
+          <div className="flex-shrink-0 flex items-center">
             <Link
               to="/"
               className="flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               aria-label="Strata Agency Home"
               onClick={() => setMobileMenuOpen(false)}
             >
-              {/* brightness-0 invert makes dark PNG logo white on dark glass */}
               <Logo className="transition-transform duration-300 group-hover:scale-105 brightness-0 invert" />
             </Link>
           </div>
 
           {/* Desktop Nav */}
           <nav
-            className="hidden xl:flex relative z-10 flex-1 items-center justify-center px-4 min-w-0"
+            className="hidden xl:flex flex-1 items-center justify-center px-4 min-w-0"
             aria-label="Main navigation"
           >
             <ul className="flex items-center gap-1 p-1">
@@ -83,7 +75,7 @@ export const Navbar = () => {
                   {hoveredLink === link.name && (
                     <motion.div
                       layoutId="nav-hover-pill"
-                      className="absolute inset-0 rounded-full bg-white/[0.10] pointer-events-none z-0"
+                      className="absolute inset-0 rounded-full bg-white/[0.08] pointer-events-none z-0"
                       initial={{ opacity: 0, scale: 0.85 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.85 }}
@@ -96,10 +88,10 @@ export const Navbar = () => {
           </nav>
 
           {/* Right — CTA + hamburger */}
-          <div className="relative z-10 flex-shrink-0 flex items-center justify-end gap-2 md:gap-3">
+          <div className="flex-shrink-0 flex items-center justify-end gap-2 md:gap-3">
             <Button
               asChild
-              variant="liquidDark"
+              variant="glass"
               size="sm"
               className="hidden lg:inline-flex rounded-full text-[10px] font-mono font-bold tracking-[0.2em] px-6 h-auto py-2.5"
             >
@@ -111,7 +103,7 @@ export const Navbar = () => {
               whileTap={{ scale: 0.88 }}
               transition={{ type: 'spring', stiffness: 280, damping: 20 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/[0.10] border border-white/[0.10] text-white flex items-center justify-center hover:bg-white/[0.18] transition-colors duration-200 shrink-0 ml-1"
+              className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/[0.18] transition-colors duration-200 shrink-0 ml-1"
               aria-label="Toggle Menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -121,22 +113,16 @@ export const Navbar = () => {
         </div>
       </motion.header>
 
-      {/* Mobile overlay — dark glass */}
+      {/* Mobile overlay — solid dark */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.28 }}
-            className="fixed inset-0 z-40 bg-[rgba(10,10,12,0.92)] backdrop-blur-2xl flex flex-col justify-center items-center px-6"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-[#111113] flex flex-col justify-center items-center px-6"
           >
-            {/* inner top gloss */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/[0.06] to-transparent"
-            />
-
             <nav aria-label="Mobile navigation">
               <ul className="flex flex-col items-center gap-6 w-full">
                 {navLinks.map((link, idx) => (
@@ -144,7 +130,7 @@ export const Navbar = () => {
                     key={link.name}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.06 + idx * 0.05 }}
+                    transition={{ delay: 0.05 + idx * 0.05 }}
                   >
                     <Link
                       to={link.href}
@@ -158,12 +144,12 @@ export const Navbar = () => {
                 <motion.li
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.36 }}
+                  transition={{ delay: 0.33 }}
                   className="mt-6 w-full max-w-xs"
                 >
                   <Button
                     asChild
-                    variant="liquidDark"
+                    variant="glass"
                     className="w-full h-14 rounded-full text-[10px] font-mono font-bold tracking-[0.2em] uppercase"
                   >
                     <Link to={CONTACT.requestDemoPath} onClick={() => setMobileMenuOpen(false)}>

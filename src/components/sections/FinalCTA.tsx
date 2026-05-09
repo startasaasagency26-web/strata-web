@@ -154,9 +154,9 @@ export const FinalCTA = () => {
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Button 
               asChild 
-              variant="liquidDark"
+              variant="glassOnDark"
               size="lg"
-              className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest border-white/15"
+              className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
             >
               <Link to={CONTACT.requestDemoPath} className="flex items-center gap-4">
                 <span>Book Strategy Call</span>
