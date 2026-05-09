@@ -37,7 +37,7 @@ export const Navbar = () => {
         <div
           className={cn(
             // Solid dark graphite — NOT liquid glass
-            "mx-auto flex items-center justify-between w-full max-w-[1800px] rounded-full px-4 md:px-5 transition-all duration-500",
+            "relative mx-auto flex items-center justify-between w-full max-w-[1800px] rounded-full px-4 md:px-5 transition-all duration-500",
             "bg-[#1D1D1F]",
             "border border-white/10",
             "shadow-[0_18px_60px_rgba(0,0,0,0.20)]",
@@ -54,6 +54,13 @@ export const Navbar = () => {
             >
               <Logo className="transition-transform duration-300 group-hover:scale-105 brightness-0 invert" />
             </Link>
+          </div>
+
+          {/* Mobile-only centered brand text — hidden on desktop where nav links show */}
+          <div className="absolute left-1/2 -translate-x-1/2 xl:hidden pointer-events-none">
+            <span className="font-mono text-[11px] font-bold tracking-[0.28em] text-white/75 uppercase">
+              STRATA
+            </span>
           </div>
 
           {/* Desktop Nav */}
