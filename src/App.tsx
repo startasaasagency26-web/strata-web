@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
@@ -97,6 +98,7 @@ function App() {
           <Route path={`${CONTACT.requestDemoPath}/received`} element={<PublicShell><DiagnosticReceived /></PublicShell>} />
           <Route path="/build-with-us" element={<PublicShell><BuildWithUs /></PublicShell>} />
         </Routes>
+        <SpeedInsights />
       </Router>
     </CrmAuthProvider>
   );
