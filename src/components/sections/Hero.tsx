@@ -8,7 +8,7 @@ export const Hero = () => {
       {/* Top Eyebrow Copy */}
       <div className="absolute top-24 md:top-32 left-4 md:left-12 z-20 max-w-[280px]">
         <p className="text-xs font-mono tracking-widest text-primary leading-relaxed uppercase">
-          Engineering tomorrow's digital ecosystems today
+          AI-POWERED DIGITAL AGENCY
         </p>
       </div>
 
@@ -17,11 +17,11 @@ export const Hero = () => {
         
         {/* Main Headline - Fully readable and dominant */}
         <div className="relative flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden">
-          <h1 className="text-[24vw] md:text-[21vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap">
-            BUILD
+          <h1 className="text-[clamp(2rem,14vw,24rem)] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap">
+            BUILD SYSTEMS
           </h1>
-          <h1 className="text-[24vw] md:text-[21vw] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap">
-            FUTURES
+          <h1 className="text-[clamp(2rem,14vw,24rem)] font-display font-bold leading-[0.8] tracking-tighter text-primary whitespace-nowrap">
+            THAT SELL
           </h1>
         </div>
 
