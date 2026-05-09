@@ -6,78 +6,99 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
 
-// ─── Standard Button (preserved for backward compat) ─────────────────────────
+// ─── Shared base: rounded-full, isolate, gpu, a11y ──────────────────────────
+const BASE =
+  "inline-flex items-center cursor-pointer justify-center gap-2 whitespace-nowrap rounded-full " +
+  "text-sm font-medium select-none " +
+  "relative isolate overflow-hidden transform-gpu will-change-transform " +
+  "transition-all duration-200 ease-out " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 " +
+  "disabled:pointer-events-none disabled:opacity-40 " +
+  "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
 
-const buttonVariants = cva(
-  "inline-flex items-center cursor-pointer justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-white hover:bg-primary/90",
-        destructive: "bg-red-600 text-white hover:bg-red-600/90",
-        // Liquid Dark — primary CTA on light backgrounds
-        liquidDark: [
-          "relative overflow-hidden transform-gpu",
-          "bg-primary/90 text-white",
-          "border border-white/10",
-          "shadow-[0_4px_24px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.12)]",
-          "backdrop-blur-md",
-          "transition-all duration-200 ease-out",
-          "hover:brightness-110 hover:-translate-y-px hover:shadow-[0_8px_32px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.18)]",
-          "active:scale-[0.98] active:translate-y-0 active:brightness-95",
-          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-        ].join(" "),
-        // Liquid Light — secondary CTA on light backgrounds
-        liquidLight: [
-          "relative overflow-hidden transform-gpu",
-          "bg-white/80 text-primary",
-          "border border-black/10",
-          "shadow-[0_2px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.9)]",
-          "backdrop-blur-md",
-          "transition-all duration-200 ease-out",
-          "hover:bg-white hover:shadow-[0_6px_20px_rgba(0,0,0,0.10),inset_0_1px_0_rgba(255,255,255,1)]",
-          "active:scale-[0.98] active:brightness-95",
-          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-        ].join(" "),
-        // Liquid Blue — accent CTA, use sparingly
-        liquidBlue: [
-          "relative overflow-hidden transform-gpu",
-          "bg-accent/90 text-white",
-          "border border-accent/20",
-          "shadow-[0_4px_20px_rgba(0,102,204,0.25),inset_0_1px_0_rgba(255,255,255,0.18)]",
-          "backdrop-blur-md",
-          "transition-all duration-200 ease-out",
-          "hover:brightness-110 hover:-translate-y-px hover:shadow-[0_8px_28px_rgba(0,102,204,0.35)]",
-          "active:scale-[0.98] active:translate-y-0",
-          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-        ].join(" "),
-        // Cool — kept for backward compat (Navbar used this)
-        cool: [
-          "dark:shadow-inner bg-gradient-to-t border border-b-2 border-zinc-950/40",
-          "from-primary to-primary/85 shadow-md shadow-primary/20 ring-1 ring-inset ring-white/25",
-          "transition-[filter] duration-200 hover:brightness-110 active:brightness-90",
-          "dark:border-x-0 text-white dark:border-t-0 dark:border-primary/50 dark:ring-white/5",
-        ].join(" "),
-        outline: "border border-border bg-background hover:bg-accent/10 hover:text-accent",
-        secondary: "bg-surface text-primary hover:bg-surface/80 border border-border/50",
-        ghost: "hover:bg-primary/5 hover:text-primary",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-11 rounded-full px-7",
-        xl: "h-13 rounded-full px-9 text-sm",
-        xxl: "h-14 rounded-full px-10 text-sm",
-        icon: "h-9 w-9",
-      },
+const buttonVariants = cva(BASE, {
+  variants: {
+    variant: {
+      default: "bg-primary text-white hover:bg-primary/90",
+      destructive: "bg-red-600 text-white hover:bg-red-600/90",
+
+      // ── Liquid Dark ── graphite glass pill, white text
+      // Layered: translucent base + top-gloss pseudo via box-shadow inset
+      liquidDark: [
+        "bg-[rgba(20,20,22,0.78)]",
+        "text-white",
+        "backdrop-blur-2xl",
+        "border border-white/[0.12]",
+        // outer glow + bottom depth + top inner gloss
+        "shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_-1px_0_0_rgba(0,0,0,0.35)_inset,0_8px_32px_rgba(0,0,0,0.22)]",
+        // bottom rim darker
+        "ring-1 ring-inset ring-white/[0.06]",
+        "hover:-translate-y-[1.5px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_-1px_0_0_rgba(0,0,0,0.35)_inset,0_14px_40px_rgba(0,0,0,0.28)]",
+        "active:translate-y-px active:scale-[0.98] active:shadow-[0_1px_0_0_rgba(255,255,255,0.10)_inset,0_-1px_0_0_rgba(0,0,0,0.40)_inset,0_2px_8px_rgba(0,0,0,0.20)]",
+      ].join(" "),
+
+      // ── Liquid Light ── frosted white glass, dark text
+      liquidLight: [
+        "bg-[rgba(255,255,255,0.62)]",
+        "text-primary",
+        "backdrop-blur-2xl",
+        "border border-black/[0.08]",
+        "shadow-[0_1px_0_0_rgba(255,255,255,0.95)_inset,0_-1px_0_0_rgba(0,0,0,0.06)_inset,0_4px_18px_rgba(0,0,0,0.07)]",
+        "ring-1 ring-inset ring-black/[0.04]",
+        "hover:-translate-y-[1.5px] hover:bg-[rgba(255,255,255,0.80)] hover:shadow-[0_1px_0_0_rgba(255,255,255,1)_inset,0_-1px_0_0_rgba(0,0,0,0.07)_inset,0_8px_28px_rgba(0,0,0,0.10)]",
+        "active:translate-y-px active:scale-[0.98]",
+      ].join(" "),
+
+      // ── Liquid Blue ── Apple accent glass
+      liquidBlue: [
+        "bg-[rgba(0,102,204,0.82)]",
+        "text-white",
+        "backdrop-blur-2xl",
+        "border border-[rgba(0,102,204,0.3)]",
+        "shadow-[0_1px_0_0_rgba(255,255,255,0.28)_inset,0_-1px_0_0_rgba(0,0,0,0.25)_inset,0_6px_24px_rgba(0,102,204,0.30)]",
+        "ring-1 ring-inset ring-white/[0.10]",
+        "hover:-translate-y-[1.5px] hover:bg-[rgba(0,102,204,0.92)] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.32)_inset,0_-1px_0_0_rgba(0,0,0,0.28)_inset,0_10px_36px_rgba(0,102,204,0.40)]",
+        "active:translate-y-px active:scale-[0.98]",
+      ].join(" "),
+
+      // ── Liquid Ghost ── transparent pill, subtle border
+      liquidGhost: [
+        "bg-white/[0.08]",
+        "text-primary",
+        "backdrop-blur-md",
+        "border border-black/[0.09]",
+        "shadow-[0_1px_0_0_rgba(255,255,255,0.60)_inset]",
+        "hover:bg-white/[0.18] hover:-translate-y-[1px]",
+        "active:translate-y-px active:scale-[0.98]",
+      ].join(" "),
+
+      // ── Kept for backward compat ──
+      cool: [
+        "bg-gradient-to-b from-primary to-primary/85",
+        "text-white border border-white/10",
+        "shadow-md shadow-primary/20 ring-1 ring-inset ring-white/20",
+        "hover:brightness-110 active:brightness-90",
+        "transition-[filter] duration-200",
+      ].join(" "),
+      outline: "border border-border bg-background hover:bg-accent/5 hover:text-accent",
+      secondary: "bg-surface text-primary hover:bg-surface/80 border border-border/50",
+      ghost: "hover:bg-primary/5 hover:text-primary",
+      link: "text-primary underline-offset-4 hover:underline",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
+    size: {
+      default: "h-9 px-5 py-2 text-sm",
+      sm:      "h-8 px-4 text-xs",
+      lg:      "h-11 px-7 text-sm",
+      xl:      "h-12 px-9 text-sm",
+      xxl:     "h-14 px-11 text-[0.8125rem]",
+      icon:    "h-9 w-9",
     },
-  }
-)
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+})
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -99,31 +120,19 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = "Button"
 
-// ─── Metal Button (premium multi-layer metallic style) ────────────────────────
+// ─── Metal Button ─────────────────────────────────────────────────────────────
+// Note: asChild intentionally removed — wrap with <Link> instead to avoid
+// Radix Slot multi-child violations.
 
-type ColorVariant =
-  | "default"
-  | "primary"
-  | "success"
-  | "error"
-  | "gold"
-  | "bronze"
+type ColorVariant = "default" | "primary" | "success" | "error" | "gold" | "bronze"
 
-interface MetalButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface MetalButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ColorVariant
 }
 
-const colorVariants: Record<
-  ColorVariant,
-  {
-    outer: string
-    inner: string
-    button: string
-    textColor: string
-    textShadow: string
-  }
-> = {
+const colorVariants: Record<ColorVariant, {
+  outer: string; inner: string; button: string; textColor: string; textShadow: string
+}> = {
   default: {
     outer: "bg-gradient-to-b from-[#000] to-[#A0A0A0]",
     inner: "bg-gradient-to-b from-[#FAFAFA] via-[#3E3E3E] to-[#E5E5E5]",
@@ -168,120 +177,104 @@ const colorVariants: Record<
   },
 }
 
-const metalButtonVariants = (
+const buildMetalVariants = (
   variant: ColorVariant = "default",
   isPressed: boolean,
   isHovered: boolean,
   isTouchDevice: boolean,
 ) => {
-  const colors = colorVariants[variant]
-  const transitionStyle = "all 250ms cubic-bezier(0.1, 0.4, 0.2, 1)"
-
+  const c = colorVariants[variant]
+  const t = "all 220ms cubic-bezier(0.1, 0.4, 0.2, 1)"
   return {
-    wrapper: cn(
-      "relative inline-flex transform-gpu rounded-lg p-[1.25px] will-change-transform",
-      colors.outer,
-    ),
+    wrapper: cn("relative inline-flex transform-gpu rounded-lg p-[1.25px] will-change-transform", c.outer),
     wrapperStyle: {
-      transform: isPressed
-        ? "translateY(2.5px) scale(0.99)"
-        : "translateY(0) scale(1)",
+      transform: isPressed ? "translateY(2px) scale(0.99)" : "translateY(0) scale(1)",
       boxShadow: isPressed
-        ? "0 1px 2px rgba(0, 0, 0, 0.15)"
+        ? "0 1px 2px rgba(0,0,0,0.15)"
         : isHovered && !isTouchDevice
-          ? "0 4px 12px rgba(0, 0, 0, 0.12)"
-          : "0 3px 8px rgba(0, 0, 0, 0.08)",
-      transition: transitionStyle,
-      transformOrigin: "center center",
+          ? "0 4px 14px rgba(0,0,0,0.14)"
+          : "0 3px 8px rgba(0,0,0,0.08)",
+      transition: t,
     },
-    inner: cn(
-      "absolute inset-[1px] transform-gpu rounded-lg will-change-transform",
-      colors.inner,
-    ),
+    inner: cn("absolute inset-[1px] transform-gpu rounded-lg will-change-transform", c.inner),
     innerStyle: {
-      transition: transitionStyle,
-      transformOrigin: "center center",
-      filter:
-        isHovered && !isPressed && !isTouchDevice ? "brightness(1.05)" : "none",
+      transition: t,
+      filter: isHovered && !isPressed && !isTouchDevice ? "brightness(1.05)" : "none",
     },
     button: cn(
       "relative z-10 m-[1px] rounded-md inline-flex h-11 transform-gpu cursor-pointer items-center justify-center overflow-hidden px-6 py-2 text-sm leading-none font-semibold will-change-transform outline-none",
       "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-      colors.button,
-      colors.textColor,
-      colors.textShadow,
+      c.button, c.textColor, c.textShadow,
     ),
     buttonStyle: {
       transform: isPressed ? "scale(0.97)" : "scale(1)",
-      transition: transitionStyle,
-      transformOrigin: "center center",
-      filter:
-        isHovered && !isPressed && !isTouchDevice ? "brightness(1.02)" : "none",
+      transition: t,
+      filter: isHovered && !isPressed && !isTouchDevice ? "brightness(1.02)" : "none",
     },
   }
 }
 
-const ShineEffect = ({ isPressed }: { isPressed: boolean }) => {
-  return (
-    <div
-      className={cn(
-        "pointer-events-none absolute inset-0 z-20 overflow-hidden transition-opacity duration-300",
-        isPressed ? "opacity-20" : "opacity-0",
-      )}
-    >
-      <div className="absolute inset-0 rounded-md bg-gradient-to-r from-transparent via-neutral-100 to-transparent" />
-    </div>
-  )
-}
+const ShineEffect = ({ isPressed }: { isPressed: boolean }) => (
+  <div className={cn(
+    "pointer-events-none absolute inset-0 z-20 overflow-hidden transition-opacity duration-300",
+    isPressed ? "opacity-20" : "opacity-0",
+  )}>
+    <div className="absolute inset-0 rounded-md bg-gradient-to-r from-transparent via-neutral-100 to-transparent" />
+  </div>
+)
 
-export const MetalButton = React.forwardRef<
-  HTMLButtonElement,
-  MetalButtonProps
->(({ children, className, variant = "default", ...props }, ref) => {
-  const [isPressed, setIsPressed] = React.useState(false)
-  const [isHovered, setIsHovered] = React.useState(false)
-  const [isTouchDevice, setIsTouchDevice] = React.useState(false)
+export const MetalButton = React.forwardRef<HTMLButtonElement, MetalButtonProps>(
+  ({ children, className, variant = "default", ...props }, ref) => {
+    const [isPressed, setIsPressed] = React.useState(false)
+    const [isHovered, setIsHovered] = React.useState(false)
+    const [isTouchDevice, setIsTouchDevice] = React.useState(false)
 
-  React.useEffect(() => {
-    setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0)
-  }, [])
+    React.useEffect(() => {
+      setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0)
+    }, [])
 
-  const variants = metalButtonVariants(variant, isPressed, isHovered, isTouchDevice)
-
-  return (
-    <div className={variants.wrapper} style={variants.wrapperStyle}>
-      <div className={variants.inner} style={variants.innerStyle} />
-      <button
-        ref={ref}
-        className={cn(variants.button, className)}
-        style={variants.buttonStyle}
-        {...props}
-        onMouseDown={() => setIsPressed(true)}
-        onMouseUp={() => setIsPressed(false)}
-        onMouseLeave={() => { setIsPressed(false); setIsHovered(false) }}
-        onMouseEnter={() => { if (!isTouchDevice) setIsHovered(true) }}
-        onTouchStart={() => setIsPressed(true)}
-        onTouchEnd={() => setIsPressed(false)}
-        onTouchCancel={() => setIsPressed(false)}
-      >
-        <ShineEffect isPressed={isPressed} />
-        {children || "Button"}
-        {isHovered && !isPressed && !isTouchDevice && (
-          <div className="pointer-events-none absolute inset-0 rounded-md bg-gradient-to-t from-transparent to-white/5" />
-        )}
-      </button>
-    </div>
-  )
-})
+    const v = buildMetalVariants(variant, isPressed, isHovered, isTouchDevice)
+    return (
+      <div className={v.wrapper} style={v.wrapperStyle}>
+        <div className={v.inner} style={v.innerStyle} />
+        <button
+          ref={ref}
+          className={cn(v.button, className)}
+          style={v.buttonStyle}
+          {...props}
+          onMouseDown={() => setIsPressed(true)}
+          onMouseUp={() => setIsPressed(false)}
+          onMouseLeave={() => { setIsPressed(false); setIsHovered(false) }}
+          onMouseEnter={() => { if (!isTouchDevice) setIsHovered(true) }}
+          onTouchStart={() => setIsPressed(true)}
+          onTouchEnd={() => setIsPressed(false)}
+          onTouchCancel={() => setIsPressed(false)}
+        >
+          <ShineEffect isPressed={isPressed} />
+          {children || "Button"}
+          {isHovered && !isPressed && !isTouchDevice && (
+            <div className="pointer-events-none absolute inset-0 rounded-md bg-gradient-to-t from-transparent to-white/5" />
+          )}
+        </button>
+      </div>
+    )
+  }
+)
 MetalButton.displayName = "MetalButton"
 
-// ─── Legacy LiquidButton (simple pass-through, kept for any existing usages) ──
+// ─── Legacy LiquidButton ──────────────────────────────────────────────────────
 const liquidbuttonVariants = cva(
   "inline-flex items-center cursor-pointer justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-primary/90 text-white border border-white/10 backdrop-blur-md shadow-[0_4px_24px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.12)] hover:brightness-110 hover:-translate-y-px active:scale-[0.98]",
+        default: [
+          "bg-[rgba(20,20,22,0.78)] text-white backdrop-blur-2xl",
+          "border border-white/[0.12]",
+          "shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_-1px_0_0_rgba(0,0,0,0.35)_inset,0_8px_32px_rgba(0,0,0,0.22)]",
+          "hover:-translate-y-[1.5px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_-1px_0_0_rgba(0,0,0,0.35)_inset,0_14px_40px_rgba(0,0,0,0.28)]",
+          "active:translate-y-px active:scale-[0.98]",
+        ].join(" "),
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -292,10 +285,7 @@ const liquidbuttonVariants = cva(
         icon: "size-9",
       },
     },
-    defaultVariants: {
-      variant: "default",
-      size: "xxl",
-    },
+    defaultVariants: { variant: "default", size: "xxl" },
   }
 )
 
@@ -304,13 +294,7 @@ const LiquidButton = React.forwardRef<
   React.ComponentProps<"button"> & VariantProps<typeof liquidbuttonVariants> & { asChild?: boolean }
 >(({ className, variant, size, asChild = false, ...props }, ref) => {
   const Comp = asChild ? Slot : "button"
-  return (
-    <Comp
-      ref={ref}
-      className={cn(liquidbuttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  )
+  return <Comp ref={ref} className={cn(liquidbuttonVariants({ variant, size, className }))} {...props} />
 })
 LiquidButton.displayName = "LiquidButton"
 
