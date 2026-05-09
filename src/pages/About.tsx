@@ -18,10 +18,10 @@ export const About = () => {
             <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">
               ABOUT STRATA
             </span>
-            <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-tight text-primary md:text-7xl lg:text-8xl">
+            <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-[-0.04em] text-primary md:text-7xl lg:text-8xl">
               Digital Architecture Built for Real Business Growth
             </h1>
-            <p className="mb-10 max-w-xl text-lg leading-relaxed text-primary/60 md:text-xl">
+            <p className="mb-10 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
               Founded in mid-2025, Strata is a founder-led digital architecture studio helping Malaysian SMEs build websites, service platforms, and web systems that create trust, clarify offers, and capture better enquiries.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -84,7 +84,7 @@ export const About = () => {
                 Founded in Mid-2025
               </span>
             </div>
-            <h2 className="mb-10 text-4xl font-black tracking-tight text-primary md:text-5xl lg:text-6xl">
+            <h2 className="mb-10 text-4xl font-black tracking-[-0.03em] text-primary md:text-5xl lg:text-6xl">
               Built From Real Business Operations, Not Theory
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-primary/60 md:text-xl">
@@ -274,33 +274,41 @@ export const About = () => {
       </section>
 
       {/* SECTION 4 — WHAT STRATA BUILDS */}
-      <section className="bg-[#f4f2ed] px-6 py-24 lg:px-20 lg:py-32">
+      <section className="px-6 py-24 lg:px-20 lg:py-32">
         <div className="mb-16">
-          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40 text-center lg:text-left">
+          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted text-center lg:text-left">
             CAPABILITIES
           </span>
-          <h2 className="mb-4 text-4xl font-black tracking-tight text-primary text-center md:text-5xl lg:text-6xl lg:text-left">
+          <h2 className="mb-4 text-4xl font-black tracking-[-0.03em] text-primary text-center md:text-5xl lg:text-6xl lg:text-left">
             Websites, Platforms, and Systems With Structure
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-2 lg:gap-6">
           {[
             {
               title: "Business Websites",
               desc: "Clean, conversion-focused websites built to explain your offer, build trust, and guide visitors toward enquiry.",
+              className: "md:col-span-2 md:row-span-1",
+              icon: <div className="h-6 w-6 rounded-md border-2 border-primary/20" />
             },
             {
-              title: "Service Business Platforms",
-              desc: "Websites for repair shops, technical services, local retail, consultants, and operators that need clear service flow, location visibility, and customer action.",
+              title: "Service Platforms",
+              desc: "Websites for technical services and local retail that need clear flow and action.",
+              className: "md:col-span-2 md:row-span-1",
+              icon: <div className="h-6 w-6 rounded-full border-2 border-primary/20" />
             },
             {
               title: "E-Commerce Experiences",
-              desc: "Product-led websites and stores designed around product clarity, customer education, and online sales.",
+              desc: "Product-led stores designed around clarity and customer education.",
+              className: "md:col-span-2 md:row-span-1",
+              icon: <div className="h-6 w-6 rotate-45 border-2 border-primary/20" />
             },
             {
               title: "AI-Assisted Workflow Systems",
-              desc: "Practical web systems and AI-assisted workflows that improve content planning, internal operations, customer handling, and business productivity.",
+              desc: "Practical web systems that improve content planning, internal operations, and business productivity.",
+              className: "md:col-span-2 md:row-span-1",
+              icon: <div className="h-6 w-6 rounded-lg bg-primary/5 flex items-center justify-center"><div className="h-2 w-2 rounded-full bg-primary/20" /></div>
             },
           ].map((card, idx) => (
             <motion.div
@@ -309,16 +317,19 @@ export const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group flex flex-col justify-between rounded-[32px] border border-primary/5 bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+              className={cn(
+                "bento-card group flex flex-col justify-between",
+                card.className
+              )}
             >
               <div>
-                <div className="mb-6 h-12 w-12 rounded-2xl bg-primary/5 flex items-center justify-center transition-colors group-hover:bg-primary group-hover:text-white">
-                   <div className="h-6 w-6 rounded-md border-2 border-current opacity-30" />
+                <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-2xl bg-background transition-colors group-hover:bg-primary group-hover:text-white">
+                   {card.icon}
                 </div>
                 <h3 className="mb-4 text-xl font-bold uppercase tracking-tight text-primary">
                   {card.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-primary/60">
+                <p className="text-sm leading-relaxed text-muted">
                   {card.desc}
                 </p>
               </div>

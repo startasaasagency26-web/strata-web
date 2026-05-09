@@ -143,7 +143,8 @@ export const SelectedWork = () => {
       <div className="container mx-auto px-6 md:px-12">
         <div className="mb-14 flex flex-col gap-6 md:mb-20 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
-            <h2 className="mb-6 font-display text-5xl font-bold uppercase leading-none tracking-tight text-primary md:text-6xl">
+            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">PORTFOLIO ARCHITECTURE</p>
+            <h2 className="mb-6 font-black text-5xl uppercase leading-none tracking-[-0.04em] text-primary md:text-6xl">
               SELECTED WORK
             </h2>
             <p className="max-w-lg font-sans text-sm leading-relaxed text-muted md:text-base">
@@ -153,83 +154,66 @@ export const SelectedWork = () => {
 
           <a
             href="#"
-            className="group inline-flex w-fit items-center gap-2 border-b border-primary pb-1 font-mono text-xs font-bold uppercase tracking-widest text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
+            className="group inline-flex w-fit items-center gap-2 border-b border-primary pb-1 font-mono text-[10px] font-bold uppercase tracking-widest text-primary transition-all duration-300 hover:gap-4"
           >
             <span>View All Projects</span>
             <ArrowUpRight
-              size={16}
-              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none"
+              size={14}
+              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
             />
           </a>
         </div>
 
-        <div className="space-y-10 md:space-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 lg:gap-6">
           {projects.map((project, index) => {
-            const reverse = index % 2 === 1;
+            const isFirst = index === 0;
+            const isLast = index === projects.length - 1;
 
             return (
               <article
                 key={project.title}
-                className="group overflow-hidden rounded-[32px] border border-border/50 bg-surface shadow-[0_24px_80px_-60px_rgba(0,0,0,0.45)] transition-all duration-[400ms] cubic-bezier(0.16,1,0.3,1) hover:-translate-y-[6px] hover:border-primary/20 hover:shadow-[0_34px_90px_-55px_rgba(0,0,0,0.5)] motion-reduce:transform-none motion-reduce:transition-none"
+                className={cn(
+                  "bento-card group relative flex flex-col",
+                  isFirst ? "md:col-span-4" : isLast ? "md:col-span-6" : "md:col-span-2"
+                )}
               >
-                <div
-                  className={[
-                    "grid min-h-[520px] grid-cols-1 lg:grid-cols-[1.45fr_0.75fr]",
-                    reverse ? "lg:grid-cols-[0.75fr_1.45fr]" : "",
-                  ].join(" ")}
-                >
-                  <div
-                    className={[
-                      "relative flex items-center justify-center overflow-hidden bg-[#e9e8e4] p-6 md:p-12 lg:p-16",
-                      reverse ? "lg:order-2" : "",
-                    ].join(" ")}
-                  >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.9),rgba(255,255,255,0)_55%)]" />
-                    <div className="relative w-full transition-transform duration-500 group-hover:scale-[1.01] motion-reduce:transition-none">
-                      <ProjectPreview project={project} />
-                    </div>
-                  </div>
+                <div className="mb-8 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-muted/60">
+                  {project.category}
+                </div>
 
-                  <div className="flex flex-col justify-center bg-white p-8 md:p-12 lg:p-14">
-                    <div className="mb-8 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted/70">
-                      {project.category}
-                    </div>
-
-                    <h3 className="mb-6 max-w-sm font-display text-3xl font-bold uppercase leading-[0.95] tracking-tight text-primary md:text-4xl">
+                <div className="flex flex-col lg:flex-row gap-8 items-start">
+                  <div className="flex-1">
+                    <h3 className="mb-4 font-black text-2xl uppercase leading-tight tracking-[-0.03em] text-primary">
                       {project.title}
                     </h3>
-
-                    <p className="mb-8 max-w-sm font-sans text-sm leading-relaxed text-muted md:text-base">
+                    <p className="mb-6 font-sans text-sm leading-relaxed text-muted max-w-sm">
                       {project.description}
                     </p>
-
-                    <div className="mb-10 flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-8">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-border/70 bg-surface px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-widest text-primary/65 transition-colors group-hover:border-primary/20 group-hover:text-primary"
+                          className="rounded-full border border-primary/5 bg-background px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-primary/60"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
+                    <a
+                      href={project.href}
+                      target={project.href === "#" ? undefined : "_blank"}
+                      className="group/link inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-primary hover:text-accent transition-colors"
+                    >
+                      <span>{project.cta}</span>
+                      <ArrowUpRight size={12} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    </a>
+                  </div>
 
-                    <div className="mt-auto border-t border-border/60 pt-8">
-                      <a
-                        href={project.href}
-                        target={project.href === "#" ? undefined : "_blank"}
-                        rel={project.href === "#" ? undefined : "noreferrer"}
-                        className="group/link inline-flex items-center gap-4 font-mono text-xs font-bold uppercase tracking-widest text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
-                      >
-                        <span>{project.cta}</span>
-                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-primary transition-all duration-300 group-hover/link:bg-primary group-hover/link:text-white">
-                          <ArrowUpRight
-                            size={17}
-                            className="transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 motion-reduce:transition-none"
-                          />
-                        </span>
-                      </a>
-                    </div>
+                  <div className={cn(
+                    "relative w-full overflow-hidden rounded-xl border border-black/5 bg-background shadow-2xl transition-all duration-500 group-hover:scale-[1.02]",
+                    isLast ? "lg:w-2/3 aspect-[16/9]" : "aspect-[4/3] lg:w-1/2"
+                  )}>
+                    <ProjectPreview project={project} />
                   </div>
                 </div>
               </article>

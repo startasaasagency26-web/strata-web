@@ -59,9 +59,9 @@ function NoIndex() {
 
 function PublicShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-background text-primary relative overflow-hidden font-sans p-2 md:p-6 lg:p-8">
+    <div className="min-h-screen bg-background text-primary relative overflow-hidden font-sans p-3 md:p-6 lg:p-8">
       {/* Massive rounded page shell */}
-      <div className="bg-surface w-full h-full min-h-[calc(100vh-1rem)] md:min-h-[calc(100vh-3rem)] rounded-[32px] md:rounded-[48px] overflow-hidden shadow-2xl border border-border/30 relative flex flex-col">
+      <div className="bg-surface w-full h-full min-h-[calc(100vh-1.5rem)] md:min-h-[calc(100vh-3rem)] rounded-[32px] md:rounded-[48px] overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.05)] border border-black/5 relative flex flex-col transition-all duration-700">
         <Navbar />
         <main className="relative z-10 flex-grow">
           {children}

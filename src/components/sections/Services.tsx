@@ -35,39 +35,42 @@ export const Services = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 md:mb-24">
           <div className="max-w-2xl">
-            <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">Service Architecture</p>
-            <h2 className="text-5xl md:text-6xl font-display font-bold leading-none tracking-tight text-primary">
+            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">SERVICE ARCHITECTURE</p>
+            <h2 className="text-5xl md:text-6xl font-black leading-none tracking-[-0.04em] text-primary uppercase">
               ENGINEERED TO <br/> COMPOUND
             </h2>
           </div>
-          <p className="text-sm font-mono text-muted max-w-sm">
+          <p className="text-[11px] font-mono text-muted max-w-sm uppercase leading-relaxed">
             End-to-end digital architecture from visual interface to technical deployment.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-6 md:grid-rows-2 gap-4 lg:gap-6">
           {services.map((service, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group border border-border/50 bg-white/50 backdrop-blur-sm p-8 md:p-12 rounded-[24px] hover:bg-white hover:shadow-xl transition-all duration-300"
+              transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className={`bento-card group flex flex-col justify-between ${
+                idx === 0 || idx === 3 ? "md:col-span-3" : "md:col-span-3"
+              }`}
             >
-              <div className="mb-8 w-14 h-14 rounded-full border border-border flex items-center justify-center bg-surface group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                {/* Clone element to change color on hover if needed, but icon classes work fine */}
-                <div className="group-hover:text-white transition-colors duration-300">
-                  {service.icon}
+              <div>
+                <div className="mb-8 w-14 h-14 rounded-2xl border border-border flex items-center justify-center bg-background group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                  <div className="group-hover:text-white transition-colors duration-500">
+                    {service.icon}
+                  </div>
                 </div>
+                <h3 className="text-xl font-bold text-primary mb-4 tracking-[-0.02em] uppercase">{service.title}</h3>
+                <p className="text-muted text-sm font-sans leading-relaxed mb-8">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="text-2xl font-display font-bold text-primary mb-4 tracking-wide">{service.title}</h3>
-              <p className="text-muted font-sans leading-relaxed mb-8">
-                {service.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mt-auto">
                 {service.tags.map((tag, tIdx) => (
-                  <span key={tIdx} className="text-[10px] font-mono tracking-widest uppercase px-3 py-1 bg-surface border border-border/50 rounded-full text-primary">
+                  <span key={tIdx} className="text-[9px] font-mono tracking-widest uppercase px-3 py-1 bg-white/50 backdrop-blur-md border border-primary/5 rounded-full text-primary">
                     {tag}
                   </span>
                 ))}

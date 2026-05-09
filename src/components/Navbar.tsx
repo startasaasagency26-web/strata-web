@@ -36,9 +36,9 @@ export const Navbar = () => {
         className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-8 md:pt-6"
       >
         <div className={cn(
-          "mx-auto flex items-center justify-between w-full max-w-[1800px] rounded-full px-4 md:px-5 transition-all duration-500",
-          "bg-[#050505] border border-white/[0.08] text-white",
-          isScrolled ? "py-2 backdrop-blur-xl bg-[#000000]/90 shadow-[0_4px_30px_rgba(0,0,0,0.5)]" : "py-3 bg-[#050505]/95 backdrop-blur-md"
+          "mx-auto flex items-center justify-between w-full max-w-[1800px] rounded-full px-4 md:px-5 transition-all duration-700",
+          "bg-white/70 backdrop-blur-2xl border border-black/[0.05] text-primary",
+          isScrolled ? "py-2 shadow-[0_8px_32px_rgba(0,0,0,0.03)]" : "py-3"
         )}>
           {/* Logo - Left */}
           <div className="flex-shrink-0 flex items-center">
@@ -59,7 +59,7 @@ export const Navbar = () => {
                 <li key={link.name} className="relative">
                   <Link 
                     to={link.href}
-                    className="relative z-10 px-4 py-2 block text-[11px] font-mono font-bold tracking-[0.2em] transition-colors duration-300 text-white/70 hover:text-white whitespace-nowrap"
+                    className="relative z-10 px-4 py-2 block text-[10px] font-mono font-bold tracking-[0.2em] transition-colors duration-300 text-primary/60 hover:text-primary whitespace-nowrap"
                     onMouseEnter={() => setHoveredLink(link.name)}
                     onMouseLeave={() => setHoveredLink(null)}
                   >
@@ -68,7 +68,7 @@ export const Navbar = () => {
                   {hoveredLink === link.name && (
                     <motion.div
                       layoutId="nav-pill"
-                      className="absolute inset-0 bg-white/10 rounded-full z-0 pointer-events-none"
+                      className="absolute inset-0 bg-black/5 rounded-full z-0 pointer-events-none"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
@@ -84,7 +84,7 @@ export const Navbar = () => {
           <div className="flex-shrink-0 flex items-center justify-end gap-2 md:gap-3 relative z-50">
             <Link 
               to={CONTACT.requestDemoPath}
-              className="hidden lg:inline-flex items-center justify-center text-[11px] font-mono font-bold tracking-widest px-6 py-2.5 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 whitespace-nowrap"
+              className="hidden lg:inline-flex items-center justify-center text-[10px] font-mono font-bold tracking-[0.2em] px-6 py-2.5 rounded-full border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-500 whitespace-nowrap"
             >
               REQUEST A DEMO
             </Link>
@@ -94,7 +94,7 @@ export const Navbar = () => {
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors duration-300 shrink-0 ml-1"
+              className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-black/5 border border-black/5 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-500 shrink-0 ml-1"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
@@ -111,7 +111,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-40 bg-[#050505]/95 flex flex-col justify-center items-center px-6"
+            className="fixed inset-0 z-40 bg-white/95 flex flex-col justify-center items-center px-6"
           >
             <ul className="flex flex-col items-center gap-6 w-full">
               {navLinks.map((link, idx) => (
@@ -125,7 +125,7 @@ export const Navbar = () => {
                   <Link 
                     to={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-4xl font-display font-bold text-white hover:text-white/70 transition-colors uppercase tracking-tight"
+                    className="text-4xl font-black text-primary hover:text-primary/70 transition-colors uppercase tracking-tight"
                   >
                     {link.name}
                   </Link>
@@ -140,7 +140,7 @@ export const Navbar = () => {
                 <Link 
                   to={CONTACT.requestDemoPath} 
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-center text-[10px] font-mono font-bold tracking-[0.2em] w-full py-4 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-colors"
+                  className="text-center text-[10px] font-mono font-bold tracking-[0.2em] w-full py-4 rounded-full border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-500"
                 >
                   REQUEST A DEMO
                 </Link>

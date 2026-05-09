@@ -142,7 +142,7 @@ export const FinalCTA = () => {
             </div>
           </div>
 
-          <h2 className="mb-8 text-4xl font-display font-bold uppercase leading-[0.9] tracking-tighter text-white md:text-7xl lg:text-8xl">
+          <h2 className="mb-8 text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-white md:text-7xl lg:text-8xl">
             Ready to architect your <br/> business presence online?
           </h2>
 

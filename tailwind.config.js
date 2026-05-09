@@ -7,15 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#E5E5E2',
-        surface: '#F1F1EF',
-        primary: '#050505',
-        muted: '#4B4B4B',
-        border: '#C8C8C8',
-        accent: '#D9D9D9'
+        background: '#F5F5F7',
+        surface: '#FFFFFF',
+        primary: '#1D1D1F',
+        muted: '#86868B',
+        border: '#D2D2D7',
+        accent: '#0066CC'
       },
       fontFamily: {
-        display: ['Oswald', 'sans-serif'],
+        display: ['Inter', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['Space Mono', 'monospace'],
       },
