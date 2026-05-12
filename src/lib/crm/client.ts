@@ -68,17 +68,22 @@ export const getLeads = async (params?: {
   assignedTo?: string;
   sort?: string;
 }): Promise<Lead[]> => {
-  const headers = await getAuthHeader();
-  const query = new URLSearchParams();
-  if (params) {
-    Object.entries(params).forEach(([key, val]) => {
-      if (val) query.set(key, val.toString());
-    });
-  }
+  try {
+    const headers = await getAuthHeader();
+    const query = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, val]) => {
+        if (val) query.set(key, val.toString());
+      });
+    }
 
-  const res = await fetch(`/api/crm/leads?${query.toString()}`, { headers: headers as HeadersInit });
-  const data = await handleResponse(res);
-  return data.leads || [];
+    const res = await fetch(`/api/crm/leads?${query.toString()}`, { headers: headers as HeadersInit });
+    const data = await handleResponse(res);
+    return data.leads || [];
+  } catch (err) {
+    console.error('[crm/client] Error fetching leads:', err);
+    return [];
+  }
 };
 
 export const getLead = async (id: string): Promise<Lead | null> => {
@@ -101,10 +106,15 @@ export const updateLead = async (id: string, payload: Partial<Lead>): Promise<Le
 };
 
 export const getLeadNotes = async (id: string): Promise<LeadNote[]> => {
-  const headers = await getAuthHeader();
-  const res = await fetch(`/api/crm/notes?leadId=${id}`, { headers: headers as HeadersInit });
-  const data = await handleResponse(res);
-  return data.notes;
+  try {
+    const headers = await getAuthHeader();
+    const res = await fetch(`/api/crm/notes?leadId=${id}`, { headers: headers as HeadersInit });
+    const data = await handleResponse(res);
+    return data.notes || [];
+  } catch (err) {
+    console.error('[crm/client] Error fetching lead notes:', err);
+    return [];
+  }
 };
 
 export const createLeadNote = async (id: string, note: string, type: string = 'general'): Promise<LeadNote> => {
@@ -119,14 +129,19 @@ export const createLeadNote = async (id: string, note: string, type: string = 'g
 };
 
 export const getFollowUps = async (params?: { leadId?: string; status?: string }): Promise<FollowUp[]> => {
-  const headers = await getAuthHeader();
-  const query = new URLSearchParams();
-  if (params?.leadId) query.set('leadId', params.leadId);
-  if (params?.status) query.set('status', params.status);
+  try {
+    const headers = await getAuthHeader();
+    const query = new URLSearchParams();
+    if (params?.leadId) query.set('leadId', params.leadId);
+    if (params?.status) query.set('status', params.status);
 
-  const res = await fetch(`/api/crm/follow-ups?${query.toString()}`, { headers: headers as HeadersInit });
-  const data = await handleResponse(res);
-  return data.followUps;
+    const res = await fetch(`/api/crm/follow-ups?${query.toString()}`, { headers: headers as HeadersInit });
+    const data = await handleResponse(res);
+    return data.followUps || [];
+  } catch (err) {
+    console.error('[crm/client] Error fetching follow-ups:', err);
+    return [];
+  }
 };
 
 export const updateFollowUp = async (id: string, payload: Partial<FollowUp>): Promise<FollowUp> => {
@@ -141,13 +156,23 @@ export const updateFollowUp = async (id: string, payload: Partial<FollowUp>): Pr
 };
 
 export const getCrmSettings = async (): Promise<CrmSettings> => {
-  const { data, error } = await supabase
-    .from('crm_settings')
-    .select('*')
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from('crm_settings')
+      .select('*')
+      .single();
 
-  if (error) {
-    console.error('[crm/client] Error fetching settings:', error);
+    if (error) throw error;
+
+    return {
+      isConfigured: data.is_configured,
+      contactEmail: data.contact_email,
+      whatsappNumber: data.whatsapp_number,
+      teamMembers: [], // This will be handled by getTeamMembers
+      leadStatuses: ["new", "contacted", "qualified", "discovery_scheduled", "proposal_sent", "negotiating", "won", "lost", "unresponsive"]
+    };
+  } catch (err) {
+    console.error('[crm/client] Error fetching settings:', err);
     return {
       isConfigured: false,
       contactEmail: "hello@strata.agency",
@@ -156,14 +181,6 @@ export const getCrmSettings = async (): Promise<CrmSettings> => {
       leadStatuses: ["new", "contacted", "qualified", "won", "lost"]
     };
   }
-
-  return {
-    isConfigured: data.is_configured,
-    contactEmail: data.contact_email,
-    whatsappNumber: data.whatsapp_number,
-    teamMembers: [], // This will be handled by getTeamMembers
-    leadStatuses: ["new", "contacted", "qualified", "discovery_scheduled", "proposal_sent", "negotiating", "won", "lost", "unresponsive"]
-  };
 };
 
 export const updateCrmSettings = async (payload: Partial<CrmSettings>): Promise<void> => {

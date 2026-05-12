@@ -9,25 +9,41 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { CrmShell } from '../../components/crm/CrmShell';
-import { MetricCard, LoadingState, ErrorState, StatusBadge } from '../../components/crm/CrmUI';
+import { MetricCard, LoadingState, StatusBadge } from '../../components/crm/CrmUI';
 import { getDashboard, getLeads } from '../../lib/crm/client';
 import type { DashboardMetrics, Lead } from '../../types/crm';
 import { Link } from 'react-router-dom';
+
+const zeroMetrics: DashboardMetrics = {
+  totalLeads: 0,
+  newLeads: 0,
+  contactedLeads: 0,
+  qualifiedLeads: 0,
+  proposalSent: 0,
+  won: 0,
+  lost: 0,
+  conversionRate: 0,
+  leadsThisWeek: 0
+};
 
 export const Dashboard = () => {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [recentLeads, setRecentLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [isDataUnavailable, setIsDataUnavailable] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [m, l] = await Promise.all([getDashboard(), getLeads()]);
-        setMetrics(m);
+        setMetrics(m || zeroMetrics);
         setRecentLeads(l.slice(0, 5));
+        setIsDataUnavailable((m?.totalLeads ?? 0) === 0 && l.length === 0);
       } catch (err) {
-        setError('Failed to load dashboard data. Please check your connection.');
+        console.error('[crm/dashboard] Data fetch failed:', err);
+        setMetrics(zeroMetrics);
+        setRecentLeads([]);
+        setIsDataUnavailable(true);
       } finally {
         setIsLoading(false);
       }
@@ -36,7 +52,6 @@ export const Dashboard = () => {
   }, []);
 
   if (isLoading) return <CrmShell><LoadingState message="Calculating metrics..." /></CrmShell>;
-  if (error) return <CrmShell><ErrorState message={error} /></CrmShell>;
   if (!metrics) return null;
 
   return (
@@ -47,6 +62,12 @@ export const Dashboard = () => {
           <h1 className="text-4xl font-display font-bold uppercase tracking-tight text-white mb-2">Performance Overview</h1>
           <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-white/40 uppercase">Global lead metrics & activity</p>
         </div>
+
+        {isDataUnavailable && (
+          <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-amber-200">
+            Dashboard data unavailable. Retrying...
+          </div>
+        )}
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
