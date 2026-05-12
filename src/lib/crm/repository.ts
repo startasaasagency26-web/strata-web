@@ -93,7 +93,7 @@ export const CrmRepository = {
     const dbPayload: any = {};
     if (payload.status) dbPayload.status = payload.status;
     if (payload.priority) dbPayload.priority = payload.priority;
-    if (payload.assignedTo) dbPayload.assigned_to = payload.assignedTo;
+    if ('assignedTo' in payload) dbPayload.assigned_to = payload.assignedTo || null;
     if (payload.lastContactedAt) dbPayload.last_contacted_at = payload.lastContactedAt;
     if (payload.nextFollowUpAt) dbPayload.next_follow_up_at = payload.nextFollowUpAt;
 
@@ -168,7 +168,7 @@ export const CrmRepository = {
         due_at: payload.dueAt,
         title: payload.title,
         status: 'pending',
-        assigned_to: payload.assignedTo || 'unassigned',
+        assigned_to: payload.assignedTo || null,
         contact_method: payload.contactMethod || 'whatsapp',
         notes: payload.notes
       })
@@ -185,6 +185,7 @@ export const CrmRepository = {
     if (payload.completedAt) dbPayload.completed_at = payload.completedAt;
     if (payload.dueAt) dbPayload.due_at = payload.dueAt;
     if (payload.notes) dbPayload.notes = payload.notes;
+    if ('assignedTo' in payload) dbPayload.assigned_to = payload.assignedTo || null;
 
     const { data, error } = await supabaseAdmin
       .from('crm_follow_ups')
@@ -200,28 +201,73 @@ export const CrmRepository = {
   // --- DASHBOARD ---
 
   async getDashboardMetrics(): Promise<DashboardMetrics> {
-    const { data: leads, error: leadError } = await supabaseAdmin
-      .from('crm_leads')
-      .select('status, created_at');
-    
-    if (leadError) throw leadError;
+    const { data, error } = await supabaseAdmin
+      .from('crm_dashboard_metrics')
+      .select('*')
+      .single();
 
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
+    if (error) throw error;
 
-    const metrics: DashboardMetrics = {
-      totalLeads: leads?.length || 0,
-      newLeads: (leads || []).filter(l => l.status === 'new').length,
-      contactedLeads: (leads || []).filter(l => l.status === 'contacted').length,
-      qualifiedLeads: (leads || []).filter(l => l.status === 'qualified').length,
-      proposalSent: (leads || []).filter(l => l.status === 'proposal_sent').length,
-      won: (leads || []).filter(l => l.status === 'won').length,
-      lost: (leads || []).filter(l => l.status === 'lost').length,
-      conversionRate: (leads?.length || 0) > 0 ? ((leads || []).filter(l => l.status === 'won').length / leads!.length) * 100 : 0,
-      leadsThisWeek: (leads || []).filter(l => new Date(l.created_at) > weekAgo).length,
+    return {
+      totalLeads: Number(data?.total_leads ?? 0),
+      newLeads: Number(data?.new_leads ?? 0),
+      contactedLeads: Number(data?.contacted_leads ?? 0),
+      qualifiedLeads: Number(data?.qualified_leads ?? 0),
+      proposalSent: Number(data?.proposal_sent ?? 0),
+      won: Number(data?.won ?? 0),
+      lost: Number(data?.lost ?? 0),
+      conversionRate: Number(data?.conversion_rate ?? 0),
+      leadsThisWeek: Number(data?.leads_this_week ?? 0),
     };
+  },
 
-    return metrics;
+  async getPipelineStages() {
+    const { data, error } = await supabaseAdmin
+      .from('pipeline_stages')
+      .select('*')
+      .eq('is_active', true)
+      .order('position');
+
+    if (error) throw error;
+    return data || [];
+  },
+
+  async insertStatusHistory(
+    leadId: string,
+    fromStatus: string | null,
+    toStatus: string,
+    changedBy: string | null,
+    note?: string
+  ) {
+    const { error } = await supabaseAdmin.from('lead_status_history').insert({
+      lead_id: leadId,
+      from_status: fromStatus,
+      to_status: toStatus,
+      changed_by: changedBy || null,
+      note: note || null
+    });
+
+    if (error) throw error;
+  },
+
+  async insertActivityLog(entry: {
+    actorId?: string;
+    actorEmail?: string;
+    action: string;
+    entityType: string;
+    entityId?: string;
+    metadata?: Record<string, unknown>;
+  }) {
+    const { error } = await supabaseAdmin.from('activity_log').insert({
+      actor_id: entry.actorId || null,
+      actor_email: entry.actorEmail || null,
+      action: entry.action,
+      entity_type: entry.entityType,
+      entity_id: entry.entityId || null,
+      metadata: entry.metadata || {}
+    });
+
+    if (error) throw error;
   },
 
   // --- HELPERS ---
@@ -247,6 +293,43 @@ export const CrmRepository = {
       timeline: db.timeline,
       selectedPackage: db.selected_package,
       sourcePage: db.source_page ?? "",
+      status: db.status,
+      priority: db.priority,
+      assignedTo: db.assigned_to ?? undefined,
+      lastContactedAt: db.last_contacted_at,
+      nextFollowUpAt: db.next_follow_up_at,
+      notesCount: Number(db.notes_count ?? 0),
+      rawPayload: db.raw_payload ?? {}
+    };
+  },
+
+  mapDbNote(db: any): LeadNote {
+    return {
+      id: db.id,
+      leadId: db.lead_id,
+      createdAt: db.created_at,
+      createdBy: db.created_by,
+      type: db.note_type,
+      note: db.note
+    };
+  },
+
+  mapDbFollowUp(db: any): FollowUp {
+    return {
+      id: db.id,
+      leadId: db.lead_id,
+      createdAt: db.created_at,
+      dueAt: db.due_at,
+      completedAt: db.completed_at,
+      status: db.status,
+      assignedTo: db.assigned_to ?? "",
+      title: db.title,
+      // Include lead info if joined
+      leadName: db.crm_leads?.full_name,
+      leadCompany: db.crm_leads?.company_name
+    };
+  }
+};
       status: db.status,
       priority: db.priority,
       assignedTo: db.assigned_to,
@@ -278,8 +361,11 @@ export const CrmRepository = {
       status: db.status,
       assignedTo: db.assigned_to,
       title: db.title,
-      // Include lead info if joined
       leadName: db.crm_leads?.full_name,
+      leadCompany: db.crm_leads?.company_name
+    };
+  }
+};
       leadCompany: db.crm_leads?.company_name
     };
   }

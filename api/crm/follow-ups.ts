@@ -12,7 +12,7 @@ const readBody = async (request: any) => {
 
 export default async function handler(request: any, response: any) {
   const auth = await protectCrmRoute(request, response);
-  if (!auth.ok) return;
+  if (!auth.ok) return sendError(response, auth.status, auth.message);
 
   const url = new URL(request.url || "", `http://${request.headers.host}`);
   const leadId = url.searchParams.get("leadId");
@@ -52,5 +52,8 @@ export default async function handler(request: any, response: any) {
   } catch (error) {
     console.error("[api/crm/follow-ups] Error:", error);
     sendError(response, 500, "Failed to process follow-ups.");
+  }
+}
+, 500, "Failed to process follow-ups.");
   }
 }

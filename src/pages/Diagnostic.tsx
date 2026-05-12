@@ -13,7 +13,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { CONTACT } from "../config/contact";
 import { cn } from "../lib/utils";
 import type { LeadFieldErrors } from "../lib/crm/types";
-import { supabase } from "../lib/supabase";
 
 const clientEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -193,32 +192,17 @@ export const Diagnostic = () => {
     const leadPayload = buildLeadPayload();
 
     try {
-      // Direct Supabase Ingestion
-      const { data, error } = await supabase
-        .from('leads')
-        .insert({
-          full_name: leadPayload.fullName,
-          company_name: leadPayload.companyName,
-          work_email: leadPayload.workEmail,
-          whatsapp_phone: leadPayload.whatsappPhone,
-          role_in_business: leadPayload.roleInBusiness,
-          country_timezone: leadPayload.countryTimezone,
-          preferred_language: leadPayload.preferredLanguage,
-          business_type: leadPayload.businessType,
-          service_need: leadPayload.serviceNeed,
-          website_url: leadPayload.websiteUrl,
-          current_problem: leadPayload.currentProblem,
-          budget_range: leadPayload.budgetRange,
-          timeline: leadPayload.timeline,
-          source_page: leadPayload.sourcePage,
-          raw_payload: leadPayload.rawPayload
-        })
-        .select()
-        .single();
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadPayload),
+      });
 
-      if (error) {
-        console.error('Supabase Error:', error);
-        setSubmitError("We couldn’t submit your request yet. Please try again.");
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        console.error('Lead submission error:', data);
+        setSubmitError("We couldn't submit your request yet. Please try again.");
         return;
       }
 
@@ -227,7 +211,7 @@ export const Diagnostic = () => {
           submission: {
             ...formData,
             ...leadPayload,
-            leadId: data.id,
+            leadId: data.leadId,
           },
         },
       });
@@ -278,7 +262,7 @@ export const Diagnostic = () => {
               Build a Digital Foundation That Actually Supports Your Business
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-primary/60 md:text-xl">
-              Tell us where your website, customer journey, or internal workflow is breaking. We’ll review your business and show you the right website, platform, or system direction.
+              Tell us where your website, customer journey, or internal workflow is breaking. We'll review your business and show you the right website, platform, or system direction.
             </p>
             <div className="flex flex-wrap gap-4">
               <button 
@@ -940,7 +924,7 @@ export const Diagnostic = () => {
               {/* Bottom Strip */}
               <div className="border-t border-white/5 bg-white/[0.02] p-6 text-center">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-white/30">
-                  Not sure if you fit? Submit the diagnostic and we’ll review honestly.
+                  Not sure if you fit? Submit the diagnostic and we'll review honestly.
                 </p>
               </div>
             </motion.div>

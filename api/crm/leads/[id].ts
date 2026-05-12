@@ -12,7 +12,7 @@ const readBody = async (request: IncomingMessage) => {
 
 export default async function handler(request: IncomingMessage, response: ServerResponse) {
   const auth = await protectCrmRoute(request, response);
-  if (!auth.ok) return;
+  if (!auth.ok) return sendError(response, auth.status, auth.message);
 
   // Extract ID from query (Vercel provides this)
   const { id } = (request as any).query || {};
@@ -28,7 +28,36 @@ export default async function handler(request: IncomingMessage, response: Server
     else if (request.method === "PATCH") {
       const rawBody = await readBody(request);
       const payload = JSON.parse(rawBody);
+      const hasStatusChange = Object.prototype.hasOwnProperty.call(payload, "status");
+      const currentLead = hasStatusChange ? await CrmRepository.getLeadById(id) : null;
+
+      if (hasStatusChange && !currentLead) {
+        return sendError(response, 404, "Lead not found.");
+      }
+
       const updatedLead = await CrmRepository.updateLead(id, payload);
+
+      if (hasStatusChange && currentLead && currentLead.status !== payload.status) {
+        try {
+          await CrmRepository.insertStatusHistory(
+            id,
+            currentLead.status,
+            payload.status,
+            auth.user.id
+          );
+          await CrmRepository.insertActivityLog({
+            actorId: auth.user.id,
+            actorEmail: auth.user.email,
+            action: 'lead.status_changed',
+            entityType: 'lead',
+            entityId: id,
+            metadata: { from: currentLead.status, to: payload.status }
+          });
+        } catch (logError) {
+          console.error(`[api/crm/leads/${id}] Failed to record status activity:`, logError);
+        }
+      }
+
       sendSuccess(response, { lead: updatedLead });
     } 
     else {

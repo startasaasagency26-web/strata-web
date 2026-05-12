@@ -3,7 +3,7 @@ import { CrmRepository } from "../../src/lib/crm/repository.js";
 
 export default async function handler(request: any, response: any) {
   const auth = await protectCrmRoute(request, response);
-  if (!auth.ok) return;
+  if (!auth.ok) return sendError(response, auth.status, auth.message);
 
   try {
     const metrics = await CrmRepository.getDashboardMetrics();
@@ -11,5 +11,8 @@ export default async function handler(request: any, response: any) {
   } catch (error) {
     console.error("[api/crm/dashboard] Error:", error);
     sendError(response, 500, "Failed to load dashboard data.");
+  }
+}
+ 500, "Failed to load dashboard data.");
   }
 }
