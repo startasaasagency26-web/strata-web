@@ -30,6 +30,3 @@ export default async function handler(request: any, response: any) {
     sendError(response, 500, "Failed to load leads.");
   }
 }
-response, 500, "Failed to load leads.");
-  }
-}

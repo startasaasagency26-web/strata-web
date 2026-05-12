@@ -13,6 +13,3 @@ export default async function handler(request: any, response: any) {
     sendError(response, 500, "Failed to load dashboard data.");
   }
 }
- 500, "Failed to load dashboard data.");
-  }
-}
