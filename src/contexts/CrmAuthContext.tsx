@@ -72,14 +72,14 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const init = async () => {
       console.log('[auth] Initializing session...');
       
-      // Safety timeout: 10 seconds
+      // Safety timeout: 6 seconds
       const timeout = setTimeout(() => {
         if (mounted && isLoading) {
-          console.warn('[auth] Initialization timed out after 10s.');
+          console.warn('[auth] Initialization timed out after 6s.');
           setError('Verification timed out. Please check your connection.');
           setIsLoading(false);
         }
-      }, 10000);
+      }, 6000);
 
       try {
         const { data: { session }, error: authError } = await supabase.auth.getSession();
@@ -94,7 +94,8 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
         } else if (authUser) {
           console.log('[auth] User authenticated:', authUser.email);
           setUser(authUser);
-          const p = await fetchProfile(authUser.id);
+          const profileTimeout = new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000));
+          const p = await Promise.race([fetchProfile(authUser.id), profileTimeout]);
           if (mounted) setProfile(p);
         }
       } catch (err) {
@@ -143,9 +144,9 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
     await supabase.auth.signOut();
   };
 
-  const isAuthorized = !!profile && 
-    profile.status === 'active' && 
-    (profile.role === 'admin' || profile.role === 'manager');
+  const isAuthorized = !!profile
+    ? profile.status === 'active' && (profile.role === 'admin' || profile.role === 'manager')
+    : false;
 
   return (
     <CrmAuthContext.Provider value={{ 
