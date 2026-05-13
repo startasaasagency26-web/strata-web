@@ -59,7 +59,7 @@ export const MetricCard: React.FC<{
     initial={{ opacity: 0, y: 10 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col justify-between hover:shadow-md transition-shadow group"
+    className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] p-6 flex flex-col justify-between hover:bg-white transition-all shadow-sm group"
   >
     <div className="flex justify-between items-start mb-3">
       <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-gray-400 uppercase">{label}</span>
@@ -110,7 +110,7 @@ export const EmptyState: React.FC<{ title: string; message: string; icon?: React
     {icon ? (
       <div className="text-gray-300">{icon}</div>
     ) : (
-      <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-300">
+      <div className="w-16 h-16 rounded-full border border-white/50 bg-white/60 shadow-sm flex items-center justify-center text-gray-400">
         <Loader2 size={24} />
       </div>
     )}
@@ -130,7 +130,7 @@ export const CrmInput: React.FC<React.InputHTMLAttributes<HTMLInputElement> & { 
     )}
     <input
       className={cn(
-        'w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400',
+        'w-full bg-white/40 border border-white/50 shadow-inner rounded-xl px-4 py-3 text-sm font-semibold text-[#111827] outline-none focus:border-blue-400 focus:bg-white transition-all placeholder:text-gray-500 font-sans',
         className
       )}
       {...props}
@@ -145,7 +145,7 @@ export const CrmSelect: React.FC<React.SelectHTMLAttributes<HTMLSelectElement> &
     )}
     <select
       className={cn(
-        'w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer',
+        'w-full bg-white/40 border border-white/50 shadow-inner rounded-xl px-4 py-3 text-sm font-semibold text-[#111827] outline-none focus:border-blue-400 focus:bg-white transition-all appearance-none cursor-pointer',
         className
       )}
       {...props}

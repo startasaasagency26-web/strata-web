@@ -4,7 +4,8 @@ import {
   ShieldCheck, 
   Users, 
   Webhook,
-  AlertTriangle
+  AlertTriangle,
+  Plus
 } from 'lucide-react';
 import { CrmShell } from '../../components/crm/CrmShell';
 import { LoadingState, ErrorState, CrmInput } from '../../components/crm/CrmUI';
@@ -76,8 +77,8 @@ export const Settings = () => {
       <div className="space-y-12">
         {/* Header */}
         <div>
-          <h1 className="text-4xl font-display font-bold uppercase tracking-tight text-white mb-2">System Settings</h1>
-          <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-white/40 uppercase">Internal configuration & backend status</p>
+          <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827] mb-2">System Settings</h1>
+          <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-gray-500 uppercase">Internal configuration & backend status</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -85,35 +86,35 @@ export const Settings = () => {
           <div className="lg:col-span-2 space-y-10">
             <section className="space-y-6">
               <div className="flex items-center gap-3">
-                <Database size={20} className="text-white/20" />
-                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-white">Backend Integration</h2>
+                <Database size={24} className="text-gray-400" />
+                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Backend Integration</h2>
               </div>
               
               <div className={cn(
-                "p-8 rounded-[32px] border flex flex-col md:flex-row items-center justify-between gap-8 transition-all",
+                "p-8 rounded-[32px] border flex flex-col md:flex-row items-center justify-between gap-8 transition-all shadow-sm",
                 settings.isConfigured 
-                  ? "bg-emerald-500/5 border-emerald-500/20" 
-                  : "bg-orange-500/5 border-orange-500/20"
+                  ? "bg-emerald-50/80 backdrop-blur-sm border-emerald-200/50" 
+                  : "bg-orange-50/80 backdrop-blur-sm border-orange-200/50"
               )}>
                 <div className="flex items-center gap-6 text-center md:text-left">
                   <div className={cn(
-                    "w-16 h-16 rounded-full flex items-center justify-center",
-                    settings.isConfigured ? "bg-emerald-500/10 text-emerald-400" : "bg-orange-500/10 text-orange-400"
+                    "w-16 h-16 rounded-full flex items-center justify-center shadow-sm bg-white border border-white/50",
+                    settings.isConfigured ? "text-emerald-500" : "text-orange-500"
                   )}>
                     {settings.isConfigured ? <ShieldCheck size={32} /> : <AlertTriangle size={32} />}
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-1">
+                    <h3 className="text-lg font-bold text-[#111827] mb-1">
                       {settings.isConfigured ? 'Production Storage Connected' : 'CRM Backend Missing'}
                     </h3>
-                    <p className="text-sm text-white/40 leading-relaxed max-w-sm">
+                    <p className="text-sm text-gray-600 leading-relaxed max-w-sm">
                       {settings.isConfigured 
                         ? 'Your lead data is currently synchronized with the Strata production database.' 
                         : 'The CRM is currently running on mock data. Connect a database or webhook to persist leads.'}
                     </p>
                   </div>
                 </div>
-                <button className="px-6 py-3 rounded-xl bg-white text-black font-mono text-[10px] font-bold tracking-widest uppercase hover:scale-105 active:scale-95 transition-all">
+                <button className="px-6 py-3 rounded-xl bg-[#111827] text-white font-mono text-[10px] font-bold tracking-widest uppercase hover:-translate-y-0.5 hover:shadow-lg active:scale-95 transition-all">
                   Configure Integration
                 </button>
               </div>
@@ -121,45 +122,45 @@ export const Settings = () => {
 
             <section className="space-y-6">
               <div className="flex items-center gap-3">
-                <Users size={20} className="text-white/20" />
-                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-white">Team Management</h2>
+                <Users size={24} className="text-gray-400" />
+                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Team Management</h2>
               </div>
               
-              <div className="bg-white/5 border border-white/10 rounded-[32px] overflow-hidden">
-                <div className="divide-y divide-white/5">
+              <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] overflow-hidden shadow-sm">
+                <div className="divide-y divide-white/40">
                   {team.length > 0 ? (
                     team.map((member) => (
-                      <div key={member.id} className="px-8 py-6 flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-mono text-sm font-bold uppercase">
+                      <div key={member.id} className="px-8 py-6 flex items-center justify-between group">
+                        <div className="flex items-center gap-5">
+                          <div className="w-12 h-12 rounded-[16px] bg-white border border-white/50 shadow-sm flex items-center justify-center font-display text-sm font-bold uppercase text-[#111827]">
                             {member.fullName.charAt(0)}
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <p className="font-bold text-white">{member.fullName}</p>
+                              <p className="font-bold text-[#111827]">{member.fullName}</p>
                               {member.id === profile?.id && (
-                                <span className="text-[8px] font-mono bg-white/10 text-white/40 px-1.5 py-0.5 rounded uppercase">You</span>
+                                <span className="text-[8px] font-mono bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded uppercase font-bold tracking-widest">You</span>
                               )}
                             </div>
-                            <p className="text-[10px] font-mono text-white/20 uppercase tracking-widest">{member.role}</p>
+                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest font-bold mt-0.5">{member.role}</p>
                           </div>
                         </div>
                         {permissions.canChangeRoles && member.id !== profile?.id && (
-                          <button className="text-[9px] font-mono font-bold tracking-widest text-white/20 hover:text-white uppercase transition-colors">
+                          <button className="text-[10px] font-mono font-bold tracking-widest text-gray-400 hover:text-[#111827] uppercase transition-colors px-4 py-2 rounded-xl hover:bg-white border border-transparent hover:border-white/50 hover:shadow-sm opacity-0 group-hover:opacity-100">
                             Manage
                           </button>
                         )}
                       </div>
                     ))
                   ) : (
-                    <div className="px-8 py-10 text-center text-white/20 font-mono text-[10px] uppercase tracking-widest">
+                    <div className="px-8 py-12 text-center text-gray-400 font-mono text-[10px] uppercase tracking-widest font-bold">
                       No team members found.
                     </div>
                   )}
                   
                   {permissions.canManageTeam && (
-                    <button className="w-full py-6 text-[10px] font-mono font-bold tracking-widest text-white/40 hover:text-white hover:bg-white/5 uppercase transition-all">
-                      Invite Team Member
+                    <button className="w-full py-6 text-[10px] font-mono font-bold tracking-widest text-gray-500 hover:text-[#111827] hover:bg-white/40 uppercase transition-all flex items-center justify-center gap-2">
+                      <Plus size={14} /> Invite Team Member
                     </button>
                   )}
                 </div>
@@ -171,12 +172,12 @@ export const Settings = () => {
           <div className="space-y-10">
             <section className="space-y-6">
               <div className="flex items-center gap-3">
-                <Webhook size={20} className="text-white/20" />
-                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-white">Notification Endpoints</h2>
+                <Webhook size={24} className="text-gray-400" />
+                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Notification Endpoints</h2>
               </div>
               
-              <div className="bg-[#0A0A0A] border border-white/10 rounded-[32px] p-8 space-y-6">
-                <div className="space-y-4">
+              <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] p-8 space-y-6 shadow-sm">
+                <div className="space-y-5">
                   <CrmInput 
                     label="System Email" 
                     value={email} 
@@ -192,16 +193,16 @@ export const Settings = () => {
                 </div>
                 
                 {success && (
-                  <p className="text-[9px] font-mono font-bold text-emerald-400 uppercase tracking-widest text-center">{success}</p>
+                  <p className="text-[10px] font-mono font-bold text-emerald-600 uppercase tracking-widest text-center">{success}</p>
                 )}
                 {error && (
-                  <p className="text-[9px] font-mono font-bold text-red-400 uppercase tracking-widest text-center">{error}</p>
+                  <p className="text-[10px] font-mono font-bold text-red-500 uppercase tracking-widest text-center">{error}</p>
                 )}
 
                 <button 
                   onClick={handleUpdateEndpoints}
                   disabled={!permissions.canEditSettings || isSaving}
-                  className="w-full py-4 rounded-xl border border-white/10 text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="w-full py-4 rounded-xl bg-[#111827] text-white text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-gray-800 hover:shadow-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   {isSaving ? 'Saving...' : permissions.canEditSettings ? 'Update Endpoints' : 'Admin access required'}
                 </button>
@@ -209,19 +210,19 @@ export const Settings = () => {
             </section>
 
             <section className={cn(
-              "rounded-[32px] p-8 space-y-4 transition-all",
+              "rounded-[32px] p-8 space-y-4 transition-all shadow-sm",
               permissions.canAccessDangerZone 
-                ? "bg-red-500/5 border border-red-500/10" 
-                : "bg-white/5 border border-white/10 opacity-40"
+                ? "bg-red-50/80 backdrop-blur-sm border border-red-200/50" 
+                : "bg-white/40 border border-white/50 opacity-40"
             )}>
-              <div className="flex items-center gap-2 text-red-400">
-                <AlertTriangle size={16} />
+              <div className="flex items-center gap-2 text-red-500">
+                <AlertTriangle size={18} />
                 <h3 className="text-xs font-mono font-bold uppercase tracking-widest">Danger Zone</h3>
               </div>
-              <p className="text-[10px] text-red-400/60 leading-relaxed uppercase font-mono">Irreversible system actions</p>
+              <p className="text-[10px] text-red-500/80 leading-relaxed uppercase font-mono font-bold tracking-widest">Irreversible system actions</p>
               <button 
                 disabled={!permissions.canAccessDangerZone}
-                className="w-full py-3 rounded-xl border border-red-500/20 text-red-500 text-[10px] font-mono font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-xl border border-red-500/20 bg-white shadow-sm text-red-600 text-[10px] font-mono font-bold uppercase tracking-widest hover:bg-red-50 hover:border-red-300 transition-all disabled:cursor-not-allowed"
               >
                 {permissions.canAccessDangerZone ? 'Factory Reset CRM' : 'Admin access required'}
               </button>

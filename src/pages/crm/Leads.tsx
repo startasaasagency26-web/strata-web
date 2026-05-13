@@ -81,31 +81,31 @@ export const Leads = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-display font-bold uppercase tracking-tight text-gray-900">Leads</h1>
-            <p className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mt-0.5">{leads.length} total contacts</p>
+            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827]">Leads</h1>
+            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-1">{leads.length} total contacts</p>
           </div>
-          <button className="inline-flex items-center gap-2 bg-gray-900 text-white px-5 py-2.5 rounded-full font-mono text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-gray-700 transition-all shadow-sm">
-            <Plus size={13} /> Add Lead
+          <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-5 py-2.5 rounded-full font-mono text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-0.5">
+            <Plus size={14} /> Add Lead
           </button>
         </div>
 
         {/* Filter Bar */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-3 flex flex-col sm:flex-row gap-3 shadow-sm">
+        <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[24px] p-3 flex flex-col sm:flex-row gap-3 shadow-sm">
           <div className="relative flex-1">
-            <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               placeholder="Search by name or company..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400"
+              className="w-full bg-white/40 border border-white/50 shadow-inner rounded-xl pl-11 pr-4 py-3 text-sm font-semibold text-gray-900 outline-none focus:border-blue-400 focus:bg-white transition-all placeholder:text-gray-500 font-sans"
             />
           </div>
-          <div className="flex gap-2 sm:w-auto">
+          <div className="flex gap-3 sm:w-auto">
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as LeadStatus | 'all')}
-              className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer min-w-[160px]"
+              className="bg-white/40 border border-white/50 shadow-inner rounded-xl px-4 py-3 text-sm font-semibold text-[#111827] outline-none focus:border-blue-400 focus:bg-white transition-all appearance-none cursor-pointer min-w-[160px]"
             >
               <option value="all">All Statuses</option>
               <option value="new">New</option>
@@ -115,56 +115,56 @@ export const Leads = () => {
               <option value="won">Won</option>
               <option value="lost">Lost</option>
             </select>
-            <button className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-700 hover:border-gray-300 transition-all">
-              <Filter size={16} />
+            <button className="w-12 h-12 rounded-xl bg-white/40 border border-white/50 shadow-inner flex items-center justify-center text-gray-500 hover:text-[#111827] hover:bg-white transition-all">
+              <Filter size={18} />
             </button>
           </div>
         </div>
 
         {/* Table Card */}
-        <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[900px]">
               <thead>
-                <tr className="border-b border-gray-100 bg-gray-50">
-                  <th className="px-5 py-3.5">
-                    <span className="flex items-center gap-1 text-[9px] font-mono font-bold tracking-widest text-gray-400 uppercase cursor-pointer hover:text-gray-700">
-                      Contact <ArrowUpDown size={10} />
+                <tr className="border-b border-white/40 bg-white/40">
+                  <th className="px-6 py-4">
+                    <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase cursor-pointer hover:text-[#111827]">
+                      Contact <ArrowUpDown size={12} />
                     </span>
                   </th>
-                  <th className="px-5 py-3.5 text-[9px] font-mono font-bold tracking-widest text-gray-400 uppercase">Service</th>
-                  <th className="px-5 py-3.5 text-[9px] font-mono font-bold tracking-widest text-gray-400 uppercase">Status</th>
-                  <th className="px-5 py-3.5 text-[9px] font-mono font-bold tracking-widest text-gray-400 uppercase">Last Contacted</th>
-                  <th className="px-5 py-3.5 text-[9px] font-mono font-bold tracking-widest text-gray-400 uppercase">Reach Out</th>
-                  <th className="px-5 py-3.5 text-[9px] font-mono font-bold tracking-widest text-gray-400 uppercase text-right">Actions</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">Service</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">Status</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">Last Contacted</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">Reach Out</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-white/40">
                 {filteredLeads.map((lead, i) => {
                   const avatarColor = AVATAR_COLORS[i % AVATAR_COLORS.length];
                   return (
-                    <tr key={lead.id} className="hover:bg-gray-50/80 transition-colors group">
+                    <tr key={lead.id} className="hover:bg-white/60 transition-colors group">
 
                       {/* Contact */}
-                      <td className="px-5 py-4">
-                        <div className="flex items-center gap-3">
+                      <td className="px-6 py-5">
+                        <div className="flex items-center gap-4">
                           <div className={cn(
-                            'w-9 h-9 rounded-full bg-gradient-to-br flex items-center justify-center font-mono text-[11px] font-bold text-white shrink-0',
+                            'w-10 h-10 rounded-full border-2 border-white shadow-sm bg-gradient-to-br flex items-center justify-center font-display text-xs font-bold text-white shrink-0',
                             avatarColor
                           )}>
                             {getInitials(lead.fullName)}
                           </div>
                           <div>
-                            <div className="font-bold text-sm text-gray-900">{lead.fullName}</div>
-                            <div className="text-[10px] font-mono text-gray-400 uppercase">{lead.companyName || '—'}</div>
+                            <div className="font-bold text-sm text-[#111827]">{lead.fullName}</div>
+                            <div className="text-[10px] font-mono font-bold text-gray-500 tracking-widest uppercase mt-0.5">{lead.companyName || '—'}</div>
                           </div>
                         </div>
                       </td>
 
                       {/* Service */}
-                      <td className="px-5 py-4">
-                        <div className="text-xs font-semibold text-gray-700">{lead.selectedPackage || lead.serviceNeed || '—'}</div>
-                        <div className="text-[10px] font-mono text-gray-400">{lead.budgetRange || ''}</div>
+                      <td className="px-6 py-5">
+                        <div className="text-sm font-bold text-[#111827]">{lead.selectedPackage || lead.serviceNeed || '—'}</div>
+                        <div className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest mt-0.5">{lead.budgetRange || ''}</div>
                       </td>
 
                       {/* Status */}
@@ -208,16 +208,16 @@ export const Leads = () => {
                       </td>
 
                       {/* Actions */}
-                      <td className="px-5 py-4 text-right">
-                        <div className="flex items-center justify-end gap-2">
+                      <td className="px-6 py-5 text-right">
+                        <div className="flex items-center justify-end gap-3">
                           <Link
                             to={`/crm/leads/${lead.id}`}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-900 text-white text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-gray-700 transition-all"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/60 border border-white/50 text-[#111827] text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-white hover:shadow-sm transition-all"
                           >
-                            View <ChevronRight size={11} />
+                            View <ChevronRight size={14} />
                           </Link>
-                          <button className="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-gray-600 transition-colors rounded-lg hover:bg-gray-100">
-                            <MoreVertical size={15} />
+                          <button className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-[#111827] transition-colors rounded-xl hover:bg-white border border-transparent hover:border-white/50">
+                            <MoreVertical size={18} />
                           </button>
                         </div>
                       </td>
@@ -229,20 +229,23 @@ export const Leads = () => {
           </div>
 
           {filteredLeads.length === 0 && (
-            <div className="py-20 text-center">
-              <p className="text-sm font-bold text-gray-900 uppercase tracking-tight mb-1">No leads found</p>
-              <p className="text-[10px] font-mono text-gray-400 uppercase tracking-[0.2em]">Try adjusting your search or filter</p>
+            <div className="py-24 text-center px-4">
+              <div className="w-16 h-16 rounded-full bg-white shadow-sm border border-white/50 flex items-center justify-center mx-auto mb-5">
+                <Search size={24} className="text-gray-400" />
+              </div>
+              <p className="text-base font-bold text-[#111827] uppercase tracking-tight mb-2">No leads found</p>
+              <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">Try adjusting your search or filter</p>
             </div>
           )}
 
           {/* Footer */}
-          <div className="px-5 py-3.5 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between">
-            <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">
+          <div className="px-6 py-4 border-t border-white/40 bg-white/20 flex items-center justify-between">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">
               Showing {filteredLeads.length} of {leads.length} leads
             </span>
-            <div className="flex gap-1.5">
-              <button disabled className="px-3 py-1.5 rounded-lg border border-gray-200 text-[10px] font-mono text-gray-400 disabled:opacity-40 bg-white">Prev</button>
-              <button disabled className="px-3 py-1.5 rounded-lg border border-gray-200 text-[10px] font-mono text-gray-400 disabled:opacity-40 bg-white">Next</button>
+            <div className="flex gap-2">
+              <button disabled className="px-4 py-2 rounded-xl border border-white/50 text-[10px] font-mono font-bold tracking-widest text-[#111827] uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-gray-400 bg-white hover:shadow-sm transition-all">Prev</button>
+              <button disabled className="px-4 py-2 rounded-xl border border-white/50 text-[10px] font-mono font-bold tracking-widest text-[#111827] uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-gray-400 bg-white hover:shadow-sm transition-all">Next</button>
             </div>
           </div>
         </div>
