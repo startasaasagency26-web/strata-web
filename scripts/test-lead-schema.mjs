@@ -9,8 +9,8 @@ await rm(outDir, { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
 
 const compile = spawnSync(
-  'npx',
   [
+    'npx',
     'tsc',
     'src/lib/crm/lead-schema.ts',
     '--ignoreConfig',
@@ -23,7 +23,7 @@ const compile = spawnSync(
     '--outDir',
     outDir,
     '--skipLibCheck',
-  ],
+  ].join(' '),
   { encoding: 'utf8', shell: true },
 );
 

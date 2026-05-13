@@ -17,23 +17,18 @@ export const ProtectedCrmRoute: React.FC<ProtectedCrmRouteProps> = ({
 
   // Profile loads in background after isLoading=false.
   // Wait up to 3s for it before showing Access Denied.
-  const [profileWait, setProfileWait] = useState(true);
+  const [profileWaitExpired, setProfileWaitExpired] = useState(false);
 
   useEffect(() => {
     if (isLoading) return;
     if (user && !profile) {
-      const t = setTimeout(() => setProfileWait(false), 3000);
+      const t = setTimeout(() => setProfileWaitExpired(true), 3000);
       return () => clearTimeout(t);
     }
-    setProfileWait(false);
   }, [isLoading, user, profile]);
 
-  useEffect(() => {
-    if (profile) setProfileWait(false);
-  }, [profile]);
-
   // Still initialising or waiting for profile
-  if (isLoading || (user && profileWait && !profile)) {
+  if (isLoading || (user && !profileWaitExpired && !profile)) {
     return (
       <div className="min-h-screen bg-[#050505] flex items-center justify-center">
         <LoadingState message="Verifying session..." />

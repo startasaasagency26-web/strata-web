@@ -1,9 +1,14 @@
 import { protectCrmRoute, sendSuccess, sendError } from "../../src/lib/crm/auth.js";
 import { CrmRepository } from "../../src/lib/crm/repository.js";
-import { supabaseAdmin } from "../../src/lib/supabase/admin.js";
+import { normalizeManualLeadPayload } from "../../src/lib/crm/api-validation.js";
+import { guardMethod, parsePositiveInteger, parseSort, readJsonBody, type VercelRequest, type VercelResponse } from "./_utils.js";
 import { URL } from "node:url";
 
-export default async function handler(request: any, response: any) {
+export default async function handler(request: VercelRequest, response: VercelResponse) {
+  if (!guardMethod(request, response, ["GET", "POST"])) {
+    return sendError(response, 405, "Method not allowed.");
+  }
+
   const auth = await protectCrmRoute(request, response);
   if (!auth.ok) return sendError(response, auth.status, auth.message);
 
@@ -13,63 +18,46 @@ export default async function handler(request: any, response: any) {
   try {
     if (request.method === "GET") {
       const result = await CrmRepository.getLeads({
-        page: parseInt(params.get("page") || "1"),
-        limit: parseInt(params.get("limit") || "20"),
-        search: params.get("search") || undefined,
+        page: parsePositiveInteger(params.get("page"), 1, 500),
+        limit: parsePositiveInteger(params.get("limit"), 20, 100),
+        search: (params.get("search") || "").slice(0, 120) || undefined,
         status: params.get("status") || undefined,
         priority: params.get("priority") || undefined,
         assignedTo: params.get("assignedTo") || undefined,
-        sort: (params.get("sort") as any) || "newest"
+        sort: parseSort(params.get("sort"))
       });
       
       sendSuccess(response, result);
     } else if (request.method === "POST") {
-      let body;
+      const body = await readJsonBody(request);
+      if (!body.ok) return sendError(response, body.status, body.message);
+
+      const validation = normalizeManualLeadPayload(body.data);
+      if (!validation.ok) {
+        return sendError(response, 400, "Please check the lead fields.", {
+          fieldErrors: validation.fieldErrors
+        });
+      }
+
+      const lead = await CrmRepository.insertLead(validation.data);
+
       try {
-        body = JSON.parse(request.body);
-      } catch (e) {
-        return response.status(400).json({ error: "Invalid JSON" });
+        await CrmRepository.insertActivityLog({
+          actorId: auth.user.id,
+          actorEmail: auth.user.email,
+          action: "lead.created",
+          entityType: "lead",
+          entityId: lead.id,
+          metadata: { source: "internal_crm" }
+        });
+      } catch (logError) {
+        console.error("[api/crm/leads] Failed to record lead creation activity:", logError);
       }
 
-      const {
-        fullName,
-        companyName,
-        workEmail,
-        whatsappPhone,
-        serviceNeed,
-        selectedPackage,
-        budgetRange,
-        status = 'new',
-        priority = 'warm'
-      } = body;
-
-      if (!fullName) {
-        return response.status(400).json({ error: "fullName is required" });
-      }
-
-      const { data, error } = await supabaseAdmin.from('crm_leads').insert({
-        full_name: fullName,
-        company_name: companyName,
-        work_email: workEmail,
-        whatsapp_phone: whatsappPhone,
-        service_need: serviceNeed,
-        selected_package: selectedPackage,
-        budget_range: budgetRange,
-        status,
-        priority
-      }).select().single();
-
-      if (error) {
-        console.error("[api/crm/leads] POST error:", error);
-        return response.status(500).json({ error: "Failed to create lead" });
-      }
-
-      return response.status(201).json(data);
-    } else {
-      sendError(response, 405, "Method not allowed.");
+      sendSuccess(response, { lead }, 201);
     }
   } catch (error) {
     console.error("[api/crm/leads] Error:", error);
-    sendError(response, 500, "Failed to load leads.");
+    sendError(response, 500, "Failed to process leads.");
   }
 }

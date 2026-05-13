@@ -1,21 +1,17 @@
-import type { IncomingMessage, ServerResponse } from "node:http";
 import { protectCrmRoute, sendSuccess, sendError } from "../../../src/lib/crm/auth.js";
 import { CrmRepository } from "../../../src/lib/crm/repository.js";
+import { normalizeLeadUpdatePayload } from "../../../src/lib/crm/api-validation.js";
+import { getSingleQueryParam, guardMethod, readJsonBody, type VercelRequest, type VercelResponse } from "../_utils.js";
 
-const readBody = async (request: IncomingMessage) => {
-  return new Promise<string>((resolve) => {
-    let body = "";
-    request.on("data", chunk => body += chunk.toString());
-    request.on("end", () => resolve(body));
-  });
-};
+export default async function handler(request: VercelRequest, response: VercelResponse) {
+  if (!guardMethod(request, response, ["GET", "PATCH"])) {
+    return sendError(response, 405, "Method not allowed.");
+  }
 
-export default async function handler(request: IncomingMessage, response: ServerResponse) {
   const auth = await protectCrmRoute(request, response);
   if (!auth.ok) return sendError(response, auth.status, auth.message);
 
-  // Extract ID from query (Vercel provides this)
-  const { id } = (request as any).query || {};
+  const id = getSingleQueryParam(request, "id");
   
   if (!id) return sendError(response, 400, "Lead ID is required.");
 
@@ -26,23 +22,37 @@ export default async function handler(request: IncomingMessage, response: Server
       sendSuccess(response, { lead });
     } 
     else if (request.method === "PATCH") {
-      const rawBody = await readBody(request);
-      const payload = JSON.parse(rawBody);
-      const hasStatusChange = Object.prototype.hasOwnProperty.call(payload, "status");
-      const currentLead = hasStatusChange ? await CrmRepository.getLeadById(id) : null;
+      const body = await readJsonBody(request);
+      if (!body.ok) return sendError(response, body.status, body.message);
 
-      if (hasStatusChange && !currentLead) {
+      const validation = normalizeLeadUpdatePayload(body.data);
+      if (!validation.ok) {
+        return sendError(response, 400, "Please check the lead fields.", {
+          fieldErrors: validation.fieldErrors
+        });
+      }
+
+      const payload = validation.data;
+      const hasStatusChange = Object.prototype.hasOwnProperty.call(payload, "status");
+      const currentLead = await CrmRepository.getLeadById(id);
+
+      if (!currentLead) {
         return sendError(response, 404, "Lead not found.");
       }
 
       const updatedLead = await CrmRepository.updateLead(id, payload);
 
-      if (hasStatusChange && currentLead && currentLead.status !== payload.status) {
+      if (hasStatusChange && currentLead.status !== payload.status) {
+        const nextStatus = payload.status;
+        if (!nextStatus) {
+          return sendError(response, 400, "Lead status is required.");
+        }
+
         try {
           await CrmRepository.insertStatusHistory(
             id,
             currentLead.status,
-            payload.status,
+            nextStatus,
             auth.user.id
           );
           await CrmRepository.insertActivityLog({
@@ -51,7 +61,7 @@ export default async function handler(request: IncomingMessage, response: Server
             action: 'lead.status_changed',
             entityType: 'lead',
             entityId: id,
-            metadata: { from: currentLead.status, to: payload.status }
+            metadata: { from: currentLead.status, to: nextStatus }
           });
         } catch (logError) {
           console.error(`[api/crm/leads/${id}] Failed to record status activity:`, logError);

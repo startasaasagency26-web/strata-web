@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "test:lead-schema": "node scripts/test-lead-schema.mjs",
+    "test:crm-api-validation": "node scripts/test-crm-api-validation.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

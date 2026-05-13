@@ -10,7 +10,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { CrmShell } from '../../components/crm/CrmShell';
-import { LoadingState, StatusBadge } from '../../components/crm/CrmUI';
+import { ErrorState, LoadingState, StatusBadge } from '../../components/crm/CrmUI';
 import { getDashboard, getLeads } from '../../lib/crm/client';
 import type { DashboardMetrics, Lead } from '../../types/crm';
 import { Link } from 'react-router-dom';
@@ -26,6 +26,8 @@ const zeroMetrics: DashboardMetrics = {
   lost: 0,
   conversionRate: 0,
   leadsThisWeek: 0,
+  followUpsToday: 0,
+  pipelineValue: null,
 };
 
 const AVATAR_COLORS = [
@@ -106,6 +108,7 @@ export const Dashboard = () => {
   const [recentLeads, setRecentLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDataUnavailable, setIsDataUnavailable] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -116,9 +119,7 @@ export const Dashboard = () => {
         setIsDataUnavailable((m?.totalLeads ?? 0) === 0 && l.length === 0);
       } catch (err) {
         console.error('[crm/dashboard] Data fetch failed:', err);
-        setMetrics(zeroMetrics);
-        setRecentLeads([]);
-        setIsDataUnavailable(true);
+        setError(err instanceof Error ? err.message : 'Failed to load dashboard data.');
       } finally {
         setIsLoading(false);
       }
@@ -127,6 +128,7 @@ export const Dashboard = () => {
   }, []);
 
   if (isLoading) return <CrmShell><LoadingState message="Loading dashboard..." /></CrmShell>;
+  if (error) return <CrmShell><ErrorState message={error} onRetry={() => window.location.reload()} /></CrmShell>;
   if (!metrics) return null;
 
   const today = new Date().toLocaleDateString('en-MY', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -202,8 +204,10 @@ export const Dashboard = () => {
                   <Clock size={18} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-sm font-bold text-[#111827]">0 Follow-ups Today</div>
-                  <div className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest mt-0.5">All clear</div>
+                  <div className="text-sm font-bold text-[#111827]">{metrics.followUpsToday} Follow-ups Due</div>
+                  <div className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest mt-0.5">
+                    {metrics.followUpsToday > 0 ? 'Needs attention' : 'All clear today'}
+                  </div>
                 </div>
                 <ChevronRight size={16} className="text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all" />
               </Link>
@@ -234,10 +238,14 @@ export const Dashboard = () => {
             {/* Pipeline Value */}
             <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] p-8 shadow-sm">
               <div className="text-xs font-mono font-bold tracking-[0.2em] text-gray-500 uppercase mb-2">Pipeline Value</div>
-              <div className="text-4xl font-display font-bold text-[#111827] tracking-tight">RM 0</div>
+              <div className="text-4xl font-display font-bold text-[#111827] tracking-tight">
+                {metrics.pipelineValue === null ? 'Unavailable' : `RM ${metrics.pipelineValue.toLocaleString()}`}
+              </div>
               <div className="flex items-center gap-2 text-gray-500 mt-3">
                 <TrendingUp size={14} />
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest">No change</span>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest">
+                  {metrics.pipelineValue === null ? 'Budget ranges are not exact deal values yet' : 'Computed from lead values'}
+                </span>
               </div>
             </div>
 

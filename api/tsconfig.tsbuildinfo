@@ -1,1 +1,1 @@
-{"root":["./leads.ts","./crm/dashboard.ts","./crm/follow-ups.ts","./crm/health.ts","./crm/leads.ts","./crm/notes.ts","./crm/leads/[id].ts"],"version":"6.0.3"}
+{"root":["./leads.ts","./crm/_utils.ts","./crm/dashboard.ts","./crm/follow-ups.ts","./crm/health.ts","./crm/leads.ts","./crm/notes.ts","./crm/settings.ts","./crm/team.ts","./crm/leads/[id].ts"],"version":"6.0.3"}

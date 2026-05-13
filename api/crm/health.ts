@@ -1,39 +1,22 @@
 import { validateEnv } from "../../src/lib/env.js";
-import { supabaseAdmin } from "../../src/lib/supabase/admin.js";
-import { sendSuccess, sendError } from "../../src/lib/crm/auth.js";
+import { protectCrmRoute, sendSuccess, sendError } from "../../src/lib/crm/auth.js";
+import { CrmRepository } from "../../src/lib/crm/repository.js";
+import { guardMethod, type VercelRequest, type VercelResponse } from "./_utils.js";
 
-export default async function handler(_request: any, response: any) {
+export default async function handler(request: VercelRequest, response: VercelResponse) {
+  if (!guardMethod(request, response, ["GET"])) {
+    return sendError(response, 405, "Method not allowed.");
+  }
+
+  const auth = await protectCrmRoute(request, response);
+  if (!auth.ok) return sendError(response, auth.status, auth.message);
+
   try {
     validateEnv();
-
-    const results = {
-      supabaseConnected: false,
-      tables: {
-        crm_leads: false,
-        crm_lead_notes: false,
-        crm_follow_ups: false
-      }
-    };
-
-    // Check connection and tables
-    const { error } = await supabaseAdmin
-      .from('crm_leads')
-      .select('id')
-      .limit(1);
-
-    if (!error) {
-      results.supabaseConnected = true;
-      results.tables.crm_leads = true;
-    }
-
-    const { error: notesError } = await supabaseAdmin.from('crm_lead_notes').select('id').limit(1);
-    if (!notesError) results.tables.crm_lead_notes = true;
-
-    const { error: fuError } = await supabaseAdmin.from('crm_follow_ups').select('id').limit(1);
-    if (!fuError) results.tables.crm_follow_ups = true;
-
+    const results = await CrmRepository.getHealthStatus();
     sendSuccess(response, results);
   } catch (error) {
-    sendError(response, 500, "Supabase connection failed.");
+    console.error("[api/crm/health] Error:", error);
+    sendError(response, 500, "CRM health check failed.");
   }
 }

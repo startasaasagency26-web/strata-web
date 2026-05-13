@@ -81,14 +81,15 @@ const QuickActions = () => {
             </div>
             <div className="space-y-1.5">
               {[
-                { icon: <Users size={16} />, label: 'New Lead', onClick: () => navigate('/crm/leads') },
-                { icon: <CalendarPlus size={16} />, label: 'Schedule Follow-up', onClick: () => navigate('/crm/follow-ups') },
+                { icon: <Users size={16} />, label: 'New Lead', onClick: () => navigate('/crm/leads?add=1') },
+                { icon: <CalendarPlus size={16} />, label: 'Schedule Follow-up', onClick: () => navigate('/crm/follow-ups?create=1') },
                 { icon: <Kanban size={16} />, label: 'Update Pipeline', onClick: () => navigate('/crm/pipeline') },
                 { icon: <Settings size={16} />, label: 'System Settings', onClick: () => navigate('/crm/settings') },
               ].map((action, i) => (
                 <button
                   key={i}
                   onClick={() => { action.onClick(); setIsOpen(false); }}
+                  aria-label={action.label}
                   className="w-full flex items-center gap-4 px-3 py-3 rounded-2xl text-sm font-bold text-gray-700 hover:bg-white hover:text-gray-900 hover:shadow-sm transition-all border border-transparent hover:border-gray-200/50"
                 >
                   <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 shrink-0">
@@ -108,6 +109,7 @@ const QuickActions = () => {
 export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [globalSearchTerm, setGlobalSearchTerm] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
   const { profile, signOut } = useCrmAuth();
@@ -128,6 +130,12 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
   const handleLogout = async () => {
     await signOut();
     navigate('/crm/login');
+  };
+
+  const handleGlobalSearch = (event: React.FormEvent) => {
+    event.preventDefault();
+    const trimmed = globalSearchTerm.trim();
+    navigate(trimmed ? `/crm/leads?search=${encodeURIComponent(trimmed)}` : '/crm/leads');
   };
 
   return (
@@ -176,6 +184,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
               <div key={item.name} className="relative group flex justify-center">
                 <Link
                   to={item.href}
+                  aria-label={item.name}
                   className={cn(
                     'flex items-center rounded-2xl transition-all duration-200 relative w-full',
                     isSidebarOpen ? 'gap-3 px-4 py-3' : 'justify-center py-3.5',
@@ -249,6 +258,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
           <div className="relative group">
             <button
               onClick={handleLogout}
+              aria-label="Log out"
               className={cn(
                 'flex items-center w-full rounded-2xl text-white/30 hover:text-white hover:bg-white/10 transition-all duration-200 mt-1',
                 isSidebarOpen ? 'gap-3 px-4 py-3' : 'justify-center py-3.5'
@@ -281,6 +291,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
           <div className="pt-2 border-t border-white/5 mt-2">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              aria-label={isSidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
               className={cn(
                 'flex items-center w-full rounded-2xl text-white/20 hover:text-white hover:bg-white/10 transition-all duration-200',
                 isSidebarOpen ? 'gap-3 px-4 py-2.5' : 'justify-center py-2.5'
@@ -314,22 +325,33 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
           <div className="flex items-center gap-4 flex-1">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open CRM navigation"
               className="md:hidden text-gray-500 hover:text-gray-900"
             >
               <Menu size={24} />
             </button>
-            <div className="hidden sm:flex items-center gap-3 bg-white/60 border border-white/50 shadow-sm rounded-full px-5 py-2.5 w-full max-w-md focus-within:bg-white focus-within:shadow-md transition-all">
+            <form
+              onSubmit={handleGlobalSearch}
+              className="hidden sm:flex items-center gap-3 bg-white/60 border border-white/50 shadow-sm rounded-full px-5 py-2.5 w-full max-w-md focus-within:bg-white focus-within:shadow-md transition-all"
+            >
               <Search size={16} className="text-gray-400 shrink-0" />
               <input
                 type="text"
                 placeholder="Search leads, companies..."
+                value={globalSearchTerm}
+                onChange={(event) => setGlobalSearchTerm(event.target.value)}
+                aria-label="Search CRM leads"
                 className="bg-transparent border-none outline-none text-sm font-semibold text-gray-900 w-full placeholder:text-gray-400"
               />
-            </div>
+            </form>
           </div>
 
           <div className="flex items-center gap-6">
-            <button className="relative w-10 h-10 rounded-full bg-white/60 border border-white/50 flex items-center justify-center text-gray-500 hover:bg-white hover:text-gray-900 transition-colors shadow-sm">
+            <button
+              onClick={() => navigate('/crm/follow-ups')}
+              aria-label="Open follow-ups"
+              className="relative w-10 h-10 rounded-full bg-white/60 border border-white/50 flex items-center justify-center text-gray-500 hover:bg-white hover:text-gray-900 transition-colors shadow-sm"
+            >
               <Bell size={18} />
               <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#2D5BFF] rounded-full border border-white" />
             </button>
@@ -376,7 +398,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
                   <Logo className="h-7 w-auto brightness-200" />
                   <span className="font-display font-bold tracking-tight text-sm uppercase text-white">Strata CRM</span>
                 </Link>
-                <button onClick={() => setIsMobileMenuOpen(false)} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors">
+                <button onClick={() => setIsMobileMenuOpen(false)} aria-label="Close CRM navigation" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors">
                   <X size={20} />
                 </button>
               </div>
@@ -399,6 +421,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
               <div className="p-4 border-t border-white/5">
                 <button
                   onClick={handleLogout}
+                  aria-label="Log out"
                   className="flex items-center gap-4 w-full px-4 py-3.5 rounded-2xl text-white/40 hover:text-white hover:bg-white/10 transition-all duration-200 font-bold text-sm tracking-wide"
                 >
                   <LogOut size={18} />

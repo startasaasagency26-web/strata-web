@@ -10,6 +10,15 @@ export type LeadStatus =
   | "unresponsive";
 
 export type LeadPriority = "hot" | "warm" | "cold";
+export type LeadNoteType = "general" | "call" | "whatsapp" | "email" | "follow_up" | "system";
+export type FollowUpStatus = "pending" | "completed" | "cancelled" | "overdue";
+export type ContactMethod = "whatsapp" | "email" | "call";
+
+export interface CrmProfileSummary {
+  id: string;
+  email?: string;
+  fullName: string;
+}
 
 export interface Lead {
   id: string;
@@ -33,7 +42,8 @@ export interface Lead {
   sourcePage: string;
   status: LeadStatus;
   priority: LeadPriority;
-  assignedTo?: string;
+  assignedTo?: string | null;
+  assignedProfile?: CrmProfileSummary | null;
   lastContactedAt?: string;
   nextFollowUpAt?: string;
   notesCount: number;
@@ -44,7 +54,7 @@ export interface LeadNote {
   id: string;
   leadId: string;
   note: string;
-  type: "system" | "user" | "call" | "email" | "whatsapp" | "general";
+  type: LeadNoteType;
   createdBy: string;
   createdAt: string;
 }
@@ -54,13 +64,15 @@ export interface FollowUp {
   leadId: string;
   title: string;
   dueAt: string;
-  status: "pending" | "completed" | "rescheduled";
-  assignedTo: string;
+  status: FollowUpStatus;
+  assignedTo?: string | null;
+  assignedProfile?: CrmProfileSummary | null;
   completedAt?: string;
   createdAt: string;
   leadName?: string;
   leadCompany?: string;
-  contactMethod?: string;
+  contactMethod?: ContactMethod;
+  notes?: string;
 }
 
 export interface DashboardMetrics {
@@ -73,6 +85,8 @@ export interface DashboardMetrics {
   lost: number;
   conversionRate: number;
   leadsThisWeek: number;
+  followUpsToday: number;
+  pipelineValue: number | null;
 }
 
 export type CrmRole = "admin" | "manager";

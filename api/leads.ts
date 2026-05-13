@@ -1,3 +1,4 @@
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { validateEnv } from "../src/lib/env.js";
 import { CrmRepository } from "../src/lib/crm/repository.js";
 import { validateLeadPayload } from "../src/lib/crm/lead-schema.js";
@@ -5,14 +6,21 @@ import type { LeadApiResponse } from "../src/lib/crm/types.js";
 
 const MAX_BODY_BYTES = 64 * 1024;
 
-const sendJson = (response: any, status: number, body: LeadApiResponse) => {
+type LeadRequest = IncomingMessage & {
+  body?: unknown;
+};
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  !!value && typeof value === "object" && !Array.isArray(value);
+
+const sendJson = (response: ServerResponse, status: number, body: LeadApiResponse) => {
   response.statusCode = status;
   response.setHeader("Content-Type", "application/json; charset=utf-8");
   response.setHeader("Cache-Control", "no-store");
   response.end(JSON.stringify(body));
 };
 
-const readBody = async (request: any) =>
+const readBody = async (request: LeadRequest) =>
   new Promise<string>((resolve, reject) => {
     let body = "";
     let size = 0;
@@ -33,7 +41,7 @@ const readBody = async (request: any) =>
     request.on("error", reject);
   });
 
-export default async function handler(request: any, response: any) {
+export default async function handler(request: LeadRequest, response: ServerResponse) {
   // 1. Method Check
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
@@ -51,7 +59,7 @@ export default async function handler(request: any, response: any) {
 
     // 3. Read & Parse Body
     const rawBody = await readBody(request);
-    let payload: any;
+    let payload: unknown;
 
     try {
       payload = rawBody ? JSON.parse(rawBody) : {};
@@ -65,8 +73,10 @@ export default async function handler(request: any, response: any) {
     }
 
     // 4. Validate & Normalize Lead Data
-    const validation = validateLeadPayload(payload, { 
-      sourcePage: payload.sourcePage || "/request-demo" 
+    const validation = validateLeadPayload(payload, {
+      sourcePage: isRecord(payload) && typeof payload.sourcePage === "string"
+        ? payload.sourcePage
+        : "/request-demo"
     });
 
     if (validation.ok === false) {
@@ -91,16 +101,19 @@ export default async function handler(request: any, response: any) {
         role_in_business: lead.roleInBusiness,
         country_timezone: lead.countryTimezone,
         preferred_language: lead.preferredLanguage,
-        business_type: lead.businessType,
-        service_need: lead.serviceNeed,
+        business_type: lead.businessType || "Not specified",
+        service_need: lead.serviceNeed || "Not specified",
         website_url: lead.websiteUrl,
         current_problem: lead.currentProblem,
         project_goal: lead.projectGoal,
-        budget_range: lead.budgetRange,
+        budget_range: lead.budgetRange || "Not specified",
         selected_package: lead.selectedPackage,
-        timeline: lead.timeline,
-        source_page: lead.sourcePage,
-        consent: lead.consent,
+        timeline: lead.timeline || "Not specified",
+        source_page: lead.sourcePage || "/request-demo",
+        status: "new",
+        priority: "warm",
+        consent: lead.consent ?? false,
+        marketing_opt_in: lead.marketingOptIn ?? false,
         raw_payload: lead.rawPayload || {}
       });
 
@@ -136,4 +149,3 @@ export default async function handler(request: any, response: any) {
     });
   }
 }
-

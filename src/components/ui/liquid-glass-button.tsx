@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable react-refresh/only-export-components */
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -255,10 +256,7 @@ export const MetalButton = React.forwardRef<HTMLButtonElement, MetalButtonProps>
   ({ children, className, variant = "default", ...props }, ref) => {
     const [isPressed, setIsPressed] = React.useState(false)
     const [isHovered, setIsHovered] = React.useState(false)
-    const [isTouchDevice, setIsTouchDevice] = React.useState(false)
-    React.useEffect(() => {
-      setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0)
-    }, [])
+    const [isTouchDevice] = React.useState(() => "ontouchstart" in window || navigator.maxTouchPoints > 0)
     const v = buildMetalVariants(variant, isPressed, isHovered, isTouchDevice)
     return (
       <div className={v.wrapper} style={v.wrapperStyle}>

@@ -6,7 +6,7 @@ import { env } from '../env.js';
  * WARNING: Never import this in browser/client components.
  */
 export const createAdminClient = () => {
-  if (typeof (globalThis as any).window !== 'undefined') {
+  if ('window' in globalThis) {
     throw new Error('Admin client cannot be initialized in the browser.');
   }
   if (!env.admin.serviceRoleKey) {
@@ -33,6 +33,6 @@ export const getAdminClient = () => {
 
 export const supabaseAdmin = new Proxy({} as ReturnType<typeof createAdminClient>, {
   get(_target, prop) {
-    return (getAdminClient() as any)[prop];
+    return Reflect.get(getAdminClient() as object, prop);
   }
 });

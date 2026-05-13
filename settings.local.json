@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venvScriptspython.exe agent-orchestrator-masterdaniel.py --prompt '@codex You are working on the One Repair inventory app at: C:\\\\Users\\\\Amirul\\\\Desktop\\\\Projects\\\\One Specialist Berhad Portfolio\\\\one-repair-inventory-app *)",
+      "PowerShell(codex *)",
+      "PowerShell(New-Item *)"
+    ]
+  }
+}

@@ -1,5 +1,51 @@
 import { supabaseAdmin } from '../supabase/admin.js';
-import type { Lead, LeadNote, FollowUp, DashboardMetrics } from '../../types/crm.js';
+import type {
+  CrmSettings,
+  CrmUserProfile,
+  DashboardMetrics,
+  FollowUp,
+  Lead,
+  LeadNote,
+} from '../../types/crm.js';
+import type {
+  FollowUpCreatePayload,
+  FollowUpUpdatePayload,
+  LeadUpdatePayload,
+  ManualLeadInsertPayload,
+} from './api-validation.js';
+
+const getMalaysiaDayBounds = () => {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Kuala_Lumpur',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date());
+  const partMap = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  const year = Number(partMap.year);
+  const month = Number(partMap.month);
+  const day = Number(partMap.day);
+  const start = new Date(Date.UTC(year, month - 1, day, -8, 0, 0, 0)).toISOString();
+  const end = new Date(Date.UTC(year, month - 1, day + 1, -8, 0, 0, 0)).toISOString();
+  return { start, end };
+};
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  !!value && typeof value === 'object' && !Array.isArray(value);
+
+const asString = (value: unknown) => typeof value === 'string' ? value : '';
+const asOptionalString = (value: unknown) => typeof value === 'string' ? value : undefined;
+
+const mapJoinedProfile = (profile: unknown) => {
+  const value = Array.isArray(profile) ? profile[0] : profile;
+  if (!isRecord(value)) return null;
+
+  return {
+    id: asString(value.id),
+    email: asOptionalString(value.email),
+    fullName: asString(value.full_name),
+  };
+};
 
 /**
  * Supabase Repository for Strata CRM.
@@ -32,7 +78,7 @@ export const CrmRepository = {
 
     let query = supabaseAdmin
       .from('crm_leads')
-      .select('*', { count: 'exact' });
+      .select('*, assigned_profile:crm_profiles(id,email,full_name)', { count: 'exact' });
 
     // Filters
     if (status) query = query.eq('status', status);
@@ -77,7 +123,7 @@ export const CrmRepository = {
     return this.mapDbLead(data);
   },
 
-  async insertLead(payload: any) {
+  async insertLead(payload: ManualLeadInsertPayload) {
     const { data, error } = await supabaseAdmin
       .from('crm_leads')
       .insert(payload)
@@ -88,14 +134,14 @@ export const CrmRepository = {
     return this.mapDbLead(data);
   },
 
-  async updateLead(id: string, payload: Partial<Lead>) {
+  async updateLead(id: string, payload: LeadUpdatePayload) {
     // Map camelCase to snake_case for DB
-    const dbPayload: any = {};
+    const dbPayload: Record<string, unknown> = {};
     if (payload.status) dbPayload.status = payload.status;
     if (payload.priority) dbPayload.priority = payload.priority;
     if ('assignedTo' in payload) dbPayload.assigned_to = payload.assignedTo || null;
-    if (payload.lastContactedAt) dbPayload.last_contacted_at = payload.lastContactedAt;
-    if (payload.nextFollowUpAt) dbPayload.next_follow_up_at = payload.nextFollowUpAt;
+    if ('lastContactedAt' in payload) dbPayload.last_contacted_at = payload.lastContactedAt;
+    if ('nextFollowUpAt' in payload) dbPayload.next_follow_up_at = payload.nextFollowUpAt || null;
 
     const { data, error } = await supabaseAdmin
       .from('crm_leads')
@@ -121,7 +167,7 @@ export const CrmRepository = {
     return (data || []).map(this.mapDbNote);
   },
 
-  async insertNote(leadId: string, payload: { note: string; noteType?: string; createdBy?: string }) {
+  async insertNote(leadId: string, payload: { note: string; noteType?: LeadNote['type']; createdBy?: string }) {
     const { data, error } = await supabaseAdmin
       .from('crm_lead_notes')
       .insert({
@@ -146,7 +192,7 @@ export const CrmRepository = {
   }) {
     let query = supabaseAdmin
       .from('crm_follow_ups')
-      .select('*, crm_leads(full_name, company_name)');
+      .select('*, crm_leads(full_name, company_name), assigned_profile:crm_profiles(id,email,full_name)');
 
     if (params.leadId) query = query.eq('lead_id', params.leadId);
     if (params.status) query = query.eq('status', params.status);
@@ -160,7 +206,7 @@ export const CrmRepository = {
     return (data || []).map(this.mapDbFollowUp);
   },
 
-  async insertFollowUp(leadId: string, payload: any) {
+  async insertFollowUp(leadId: string, payload: FollowUpCreatePayload) {
     const { data, error } = await supabaseAdmin
       .from('crm_follow_ups')
       .insert({
@@ -179,12 +225,12 @@ export const CrmRepository = {
     return this.mapDbFollowUp(data);
   },
 
-  async updateFollowUp(id: string, payload: any) {
-    const dbPayload: any = {};
+  async updateFollowUp(id: string, payload: FollowUpUpdatePayload) {
+    const dbPayload: Record<string, unknown> = {};
     if (payload.status) dbPayload.status = payload.status;
     if (payload.completedAt) dbPayload.completed_at = payload.completedAt;
     if (payload.dueAt) dbPayload.due_at = payload.dueAt;
-    if (payload.notes) dbPayload.notes = payload.notes;
+    if ('notes' in payload) dbPayload.notes = payload.notes;
     if ('assignedTo' in payload) dbPayload.assigned_to = payload.assignedTo || null;
 
     const { data, error } = await supabaseAdmin
@@ -208,6 +254,15 @@ export const CrmRepository = {
 
     if (error) throw error;
 
+    const endOfToday = getMalaysiaDayBounds().end;
+    const { count: followUpsToday, error: followUpsError } = await supabaseAdmin
+      .from('crm_follow_ups')
+      .select('id', { count: 'exact', head: true })
+      .in('status', ['pending', 'overdue'])
+      .lt('due_at', endOfToday);
+
+    if (followUpsError) throw followUpsError;
+
     return {
       totalLeads: Number(data?.total_leads ?? 0),
       newLeads: Number(data?.new_leads ?? 0),
@@ -218,6 +273,8 @@ export const CrmRepository = {
       lost: Number(data?.lost ?? 0),
       conversionRate: Number(data?.conversion_rate ?? 0),
       leadsThisWeek: Number(data?.leads_this_week ?? 0),
+      followUpsToday: Number(followUpsToday ?? 0),
+      pipelineValue: null,
     };
   },
 
@@ -270,63 +327,178 @@ export const CrmRepository = {
     if (error) throw error;
   },
 
+  async getSettings(): Promise<CrmSettings> {
+    const { data, error } = await supabaseAdmin
+      .from('crm_settings')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    return {
+      isConfigured: Boolean(data?.is_configured),
+      contactEmail: data?.contact_email ?? '',
+      whatsappNumber: data?.whatsapp_number ?? '',
+      teamMembers: [],
+      leadStatuses: ['new', 'contacted', 'qualified', 'discovery_scheduled', 'proposal_sent', 'negotiating', 'won', 'lost', 'unresponsive']
+    };
+  },
+
+  async updateSettings(payload: { contactEmail?: string; whatsappNumber?: string; isConfigured?: boolean }) {
+    const dbPayload: Record<string, unknown> = {
+      updated_at: new Date().toISOString()
+    };
+
+    if ('contactEmail' in payload) dbPayload.contact_email = payload.contactEmail ?? '';
+    if ('whatsappNumber' in payload) dbPayload.whatsapp_number = payload.whatsappNumber ?? '';
+    if ('isConfigured' in payload) dbPayload.is_configured = Boolean(payload.isConfigured);
+
+    const { data: existing, error: existingError } = await supabaseAdmin
+      .from('crm_settings')
+      .select('id')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (existingError) throw existingError;
+
+    const query = existing?.id
+      ? supabaseAdmin.from('crm_settings').update(dbPayload).eq('id', existing.id)
+      : supabaseAdmin.from('crm_settings').insert(dbPayload);
+
+    const { error } = await query;
+    if (error) throw error;
+
+    return this.getSettings();
+  },
+
+  async getTeamMembers(): Promise<CrmUserProfile[]> {
+    const { data, error } = await supabaseAdmin
+      .from('crm_profiles')
+      .select('id,email,full_name,role,status,created_at,updated_at')
+      .order('full_name', { ascending: true });
+
+    if (error) throw error;
+    return (data || []).map(this.mapDbProfile);
+  },
+
+  async updateTeamMember(
+    id: string,
+    payload: { role?: CrmUserProfile['role']; status?: CrmUserProfile['status'] }
+  ): Promise<CrmUserProfile> {
+    const dbPayload: Record<string, unknown> = {
+      updated_at: new Date().toISOString()
+    };
+    if (payload.role) dbPayload.role = payload.role;
+    if (payload.status) dbPayload.status = payload.status;
+
+    const { data, error } = await supabaseAdmin
+      .from('crm_profiles')
+      .update(dbPayload)
+      .eq('id', id)
+      .select('id,email,full_name,role,status,created_at,updated_at')
+      .single();
+
+    if (error) throw error;
+    return this.mapDbProfile(data);
+  },
+
+  async getHealthStatus() {
+    const tables = {
+      crm_leads: false,
+      crm_lead_notes: false,
+      crm_follow_ups: false,
+      crm_profiles: false,
+      crm_settings: false,
+    };
+
+    for (const table of Object.keys(tables) as Array<keyof typeof tables>) {
+      const { error } = await supabaseAdmin.from(table).select('id').limit(1);
+      tables[table] = !error;
+    }
+
+    return {
+      supabaseConnected: Object.values(tables).some(Boolean),
+      tables,
+    };
+  },
+
   // --- HELPERS ---
 
-  mapDbLead(db: any): Lead {
+  mapDbProfile(db: Record<string, unknown>): CrmUserProfile {
     return {
-      id: db.id,
-      createdAt: db.created_at,
-      updatedAt: db.updated_at,
-      fullName: db.full_name,
-      companyName: db.company_name,
-      workEmail: db.work_email,
-      whatsappPhone: db.whatsapp_phone,
-      roleInBusiness: db.role_in_business,
-      countryTimezone: db.country_timezone ?? "",
-      preferredLanguage: db.preferred_language ?? "",
-      businessType: db.business_type,
-      serviceNeed: db.service_need,
-      websiteUrl: db.website_url,
-      currentProblem: db.current_problem,
-      projectGoal: db.project_goal,
-      budgetRange: db.budget_range,
-      timeline: db.timeline,
-      selectedPackage: db.selected_package,
-      sourcePage: db.source_page ?? "",
-      status: db.status,
-      priority: db.priority,
-      assignedTo: db.assigned_to ?? undefined,
-      lastContactedAt: db.last_contacted_at,
-      nextFollowUpAt: db.next_follow_up_at,
+      id: asString(db.id),
+      email: asString(db.email),
+      fullName: asString(db.full_name),
+      role: db.role as CrmUserProfile['role'],
+      status: db.status as CrmUserProfile['status'],
+      createdAt: asString(db.created_at),
+      updatedAt: asString(db.updated_at),
+    };
+  },
+
+  mapDbLead(db: Record<string, unknown>): Lead {
+    return {
+      id: asString(db.id),
+      createdAt: asString(db.created_at),
+      updatedAt: asString(db.updated_at),
+      fullName: asString(db.full_name),
+      companyName: asString(db.company_name),
+      workEmail: asString(db.work_email),
+      whatsappPhone: asString(db.whatsapp_phone),
+      roleInBusiness: asString(db.role_in_business),
+      countryTimezone: asString(db.country_timezone),
+      preferredLanguage: asString(db.preferred_language),
+      businessType: asString(db.business_type),
+      serviceNeed: asString(db.service_need),
+      websiteUrl: asOptionalString(db.website_url),
+      currentProblem: asOptionalString(db.current_problem),
+      projectGoal: asOptionalString(db.project_goal),
+      budgetRange: asString(db.budget_range),
+      timeline: asString(db.timeline),
+      selectedPackage: asOptionalString(db.selected_package),
+      sourcePage: asString(db.source_page),
+      status: db.status as Lead['status'],
+      priority: db.priority as Lead['priority'],
+      assignedTo: asOptionalString(db.assigned_to) ?? null,
+      assignedProfile: mapJoinedProfile(db.assigned_profile),
+      lastContactedAt: asOptionalString(db.last_contacted_at),
+      nextFollowUpAt: asOptionalString(db.next_follow_up_at),
       notesCount: Number(db.notes_count ?? 0),
-      rawPayload: db.raw_payload ?? {}
+      rawPayload: isRecord(db.raw_payload) ? db.raw_payload : {}
     };
   },
 
-  mapDbNote(db: any): LeadNote {
+  mapDbNote(db: Record<string, unknown>): LeadNote {
     return {
-      id: db.id,
-      leadId: db.lead_id,
-      createdAt: db.created_at,
-      createdBy: db.created_by,
-      type: db.note_type,
-      note: db.note
+      id: asString(db.id),
+      leadId: asString(db.lead_id),
+      createdAt: asString(db.created_at),
+      createdBy: asString(db.created_by),
+      type: db.note_type as LeadNote['type'],
+      note: asString(db.note)
     };
   },
 
-  mapDbFollowUp(db: any): FollowUp {
+  mapDbFollowUp(db: Record<string, unknown>): FollowUp {
+    const joinedLead = isRecord(db.crm_leads) ? db.crm_leads : null;
     return {
-      id: db.id,
-      leadId: db.lead_id,
-      createdAt: db.created_at,
-      dueAt: db.due_at,
-      completedAt: db.completed_at,
-      status: db.status,
-      assignedTo: db.assigned_to ?? "",
-      title: db.title,
+      id: asString(db.id),
+      leadId: asString(db.lead_id),
+      createdAt: asString(db.created_at),
+      dueAt: asString(db.due_at),
+      completedAt: asOptionalString(db.completed_at),
+      status: db.status as FollowUp['status'],
+      assignedTo: asOptionalString(db.assigned_to) ?? null,
+      assignedProfile: mapJoinedProfile(db.assigned_profile),
+      title: asString(db.title),
+      contactMethod: db.contact_method as FollowUp['contactMethod'],
+      notes: asOptionalString(db.notes),
       // Include lead info if joined
-      leadName: db.crm_leads?.full_name,
-      leadCompany: db.crm_leads?.company_name
+      leadName: joinedLead ? asOptionalString(joinedLead.full_name) : undefined,
+      leadCompany: joinedLead ? asOptionalString(joinedLead.company_name) : undefined
     };
   }
 };

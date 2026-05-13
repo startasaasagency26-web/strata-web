@@ -1,9 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import type { User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase/browser';
 import type { CrmUserProfile, CrmRole } from '../types/crm';
 
 interface CrmAuthContextType {
-  user: any | null;
+  user: User | null;
   profile: CrmUserProfile | null;
   isLoading: boolean;
   role: CrmRole | null;
@@ -16,7 +18,7 @@ interface CrmAuthContextType {
 const CrmAuthContext = createContext<CrmAuthContextType | undefined>(undefined);
 
 export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<CrmUserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
