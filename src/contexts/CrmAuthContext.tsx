@@ -82,8 +82,8 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
       }, 10000);
 
       try {
-        // Use getUser() for server-side validation as requested
-        const { data: { user: authUser }, error: authError } = await supabase.auth.getUser();
+        const { data: { session }, error: authError } = await supabase.auth.getSession();
+        const authUser = session?.user ?? null;
         
         if (!mounted) return;
 
