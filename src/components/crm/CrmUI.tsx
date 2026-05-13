@@ -4,24 +4,23 @@ import { AlertCircle, Loader2 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import type { LeadStatus, LeadPriority } from '../../types/crm';
 
-// --- Badges ---
+// ── Badges ──────────────────────────────────────────────────────────
 
-export const StatusBadge: React.FC<{ status: LeadStatus, className?: string }> = ({ status, className }) => {
+export const StatusBadge: React.FC<{ status: LeadStatus; className?: string }> = ({ status, className }) => {
   const styles: Record<LeadStatus, string> = {
-    new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    contacted: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
-    qualified: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    discovery_scheduled: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-    proposal_sent: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-    negotiating: "bg-orange-500/10 text-orange-400 border-orange-500/20",
-    won: "bg-green-500/10 text-green-400 border-green-500/20",
-    lost: "bg-red-500/10 text-red-400 border-red-500/20",
-    unresponsive: "bg-gray-500/10 text-gray-400 border-gray-500/20",
+    new:                  'bg-blue-50 text-blue-600 border-blue-200',
+    contacted:            'bg-yellow-50 text-yellow-700 border-yellow-200',
+    qualified:            'bg-emerald-50 text-emerald-700 border-emerald-200',
+    discovery_scheduled:  'bg-purple-50 text-purple-600 border-purple-200',
+    proposal_sent:        'bg-cyan-50 text-cyan-700 border-cyan-200',
+    negotiating:          'bg-orange-50 text-orange-600 border-orange-200',
+    won:                  'bg-green-50 text-green-700 border-green-200',
+    lost:                 'bg-red-50 text-red-600 border-red-200',
+    unresponsive:         'bg-gray-100 text-gray-500 border-gray-200',
   };
-
   return (
     <span className={cn(
-      "px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase border whitespace-nowrap",
+      'px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase border whitespace-nowrap',
       styles[status],
       className
     )}>
@@ -30,16 +29,15 @@ export const StatusBadge: React.FC<{ status: LeadStatus, className?: string }> =
   );
 };
 
-export const PriorityBadge: React.FC<{ priority: LeadPriority, className?: string }> = ({ priority, className }) => {
+export const PriorityBadge: React.FC<{ priority: LeadPriority; className?: string }> = ({ priority, className }) => {
   const styles: Record<LeadPriority, string> = {
-    hot: "bg-red-500/20 text-red-400",
-    warm: "bg-orange-500/20 text-orange-400",
-    cold: "bg-blue-500/20 text-blue-400",
+    hot:  'bg-red-50 text-red-600',
+    warm: 'bg-orange-50 text-orange-600',
+    cold: 'bg-blue-50 text-blue-600',
   };
-
   return (
     <span className={cn(
-      "px-2 py-0.5 rounded text-[10px] font-mono font-bold tracking-tighter uppercase",
+      'px-2 py-0.5 rounded text-[10px] font-mono font-bold tracking-tighter uppercase',
       styles[priority],
       className
     )}>
@@ -48,34 +46,29 @@ export const PriorityBadge: React.FC<{ priority: LeadPriority, className?: strin
   );
 };
 
-// --- Metrics ---
+// ── MetricCard ───────────────────────────────────────────────────────
 
-export const MetricCard: React.FC<{ 
-  label: string, 
-  value: string | number, 
-  trend?: string, 
-  trendUp?: boolean,
-  icon?: React.ReactNode 
+export const MetricCard: React.FC<{
+  label: string;
+  value: string | number;
+  trend?: string;
+  trendUp?: boolean;
+  icon?: React.ReactNode;
 }> = ({ label, value, trend, trendUp, icon }) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0, y: 10 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    className="bg-white/5 border border-white/10 rounded-[24px] p-6 flex flex-col justify-between hover:border-white/20 transition-colors group"
+    className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col justify-between hover:shadow-md transition-shadow group"
   >
-    <div className="flex justify-between items-start mb-4">
-      <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white/40 uppercase group-hover:text-white/60 transition-colors">
-        {label}
-      </span>
-      {icon && <span className="text-white/20 group-hover:text-white/40 transition-colors">{icon}</span>}
+    <div className="flex justify-between items-start mb-3">
+      <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-gray-400 uppercase">{label}</span>
+      {icon && <span className="text-gray-300 group-hover:text-gray-400 transition-colors">{icon}</span>}
     </div>
-    <div className="flex items-baseline gap-3">
-      <span className="text-3xl font-display font-bold text-white uppercase tracking-tight">{value}</span>
+    <div className="flex items-baseline gap-2">
+      <span className="text-2xl font-display font-bold text-gray-900 uppercase tracking-tight">{value}</span>
       {trend && (
-        <span className={cn(
-          "text-[10px] font-mono font-bold",
-          trendUp ? "text-emerald-400" : "text-red-400"
-        )}>
+        <span className={cn('text-[10px] font-mono font-bold', trendUp ? 'text-emerald-500' : 'text-red-500')}>
           {trendUp ? '↑' : '↓'} {trend}
         </span>
       )}
@@ -83,63 +76,61 @@ export const MetricCard: React.FC<{
   </motion.div>
 );
 
-// --- States ---
+// ── States ───────────────────────────────────────────────────────────
 
-export const LoadingState: React.FC<{ message?: string }> = ({ message = "Loading..." }) => (
+export const LoadingState: React.FC<{ message?: string }> = ({ message = 'Loading...' }) => (
   <div className="flex flex-col items-center justify-center py-20 gap-4">
-    <Loader2 size={32} className="text-white/20 animate-spin" />
-    <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white/40 uppercase">{message}</span>
+    <Loader2 size={28} className="text-gray-300 animate-spin" />
+    <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-gray-400 uppercase">{message}</span>
   </div>
 );
 
-export const ErrorState: React.FC<{ message: string, onRetry?: () => void }> = ({ message, onRetry }) => (
+export const ErrorState: React.FC<{ message: string; onRetry?: () => void }> = ({ message, onRetry }) => (
   <div className="flex flex-col items-center justify-center py-20 gap-6 text-center max-w-md mx-auto">
-    <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center text-red-500">
-      <AlertCircle size={32} />
+    <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center text-red-500">
+      <AlertCircle size={28} />
     </div>
     <div className="space-y-2">
-      <h3 className="text-xl font-display font-bold uppercase tracking-tight">Operation Failed</h3>
-      <p className="text-sm text-white/40 leading-relaxed">{message}</p>
+      <h3 className="text-lg font-display font-bold uppercase tracking-tight text-gray-900">Something went wrong</h3>
+      <p className="text-sm text-gray-500 leading-relaxed">{message}</p>
     </div>
     {onRetry && (
-      <button 
+      <button
         onClick={onRetry}
-        className="px-6 py-2 rounded-full border border-white/20 text-[10px] font-mono font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all"
+        className="px-6 py-2 rounded-full bg-gray-900 text-white text-[10px] font-mono font-bold tracking-[0.2em] uppercase hover:bg-gray-700 transition-all"
       >
-        Retry Operation
+        Retry
       </button>
     )}
   </div>
 );
 
-export const EmptyState: React.FC<{ title: string, message: string, icon?: React.ReactNode }> = ({ title, message, icon }) => (
+export const EmptyState: React.FC<{ title: string; message: string; icon?: React.ReactNode }> = ({ title, message, icon }) => (
   <div className="flex flex-col items-center justify-center py-20 gap-6 text-center max-w-md mx-auto">
     {icon ? (
-      <div className="text-white/10">{icon}</div>
+      <div className="text-gray-300">{icon}</div>
     ) : (
-      <div className="w-16 h-16 rounded-full border border-dashed border-white/10 flex items-center justify-center text-white/10">
-        <Loader2 size={32} className="opacity-20" />
+      <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-300">
+        <Loader2 size={24} />
       </div>
     )}
     <div className="space-y-2">
-      <h3 className="text-xl font-display font-bold uppercase tracking-tight">{title}</h3>
-      <p className="text-sm text-white/40 leading-relaxed">{message}</p>
+      <h3 className="text-lg font-display font-bold uppercase tracking-tight text-gray-900">{title}</h3>
+      <p className="text-sm text-gray-500 leading-relaxed">{message}</p>
     </div>
   </div>
 );
 
-// --- Form Elements ---
+// ── Form Elements ────────────────────────────────────────────────────
 
 export const CrmInput: React.FC<React.InputHTMLAttributes<HTMLInputElement> & { label?: string }> = ({ label, className, ...props }) => (
   <div className="space-y-1.5 w-full">
     {label && (
-      <label className="block text-[9px] font-mono font-bold tracking-widest text-white/40 uppercase">
-        {label}
-      </label>
+      <label className="block text-[9px] font-mono font-bold tracking-widest text-gray-400 uppercase">{label}</label>
     )}
     <input
       className={cn(
-        "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-white/30 transition-all placeholder:text-white/10",
+        'w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400',
         className
       )}
       {...props}
@@ -150,13 +141,11 @@ export const CrmInput: React.FC<React.InputHTMLAttributes<HTMLInputElement> & { 
 export const CrmSelect: React.FC<React.SelectHTMLAttributes<HTMLSelectElement> & { label?: string }> = ({ label, children, className, ...props }) => (
   <div className="space-y-1.5 w-full">
     {label && (
-      <label className="block text-[9px] font-mono font-bold tracking-widest text-white/40 uppercase">
-        {label}
-      </label>
+      <label className="block text-[9px] font-mono font-bold tracking-widest text-gray-400 uppercase">{label}</label>
     )}
     <select
       className={cn(
-        "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-white/30 transition-all appearance-none cursor-pointer",
+        'w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer',
         className
       )}
       {...props}
