@@ -10,7 +10,7 @@ import {
   ArrowUpDown,
 } from 'lucide-react';
 import { CrmShell } from '../../components/crm/CrmShell';
-import { LoadingState, ErrorState, StatusBadge, PriorityBadge } from '../../components/crm/CrmUI';
+import { LoadingState, ErrorState, StatusBadge, PriorityBadge, CrmInput } from '../../components/crm/CrmUI';
 import { getLeads } from '../../lib/crm/client';
 import type { Lead, LeadStatus } from '../../types/crm';
 import { Link } from 'react-router-dom';
@@ -49,19 +49,70 @@ export const Leads = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<LeadStatus | 'all'>('all');
 
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [workEmail, setWorkEmail] = useState('');
+  const [whatsappPhone, setWhatsappPhone] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+  const [addError, setAddError] = useState('');
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const data = await getLeads();
+      setLeads(data);
+    } catch (err) {
+      setError('Failed to load leads.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getLeads();
-        setLeads(data);
-      } catch (err) {
-        setError('Failed to load leads.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
     fetchData();
   }, []);
+
+  const handleAddLead = async () => {
+    setAddError('');
+    if (!fullName) {
+      setAddError('Full name is required');
+      return;
+    }
+    
+    setIsSaving(true);
+    try {
+      const { data: { session } } = await import('../../lib/supabase/browser').then(m => m.supabase.auth.getSession());
+      const res = await fetch('/api/crm/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session ? { 'Authorization': `Bearer ${session.access_token}` } : {})
+        },
+        body: JSON.stringify({
+          fullName,
+          companyName,
+          workEmail,
+          whatsappPhone
+        })
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to create lead');
+      }
+
+      setShowAddForm(false);
+      setFullName('');
+      setCompanyName('');
+      setWorkEmail('');
+      setWhatsappPhone('');
+      await fetchData();
+    } catch (err: any) {
+      setAddError(err.message || 'Error saving lead');
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const filteredLeads = leads.filter((lead) => {
     const matchesSearch =
@@ -84,7 +135,10 @@ export const Leads = () => {
             <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827]">Leads</h1>
             <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-1">{leads.length} total contacts</p>
           </div>
-          <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-5 py-2.5 rounded-full font-mono text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-0.5">
+          <button 
+            onClick={() => setShowAddForm(true)}
+            className="inline-flex items-center gap-2 bg-[#111827] text-white px-5 py-2.5 rounded-full font-mono text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-0.5"
+          >
             <Plus size={14} /> Add Lead
           </button>
         </div>
@@ -250,6 +304,65 @@ export const Leads = () => {
           </div>
         </div>
       </div>
+
+      {showAddForm && (
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white/90 backdrop-blur-md border border-white/50 rounded-[24px] p-6 w-full max-w-md shadow-xl flex flex-col gap-6">
+            <h2 className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Add Lead</h2>
+            
+            {addError && (
+              <div className="text-[10px] font-mono font-bold text-red-500 bg-red-50 p-3 rounded-xl border border-red-100 uppercase tracking-widest">
+                {addError}
+              </div>
+            )}
+            
+            <div className="space-y-4">
+              <CrmInput 
+                label="Full Name *" 
+                value={fullName} 
+                onChange={(e) => setFullName(e.target.value)} 
+                placeholder="e.g. John Doe"
+              />
+              <CrmInput 
+                label="Company Name" 
+                value={companyName} 
+                onChange={(e) => setCompanyName(e.target.value)} 
+                placeholder="e.g. Acme Corp"
+              />
+              <CrmInput 
+                label="Work Email" 
+                type="email"
+                value={workEmail} 
+                onChange={(e) => setWorkEmail(e.target.value)} 
+                placeholder="john@example.com"
+              />
+              <CrmInput 
+                label="WhatsApp Phone" 
+                value={whatsappPhone} 
+                onChange={(e) => setWhatsappPhone(e.target.value)} 
+                placeholder="+1234567890"
+              />
+            </div>
+            
+            <div className="flex gap-3 justify-end mt-2">
+              <button 
+                onClick={() => setShowAddForm(false)}
+                className="px-5 py-2.5 rounded-full border border-gray-200 text-[#111827] text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-gray-50 transition-all"
+                disabled={isSaving}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleAddLead}
+                disabled={isSaving}
+                className="inline-flex items-center gap-2 bg-[#111827] text-white px-5 py-2.5 rounded-full font-mono text-[10px] font-bold tracking-widest uppercase hover:bg-gray-800 transition-all disabled:opacity-50"
+              >
+                {isSaving ? 'Saving...' : 'Save'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </CrmShell>
   );
 };

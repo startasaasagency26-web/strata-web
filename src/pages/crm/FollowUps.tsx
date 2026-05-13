@@ -104,7 +104,7 @@ export const FollowUps = () => {
                     task.status === 'completed' && "text-gray-400 line-through"
                   )}>{task.title}</h3>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                    <span className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest">Lead: {task.leadId}</span>
+                    <span className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest">Lead: {task.leadName}</span>
                     <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1">
                       <Calendar size={12} /> {new Date(task.dueAt).toLocaleDateString()}
                     </span>

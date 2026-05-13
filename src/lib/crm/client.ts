@@ -43,19 +43,8 @@ export const getDashboard = async (): Promise<DashboardMetrics> => {
       leadsThisWeek: 0
     };
   } catch (err) {
-    console.error('[crm/client] Error fetching dashboard:', err);
-    // Return empty metrics instead of throwing if it's just a data issue
-    return {
-      totalLeads: 0,
-      newLeads: 0,
-      contactedLeads: 0,
-      qualifiedLeads: 0,
-      proposalSent: 0,
-      won: 0,
-      lost: 0,
-      conversionRate: 0,
-      leadsThisWeek: 0
-    };
+    console.error('[crm/client] getDashboard failed:', err);
+    throw err;
   }
 };
 
@@ -81,8 +70,8 @@ export const getLeads = async (params?: {
     const data = await handleResponse(res);
     return data.leads || [];
   } catch (err) {
-    console.error('[crm/client] Error fetching leads:', err);
-    return [];
+    console.error('[crm/client] getLeads failed:', err);
+    throw err;
   }
 };
 
@@ -139,8 +128,8 @@ export const getFollowUps = async (params?: { leadId?: string; status?: string }
     const data = await handleResponse(res);
     return data.followUps || [];
   } catch (err) {
-    console.error('[crm/client] Error fetching follow-ups:', err);
-    return [];
+    console.error('[crm/client] getFollowUps failed:', err);
+    throw err;
   }
 };
 

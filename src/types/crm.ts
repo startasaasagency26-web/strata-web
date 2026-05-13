@@ -44,7 +44,7 @@ export interface LeadNote {
   id: string;
   leadId: string;
   note: string;
-  type: "system" | "user" | "call" | "email" | "whatsapp";
+  type: "system" | "user" | "call" | "email" | "whatsapp" | "general";
   createdBy: string;
   createdAt: string;
 }
@@ -60,6 +60,7 @@ export interface FollowUp {
   createdAt: string;
   leadName?: string;
   leadCompany?: string;
+  contactMethod?: string;
 }
 
 export interface DashboardMetrics {

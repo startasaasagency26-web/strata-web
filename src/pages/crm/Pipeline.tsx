@@ -43,6 +43,13 @@ export const Pipeline = () => {
   if (isLoading) return <CrmShell><LoadingState message="Visualizing sales pipeline..." /></CrmShell>;
   if (error) return <CrmShell><ErrorState message={error} /></CrmShell>;
 
+  const totalValue = leads.reduce((acc, lead) => {
+    const stripped = lead.budgetRange?.replace(/[^0-9]/g, '');
+    const val = stripped ? parseFloat(stripped) : 0;
+    return acc + (isNaN(val) ? 0 : val);
+  }, 0);
+  const formattedTotal = totalValue > 0 ? `RM ${totalValue.toLocaleString()}` : 'RM 0';
+
   return (
     <CrmShell>
       <div className="space-y-8 h-full flex flex-col">
@@ -56,7 +63,7 @@ export const Pipeline = () => {
             <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[24px] px-6 py-3 flex items-center gap-4 shadow-sm">
               <div className="text-right">
                 <p className="text-[9px] font-mono font-bold tracking-widest text-gray-500 uppercase">Total Value</p>
-                <p className="text-lg font-display font-bold text-[#111827] uppercase tracking-tight">RM 142.5k</p>
+                <p className="text-lg font-display font-bold text-[#111827] uppercase tracking-tight">{formattedTotal}</p>
               </div>
               <TrendingUp size={24} className="text-emerald-500" />
             </div>

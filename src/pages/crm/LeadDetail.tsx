@@ -118,18 +118,7 @@ export const LeadDetail = () => {
   if (isLoading) return <CrmShell><LoadingState message="Deep diving into lead data..." /></CrmShell>;
   if (error || !lead) return <CrmShell><ErrorState message={error || 'Lead not found'} onRetry={() => navigate('/crm/leads')} /></CrmShell>;
 
-  // Provide at least 4 dummy notes if there aren't enough to fill the 2x2 grid in the mockup
-  const displayNotes = [...notes];
-  while (displayNotes.length < 4) {
-    displayNotes.push({
-      id: `dummy-${displayNotes.length}`,
-      leadId: lead.id,
-      note: 'System logged an automated interaction check for this lead opportunity.',
-      type: 'system',
-      createdBy: 'Automated',
-      createdAt: new Date(Date.now() - displayNotes.length * 86400000).toISOString()
-    });
-  }
+
 
   // Calendar mock generation
   const daysInMonth = 31;
@@ -139,6 +128,10 @@ export const LeadDetail = () => {
     if (dateNum > 0 && dateNum <= daysInMonth) return dateNum;
     return null;
   });
+
+  const ageDays = lead.createdAt
+    ? Math.floor((Date.now() - new Date(lead.createdAt).getTime()) / 86400000)
+    : null;
 
   return (
     <CrmShell>
@@ -172,7 +165,7 @@ export const LeadDetail = () => {
                 <Clock size={16} className="text-gray-600" />
                 <div className="flex flex-col">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-gray-900">12 Days</span>
+                    <span className="text-sm font-bold text-gray-900">{ageDays !== null ? `${ageDays} Days` : '—'}</span>
                     <span className="text-[8px] font-bold bg-[#2D5BFF] text-white px-1.5 py-0.5 rounded-full uppercase">Active</span>
                   </div>
                   <span className="text-[10px] text-gray-500">Since {new Date(lead.createdAt).toLocaleDateString()}</span>
@@ -199,9 +192,10 @@ export const LeadDetail = () => {
             </div>
             
             <div className="grid grid-cols-2 gap-4">
-              {displayNotes.slice(0, 4).map((note, index) => {
+              {notes.slice(0, 4).map((note, index) => {
                 const colorClass = NOTE_COLORS[index % NOTE_COLORS.length];
-                const mockValue = lead.budgetRange.replace(/[^0-9$.,]/g, '') || '11,250$';
+                const strippedBudget = lead.budgetRange?.replace(/[^0-9]/g, '');
+                const mockValue = strippedBudget ? `RM ${parseInt(strippedBudget).toLocaleString()}` : '—';
                 
                 return (
                   <div key={note.id} className={cn("p-6 rounded-[32px] relative flex flex-col min-h-[160px] shadow-sm", colorClass)}>
