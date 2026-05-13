@@ -68,44 +68,35 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
   useEffect(() => {
     let mounted = true;
 
-    // 1. Robust initialization
     const init = async () => {
       console.log('[auth] Initializing session...');
-      
-      // Safety timeout: 6 seconds
-      const timeout = setTimeout(() => {
-        if (mounted && isLoading) {
-          console.warn('[auth] Initialization timed out after 6s.');
-          setError('Verification timed out. Please check your connection.');
-          setIsLoading(false);
-        }
-      }, 6000);
 
       try {
-        const { data: { session }, error: authError } = await supabase.auth.getSession();
-        const authUser = session?.user ?? null;
-        
+        // getSession reads localStorage - no network call, always instant
+        const { data: { session } } = await supabase.auth.getSession();
+
         if (!mounted) return;
 
-        if (authError) {
-          console.log('[auth] No active session found.');
+        if (session?.user) {
+          console.log('[auth] Session found:', session.user.email);
+          setUser(session.user);
+          // Load profile in background - don't block render
+          fetchProfile(session.user.id).then((p) => {
+            if (mounted) setProfile(p);
+          });
+        } else {
+          console.log('[auth] No active session.');
           setUser(null);
           setProfile(null);
-        } else if (authUser) {
-          console.log('[auth] User authenticated:', authUser.email);
-          setUser(authUser);
-          const profileTimeout = new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000));
-          const p = await Promise.race([fetchProfile(authUser.id), profileTimeout]);
-          if (mounted) setProfile(p);
         }
       } catch (err) {
-        console.error('[auth] Fatal initialization error:', err);
+        console.error('[auth] Init error:', err);
         if (mounted) setError('System failed to initialize. Please refresh.');
       } finally {
-        clearTimeout(timeout);
+        // Always unblock the UI - profile loads separately
         if (mounted) {
-          console.log('[auth] Initialization complete. Loading: false');
           setIsLoading(false);
+          console.log('[auth] Init complete.');
         }
       }
     };
