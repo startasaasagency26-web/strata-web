@@ -69,35 +69,37 @@ export const CrmAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
     let mounted = true;
 
     const init = async () => {
-      console.log('[auth] Initializing session...');
+      // Guard: if Supabase URL is not defined, don't attempt any network calls
+      if (!import.meta.env.VITE_SUPABASE_URL) {
+        console.error('[auth] VITE_SUPABASE_URL is not defined. Check Vercel env vars and redeploy.');
+        if (mounted) {
+          setError('Configuration error. Please contact support.');
+          setIsLoading(false);
+        }
+        return;
+      }
 
       try {
-        // getSession reads localStorage - no network call, always instant
+        // getSession reads localStorage - zero network calls, always instant
         const { data: { session } } = await supabase.auth.getSession();
 
         if (!mounted) return;
 
         if (session?.user) {
-          console.log('[auth] Session found:', session.user.email);
           setUser(session.user);
-          // Load profile in background - don't block render
+          // Load profile in background - never block render on this
           fetchProfile(session.user.id).then((p) => {
             if (mounted) setProfile(p);
           });
         } else {
-          console.log('[auth] No active session.');
           setUser(null);
           setProfile(null);
         }
       } catch (err) {
-        console.error('[auth] Init error:', err);
-        if (mounted) setError('System failed to initialize. Please refresh.');
+        console.error('[auth] Init failed:', err);
+        if (mounted) setError('Failed to initialize. Please refresh.');
       } finally {
-        // Always unblock the UI - profile loads separately
-        if (mounted) {
-          setIsLoading(false);
-          console.log('[auth] Init complete.');
-        }
+        if (mounted) setIsLoading(false);
       }
     };
 

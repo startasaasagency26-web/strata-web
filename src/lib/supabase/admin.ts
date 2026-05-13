@@ -28,4 +28,16 @@ export const createAdminClient = () => {
   );
 };
 
-export const supabaseAdmin = createAdminClient();
+let _adminClient: ReturnType<typeof createAdminClient> | null = null;
+
+export const getAdminClient = () => {
+  if (!_adminClient) _adminClient = createAdminClient();
+  return _adminClient;
+};
+
+// Keep export for backward compatibility but make it lazy.
+export const supabaseAdmin = new Proxy({} as ReturnType<typeof createAdminClient>, {
+  get(_target, prop) {
+    return (getAdminClient() as any)[prop];
+  }
+});
