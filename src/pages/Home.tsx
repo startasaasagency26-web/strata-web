@@ -5,7 +5,6 @@ import { Process } from '../components/sections/Process';
 import { SelectedWork } from '../components/sections/SelectedWork';
 import { Technology } from '../components/sections/Technology';
 import { Benefits } from '../components/sections/Benefits';
-import { Pricing } from '../components/sections/Pricing';
 import { FAQ } from '../components/sections/FAQ';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import { Industries } from '../components/sections/Industries';
@@ -21,7 +20,6 @@ export const Home = () => {
       <Process />
       <SelectedWork />
       <Technology />
-      <Pricing />
       <FAQ />
       <FinalCTA />
     </>

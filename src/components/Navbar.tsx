@@ -20,9 +20,9 @@ export const Navbar = () => {
 
   const navLinks = [
     { name: 'SYSTEMS',    href: '/#services'   },
-    { name: 'OFFERS',     href: '/#products'   },
-    { name: 'STACK',      href: '/#tech'        },
-    { name: 'INDUSTRIES', href: '/#industries'  },
+    { name: 'OFFERS',     href: '/pricing'     },
+    { name: 'STACK',      href: '/#tech'       },
+    { name: 'INDUSTRIES', href: '/#industries' },
     { name: 'ABOUT',      href: '/about'        },
   ];
 

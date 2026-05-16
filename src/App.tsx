@@ -7,6 +7,7 @@ import { About } from "./pages/About";
 import { Diagnostic } from "./pages/Diagnostic";
 import { DiagnosticReceived } from "./pages/DiagnosticReceived";
 import { BuildWithUs } from "./pages/BuildWithUs";
+import { Pricing } from "./pages/Pricing";
 import { Footer } from "./components/Footer";
 import { CONTACT } from "./config/contact";
 
@@ -94,6 +95,7 @@ function App() {
           {/* Public Routes - With Shell */}
           <Route path="/" element={<PublicShell><Home /></PublicShell>} />
           <Route path="/about" element={<PublicShell><About /></PublicShell>} />
+          <Route path="/pricing" element={<PublicShell><Pricing /></PublicShell>} />
           <Route path={CONTACT.requestDemoPath} element={<PublicShell><Diagnostic /></PublicShell>} />
           <Route path={`${CONTACT.requestDemoPath}/received`} element={<PublicShell><DiagnosticReceived /></PublicShell>} />
           <Route path="/build-with-us" element={<PublicShell><BuildWithUs /></PublicShell>} />

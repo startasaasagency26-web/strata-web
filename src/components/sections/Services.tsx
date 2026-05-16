@@ -1,7 +1,6 @@
 import { ArrowRight, ChartNoAxesCombined, Clapperboard, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { CONTACT } from '../../config/contact';
 import { Button } from '../ui/liquid-glass-button';
 
 const systems = [
@@ -95,7 +94,7 @@ export const Services = () => {
                 variant={idx === 0 ? 'glassStrong' : 'glass'}
                 className="w-fit h-auto rounded-full px-6 py-4 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
               >
-                <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
+                <Link to="/#products" className="flex items-center gap-2">
                   {system.cta}
                   <ArrowRight size={13} />
                 </Link>
