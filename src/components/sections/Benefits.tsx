@@ -1,37 +1,36 @@
 import { motion } from 'framer-motion';
 
 const benefits = [
-  { num: "01", title: "CONVERSION FIRST", desc: "Every pixel is engineered to guide users toward your primary objective. We build systems that perform, not just pretty pictures." },
-  { num: "02", title: "PREMIUM INTERFACE", desc: "A luxury aesthetic that positions your brand as an industry leader. We utilize advanced typography, spacing, and motion." },
-  { num: "03", title: "FAST RESPONSIVE", desc: "Mobile must be flawless. We build natively responsive frontends that load in milliseconds across all devices." },
-  { num: "04", title: "SEO FOUNDATION", desc: "Technical SEO built into the core architecture, ensuring search engines index and rank your content effectively." },
-  { num: "05", title: "SCALABLE ARCHITECTURE", desc: "Built on modern frameworks like React and Next.js, your site is ready to grow and integrate with future technologies." },
-  { num: "06", title: "LONG-TERM SYSTEMS", desc: "We don't do disposable websites. We build enduring digital assets that compound in value over time." }
+  { num: '01', title: 'DEMAND CREATION', desc: 'Short-form content and paid media create consistent attention instead of relying on random referrals.' },
+  { num: '02', title: 'LEAD CAPTURE', desc: 'Landing pages and forms turn attention into structured enquiries.' },
+  { num: '03', title: 'CRM CONTROL', desc: 'Leads stop disappearing into WhatsApp because every enquiry enters a clear pipeline.' },
+  { num: '04', title: 'AUTOMATED FOLLOW-UP', desc: 'Prospects are followed up without depending entirely on staff memory or manual chasing.' },
+  { num: '05', title: 'SALES VISIBILITY', desc: 'Owners can see where leads are stuck, what needs action, and where revenue is leaking.' },
+  { num: '06', title: 'OPTIMIZATION LOOP', desc: 'Media, funnel, CRM, and follow-up improve based on real campaign and lead-flow data.' },
 ];
 
 export const Benefits = () => {
   return (
     <section className="py-24 relative overflow-hidden bg-background border-y border-border/50">
       <div className="container mx-auto px-6 md:px-12">
-        
         <div className="flex flex-col md:flex-row gap-12 md:gap-24 mb-16">
           <h2 className="text-4xl md:text-6xl font-display font-bold leading-[0.9] tracking-tighter text-primary max-w-md uppercase">
-            Why serious brands choose Strata.
+            Why the system works.
           </h2>
           <div className="flex-1 max-w-lg border-l border-primary/20 pl-6 md:pl-12">
             <p className="text-base font-sans text-primary mb-6 leading-relaxed">
-              We don't rely on generic templates or bloated builders. Every line of code and interface decision is crafted to ensure your digital presence is faster, more secure, and higher converting than your competition.
+              Demand creation, lead capture, CRM control, and follow-up cannot operate as disconnected pieces. Strata connects them into a system owners can see, run, and improve.
             </p>
             <p className="text-sm font-mono tracking-widest text-muted uppercase">
-              The Strata Advantage
+              The Strata Operating Layer
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 border-t border-border/50 pt-12">
           {benefits.map((benefit, idx) => (
-            <motion.div 
-              key={idx}
+            <motion.div
+              key={benefit.title}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -48,7 +47,6 @@ export const Benefits = () => {
             </motion.div>
           ))}
         </div>
-          
       </div>
     </section>
   );

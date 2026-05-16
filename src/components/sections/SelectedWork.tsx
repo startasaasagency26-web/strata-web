@@ -19,11 +19,11 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "J-ARMOR BRAND WEBSITE",
-    category: "BRAND WEBSITE",
+    title: "J-ARMOR CONVERSION FOUNDATION",
+    category: "ECOMMERCE CONVERSION SYSTEM",
     description:
-      "A product-led brand website built to communicate protection, quality, product clarity, and customer trust through a polished digital presence.",
-    tags: ["Product Brand", "Trust Architecture", "Premium UI"],
+      "Product trust and product clarity were the priority. Strata built a polished conversion foundation with clearer product flow, trust structure, and ecommerce-ready demand capture.",
+    tags: ["Product Flow", "Trust Signals", "Conversion Foundation"],
     cta: "View Project",
     href: "https://www.j-armor.net",
     image: "/work/jarmor-desktop.png",
@@ -31,11 +31,11 @@ const projects: Project[] = [
     urlLabel: "j-armor.net",
   },
   {
-    title: "THUNDERFIX SERVICE WEBSITE",
-    category: "SERVICE BUSINESS WEBSITE",
+    title: "THUNDERFIX REVENUE INFRASTRUCTURE",
+    category: "CRM + FUNNEL SETUP",
     description:
-      "A repair business website built around trust, service clarity, branch discovery, Google/Waze navigation, and WhatsApp-led customer enquiries.",
-    tags: ["Service Website", "Branch Flow", "Enquiry System"],
+      "Repair enquiries needed clearer trust, branch discovery, and action flow. Strata built a service funnel around location visibility, WhatsApp enquiries, and booked-job intent.",
+    tags: ["Revenue Infrastructure", "Branch Flow", "Enquiry Capture"],
     cta: "View Project",
     href: "https://thunderfix.online",
     image: "/work/thunderfix-desktop.png",
@@ -44,10 +44,10 @@ const projects: Project[] = [
   },
   {
     title: "ONE MOBILE ROS APP",
-    category: "DIGITAL GROWTH SYSTEM",
+    category: "FULL SYSTEM INSTALL",
     description:
-      "An internal repair operations system that turns jobs, revenue, technician performance, attribution, and pipeline visibility into a clean owner dashboard.",
-    tags: ["Operations Dashboard", "KPI Tracking", "Revenue Visibility"],
+      "Operations visibility was scattered across jobs, revenue, technician performance, attribution, and pipeline movement. Strata connected the workflow into a clean owner dashboard.",
+    tags: ["Operations Dashboard", "Sales Pipeline", "Revenue Visibility"],
     cta: "View System",
     href: "#",
     image: "/work/One Mobile ROS Dashboard.png",
@@ -143,20 +143,20 @@ export const SelectedWork = () => {
         <div className="mb-16 md:mb-24 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">
-              PORTFOLIO ARCHITECTURE
+              SYSTEM CASE STUDIES
             </p>
             <h2 className="mb-5 font-black text-5xl md:text-6xl uppercase leading-none tracking-[-0.04em] text-primary">
               SELECTED WORK
             </h2>
             <p className="max-w-lg font-sans text-sm leading-relaxed text-muted md:text-base">
-              Real digital architecture built across product brands, service businesses, and internal growth systems.
+              Real systems built across product brands, service businesses, and operations-heavy companies without fake metrics or inflated claims.
             </p>
           </div>
           <a
             href="#"
             className="group inline-flex w-fit items-center gap-2 border-b border-primary pb-1 font-mono text-[10px] font-bold uppercase tracking-widest text-primary transition-all duration-300 hover:gap-4"
           >
-            <span>View All Projects</span>
+            <span>View Project Work</span>
             <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>

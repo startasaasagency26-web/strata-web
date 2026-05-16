@@ -1,5 +1,6 @@
 import { Hero } from '../components/sections/Hero';
 import { Services } from '../components/sections/Services';
+import { SystemFlow } from '../components/sections/SystemFlow';
 import { Process } from '../components/sections/Process';
 import { SelectedWork } from '../components/sections/SelectedWork';
 import { Technology } from '../components/sections/Technology';
@@ -14,6 +15,7 @@ export const Home = () => {
     <>
       <Hero />
       <Services />
+      <SystemFlow />
       <Industries />
       <Benefits />
       <Process />

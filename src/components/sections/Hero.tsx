@@ -8,9 +8,10 @@ import { ArrowRight } from 'lucide-react';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const proofChips = [
-  'PREMIUM INTERFACE',
-  'FAST ARCHITECTURE',
-  'AUTOMATED FUNNELS',
+  'Revenue Infrastructure',
+  'Growth Media System',
+  'CRM + Automation',
+  'Content + Paid Media',
 ];
 
 export const Hero = () => {
@@ -29,7 +30,6 @@ export const Hero = () => {
       aria-labelledby="hero-headline"
       className="relative min-h-[90svh] flex flex-col items-center justify-center overflow-hidden px-5 md:px-12 pt-28 md:pt-32 pb-16"
     >
-      {/* Subtle grid background */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0"
@@ -41,46 +41,38 @@ export const Hero = () => {
         }}
       />
 
-      {/* ── Centered copy ── */}
       <div className="relative z-10 mx-auto w-full max-w-5xl text-center">
-
-        {/* Eyebrow */}
         <motion.p
           {...fadeUp(0)}
           className="mb-6 text-[10px] font-mono tracking-[0.3em] text-muted uppercase"
         >
-          STRATA ARCHITECTURE STUDIO
+          STRATA GROWTH SYSTEMS
         </motion.p>
 
-        {/* Main headline */}
         <motion.div {...fadeUp(0.1)}>
           <h1
             id="hero-headline"
-            className="uppercase font-black leading-[0.86] tracking-[-0.055em] text-primary mb-4"
-            style={{ fontSize: 'clamp(3rem, 10.5vw, 9.5rem)' }}
+            className="font-black leading-[0.88] tracking-[-0.055em] text-primary mb-6"
+            style={{ fontSize: 'clamp(3.25rem, 10vw, 9.5rem)' }}
           >
-            AI-POWERED<br />GROWTH AGENCY
+            Build the system that turns attention into revenue.
           </h1>
         </motion.div>
 
-        {/* Sub-headline */}
         <motion.p
           {...fadeUp(0.18)}
-          className="mb-5 text-[clamp(1rem,2.4vw,1.35rem)] font-black uppercase tracking-[-0.03em] text-primary/30 leading-tight"
+          className="mb-5 text-[clamp(0.95rem,2.2vw,1.2rem)] font-black uppercase tracking-[-0.02em] text-primary/35 leading-tight"
         >
-          WE BUILD SYSTEMS THAT SELL
+          Media creates demand. Infrastructure captures and converts it.
         </motion.p>
 
-        {/* Supporting paragraph */}
         <motion.p
           {...fadeUp(0.26)}
-          className="mx-auto mb-10 max-w-2xl font-sans text-sm md:text-base leading-relaxed text-muted"
+          className="mx-auto mb-10 max-w-3xl font-sans text-sm md:text-base leading-relaxed text-muted"
         >
-          Premium websites, funnels, AI automation, and growth infrastructure for
-          brands that need conversion, speed, and operational leverage.
+          Strata installs revenue infrastructure and growth media systems for service businesses that need better lead capture, follow-up, content, and paid media execution.
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
           {...fadeUp(0.34)}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10"
@@ -92,7 +84,7 @@ export const Hero = () => {
             className="rounded-full font-mono font-bold tracking-[0.16em] text-[10px] uppercase px-8 h-12"
           >
             <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-              Build my system
+              Book Strategy Call
               <ArrowRight size={13} />
             </Link>
           </Button>
@@ -103,13 +95,12 @@ export const Hero = () => {
             size="lg"
             className="rounded-full font-mono font-bold tracking-[0.16em] text-[10px] uppercase px-8 h-12"
           >
-            <Link to="/#selected-work">
-              See the system
+            <Link to="/#system-flow">
+              See The System
             </Link>
           </Button>
         </motion.div>
 
-        {/* Proof chips */}
         <motion.div
           {...fadeUp(0.42)}
           className="flex flex-wrap items-center justify-center gap-2"
@@ -125,7 +116,6 @@ export const Hero = () => {
         </motion.div>
       </div>
 
-      {/* ── Browser video below copy ── */}
       <motion.div
         {...(shouldReduceMotion
           ? {}
@@ -133,12 +123,10 @@ export const Hero = () => {
         )}
         className="relative z-10 mt-14 w-full max-w-[1080px] mx-auto"
       >
-        {/* Browser card */}
         <div
           aria-hidden="true"
           className="w-full rounded-[28px] bg-white border border-border/60 shadow-[0_30px_90px_rgba(0,0,0,0.10)] overflow-hidden"
         >
-          {/* Chrome top bar */}
           <div className="flex items-center gap-3 px-5 py-3 bg-[#F5F5F7] border-b border-border/50">
             <div className="flex items-center gap-1.5 flex-shrink-0">
               <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
@@ -148,14 +136,13 @@ export const Hero = () => {
             <div className="flex-1 flex justify-center">
               <div className="bg-white/70 border border-border/60 rounded-md px-3 py-1 max-w-[280px] w-full flex items-center justify-center">
                 <span className="text-[10px] font-mono text-muted truncate">
-                  strata.ai/growth-command-center
+                  strata.systems/revenue-command-center
                 </span>
               </div>
             </div>
             <div className="w-[54px] flex-shrink-0" />
           </div>
 
-          {/* Video */}
           <div className="relative w-full aspect-[16/9] bg-[#eef0f2]">
             <video
               src="/videos/strata-ai-dashboard-browser.mp4"
@@ -170,7 +157,6 @@ export const Hero = () => {
         </div>
       </motion.div>
 
-      {/* Founder card */}
       <motion.div
         {...(shouldReduceMotion ? {} : { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.6, delay: 0.9, ease: EASE } })}
         className="relative z-10 mt-10"
@@ -184,7 +170,7 @@ export const Hero = () => {
           </div>
           <div>
             <p className="text-[8px] font-mono font-bold tracking-widest text-white/40 uppercase">Founder-led Studio</p>
-            <p className="text-[10px] font-mono text-white/80 leading-tight">Build with Amirul Afiz & Strata.</p>
+            <p className="text-[10px] font-mono text-white/80 leading-tight">Build with Amirul Afiz and Strata.</p>
           </div>
         </Link>
       </motion.div>
