@@ -19,9 +19,9 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'SERVICES',   href: '/#services'   },
-    { name: 'PRODUCTS',   href: '/#products'   },
-    { name: 'TECH',       href: '/#tech'        },
+    { name: 'SYSTEMS',    href: '/#services'   },
+    { name: 'OFFERS',     href: '/#products'   },
+    { name: 'STACK',      href: '/#tech'        },
     { name: 'INDUSTRIES', href: '/#industries'  },
     { name: 'ABOUT',      href: '/about'        },
   ];
@@ -102,7 +102,7 @@ export const Navbar = () => {
               size="sm"
               className="hidden lg:inline-flex rounded-full text-[10px] font-mono font-bold tracking-[0.2em] px-6 h-auto py-2.5"
             >
-              <Link to={CONTACT.requestDemoPath}>REQUEST A DEMO</Link>
+              <Link to={CONTACT.requestDemoPath}>BOOK STRATEGY CALL</Link>
             </Button>
 
             <motion.button
@@ -160,7 +160,7 @@ export const Navbar = () => {
                     className="w-full h-14 rounded-full text-[10px] font-mono font-bold tracking-[0.2em] uppercase"
                   >
                     <Link to={CONTACT.requestDemoPath} onClick={() => setMobileMenuOpen(false)}>
-                      REQUEST A DEMO
+                      BOOK STRATEGY CALL
                     </Link>
                   </Button>
                 </motion.li>

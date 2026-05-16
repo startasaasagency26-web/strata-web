@@ -1,13 +1,15 @@
-import { Server, Smartphone, Zap, Search, Shield, Cpu } from 'lucide-react';
+import { Cpu, LayoutDashboard, MessageSquare, Search, Server, Shield, TrendingUp, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const techStack = [
-  { icon: <Zap size={24} />, name: "React & Next.js", desc: "For lightning-fast, reactive interfaces." },
-  { icon: <Smartphone size={24} />, name: "Responsive UI", desc: "Flawless mobile, tablet, and desktop layouts." },
-  { icon: <Search size={24} />, name: "SEO Built-in", desc: "Structured data and semantic HTML standard." },
-  { icon: <Server size={24} />, name: "CMS Ready", desc: "Easily manage your content at scale." },
-  { icon: <Cpu size={24} />, name: "Automation Ready", desc: "Integrate with any modern CRM or API." },
-  { icon: <Shield size={24} />, name: "Security First", desc: "Enterprise-grade security best practices." }
+const systemStack = [
+  { icon: <Zap size={24} />, name: 'Landing Pages', desc: 'Fast, conversion-focused pages built to capture demand.' },
+  { icon: <LayoutDashboard size={24} />, name: 'CRM Pipelines', desc: 'Structured lead stages so every enquiry has a clear next action.' },
+  { icon: <MessageSquare size={24} />, name: 'WhatsApp / Email Automation', desc: 'Follow-up flows that reduce delay and manual chasing.' },
+  { icon: <TrendingUp size={24} />, name: 'Analytics + Tracking', desc: 'Visibility into traffic, conversion, lead flow, and campaign performance.' },
+  { icon: <Cpu size={24} />, name: 'Content Production Workflow', desc: 'Repeatable system for short-form assets, hooks, captions, and creative testing.' },
+  { icon: <Server size={24} />, name: 'Paid Media Execution', desc: 'Campaign structure for Meta and TikTok to distribute and test demand.' },
+  { icon: <Search size={24} />, name: 'SEO Foundation', desc: 'Technical foundations that help the site stay indexable, fast, and structured.' },
+  { icon: <Shield size={24} />, name: 'Performance + Security', desc: 'Fast, stable, and secure implementation using modern web standards.' },
 ];
 
 export const Technology = () => {
@@ -16,20 +18,20 @@ export const Technology = () => {
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
           <div>
-            <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">Tech Stack</p>
+            <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">System Stack</p>
             <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary max-w-lg">
-              MODERN WEB CAPABILITIES
+              THE STACK BEHIND THE SYSTEM.
             </h2>
           </div>
-          <p className="text-sm font-sans text-muted max-w-sm leading-relaxed">
-            We don't build on legacy platforms. We utilize the latest web technologies to deliver an unfair advantage.
+          <p className="text-sm font-sans text-muted max-w-md leading-relaxed">
+            Strata uses modern web, CRM, automation, tracking, and media workflows to build systems that can be launched, measured, and improved.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {techStack.map((tech, idx) => (
-            <motion.div 
-              key={idx}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {systemStack.map((tech, idx) => (
+            <motion.div
+              key={tech.name}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

@@ -7,31 +7,31 @@ import { Button } from '../ui/liquid-glass-button';
 
 const systemCards = [
   {
-    label: 'SCOPE',
+    label: 'DIAGNOSE',
     position: 'left-[10%] top-[18%] rotate-[-4deg]',
     visibility: 'md:block',
     delay: '0s',
   },
   {
-    label: 'PACKAGE',
+    label: 'MEDIA',
     position: 'right-[12%] top-[20%] rotate-[3deg]',
     visibility: 'md:block',
     delay: '-5s',
   },
   {
-    label: 'DEPOSIT',
+    label: 'CRM',
     position: 'left-[20%] top-[41%] rotate-[2deg]',
     visibility: 'lg:block',
     delay: '-9s',
   },
   {
-    label: 'BUILD START',
+    label: 'FOLLOW-UP',
     position: 'right-[21%] top-[43%] rotate-[-2deg]',
     visibility: 'lg:block',
     delay: '-2s',
   },
   {
-    label: 'LAUNCH',
+    label: 'PIPELINE',
     position: 'left-1/2 top-[31%] -translate-x-1/2 rotate-[1deg]',
     visibility: 'md:block',
     delay: '-12s',
@@ -104,13 +104,13 @@ export const FinalCTA = () => {
 
         <div className="hidden lg:block">
           <span className="absolute left-[1.35rem] top-[18%] font-mono text-[10px] uppercase tracking-[0.55em] text-white/[0.055] [writing-mode:vertical-rl]">
-            Strategy
+            Diagnosis
           </span>
           <span className="absolute right-[1.35rem] top-[25%] font-mono text-[10px] uppercase tracking-[0.55em] text-white/[0.055] [writing-mode:vertical-rl]">
-            Architecture
+            Infrastructure
           </span>
           <span className="absolute left-[1.35rem] bottom-[16%] font-mono text-[10px] uppercase tracking-[0.55em] text-white/[0.055] [writing-mode:vertical-rl]">
-            Execution
+            Pipeline
           </span>
         </div>
       </div>
@@ -144,11 +144,11 @@ export const FinalCTA = () => {
           </div>
 
           <h2 className="mb-8 text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-white md:text-7xl lg:text-8xl">
-            Ready to architect your <br/> business presence online?
+            Ready to stop <br /> leaking revenue?
           </h2>
 
           <p className="mx-auto mb-16 max-w-2xl font-sans text-lg leading-relaxed text-white/70 md:text-xl">
-            Book a Strata strategy call. We’ll confirm your scope, recommend the right package, and start once the deposit is paid.
+            Book a strategy call and we'll identify whether your business needs better media, better infrastructure, or the full growth system.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">

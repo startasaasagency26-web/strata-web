@@ -15,7 +15,7 @@ export const SystemFlow = () => {
   return (
     <section id="system-flow" className="relative border-y border-border/50 bg-surface py-24 md:py-32 scroll-mt-[120px]">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="mb-14 flex flex-col gap-6 md:mb-18 md:flex-row md:items-end md:justify-between">
+        <div className="mb-14 flex flex-col gap-6 md:mb-20 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <p className="mb-4 text-[10px] font-mono uppercase tracking-[0.3em] text-muted">SYSTEM FLOW</p>
             <h2 className="text-4xl md:text-6xl font-black leading-none tracking-[-0.04em] text-primary">

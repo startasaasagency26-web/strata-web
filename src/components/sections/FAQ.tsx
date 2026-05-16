@@ -4,25 +4,29 @@ import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   {
-    question: "WHAT EXACTLY DOES STRATA BUILD?",
-    answer: "We engineer premium, conversion-focused websites and web applications. This ranges from luxury landing pages and corporate sites to complex interactive web apps using modern frameworks like React and Next.js."
+    question: 'What does Strata actually build?',
+    answer: 'Strata builds revenue infrastructure and growth media systems: landing pages, CRM pipelines, automations, content assets, paid media workflows, and performance reporting.',
   },
   {
-    question: "IS THE ARCHITECTURE MOBILE RESPONSIVE?",
-    answer: "Absolutely. We employ a mobile-first philosophy. Every interface is meticulously crafted to ensure flawless performance and accessibility across all devices and screen sizes."
+    question: 'Do I need both systems?',
+    answer: 'No. If you already have demand, start with Revenue Infrastructure. If you need more attention and traffic, start with Growth Media System. If both are weak, install the full system.',
   },
   {
-    question: "HOW IS SEO HANDLED?",
-    answer: "Technical SEO is built directly into our deployment protocol. We ensure proper semantic HTML, lightning-fast load times, Core Web Vitals optimization, and structured data setup."
+    question: 'Is ad spend included?',
+    answer: 'No. Ad spend is paid directly by the client to Meta or TikTok. Strata\'s fee covers strategy, media management, content production, system build, and optimization depending on scope.',
   },
   {
-    question: "WHAT IS THE DEPLOYMENT TIMELINE?",
-    answer: "A standard brand foundation takes 2-4 weeks. Comprehensive multi-page corporate systems or web applications take 6-12 weeks depending on technical complexity and feature requirements."
+    question: 'Do I need to film content?',
+    answer: 'No. Strata can produce short-form video assets using an AI-assisted production workflow, including scripts, hooks, captions, and creative direction.',
   },
   {
-    question: "CAN THE SYSTEM BE SCALED LATER?",
-    answer: "Yes. We build modular, scalable architectures. Our code structure allows for seamless expansion, whether you need to add e-commerce capabilities, complex integrations, or new product verticals in the future."
-  }
+    question: 'Do you guarantee results?',
+    answer: 'No. Strata does not guarantee specific revenue, ROAS, or lead volume. Strata builds the system, strategy, execution, and optimization layer. Results depend on offer, market, budget, and follow-through.',
+  },
+  {
+    question: 'What happens after the strategy call?',
+    answer: 'Strata diagnoses the current leak, recommends the right system, scopes the engagement, and provides a clear implementation plan.',
+  },
 ];
 
 export const FAQ = () => {
@@ -31,15 +35,13 @@ export const FAQ = () => {
   return (
     <section id="faq" className="relative border-b border-border/50 bg-surface py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-12 max-w-5xl">
-        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-          
           <div className="lg:col-span-4">
             <div className="sticky top-24">
               <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">Knowledge Base</p>
-              <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary mb-6">SYSTEM <br/> QUERIES</h2>
+              <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary mb-6">SYSTEM <br /> QUERIES</h2>
               <p className="text-muted font-sans text-sm leading-relaxed">
-                Clear answers to common questions about our technical capabilities and deployment processes.
+                Clear answers about how Strata installs revenue infrastructure, media systems, and follow-up workflows.
               </p>
             </div>
           </div>
@@ -48,12 +50,19 @@ export const FAQ = () => {
             <div className="border-t border-border/50">
               {faqs.map((faq, idx) => {
                 const isOpen = openIdx === idx;
+                const panelId = `faq-panel-${idx}`;
+                const buttonId = `faq-button-${idx}`;
+
                 return (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={faq.question}
                     className="border-b border-border/50 group"
                   >
                     <button
+                      id={buttonId}
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
                       onClick={() => setOpenIdx(isOpen ? null : idx)}
                       className="w-full py-6 md:py-8 flex items-center justify-between text-left focus:outline-none"
                     >
@@ -64,10 +73,13 @@ export const FAQ = () => {
                         {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                       </div>
                     </button>
-                    
+
                     <AnimatePresence>
                       {isOpen && (
                         <motion.div
+                          id={panelId}
+                          role="region"
+                          aria-labelledby={buttonId}
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
@@ -85,9 +97,7 @@ export const FAQ = () => {
               })}
             </div>
           </div>
-
         </div>
-        
       </div>
     </section>
   );
