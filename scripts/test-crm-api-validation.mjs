@@ -69,6 +69,67 @@ assert.equal(created.data.consent, false);
 assert.equal(created.data.marketing_opt_in, false);
 assert.equal('ignored' in created.data, false);
 
+const researched = normalizeManualLeadPayload({
+  fullName: 'Owner / Decision Maker',
+  companyName: 'Banting Auto Care',
+  workEmail: '',
+  whatsappPhone: '',
+  roleInBusiness: 'Owner / Decision Maker',
+  businessType: 'Automotive service business',
+  serviceNeed: 'Revenue Infrastructure',
+  websiteUrl: 'https://example.com',
+  currentProblem: 'Visible enquiry flow depends on WhatsApp with no clear CRM handoff.',
+  budgetRange: 'Not verified',
+  timeline: 'Research outreach',
+  sourcePage: 'https://example.com/source',
+  research: {
+    researchedAt: '2026-05-28',
+    researcher: 'Strata Research Sprint',
+    sourceUrls: ['https://example.com/source'],
+    evidenceSummary: 'Public listing shows service demand and contact path.',
+    visibleGap: 'No clear owned funnel or CRM follow-up path found.',
+    recommendedOffer: 'Revenue Infrastructure',
+    outreachAngle: 'Diagnose whether enquiries are being captured and followed up.',
+    nextAction: 'Send first WhatsApp or email outreach.',
+    score: {
+      demandSignal: 22,
+      visibleSystemLeakage: 26,
+      budgetRoiFit: 18,
+      contactability: 14,
+      strataProofRelevance: 9,
+    },
+  },
+});
+
+assert.equal(researched.ok, true);
+assert.equal(researched.data.company_name, 'Banting Auto Care');
+assert.equal(researched.data.business_type, 'Automotive service business');
+assert.equal(researched.data.service_need, 'Revenue Infrastructure');
+assert.equal(researched.data.website_url, 'https://example.com');
+assert.equal(researched.data.current_problem, 'Visible enquiry flow depends on WhatsApp with no clear CRM handoff.');
+assert.equal(researched.data.source_page, 'https://example.com/source');
+assert.equal(researched.data.priority, 'hot');
+assert.equal(researched.data.consent, false);
+assert.equal(researched.data.marketing_opt_in, false);
+assert.equal(researched.data.raw_payload.origin, 'strata_research_import');
+assert.equal(researched.data.raw_payload.research.score.total, 89);
+assert.equal(researched.data.raw_payload.research.recommendedOffer, 'Revenue Infrastructure');
+
+const badResearch = normalizeManualLeadPayload({
+  fullName: 'Owner',
+  companyName: 'No Evidence Sdn Bhd',
+  research: {
+    sourceUrls: [],
+    visibleGap: '',
+    recommendedOffer: 'Cheap Website',
+    outreachAngle: '',
+    nextAction: '',
+  },
+});
+assert.equal(badResearch.ok, false);
+assert.equal(badResearch.fieldErrors['research.sourceUrls'], 'Add at least one public source URL.');
+assert.equal(badResearch.fieldErrors['research.recommendedOffer'], 'Choose a valid Strata offer.');
+
 const invalidEmail = normalizeManualLeadPayload({
   fullName: 'Ada',
   workEmail: 'bad-email',

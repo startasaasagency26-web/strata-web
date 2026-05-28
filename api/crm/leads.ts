@@ -40,6 +40,9 @@ export default async function handler(request: VercelRequest, response: VercelRe
       }
 
       const lead = await CrmRepository.insertLead(validation.data);
+      const activitySource = typeof validation.data.raw_payload.origin === "string"
+        ? validation.data.raw_payload.origin
+        : "internal_crm";
 
       try {
         await CrmRepository.insertActivityLog({
@@ -48,7 +51,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
           action: "lead.created",
           entityType: "lead",
           entityId: lead.id,
-          metadata: { source: "internal_crm" }
+          metadata: { source: activitySource }
         });
       } catch (logError) {
         console.error("[api/crm/leads] Failed to record lead creation activity:", logError);

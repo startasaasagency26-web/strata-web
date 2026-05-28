@@ -13,6 +13,32 @@ export type LeadPriority = "hot" | "warm" | "cold";
 export type LeadNoteType = "general" | "call" | "whatsapp" | "email" | "follow_up" | "system";
 export type FollowUpStatus = "pending" | "completed" | "cancelled" | "overdue";
 export type ContactMethod = "whatsapp" | "email" | "call";
+export type StrataRecommendedOffer =
+  | "Revenue Infrastructure"
+  | "Growth Media System"
+  | "Full System Install"
+  | "System Care Plan";
+
+export interface LeadResearchScore {
+  demandSignal: number;
+  visibleSystemLeakage: number;
+  budgetRoiFit: number;
+  contactability: number;
+  strataProofRelevance: number;
+  total: number;
+}
+
+export interface LeadResearchContext {
+  researchedAt?: string;
+  researcher?: string;
+  sourceUrls: string[];
+  evidenceSummary?: string;
+  visibleGap: string;
+  recommendedOffer: StrataRecommendedOffer;
+  outreachAngle: string;
+  nextAction: string;
+  score: LeadResearchScore;
+}
 
 export interface CrmProfileSummary {
   id: string;

@@ -2,9 +2,11 @@ import type {
   FollowUpStatus,
   CrmRole,
   CrmUserProfile,
+  LeadResearchContext,
   LeadNoteType,
   LeadPriority,
   LeadStatus,
+  StrataRecommendedOffer,
 } from "../../types/crm.js";
 import { normalizePhone } from "./lead-schema.js";
 
@@ -32,8 +34,36 @@ export const FOLLOW_UP_STATUSES: FollowUpStatus[] = ["pending", "completed", "ca
 export const CONTACT_METHODS = ["whatsapp", "email", "call"] as const;
 export const CRM_ROLES: CrmRole[] = ["admin", "manager"];
 export const CRM_USER_STATUSES: CrmUserProfile["status"][] = ["active", "invited", "disabled"];
+export const STRATA_RECOMMENDED_OFFERS: StrataRecommendedOffer[] = [
+  "Revenue Infrastructure",
+  "Growth Media System",
+  "Full System Install",
+  "System Care Plan",
+];
 
 export type ContactMethod = (typeof CONTACT_METHODS)[number];
+
+export type ManualLeadCreatePayload = {
+  fullName: string;
+  companyName?: string;
+  workEmail?: string;
+  whatsappPhone?: string;
+  roleInBusiness?: string;
+  countryTimezone?: string;
+  preferredLanguage?: string;
+  businessType?: string;
+  serviceNeed?: string;
+  websiteUrl?: string;
+  currentProblem?: string;
+  projectGoal?: string;
+  budgetRange?: string;
+  selectedPackage?: string;
+  timeline?: string;
+  sourcePage?: string;
+  status?: LeadStatus;
+  priority?: LeadPriority;
+  research?: LeadResearchContext;
+};
 
 export type ManualLeadInsertPayload = {
   full_name: string;
@@ -114,6 +144,8 @@ const optionalTrimmedString = (value: unknown) => {
   return trimmed || undefined;
 };
 
+const optionalRecord = (value: unknown) => (isRecord(value) ? value : undefined);
+
 const isIsoDate = (value: string) => {
   const time = Date.parse(value);
   return Number.isFinite(time);
@@ -123,6 +155,86 @@ const isValidUuid = (value: string) => uuidPattern.test(value);
 
 const pushError = (fieldErrors: FieldErrors, key: string, message: string) => {
   fieldErrors[key] = message;
+};
+
+const normalizeStringArray = (value: unknown) => {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((item) => trimString(item))
+    .filter(Boolean)
+    .slice(0, 12);
+};
+
+const normalizeScorePart = (value: unknown) => {
+  const score = typeof value === "number" ? value : Number.parseFloat(trimString(value));
+  if (!Number.isFinite(score)) return 0;
+  return Math.max(0, Math.min(100, Math.round(score)));
+};
+
+const priorityFromResearchScore = (total: number): LeadPriority => {
+  if (total >= 75) return "hot";
+  if (total >= 55) return "warm";
+  return "cold";
+};
+
+const normalizeResearchContext = (
+  value: unknown,
+  fieldErrors: FieldErrors,
+): LeadResearchContext | undefined => {
+  if (value === undefined || value === null) return undefined;
+
+  const rawResearch = optionalRecord(value);
+  if (!rawResearch) {
+    pushError(fieldErrors, "research", "Submit valid research details.");
+    return undefined;
+  }
+
+  const sourceUrls = normalizeStringArray(rawResearch.sourceUrls);
+  const visibleGap = trimString(rawResearch.visibleGap);
+  const recommendedOffer = trimString(rawResearch.recommendedOffer) as StrataRecommendedOffer;
+  const outreachAngle = trimString(rawResearch.outreachAngle);
+  const nextAction = trimString(rawResearch.nextAction);
+  const rawScore = optionalRecord(rawResearch.score);
+
+  if (sourceUrls.length === 0) {
+    pushError(fieldErrors, "research.sourceUrls", "Add at least one public source URL.");
+  }
+  if (!visibleGap) pushError(fieldErrors, "research.visibleGap", "Visible gap is required.");
+  if (!STRATA_RECOMMENDED_OFFERS.includes(recommendedOffer)) {
+    pushError(fieldErrors, "research.recommendedOffer", "Choose a valid Strata offer.");
+  }
+  if (!outreachAngle) pushError(fieldErrors, "research.outreachAngle", "Outreach angle is required.");
+  if (!nextAction) pushError(fieldErrors, "research.nextAction", "Next action is required.");
+  if (!rawScore) pushError(fieldErrors, "research.score", "Research score is required.");
+
+  const demandSignal = normalizeScorePart(rawScore?.demandSignal);
+  const visibleSystemLeakage = normalizeScorePart(rawScore?.visibleSystemLeakage);
+  const budgetRoiFit = normalizeScorePart(rawScore?.budgetRoiFit);
+  const contactability = normalizeScorePart(rawScore?.contactability);
+  const strataProofRelevance = normalizeScorePart(rawScore?.strataProofRelevance);
+  const computedTotal = demandSignal + visibleSystemLeakage + budgetRoiFit + contactability + strataProofRelevance;
+  const total = rawScore && "total" in rawScore
+    ? normalizeScorePart(rawScore.total)
+    : Math.min(100, computedTotal);
+
+  return {
+    researchedAt: optionalTrimmedString(rawResearch.researchedAt),
+    researcher: optionalTrimmedString(rawResearch.researcher),
+    sourceUrls,
+    evidenceSummary: optionalTrimmedString(rawResearch.evidenceSummary),
+    visibleGap,
+    recommendedOffer,
+    outreachAngle,
+    nextAction,
+    score: {
+      demandSignal,
+      visibleSystemLeakage,
+      budgetRoiFit,
+      contactability,
+      strataProofRelevance,
+      total,
+    },
+  };
 };
 
 const validatePayloadShape = (payload: unknown): ValidationResult<Record<string, unknown>> => {
@@ -145,15 +257,30 @@ export const normalizeManualLeadPayload = (
   const companyName = trimString(rawPayload.companyName) || "Independent";
   const workEmail = trimString(rawPayload.workEmail).toLowerCase();
   const whatsappPhone = normalizePhone(rawPayload.whatsappPhone);
+  const research = normalizeResearchContext(rawPayload.research, fieldErrors);
+  const status = optionalTrimmedString(rawPayload.status) as LeadStatus | undefined;
+  const priority = optionalTrimmedString(rawPayload.priority) as LeadPriority | undefined;
 
   if (!fullName) pushError(fieldErrors, "fullName", "Full name is required.");
   if (workEmail && !emailPattern.test(workEmail)) {
     pushError(fieldErrors, "workEmail", "Enter a valid email address.");
   }
+  if (status && !LEAD_STATUSES.includes(status)) {
+    pushError(fieldErrors, "status", "Choose a valid lead status.");
+  }
+  if (priority && !LEAD_PRIORITIES.includes(priority)) {
+    pushError(fieldErrors, "priority", "Choose a valid lead priority.");
+  }
 
   if (Object.keys(fieldErrors).length > 0) {
     return { ok: false, fieldErrors };
   }
+
+  const origin = research ? "strata_research_import" : "internal_crm_manual_entry";
+  const sourcePage =
+    optionalTrimmedString(rawPayload.sourcePage) ??
+    research?.sourceUrls[0] ??
+    "Internal CRM";
 
   return {
     ok: true,
@@ -162,26 +289,32 @@ export const normalizeManualLeadPayload = (
       company_name: companyName,
       work_email: workEmail,
       whatsapp_phone: whatsappPhone,
-      role_in_business: "Unknown",
-      country_timezone: "Malaysia",
-      preferred_language: "English",
-      business_type: "Manual CRM Entry",
-      service_need: "Not specified",
-      budget_range: "Not specified",
-      timeline: "Not specified",
-      source_page: "Internal CRM",
-      status: "new",
-      priority: "warm",
+      role_in_business: optionalTrimmedString(rawPayload.roleInBusiness) ?? "Unknown",
+      country_timezone: optionalTrimmedString(rawPayload.countryTimezone) ?? "Malaysia",
+      preferred_language: optionalTrimmedString(rawPayload.preferredLanguage) ?? "English",
+      business_type: optionalTrimmedString(rawPayload.businessType) ?? "Manual CRM Entry",
+      service_need: optionalTrimmedString(rawPayload.serviceNeed) ?? "Not specified",
+      website_url: optionalTrimmedString(rawPayload.websiteUrl),
+      current_problem: optionalTrimmedString(rawPayload.currentProblem),
+      project_goal: optionalTrimmedString(rawPayload.projectGoal),
+      selected_package: optionalTrimmedString(rawPayload.selectedPackage),
+      budget_range: optionalTrimmedString(rawPayload.budgetRange) ?? "Not specified",
+      timeline: optionalTrimmedString(rawPayload.timeline) ?? "Not specified",
+      source_page: sourcePage,
+      status: status ?? "new",
+      priority: priority ?? (research ? priorityFromResearchScore(research.score.total) : "warm"),
       consent: false,
       marketing_opt_in: false,
       raw_payload: {
-        origin: "internal_crm_manual_entry",
+        origin,
         submittedFields: {
           fullName,
           companyName,
           workEmail: workEmail || null,
           whatsappPhone: whatsappPhone || null,
+          sourcePage,
         },
+        ...(research ? { research } : {}),
       },
     },
   };

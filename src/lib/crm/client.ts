@@ -11,6 +11,7 @@ import type {
   FollowUpCreatePayload,
   FollowUpUpdatePayload,
   LeadUpdatePayload,
+  ManualLeadCreatePayload,
   SettingsUpdatePayload,
   TeamUpdatePayload
 } from "./api-validation.js";
@@ -137,12 +138,7 @@ export const getLead = async (id: string): Promise<Lead | null> => {
   return data.lead as Lead;
 };
 
-export const createLead = async (payload: {
-  fullName: string;
-  companyName?: string;
-  workEmail?: string;
-  whatsappPhone?: string;
-}): Promise<Lead> => {
+export const createLead = async (payload: ManualLeadCreatePayload): Promise<Lead> => {
   const headers = await getAuthHeader();
   const res = await fetch('/api/crm/leads', {
     method: 'POST',
