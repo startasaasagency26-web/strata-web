@@ -102,7 +102,7 @@ export const Navbar = () => {
               size="sm"
               className="hidden lg:inline-flex rounded-full text-[10px] font-mono font-bold tracking-[0.2em] px-6 h-auto py-2.5"
             >
-              <Link to={CONTACT.requestDemoPath}>BOOK STRATEGY CALL</Link>
+              <Link to={CONTACT.requestDemoPath}>REQUEST DIAGNOSIS</Link>
             </Button>
 
             <motion.button
@@ -160,9 +160,19 @@ export const Navbar = () => {
                     className="w-full h-14 rounded-full text-[10px] font-mono font-bold tracking-[0.2em] uppercase"
                   >
                     <Link to={CONTACT.requestDemoPath} onClick={() => setMobileMenuOpen(false)}>
-                      BOOK STRATEGY CALL
+                      REQUEST DIAGNOSIS
                     </Link>
                   </Button>
+                </motion.li>
+                <motion.li
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="mt-2 w-full max-w-xs"
+                >
+                  <p className="text-center font-mono text-[9px] font-bold uppercase leading-relaxed tracking-[0.24em] text-white/35">
+                    Revenue Infrastructure for Service Businesses
+                  </p>
                 </motion.li>
               </ul>
             </nav>

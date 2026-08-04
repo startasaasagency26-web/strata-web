@@ -1,12 +1,12 @@
 
 const capabilities = [
-  "Web Design",
-  "Web Development",
-  "SEO Optimization",
-  "Performance",
-  "Landing Pages",
-  "Brand Systems",
-  "Mobile Responsive Builds"
+  "Revenue Infrastructure",
+  "Growth Media System",
+  "Lead Capture",
+  "CRM & Pipeline",
+  "Follow-Up Automation",
+  "Paid Media",
+  "Reporting & Visibility"
 ];
 
 export const TrustStrip = () => {

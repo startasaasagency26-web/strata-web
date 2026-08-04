@@ -2,6 +2,7 @@ import { ArrowRight, ChartNoAxesCombined, Clapperboard, Check } from 'lucide-rea
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/liquid-glass-button';
+import { CONTACT } from '../../config/contact';
 
 const systems = [
   {
@@ -11,14 +12,13 @@ const systems = [
     description:
       'For businesses that already have attention, referrals, ads, or enquiries - but lose leads because the capture and follow-up system is weak.',
     bullets: [
-      'Landing page / sales page',
-      'Lead capture form',
-      'CRM pipeline setup',
-      'WhatsApp / email follow-up automation',
-      'Staff task flow',
-      'Analytics and handover',
+      'Lead capture: landing pages, sales pages, and forms',
+      'CRM: pipeline stages and lead ownership',
+      'Automation: WhatsApp and email follow-up flows',
+      'Follow-up: staff task flow and next-action clarity',
+      'Reporting: analytics, lead-flow visibility, and handover',
     ],
-    cta: 'Diagnose My Revenue System',
+    cta: 'Diagnose My Lead Flow',
   },
   {
     icon: <Clapperboard size={26} className="text-primary" />,
@@ -27,15 +27,14 @@ const systems = [
     description:
       'For businesses that need consistent content, paid media, and a repeatable system for creating attention.',
     bullets: [
-      'Short-form video assets',
-      'Hooks, scripts, and captions',
-      'Organic content system',
-      'Paid ad creatives',
-      'Meta / TikTok campaign management',
-      'Monthly media calendar',
-      'Performance reporting',
+      'Content: short-form video assets, hooks, and scripts',
+      'Organic: repeatable posting and content system',
+      'Paid media: ad creative and offer testing',
+      'Distribution: Meta and TikTok campaign management',
+      'Planning: monthly media calendar',
+      'Reporting: campaign performance review',
     ],
-    cta: 'Build My Media System',
+    cta: 'Request Diagnosis',
   },
 ];
 
@@ -94,7 +93,7 @@ export const Services = () => {
                 variant={idx === 0 ? 'glassStrong' : 'glass'}
                 className="w-fit h-auto rounded-full px-6 py-4 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
               >
-                <Link to="/#products" className="flex items-center gap-2">
+                <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
                   {system.cta}
                   <ArrowRight size={13} />
                 </Link>

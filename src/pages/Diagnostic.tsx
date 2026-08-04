@@ -20,9 +20,11 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="border-b border-primary/10 py-6">
-      <button 
+      <button
+        type="button"
+        aria-expanded={isOpen}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between text-left focus:outline-none"
+        className="flex w-full items-center justify-between rounded-2xl text-left focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         <h4 className="text-base font-bold uppercase tracking-tight text-primary md:text-lg">
           {question}
@@ -67,8 +69,8 @@ export const Diagnostic = () => {
       document.head.appendChild(activeDescription);
     }
 
-    document.title = "Request a Strata Diagnostic | Website & Digital System Strategy";
-    activeDescription.content = "Tell Strata what is broken in your website, customer journey, or workflow. Request a diagnostic call to define the right digital build direction.";
+    document.title = "Request Diagnosis | Strata Revenue Infrastructure";
+    activeDescription.content = "Tell Strata where your lead flow is breaking. Request a diagnosis to see where enquiries are lost across capture, CRM, follow-up, and demand.";
 
     return () => {
       document.title = previousTitle;
@@ -259,17 +261,17 @@ export const Diagnostic = () => {
               STRATA DIAGNOSTIC
             </span>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-tight text-primary md:text-7xl lg:text-8xl">
-              Build a Digital Foundation That Actually Supports Your Business
+              Find Out Where Your Lead Flow Is Leaking
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-primary/60 md:text-xl">
-              Tell us where your website, customer journey, or internal workflow is breaking. We'll review your business and show you the right website, platform, or system direction.
+              Tell us how enquiries reach you today and what happens after they arrive. We'll show you whether the leak is in demand, capture, CRM, or follow-up — and which system fixes it.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button 
+              <button
                 onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}
                 className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95"
               >
-                <span className="relative z-10">Start the Diagnostic</span>
+                <span className="relative z-10">Diagnose My Lead Flow</span>
               </button>
               <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>
@@ -289,10 +291,10 @@ export const Diagnostic = () => {
               </div>
               <div className="space-y-6">
                 {[
-                  { id: "01", title: "Business Clarity" },
-                  { id: "02", title: "Page Architecture" },
-                  { id: "03", title: "Digital System Direction" },
-                  { id: "04", title: "Build Roadmap" },
+                  { id: "01", title: "Demand Sources" },
+                  { id: "02", title: "Lead Capture" },
+                  { id: "03", title: "CRM & Follow-Up" },
+                  { id: "04", title: "System Roadmap" },
                 ].map((item) => (
                   <div key={item.id} className="flex items-center gap-6 border-b border-white/5 pb-6 last:border-0 last:pb-0">
                     <span className="font-mono text-xs font-bold text-white/20">{item.id}</span>
@@ -312,16 +314,16 @@ export const Diagnostic = () => {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {[
             {
-              title: "Clarify the Business",
-              desc: "We identify your offer, audience, trust gaps, customer journey, and conversion goal."
+              title: "Locate the Leak",
+              desc: "We trace where enquiries are lost: weak demand, weak capture, no CRM structure, or slow follow-up."
             },
             {
-              title: "Architect the Pages",
-              desc: "We map the website or platform structure around clarity, proof, mobile flow, and enquiry action."
+              title: "Map the Capture Path",
+              desc: "We map how attention should move into a page, a form, a pipeline stage, and a next action."
             },
             {
-              title: "Define the Right Build",
-              desc: "We decide whether you need a website, landing page, e-commerce experience, platform, dashboard, or workflow system."
+              title: "Pick the Right System",
+              desc: "We decide whether you need Revenue Infrastructure, the Growth Media System, or both."
             },
             {
               title: "Shape the Roadmap",
@@ -740,7 +742,7 @@ export const Diagnostic = () => {
                   {step === 7 && (
                     <div className="space-y-12">
                       <div className="space-y-8">
-                        <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">Preferred Strategy Call Time</h3>
+                        <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">Preferred Diagnosis Call Time</h3>
                         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                           <div className="space-y-2">
                             <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Preferred Date</label>
@@ -782,16 +784,19 @@ export const Diagnostic = () => {
                       <div className="flex items-start gap-4">
                         <button
                           type="button"
+                          role="checkbox"
+                          aria-checked={formData.consent}
+                          aria-label="I agree to be contacted by Strata regarding this diagnosis request"
                           onClick={() => setFormData({...formData, consent: !formData.consent})}
                           className={cn(
-                            "mt-1 h-5 w-5 shrink-0 rounded border-2 flex items-center justify-center transition-colors",
+                            "mt-1 h-5 w-5 shrink-0 rounded border-2 flex items-center justify-center transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
                             formData.consent ? "bg-primary border-primary text-white" : "border-primary/10"
                           )}
                         >
                           {formData.consent && <CheckCircle2 size={12} />}
                         </button>
                         <span className="text-xs leading-relaxed text-primary/60">
-                          I agree to be contacted by Strata regarding this diagnostic request. My data will be handled according to Strata's privacy policy.
+                          I agree to be contacted by Strata regarding this diagnosis request. My data will be handled according to Strata's privacy policy.
                         </span>
                       </div>
                     </div>
@@ -872,7 +877,7 @@ export const Diagnostic = () => {
                   Built for serious operators.
                 </h3>
                 <p className="mb-10 text-sm leading-relaxed text-white/50">
-                  Strata works best with businesses that need structure, clarity, and a digital system that supports growth.
+                  Strata works best with businesses that need structure, clarity, and a revenue system they can actually see and run.
                 </p>
 
                 {/* Section 1: Good Fit */}
@@ -882,7 +887,7 @@ export const Diagnostic = () => {
                   </span>
                   <ul className="space-y-4">
                     {[
-                      "Malaysian SMEs that need a stronger digital foundation",
+                      "Malaysian SMEs that need stronger revenue infrastructure",
                       "Service businesses with weak lead capture",
                       "Brands with unclear websites or poor mobile flow",
                       "Operators replacing manual workflows",
@@ -945,9 +950,9 @@ export const Diagnostic = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {[
             { id: "01", title: "Submit the Diagnostic", desc: "You tell us about your business, current problem, intended build, budget, and timeline." },
-            { id: "02", title: "Strata Reviews Fit", desc: "We review your project details and check whether Strata is the right team for the problem." },
-            { id: "03", title: "Strategy Call", desc: "We walk through the best direction for your website, platform, system, or workflow." },
-            { id: "04", title: "Build Roadmap", desc: "If there is fit, we outline the next step, rough scope, and execution path." }
+            { id: "02", title: "Strata Reviews Fit", desc: "We review your details and check whether Strata is the right team for the problem." },
+            { id: "03", title: "Diagnosis Call", desc: "We walk through where your lead flow is leaking and which system closes the gap." },
+            { id: "04", title: "System Roadmap", desc: "If there is fit, we outline the next step, rough scope, and execution path." }
           ].map((item) => (
             <div key={item.id} className="space-y-6">
               <span className="font-mono text-xs font-bold text-white/20">{item.id}</span>
@@ -1006,23 +1011,23 @@ export const Diagnostic = () => {
             {[
               {
                 q: "Is the diagnostic free?",
-                a: "Yes. The initial diagnostic review and strategy call are complementary. Our goal is to ensure we only take on projects where we can provide measurable value."
+                a: "Yes. The initial diagnostic review and diagnosis call are complimentary. Our goal is to ensure we only take on projects where Strata is genuinely the right fit."
               },
               {
                 q: "Do I need to know exactly what I want built?",
-                a: "No. That is exactly what the diagnostic is for. We help you define whether you need a simple website, a complex platform, or an internal operations system based on your business problems."
+                a: "No. That is exactly what the diagnosis is for. We help you decide whether the gap is in demand, capture, CRM, or follow-up, and which system to install first."
               },
               {
                 q: "Does Strata only build websites?",
-                a: "We build digital architecture. This includes business websites, but also extends to custom booking platforms, internal dashboards, e-commerce stores, and AI-assisted workflow systems."
+                a: "No. Strata builds revenue infrastructure — lead capture, CRM, automation, follow-up, and reporting — plus the Growth Media System that creates demand. A page is one component, not the product."
               },
               {
                 q: "What should I prepare before the call?",
-                a: "Simply be ready to discuss your business goals, what is currently slow or manual in your workflow, and what your ideal customer journey looks like. Any existing branding or links are helpful."
+                a: "Be ready to discuss how enquiries reach you today, what happens after they arrive, who follows up, and where you think leads are being lost. Existing links and campaign details help."
               },
               {
                 q: "What happens after the call?",
-                a: "If there is a clear fit, we will provide a build roadmap including a rough scope, timeline, and investment range. You decide whether to proceed with the build or keep the strategy findings."
+                a: "If there is a clear fit, we provide a system roadmap including rough scope, timeline, and investment range. You decide whether to proceed or keep the diagnosis findings."
               }
             ].map((item) => (
               <FAQItem key={item.q} question={item.q} answer={item.a} />

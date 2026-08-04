@@ -1,6 +1,6 @@
 export const CONTACT = {
-  email: "Startasaasagency26@gmail.com",
-  mailto: "mailto:Startasaasagency26@gmail.com",
+  email: "nick@strataagency.tech",
+  mailto: "mailto:nick@strataagency.tech",
   requestDemoPath: "/request-demo",
   whatsapp: {
     nick: {

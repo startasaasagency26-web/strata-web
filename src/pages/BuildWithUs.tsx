@@ -50,7 +50,7 @@ export const BuildWithUs = () => {
             to={CONTACT.requestDemoPath} 
             className="group flex h-14 items-center justify-center gap-3 rounded-full bg-primary px-8 text-[11px] font-bold uppercase tracking-widest text-white transition-all active:scale-95"
           >
-            Request a Diagnostic
+            Request Diagnosis
             <ArrowRight size={16} />
           </Link>
         </motion.div>

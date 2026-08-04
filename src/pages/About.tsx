@@ -19,14 +19,14 @@ export const About = () => {
               ABOUT STRATA
             </span>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-[-0.04em] text-primary md:text-7xl lg:text-8xl">
-              Digital Architecture Built for Real Business Growth
+              Revenue Infrastructure for Service Businesses
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
-              Founded in mid-2025, Strata is a founder-led digital architecture studio helping Malaysian SMEs build websites, service platforms, and web systems that create trust, clarify offers, and capture better enquiries.
+              Founded in mid-2025, Strata is a founder-led studio that installs revenue infrastructure and growth media systems for Malaysian service businesses: lead capture, CRM, automation, follow-up, reporting, and the content and paid media that create demand.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
-                <span className="relative z-10">Book a Strategy Call</span>
+                <span className="relative z-10">Request Diagnosis</span>
               </Link>
               <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>
@@ -63,7 +63,7 @@ export const About = () => {
                 Founder Role
               </div>
               <div className="mt-1 text-xs font-bold uppercase tracking-wider">
-                Digital Architect
+                Revenue Systems Architect
               </div>
             </div>
           </motion.div>
@@ -89,16 +89,16 @@ export const About = () => {
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-primary/60 md:text-xl">
               <p>
-                Strata was founded in mid-2025 after seeing the same problem across too many small and medium businesses: their websites existed, but they did not actually support the business.
+                Strata was founded in mid-2025 after seeing the same problem across too many small and medium businesses: they were generating attention, but had no system to capture it, follow up on it, or convert it.
               </p>
               <p>
-                Many sites looked decent on the surface, but failed where it mattered — unclear offers, weak trust signals, poor mobile experience, no clear customer journey, and no practical lead capture structure.
+                The pieces existed in isolation — a website, a WhatsApp inbox, some content, sometimes ads — but nothing connected them. Enquiries arrived and quietly disappeared, and nobody could see where.
               </p>
               <p className="font-bold text-primary">
                 Strata was built to solve that gap.
               </p>
               <p>
-                We design and build digital foundations that connect brand presentation with real business outcomes: enquiries, clarity, customer confidence, and operational flow.
+                We build the revenue infrastructure behind the business: lead capture, CRM structure, automated follow-up, and reporting owners can actually see and run.
               </p>
             </div>
           </motion.div>
@@ -122,13 +122,13 @@ export const About = () => {
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-primary/60">
               <p>
-                Amirul Afiz, also known as Nick, is the founder of Strata and a conversion-focused business website builder. His work combines website design, customer journey structure, AI-assisted workflows, and practical business operations.
+                Amirul Afiz, also known as Nick, is the founder of Strata. His work combines lead capture, CRM structure, follow-up automation, media execution, and practical business operations.
               </p>
               <p>
                 Strata’s approach is shaped by hands-on experience building for service businesses, local brands, e-commerce, and internal systems — not just designing pages that look good.
               </p>
               <p>
-                The goal is simple: build digital assets that make the business easier to trust, easier to understand, and easier to buy from.
+                The goal is simple: build a system that makes the business easier to trust, easier to understand, and easier to buy from — and that stops losing leads on the way there.
               </p>
             </div>
           </motion.div>
@@ -145,14 +145,14 @@ export const About = () => {
             </h3>
             <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {[
-                "Business website development",
-                "Service business websites",
-                "E-commerce website building",
+                "Lead capture pages and enquiry forms",
+                "CRM pipeline setup and lead stages",
+                "WhatsApp and email follow-up automation",
+                "Reporting and lead-flow visibility",
                 "Landing pages and sales pages",
-                "Website redesign and optimization",
-                "Mobile responsive design",
-                "Basic SEO setup",
-                "Lead capture and contact forms",
+                "Mobile responsive build standards",
+                "Technical SEO foundations",
+                "Short-form content and paid media systems",
                 "AI-assisted content and workflow systems",
                 "Business operations and customer journey systems",
               ].map((highlight) => (
@@ -263,10 +263,10 @@ export const About = () => {
 
             <div className="rounded-[32px] border border-primary/5 bg-[#f4f2ed]/50 p-8 lg:p-10">
               <p className="mb-8 text-sm font-medium italic text-primary/70">
-                "Speak with a team that understands both websites and real customer conversations."
+                "Speak with a team that understands both revenue systems and real customer conversations."
               </p>
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
-                <span className="relative z-10">Book a Strategy Call</span>
+                <span className="relative z-10">Request Diagnosis</span>
               </Link>
             </div>
           </motion.div>
@@ -280,33 +280,33 @@ export const About = () => {
             CAPABILITIES
           </span>
           <h2 className="mb-4 text-4xl font-black tracking-[-0.03em] text-primary text-center md:text-5xl lg:text-6xl lg:text-left">
-            Websites, Platforms, and Systems With Structure
+            Revenue Infrastructure and Growth Media Systems
           </h2>
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-2 lg:gap-6">
           {[
             {
-              title: "Business Websites",
-              desc: "Clean, conversion-focused websites built to explain your offer, build trust, and guide visitors toward enquiry.",
+              title: "Lead Capture",
+              desc: "Landing pages, sales pages, and forms built to turn attention into structured enquiries instead of scattered messages.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-md border-2 border-primary/20" />
             },
             {
-              title: "Service Platforms",
-              desc: "Websites for technical services and local retail that need clear flow and action.",
+              title: "CRM & Pipeline",
+              desc: "Lead stages, ownership, and next actions so every enquiry has a clear position and a clear owner.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-full border-2 border-primary/20" />
             },
             {
-              title: "E-Commerce Experiences",
-              desc: "Product-led stores designed around clarity and customer education.",
+              title: "Automation & Follow-Up",
+              desc: "WhatsApp and email flows that reduce response delay and remove dependence on staff memory.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rotate-45 border-2 border-primary/20" />
             },
             {
-              title: "AI-Assisted Workflow Systems",
-              desc: "Practical web systems that improve content planning, internal operations, and business productivity.",
+              title: "Growth Media System",
+              desc: "Content and paid media that create the demand the infrastructure captures, plus reporting owners can read.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-lg bg-primary/5 flex items-center justify-center"><div className="h-2 w-2 rounded-full bg-primary/20" /></div>
             },
@@ -542,7 +542,7 @@ export const About = () => {
                 aria-hidden="true"
                 className="absolute inset-0 flex items-center justify-center text-center font-display text-4xl font-black uppercase leading-[1.1] tracking-tight text-white/40 blur-2xl md:text-5xl lg:text-7xl"
               >
-                Ready to Build a Digital Foundation That Supports Your Business?
+                Ready to Stop Leaking Revenue?
               </div>
 
               {/* Main Headline with text-shadow */}
@@ -562,17 +562,17 @@ export const About = () => {
                 }}
                 className="relative z-10 font-display text-4xl font-black uppercase leading-[1.1] tracking-tight text-white md:text-5xl lg:text-7xl"
               >
-                Ready to Build a Digital Foundation That Supports Your Business?
+                Ready to Stop Leaking Revenue?
               </motion.h2>
             </div>
 
             <p className="mb-12 text-lg text-white/60 md:text-xl">
-              Book a Strata strategy call and we’ll help clarify the right website, platform, or system for your business stage.
+              Request a Strata diagnosis and we’ll show you where leads are being lost between attention, capture, and follow-up.
             </p>
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-white px-10 text-sm font-bold uppercase tracking-widest text-primary transition-transform active:scale-95 sm:w-auto">
-                <span className="relative z-10">Book a Strategy Call</span>
+                <span className="relative z-10">Request Diagnosis</span>
               </Link>
               <Link to="/#selected-work" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-white/20 px-10 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white/10 active:scale-95 sm:w-auto">
                 <span className="relative z-10">View Selected Work</span>

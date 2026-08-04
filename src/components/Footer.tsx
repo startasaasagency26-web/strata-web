@@ -15,7 +15,7 @@ export const Footer = () => {
               <Logo className="h-10 origin-left mb-6 justify-start" />
             </Link>
             <p className="text-muted text-sm font-sans leading-relaxed mb-6">
-              Strata Agency builds premium digital foundations for serious brands. We combine high-end interfaces with conversion-first architecture.
+              Strata installs revenue infrastructure and growth media systems for service businesses that need better lead capture, CRM control, follow-up, and demand generation.
             </p>
             <div className="flex gap-4">
               <a
@@ -47,7 +47,7 @@ export const Footer = () => {
               <li><Link to="/about" className="text-muted hover:text-primary font-sans transition-colors text-sm">About Strata</Link></li>
               <li><Link to="/#selected-work" className="text-muted hover:text-primary font-sans transition-colors text-sm">Selected Work</Link></li>
               <li><Link to="/#process" className="text-muted hover:text-primary font-sans transition-colors text-sm">Our Process</Link></li>
-              <li><Link to="/#products" className="text-muted hover:text-primary font-sans transition-colors text-sm">Pricing</Link></li>
+              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Pricing</Link></li>
               <li><Link to="/#faq" className="text-muted hover:text-primary font-sans transition-colors text-sm">FAQ</Link></li>
             </ul>
           </div>
@@ -55,23 +55,23 @@ export const Footer = () => {
           <div>
             <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">SERVICES</h4>
             <ul className="space-y-4">
-              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">Premium Web Design</Link></li>
-              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">Web Development</Link></li>
-              <li><Link to="/#tech" className="text-muted hover:text-primary font-sans transition-colors text-sm">SEO & Performance</Link></li>
-              <li><Link to="/#products" className="text-muted hover:text-primary font-sans transition-colors text-sm">Brand Systems</Link></li>
+              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">Revenue Infrastructure</Link></li>
+              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">CRM & Automation</Link></li>
+              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">Growth Media System</Link></li>
+              <li><Link to={CONTACT.requestDemoPath} className="text-muted hover:text-primary font-sans transition-colors text-sm">Lead Flow Diagnosis</Link></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">READY TO SCALE?</h4>
-            <p className="text-muted font-sans text-sm mb-4">Book a call to discuss your project requirements.</p>
+            <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">LEAKING ENQUIRIES?</h4>
+            <p className="text-muted font-sans text-sm mb-4">Diagnose where leads are being lost between attention and follow-up.</p>
             <Button
               asChild
               variant="glassStrong"
               className="mt-2 w-full sm:w-auto rounded-full font-mono tracking-widest text-[10px] font-bold uppercase h-auto py-3 px-6"
             >
               <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-                BOOK STRATEGY CALL <ArrowRight size={16} />
+                REQUEST DIAGNOSIS <ArrowRight size={16} />
               </Link>
             </Button>
             <a href={CONTACT.mailto} className="mt-4 block break-all font-mono text-xs font-bold tracking-widest text-muted transition-colors hover:text-primary">

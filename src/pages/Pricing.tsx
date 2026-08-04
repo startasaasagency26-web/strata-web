@@ -22,7 +22,7 @@ export const Pricing = () => {
             className="w-fit h-auto rounded-full px-8 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
           >
             <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-              Book Strategy Call
+              Request Diagnosis
               <ArrowRight size={14} />
             </Link>
           </Button>
@@ -260,7 +260,7 @@ export const Pricing = () => {
                 className="w-full sm:w-fit h-auto rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
               >
                 <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
-                  Book Full System Strategy Call
+                  Request Full System Diagnosis
                   <ArrowRight size={13} />
                 </Link>
               </Button>
@@ -377,7 +377,7 @@ export const Pricing = () => {
               className="w-full sm:w-fit h-auto rounded-full px-8 py-5 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
             >
               <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
-                Book Strategy Call
+                Request Diagnosis
                 <ArrowRight size={13} />
               </Link>
             </Button>
@@ -416,8 +416,8 @@ export const Pricing = () => {
               answer="No. Strata does not guarantee specific revenue, ROAS, or lead volume. Strata builds the system, strategy, execution, and optimization layer. Results depend on the offer, market, budget, and follow-through."
             />
             <FaqItem 
-              question="What happens after I book a strategy call?"
-              answer="Strata diagnoses the current leak, recommends the right system, scopes the engagement, and provides a clear implementation plan."
+              question="What happens after I request a diagnosis?"
+              answer="Strata reviews your lead flow, diagnoses the current leak, recommends the right system, scopes the engagement, and provides a clear implementation plan."
             />
           </div>
         </div>

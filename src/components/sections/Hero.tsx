@@ -46,7 +46,7 @@ export const Hero = () => {
           {...fadeUp(0)}
           className="mb-6 text-[10px] font-mono tracking-[0.3em] text-muted uppercase"
         >
-          STRATA GROWTH SYSTEMS
+          REVENUE INFRASTRUCTURE FOR SERVICE BUSINESSES
         </motion.p>
 
         <motion.div {...fadeUp(0.1)}>
@@ -84,7 +84,7 @@ export const Hero = () => {
             className="rounded-full font-mono font-bold tracking-[0.16em] text-[10px] uppercase px-8 h-12"
           >
             <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-              Book Strategy Call
+              Diagnose My Lead Flow
               <ArrowRight size={13} />
             </Link>
           </Button>
@@ -136,7 +136,7 @@ export const Hero = () => {
             <div className="flex-1 flex justify-center">
               <div className="bg-white/70 border border-border/60 rounded-md px-3 py-1 max-w-[280px] w-full flex items-center justify-center">
                 <span className="text-[10px] font-mono text-muted truncate">
-                  strata.systems/revenue-command-center
+                  strataagency.tech/revenue-command-center
                 </span>
               </div>
             </div>

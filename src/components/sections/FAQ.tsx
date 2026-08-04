@@ -24,8 +24,8 @@ const faqs = [
     answer: 'No. Strata does not guarantee specific revenue, ROAS, or lead volume. Strata builds the system, strategy, execution, and optimization layer. Results depend on offer, market, budget, and follow-through.',
   },
   {
-    question: 'What happens after the strategy call?',
-    answer: 'Strata diagnoses the current leak, recommends the right system, scopes the engagement, and provides a clear implementation plan.',
+    question: 'What happens after I request a diagnosis?',
+    answer: 'Strata reviews your lead flow, diagnoses the current leak, recommends the right system, scopes the engagement, and provides a clear implementation plan.',
   },
 ];
 
@@ -64,7 +64,7 @@ export const FAQ = () => {
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       onClick={() => setOpenIdx(isOpen ? null : idx)}
-                      className="w-full py-6 md:py-8 flex items-center justify-between text-left focus:outline-none"
+                      className="w-full py-6 md:py-8 flex items-center justify-between text-left rounded-2xl focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     >
                       <span className={`text-base md:text-lg font-mono font-bold tracking-wide pr-8 transition-colors ${isOpen ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>
                         {faq.question}

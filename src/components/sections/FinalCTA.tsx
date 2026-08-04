@@ -148,7 +148,7 @@ export const FinalCTA = () => {
           </h2>
 
           <p className="mx-auto mb-16 max-w-2xl font-sans text-lg leading-relaxed text-white/70 md:text-xl">
-            Book a strategy call and we'll identify whether your business needs better media, better infrastructure, or the full growth system.
+            Request a diagnosis and we'll identify whether your business needs better media, better infrastructure, or the full growth system.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
@@ -159,7 +159,7 @@ export const FinalCTA = () => {
               className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
             >
               <Link to={CONTACT.requestDemoPath} className="flex items-center gap-4">
-                <span>Book Strategy Call</span>
+                <span>Diagnose My Lead Flow</span>
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 transition-colors duration-300">
                   <ArrowRight size={16} />
                 </div>
