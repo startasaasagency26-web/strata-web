@@ -6,51 +6,50 @@ import { CONTACT } from '../../config/contact';
 
 const systems = [
   {
-    icon: <ChartNoAxesCombined size={26} className="text-primary" />,
-    title: 'Revenue Infrastructure',
-    subtitle: 'Capture and convert demand.',
+    icon: <Clapperboard size={26} className="text-primary" />,
+    title: 'Demand Engine',
+    subtitle: 'Create & Feed Attention',
     description:
-      'For businesses that already have attention, referrals, ads, or enquiries - but lose leads because the capture and follow-up system is weak.',
+      'Generates targeted commercial attention through high-converting content, paid creative, and campaigns that feed qualified demand directly into your operating system.',
     bullets: [
-      'Lead capture: landing pages, sales pages, and forms',
-      'CRM: pipeline stages and lead ownership',
-      'Automation: WhatsApp and email follow-up flows',
-      'Follow-up: staff task flow and next-action clarity',
-      'Reporting: analytics, lead-flow visibility, and handover',
+      'Content production: short-form video assets, hooks, and scripts',
+      'Paid media execution: Meta and TikTok campaign management',
+      'Acquisition strategy: offer design and creative testing',
+      'Landing experiences: conversion-focused assets',
+      'Demand analytics: campaign performance and audience tracking',
     ],
-    cta: 'Diagnose My Lead Flow',
+    cta: 'Book a Revenue Systems Audit',
   },
   {
-    icon: <Clapperboard size={26} className="text-primary" />,
-    title: 'Growth Media System',
-    subtitle: 'Create and feed demand.',
+    icon: <ChartNoAxesCombined size={26} className="text-primary" />,
+    title: 'Revenue OS',
+    subtitle: 'Convert, Operate & Optimize Demand',
     description:
-      'For businesses that need consistent content, paid media, and a repeatable system for creating attention.',
+      'The central operating infrastructure that captures inbound leads, runs AI qualification, automates follow-up, and manages sales pipelines with full operational visibility.',
     bullets: [
-      'Content: short-form video assets, hooks, and scripts',
-      'Organic: repeatable posting and content system',
-      'Paid media: ad creative and offer testing',
-      'Distribution: Meta and TikTok campaign management',
-      'Planning: monthly media calendar',
-      'Reporting: campaign performance review',
+      'Inbound capture: landing pages, forms, and WhatsApp widgets',
+      'Centralized CRM: deal stages, lead history, and ownership',
+      'AI qualification: automated lead scoring and context extraction',
+      'Automation: WhatsApp & email follow-up sequences',
+      'Sales operations: staff task assignment and performance reporting',
     ],
-    cta: 'Request Diagnosis',
+    cta: 'Book a Revenue Systems Audit',
   },
 ];
 
 export const Services = () => {
   return (
-    <section id="services" className="py-24 md:py-32 border-t border-border/50">
+    <section id="services" className="py-24 md:py-32 border-t border-border/50 bg-background">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 md:mb-24">
           <div className="max-w-2xl">
-            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">STRATA SYSTEMS</p>
-            <h2 className="text-5xl md:text-6xl font-black leading-none tracking-[-0.04em] text-primary">
-              Two systems. <br /> One growth engine.
+            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">CORE SYSTEMS</p>
+            <h2 className="text-5xl md:text-6xl font-black leading-none tracking-[-0.04em] text-primary uppercase">
+              Demand Engine <br /> Feeds Revenue OS.
             </h2>
           </div>
-          <p className="text-[11px] font-mono text-muted max-w-md uppercase leading-relaxed">
-            Growth does not come from disconnected content, ads, websites, and WhatsApp messages. Strata connects the media layer and revenue layer into one operating system.
+          <p className="text-xs font-mono text-muted max-w-md uppercase leading-relaxed">
+            Growth fails when demand creation and revenue operations run independently. Strata connects the attention layer directly into your revenue infrastructure.
           </p>
         </div>
 
@@ -90,7 +89,7 @@ export const Services = () => {
               </div>
               <Button
                 asChild
-                variant={idx === 0 ? 'glassStrong' : 'glass'}
+                variant={idx === 1 ? 'glassStrong' : 'glass'}
                 className="w-fit h-auto rounded-full px-6 py-4 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
               >
                 <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
@@ -107,9 +106,9 @@ export const Services = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mx-auto mt-14 max-w-3xl text-center text-2xl md:text-4xl font-black tracking-[-0.04em] text-primary"
+          className="mx-auto mt-14 max-w-3xl text-center text-2xl md:text-4xl font-black tracking-[-0.04em] text-primary uppercase"
         >
-          Media creates demand. Infrastructure captures and converts it.
+          Demand Engine creates attention. Revenue OS captures, qualifies, and converts it.
         </motion.p>
       </div>
     </section>

@@ -19,11 +19,12 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'SYSTEMS',    href: '/#services'   },
-    { name: 'OFFERS',     href: '/pricing'     },
-    { name: 'STACK',      href: '/#tech'       },
-    { name: 'INDUSTRIES', href: '/#industries' },
-    { name: 'ABOUT',      href: '/about'        },
+    { name: 'REVENUE OS', href: '/#services' },
+    { name: 'AIOS', href: '/#ai-operating-system' },
+    { name: 'WHO IT\'S FOR', href: '/#industries' },
+    { name: 'PROCESS', href: '/#process' },
+    { name: 'OFFERS', href: '/pricing' },
+    { name: 'ABOUT', href: '/about' },
   ];
 
   return (
@@ -102,7 +103,7 @@ export const Navbar = () => {
               size="sm"
               className="hidden lg:inline-flex rounded-full text-[10px] font-mono font-bold tracking-[0.2em] px-6 h-auto py-2.5"
             >
-              <Link to={CONTACT.requestDemoPath}>REQUEST DIAGNOSIS</Link>
+              <Link to={CONTACT.requestDemoPath}>BOOK REVENUE AUDIT</Link>
             </Button>
 
             <motion.button
@@ -160,7 +161,7 @@ export const Navbar = () => {
                     className="w-full h-14 rounded-full text-[10px] font-mono font-bold tracking-[0.2em] uppercase"
                   >
                     <Link to={CONTACT.requestDemoPath} onClick={() => setMobileMenuOpen(false)}>
-                      REQUEST DIAGNOSIS
+                      BOOK REVENUE AUDIT
                     </Link>
                   </Button>
                 </motion.li>
@@ -171,7 +172,7 @@ export const Navbar = () => {
                   className="mt-2 w-full max-w-xs"
                 >
                   <p className="text-center font-mono text-[9px] font-bold uppercase leading-relaxed tracking-[0.24em] text-white/35">
-                    Revenue Infrastructure for Service Businesses
+                    AI-Powered Revenue Operating System
                   </p>
                 </motion.li>
               </ul>

@@ -14,7 +14,7 @@ export const Pricing = () => {
             Choose the system your business needs next.
           </h1>
           <p className="text-muted font-sans text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-10">
-            Start with the leak. If demand is weak, build the media system. If follow-up and conversion are weak, build the revenue infrastructure. If both are weak, install the full system.
+            Start with your revenue leak. If attention is low, build the Demand Engine. If follow-up and conversion leak, build the Revenue OS. If both are broken, install the full connected system.
           </p>
           <Button
             asChild
@@ -22,7 +22,7 @@ export const Pricing = () => {
             className="w-fit h-auto rounded-full px-8 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
           >
             <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-              Request Diagnosis
+              Book a Revenue Systems Audit
               <ArrowRight size={14} />
             </Link>
           </Button>

@@ -16,11 +16,13 @@ import { CONTACT } from "./config/contact";
 import { CrmAuthProvider } from "./contexts/CrmAuthContext";
 import { ProtectedCrmRoute } from "./components/crm/ProtectedCrmRoute";
 import { Login as CrmLogin } from "./pages/crm/Login";
-import { Dashboard as CrmDashboard } from "./pages/crm/Dashboard";
+import { ResetPassword as CrmResetPassword } from "./pages/crm/ResetPassword";
+import { Dashboard as CrmDashboard, DashboardPreview as CrmDashboardPreview } from "./pages/crm/Dashboard";
 import { Leads as CrmLeads } from "./pages/crm/Leads";
 import { LeadDetail as CrmLeadDetail } from "./pages/crm/LeadDetail";
 import { Pipeline as CrmPipeline } from "./pages/crm/Pipeline";
 import { FollowUps as CrmFollowUps } from "./pages/crm/FollowUps";
+import { Outreach as CrmOutreach } from "./pages/crm/Outreach";
 import { Settings as CrmSettings } from "./pages/crm/Settings";
 
 // Scroll to top on route change
@@ -83,13 +85,16 @@ function App() {
         <NoIndex />
         <Routes>
           {/* CRM Routes - No Shell */}
+          <Route path="/crm-preview" element={<CrmDashboardPreview />} />
           <Route path="/crm/login" element={<CrmLogin />} />
+          <Route path="/crm/reset-password" element={<CrmResetPassword />} />
           
           <Route path="/crm" element={<ProtectedCrmRoute><CrmDashboard /></ProtectedCrmRoute>} />
           <Route path="/crm/leads" element={<ProtectedCrmRoute><CrmLeads /></ProtectedCrmRoute>} />
           <Route path="/crm/leads/:id" element={<ProtectedCrmRoute><CrmLeadDetail /></ProtectedCrmRoute>} />
           <Route path="/crm/pipeline" element={<ProtectedCrmRoute><CrmPipeline /></ProtectedCrmRoute>} />
           <Route path="/crm/follow-ups" element={<ProtectedCrmRoute><CrmFollowUps /></ProtectedCrmRoute>} />
+          <Route path="/crm/outreach" element={<ProtectedCrmRoute><CrmOutreach /></ProtectedCrmRoute>} />
           <Route path="/crm/settings" element={<ProtectedCrmRoute><CrmSettings /></ProtectedCrmRoute>} />
 
           {/* Public Routes - With Shell */}

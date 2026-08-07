@@ -69,8 +69,8 @@ export const Diagnostic = () => {
       document.head.appendChild(activeDescription);
     }
 
-    document.title = "Request Diagnosis | Strata Revenue Infrastructure";
-    activeDescription.content = "Tell Strata where your lead flow is breaking. Request a diagnosis to see where enquiries are lost across capture, CRM, follow-up, and demand.";
+    document.title = "Book a Revenue Systems Audit | Strata Agency";
+    activeDescription.content = "Tell Strata where your lead flow is breaking. Book a revenue systems audit to see where enquiries are lost across capture, CRM, AI qualification, follow-up, and demand.";
 
     return () => {
       document.title = previousTitle;
@@ -258,20 +258,20 @@ export const Diagnostic = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">
-              STRATA DIAGNOSTIC
+              STRATA REVENUE AUDIT
             </span>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-tight text-primary md:text-7xl lg:text-8xl">
-              Find Out Where Your Lead Flow Is Leaking
+              Book Your Revenue Systems Audit
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-primary/60 md:text-xl">
-              Tell us how enquiries reach you today and what happens after they arrive. We'll show you whether the leak is in demand, capture, CRM, or follow-up — and which system fixes it.
+              Tell us how enquiries reach you today and what happens after they arrive. We'll map your lead flow, uncover conversion leaks across capture, CRM, AI, and follow-up — and design your revenue operating system.
             </p>
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}
                 className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95"
               >
-                <span className="relative z-10">Diagnose My Lead Flow</span>
+                <span className="relative z-10">Start Revenue Audit</span>
               </button>
               <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>

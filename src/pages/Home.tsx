@@ -1,24 +1,28 @@
 import { Hero } from '../components/sections/Hero';
-import { Services } from '../components/sections/Services';
+import { BusinessProblem } from '../components/sections/BusinessProblem';
 import { SystemFlow } from '../components/sections/SystemFlow';
-import { Process } from '../components/sections/Process';
-import { SelectedWork } from '../components/sections/SelectedWork';
-import { Technology } from '../components/sections/Technology';
+import { AiOperatingSystem } from '../components/sections/AiOperatingSystem';
+import { Services } from '../components/sections/Services';
 import { Benefits } from '../components/sections/Benefits';
+import { Industries } from '../components/sections/Industries';
+import { SelectedWork } from '../components/sections/SelectedWork';
+import { Process } from '../components/sections/Process';
+import { Technology } from '../components/sections/Technology';
 import { FAQ } from '../components/sections/FAQ';
 import { FinalCTA } from '../components/sections/FinalCTA';
-import { Industries } from '../components/sections/Industries';
 
 export const Home = () => {
   return (
     <>
       <Hero />
-      <Services />
+      <BusinessProblem />
       <SystemFlow />
-      <Industries />
+      <AiOperatingSystem />
+      <Services />
       <Benefits />
-      <Process />
+      <Industries />
       <SelectedWork />
+      <Process />
       <Technology />
       <FAQ />
       <FinalCTA />

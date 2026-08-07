@@ -19,14 +19,14 @@ export const About = () => {
               ABOUT STRATA
             </span>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-[-0.04em] text-primary md:text-7xl lg:text-8xl">
-              Revenue Infrastructure for Service Businesses
+              AI-Powered Revenue Systems &amp; Infrastructure
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
-              Founded in mid-2025, Strata is a founder-led studio that installs revenue infrastructure and growth media systems for Malaysian service businesses: lead capture, CRM, automation, follow-up, reporting, and the content and paid media that create demand.
+              Founded in mid-2025, Strata is a founder-led implementation partner that builds AI-powered revenue operating systems for growing businesses: connecting marketing, lead capture, CRM, AI qualification, follow-up, and sales operations.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
-                <span className="relative z-10">Request Diagnosis</span>
+                <span className="relative z-10">Book Revenue Audit</span>
               </Link>
               <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>

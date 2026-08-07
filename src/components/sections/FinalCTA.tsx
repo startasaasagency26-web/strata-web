@@ -147,9 +147,34 @@ export const FinalCTA = () => {
             Ready to stop <br /> leaking revenue?
           </h2>
 
-          <p className="mx-auto mb-16 max-w-2xl font-sans text-lg leading-relaxed text-white/70 md:text-xl">
-            Request a diagnosis and we'll identify whether your business needs better media, better infrastructure, or the full growth system.
+          <p className="mx-auto mb-10 max-w-2xl font-sans text-lg leading-relaxed text-white/80 md:text-xl">
+            Book a Revenue Systems Audit with Strata. We'll map your lead flow, uncover conversion leaks, and design your connected operating system.
           </p>
+
+          {/* What happens during audit box */}
+          <div className="mx-auto mb-12 max-w-2xl bg-white/5 border border-white/10 rounded-[24px] p-6 text-left backdrop-blur-sm">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-white/50 mb-3">
+              WHAT HAPPENS DURING YOUR REVENUE SYSTEMS AUDIT:
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-sans text-white/80">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/50 shrink-0" />
+                Review current lead acquisition &amp; traffic flow
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/50 shrink-0" />
+                Pinpoint conversion leaks &amp; drop-off points
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/50 shrink-0" />
+                Evaluate CRM &amp; follow-up infrastructure
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/50 shrink-0" />
+                Identify AI &amp; automation opportunities
+              </li>
+            </ul>
+          </div>
 
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Button 
@@ -158,8 +183,8 @@ export const FinalCTA = () => {
               size="lg"
               className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
             >
-              <Link to={CONTACT.requestDemoPath} className="flex items-center gap-4">
-                <span>Diagnose My Lead Flow</span>
+              <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-4">
+                <span>Book a Revenue Systems Audit</span>
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 transition-colors duration-300">
                   <ArrowRight size={16} />
                 </div>

@@ -8,10 +8,11 @@ import { ArrowRight } from 'lucide-react';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const proofChips = [
-  'Revenue Infrastructure',
-  'Growth Media System',
+  'Demand Engine',
+  'Revenue OS',
+  'AI Qualification',
   'CRM + Automation',
-  'Content + Paid Media',
+  'Sales Pipeline',
 ];
 
 export const Hero = () => {
@@ -46,31 +47,31 @@ export const Hero = () => {
           {...fadeUp(0)}
           className="mb-6 text-[10px] font-mono tracking-[0.3em] text-muted uppercase"
         >
-          REVENUE INFRASTRUCTURE FOR SERVICE BUSINESSES
+          AI-POWERED REVENUE OPERATING SYSTEM
         </motion.p>
 
         <motion.div {...fadeUp(0.1)}>
           <h1
             id="hero-headline"
             className="font-black leading-[0.88] tracking-[-0.055em] text-primary mb-6"
-            style={{ fontSize: 'clamp(3.25rem, 10vw, 9.5rem)' }}
+            style={{ fontSize: 'clamp(2.75rem, 8.5vw, 8rem)' }}
           >
-            Build the system that turns attention into revenue.
+            The AI-Powered Revenue Operating System for Modern Businesses.
           </h1>
         </motion.div>
 
         <motion.p
           {...fadeUp(0.18)}
-          className="mb-5 text-[clamp(0.95rem,2.2vw,1.2rem)] font-black uppercase tracking-[-0.02em] text-primary/35 leading-tight"
+          className="mb-5 text-[clamp(0.95rem,2vw,1.15rem)] font-black uppercase tracking-[-0.02em] text-primary/40 leading-tight"
         >
-          Media creates demand. Infrastructure captures and converts it.
+          Demand Engine creates attention. Revenue OS captures, qualifies and converts it.
         </motion.p>
 
         <motion.p
           {...fadeUp(0.26)}
           className="mx-auto mb-10 max-w-3xl font-sans text-sm md:text-base leading-relaxed text-muted"
         >
-          Strata installs revenue infrastructure and growth media systems for service businesses that need better lead capture, follow-up, content, and paid media execution.
+          Strata connects your marketing, lead capture, CRM, AI automation, follow-up and sales operations into one revenue system built to convert demand into measurable growth.
         </motion.p>
 
         <motion.div
@@ -84,7 +85,7 @@ export const Hero = () => {
             className="rounded-full font-mono font-bold tracking-[0.16em] text-[10px] uppercase px-8 h-12"
           >
             <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-              Diagnose My Lead Flow
+              Book a Revenue Systems Audit
               <ArrowRight size={13} />
             </Link>
           </Button>
@@ -96,7 +97,7 @@ export const Hero = () => {
             className="rounded-full font-mono font-bold tracking-[0.16em] text-[10px] uppercase px-8 h-12"
           >
             <Link to="/#system-flow">
-              See The System
+              See How Strata Works
             </Link>
           </Button>
         </motion.div>

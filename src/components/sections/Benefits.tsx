@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 
 const benefits = [
-  { num: '01', title: 'DEMAND CREATION', desc: 'Short-form content and paid media create consistent attention instead of relying on random referrals.' },
-  { num: '02', title: 'LEAD CAPTURE', desc: 'Landing pages and forms turn attention into structured enquiries.' },
-  { num: '03', title: 'CRM CONTROL', desc: 'Leads stop disappearing into WhatsApp because every enquiry enters a clear pipeline.' },
-  { num: '04', title: 'AUTOMATED FOLLOW-UP', desc: 'Prospects are followed up without depending entirely on staff memory or manual chasing.' },
-  { num: '05', title: 'SALES VISIBILITY', desc: 'Owners can see where leads are stuck, what needs action, and where revenue is leaking.' },
-  { num: '06', title: 'OPTIMIZATION LOOP', desc: 'Media, funnel, CRM, and follow-up improve based on real campaign and lead-flow data.' },
+  { num: '01', title: 'EVERY LEAD CAPTURED', desc: 'No inbound enquiry falls through the cracks regardless of whether it arrives via landing page, WhatsApp, call, or ad form.' },
+  { num: '02', title: 'EVERY ENQUIRY FOLLOWED UP', desc: 'Automated WhatsApp and email communication sequences ensure zero leads go cold waiting for a manual response.' },
+  { num: '03', title: 'EVERY OPPORTUNITY VISIBLE', desc: 'Clear pipeline visibility allows management to see exactly where leads sit, who owns them, and where deals get stuck.' },
+  { num: '04', title: 'AUTOMATED WHERE SMART', desc: 'Repetitive intake, scoring, reminders, and task handoffs are automated so staff focus strictly on high-value closing.' },
+  { num: '05', title: 'ONE CONNECTED SYSTEM', desc: 'Replaces scattered spreadsheets and messaging groups with a single infrastructure connecting marketing directly to sales.' },
+  { num: '06', title: 'CONTINUOUS OPTIMIZATION', desc: 'Traffic quality, conversion rates, and pipeline speed are measured and continuously improved based on live operational data.' },
 ];
 
 export const Benefits = () => {
@@ -15,14 +15,14 @@ export const Benefits = () => {
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row gap-12 md:gap-24 mb-16">
           <h2 className="text-4xl md:text-6xl font-display font-bold leading-[0.9] tracking-tighter text-primary max-w-md uppercase">
-            Why the system works.
+            Built for commercial outcomes.
           </h2>
           <div className="flex-1 max-w-lg border-l border-primary/20 pl-6 md:pl-12">
             <p className="text-base font-sans text-primary mb-6 leading-relaxed">
-              Demand creation, lead capture, CRM control, and follow-up cannot operate as disconnected pieces. Strata connects them into a system owners can see, run, and improve.
+              Technical capabilities mean nothing if they don't produce clear business results. Strata measures success by captured demand, pipeline velocity, and revenue conversion.
             </p>
             <p className="text-sm font-mono tracking-widest text-muted uppercase">
-              The Strata Operating Layer
+              The Strata Standard
             </p>
           </div>
         </div>
@@ -38,7 +38,7 @@ export const Benefits = () => {
               className="group flex flex-col"
             >
               <div className="flex items-end justify-between border-b border-border/50 pb-4 mb-4">
-                <h3 className="text-lg font-mono font-bold tracking-widest text-primary">{benefit.title}</h3>
+                <h3 className="text-base md:text-lg font-mono font-bold tracking-wider text-primary">{benefit.title}</h3>
                 <span className="text-sm font-mono text-muted">{benefit.num}</span>
               </div>
               <p className="text-muted font-sans text-sm leading-relaxed">
