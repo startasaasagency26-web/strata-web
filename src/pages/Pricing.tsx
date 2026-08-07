@@ -1,4 +1,4 @@
-import { ArrowRight, Check, ArrowRightLeft, Layers, ShieldCheck, TrendingUp, Users, Wrench } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { CONTACT } from '../config/contact';
