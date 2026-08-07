@@ -101,10 +101,6 @@ const faqs = [
     answer: 'Standard (from RM 5,000/mo) covers a single business operation with core funnels, CRM, AI, and follow-up. Expanded Scope (from RM 7,500/mo) is designed for multi-location businesses, heavy lead volume, complex sales teams, or custom software integrations.',
   },
   {
-    question: 'Do you offer a lower-tier package for early or smaller businesses?',
-    answer: 'For select early-stage or lower-ticket local operations with simpler requirements, we occasionally deploy a Founding Floor setup during our discovery phase. However, our main public commercial anchor is RM 5,000/month to ensure full operational support.',
-  },
-  {
     question: 'What happens during the Revenue Systems Audit?',
     answer: 'During the audit, we analyze your current lead flow, customer value, margin structure, conversion drop-offs, and software tools to determine if Strata Core is a fit and specify your exact implementation scope.',
   },
@@ -170,7 +166,7 @@ export const Pricing = () => {
               What Strata Core Includes
             </h2>
             <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
-              Strata Core is standardized around the same high-converting commercial system. Scope changes only where your business economics or operational complexity require more infrastructure.
+              Strata Core is standardized around the same connected revenue operating system. Scope changes only where your business economics or operational complexity require more infrastructure.
             </p>
           </div>
 
@@ -220,7 +216,7 @@ export const Pricing = () => {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMERCIAL INVESTMENT</p>
           <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-primary uppercase">
-            Standard Investment Anchor
+            Starting Investment
           </h2>
         </div>
 
@@ -349,7 +345,7 @@ export const Pricing = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 relative z-10 items-center">
             <div>
               <span className="mb-3 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
-                HIGH COMPLEXITY &amp; ENTERPRISE
+                EXPANDED INFRASTRUCTURE
               </span>
               <h2 className="mb-6 text-4xl md:text-5xl font-black uppercase leading-tight text-white">
                 Expanded Scope
