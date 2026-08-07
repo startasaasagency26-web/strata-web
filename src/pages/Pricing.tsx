@@ -1,289 +1,400 @@
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, ArrowRightLeft, Layers, ShieldCheck, TrendingUp, Users, Wrench } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { CONTACT } from '../config/contact';
 import { Button } from '../components/ui/liquid-glass-button';
 
+const systemFlowSteps = [
+  'Meta Ads',
+  'Landing Page',
+  'WhatsApp CRM',
+  'AI Qualification',
+  'Automated Follow-Up',
+  'Booking & Reporting',
+];
+
+const coreDeliverables = [
+  'Conversion-focused landing page / offer flow',
+  'Direct WhatsApp & multi-channel lead capture',
+  'Centralized WhatsApp CRM & pipeline management',
+  'AI qualification agents & automated lead scoring',
+  'Automated WhatsApp & email follow-up sequences',
+  'Staff task assignment & team handoff rules',
+  'Booking calendar integration & appointment flow',
+  'Executive reporting dashboard & conversion analytics',
+];
+
+const pricingFactors = [
+  {
+    num: '01',
+    title: 'Average Customer Value',
+    desc: 'Higher-value customers generate greater commercial return, supporting higher acquisition and infrastructure investment.',
+  },
+  {
+    num: '02',
+    title: 'Gross Margin',
+    desc: 'The system architecture and acquisition strategy must make clean commercial sense relative to your margins.',
+  },
+  {
+    num: '03',
+    title: 'Lead Volume',
+    desc: 'Higher enquiry volume requires expanded automation, lead routing rules, database capacity, and tracking infrastructure.',
+  },
+  {
+    num: '04',
+    title: 'Sales Capacity',
+    desc: 'System scope depends on your team\'s current bandwidth to receive, respond to, and convert active inbound demand.',
+  },
+  {
+    num: '05',
+    title: 'Complexity & Integrations',
+    desc: 'Multiple locations, custom CRM workflows, staff roles, third-party software, or legacy integrations increase setup scope.',
+  },
+];
+
+const expandedScopeReasons = [
+  'Multiple branch or office locations',
+  'Multiple offer funnels & audience segments',
+  'High lead volume requiring custom routing',
+  'Custom CRM architecture & team permissions',
+  'Advanced third-party API integrations',
+  'Complex multi-stage automation workflows',
+  'Multiple sales or customer service teams',
+  'High-ticket multi-step sales processes',
+  'Custom executive reporting & dashboards',
+  'Heavy legacy database & software integrations',
+];
+
+const quotingSteps = [
+  {
+    num: '01',
+    title: 'QUALIFY THE BUSINESS',
+    desc: 'We verify whether your offer, market, margins, and sales capacity are commercially suitable for Strata Core.',
+  },
+  {
+    num: '02',
+    title: 'ASSESS ECONOMICS & COMPLEXITY',
+    desc: 'We review customer value, lead volume, operational workflows, branch locations, and required integrations.',
+  },
+  {
+    num: '03',
+    title: 'QUOTE WITHIN APPROVED BAND',
+    desc: 'Final implementation and monthly investment are proposed based on the required infrastructure and commercial opportunity.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is Strata Core?',
+    answer: 'Strata Core is our standardized AI-powered revenue operating system. It connects Meta advertising, landing pages, WhatsApp CRM, AI qualification, automated follow-up, booking, and reporting into one unified commercial infrastructure.',
+  },
+  {
+    question: 'Why does pricing vary if Strata Core is one product?',
+    answer: 'Strata Core uses the same core operating architecture for all clients. However, setup complexity, lead volume, number of locations, custom integrations, and team routing vary depending on your business economics.',
+  },
+  {
+    question: 'Is ad spend included in the monthly fee?',
+    answer: 'No. Ad spend is billed directly by Meta or TikTok to your business account. Strata\'s monthly fee covers system operation, campaign execution, AI qualification, automation maintenance, and optimization.',
+  },
+  {
+    question: 'What is the difference between Standard and Expanded Scope?',
+    answer: 'Standard (from RM 5,000/mo) covers a single business operation with core funnels, CRM, AI, and follow-up. Expanded Scope (from RM 7,500/mo) is designed for multi-location businesses, heavy lead volume, complex sales teams, or custom software integrations.',
+  },
+  {
+    question: 'Do you offer a lower-tier package for early or smaller businesses?',
+    answer: 'For select early-stage or lower-ticket local operations with simpler requirements, we occasionally deploy a Founding Floor setup during our discovery phase. However, our main public commercial anchor is RM 5,000/month to ensure full operational support.',
+  },
+  {
+    question: 'What happens during the Revenue Systems Audit?',
+    answer: 'During the audit, we analyze your current lead flow, customer value, margin structure, conversion drop-offs, and software tools to determine if Strata Core is a fit and specify your exact implementation scope.',
+  },
+];
+
 export const Pricing = () => {
   return (
     <div className="relative pt-32 pb-24 md:pt-40 md:pb-32 bg-background min-h-screen">
-      {/* Hero */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+      
+      {/* SECTION 1 — HERO */}
+      <section className="container mx-auto px-6 md:px-12 mb-20 md:mb-28">
         <div className="text-center max-w-4xl mx-auto">
-          <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">SYSTEMS OFFER</p>
-          <h1 className="text-5xl md:text-7xl font-display font-bold leading-none tracking-tight text-primary mb-8">
-            Choose the system your business needs next.
-          </h1>
-          <p className="text-muted font-sans text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-10">
-            Start with your revenue leak. If attention is low, build the Demand Engine. If follow-up and conversion leak, build the Revenue OS. If both are broken, install the full connected system.
-          </p>
-          <Button
-            asChild
-            variant="glassStrong"
-            className="w-fit h-auto rounded-full px-8 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4"
           >
-            <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-              Book a Revenue Systems Audit
-              <ArrowRight size={14} />
-            </Link>
-          </Button>
+            STRATA CORE
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-7xl font-display font-bold leading-none tracking-tight text-primary mb-8 uppercase"
+          >
+            One Operating System. <br />
+            <span className="text-primary/70">Priced Around Your Business Economics.</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            className="text-muted font-sans text-base md:text-xl leading-relaxed max-w-3xl mx-auto mb-10"
+          >
+            Strata Core connects demand generation, lead capture, WhatsApp CRM, AI qualification, automated follow-up, booking, and reporting into one revenue operating system. Pricing varies based on customer value, sales economics, operational complexity, locations, and required integrations.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.24 }}
+            className="flex justify-center"
+          >
+            <Button
+              asChild
+              variant="glassStrong"
+              className="w-full sm:w-auto h-auto rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
+            >
+              <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
+                Book a Revenue Systems Audit
+                <ArrowRight size={14} />
+              </Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
 
-      {/* Revenue Infrastructure */}
+      {/* SECTION 2 — WHAT STRATA CORE INCLUDES */}
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
-        <div className="mb-12">
-          <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-primary mb-4">
-            Revenue Infrastructure
-          </h2>
-          <p className="text-lg md:text-xl font-sans text-muted max-w-3xl mb-4">
-            For businesses that already have demand but lose leads through weak landing pages, poor follow-up, or no CRM structure.
-          </p>
-          <p className="text-sm font-mono tracking-widest text-primary uppercase font-bold">
-            Purpose: Capture and convert demand.
-          </p>
-        </div>
+        <div className="bg-surface border border-border/60 rounded-[32px] p-8 md:p-14 shadow-sm">
+          <div className="max-w-3xl mb-12">
+            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">PRODUCT ARCHITECTURE</p>
+            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-primary uppercase mb-4">
+              What Strata Core Includes
+            </h2>
+            <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
+              Strata Core is standardized around the same high-converting commercial system. Scope changes only where your business economics or operational complexity require more infrastructure.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <PricingCard
-            title="Foundation"
-            price="RM 8,500"
-            bestFor="One offer, one funnel, one CRM pipeline."
-            features={[
-              "Single funnel",
-              "CRM essential setup",
-              "Core automations",
-              "Lead capture",
-              "Basic analytics",
-              "Handover documentation",
-            ]}
-          />
-          <PricingCard
-            title="Growth"
-            price="RM 14,500"
-            bestFor="Multiple offers, stronger automation, and staff accountability."
-            features={[
-              "Up to 3 funnels",
-              "CRM advanced setup",
-              "Multiple pipelines or offer flows",
-              "Full automation",
-              "Staff accountability rules",
-              "Analytics and reporting setup",
-            ]}
-            featured
-          />
-          <PricingCard
-            title="Scale"
-            price="From RM 20,000"
-            bestFor="Complex operations, upsells, and third-party integrations."
-            features={[
-              "Custom funnel system",
-              "Advanced CRM structure",
-              "Upsell paths",
-              "Complex workflows",
-              "Third-party integrations",
-              "Custom operations logic",
-            ]}
-          />
-        </div>
-        <div className="mt-10">
-          <div className="bg-surface/50 rounded-2xl p-6 md:p-8 border border-border/50 mb-10">
-            <h4 className="font-bold text-primary mb-4 uppercase text-sm tracking-wider">What's Included Across All Tiers:</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8">
-              {[
-                "Conversion-focused landing page / sales page",
-                "Lead capture form",
-                "CRM pipeline setup",
-                "WhatsApp / email / SMS follow-up automation",
-                "Staff workflow and task assignment rules",
-                "Thank-you page",
-                "Mobile-first build",
-                "Analytics setup",
-                "Basic on-page SEO",
-                "Onboarding, staff training documentation, and handover"
-              ].map(item => (
-                <div key={item} className="flex items-start gap-3">
-                  <Check className="mt-0.5 shrink-0 text-primary/70" size={15} />
-                  <span className="text-sm font-sans text-muted">{item}</span>
+          {/* Connected Flow Diagram */}
+          <div className="relative mb-14">
+            <div className="hidden lg:block absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-border/70" aria-hidden="true" />
+            <div className="grid grid-cols-1 gap-3 lg:grid-cols-6 lg:gap-3">
+              {systemFlowSteps.map((step, idx) => (
+                <div key={step} className="relative">
+                  <div className="relative z-10 flex min-h-[76px] items-center justify-between rounded-[18px] border border-border/60 bg-white px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.03)] lg:flex-col lg:items-start lg:justify-between">
+                    <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-muted">
+                      0{idx + 1}
+                    </span>
+                    <span className="text-right font-mono text-xs font-bold uppercase tracking-wider text-primary lg:text-left leading-snug">
+                      {step}
+                    </span>
+                  </div>
+                  {idx < systemFlowSteps.length - 1 && (
+                    <div className="flex justify-center py-1.5 text-primary/35 lg:absolute lg:right-[-1.0rem] lg:top-1/2 lg:z-20 lg:-translate-y-1/2 lg:bg-surface lg:px-1 lg:py-0">
+                      <ArrowRight size={14} />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </div>
-          <div className="flex justify-center">
-            <Button
-              asChild
-              variant="glass"
-              className="w-full sm:w-fit h-auto rounded-full px-8 py-5 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
-            >
-              <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-                Diagnose My Revenue System
-                <ArrowRight size={13} />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
 
-      {/* Growth Media System */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
-        <div className="mb-12">
-          <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-primary mb-4">
-            Growth Media System
-          </h2>
-          <p className="text-lg md:text-xl font-sans text-muted max-w-3xl mb-4">
-            For businesses that need consistent content, paid media, and a repeatable engine for demand creation.
-          </p>
-          <p className="text-sm font-mono tracking-widest text-primary uppercase font-bold">
-            Purpose: Create and feed demand.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <PricingCard
-            title="Content Only"
-            price="RM 3,500/mo"
-            features={[
-              "12 short-form videos per month",
-              "Organic content for Meta + TikTok",
-              "Script, hook, and caption per video",
-              "Monthly content calendar",
-            ]}
-          />
-          <PricingCard
-            title="Content + Ads"
-            subtitle="1 Platform"
-            price="RM 5,500/mo"
-            features={[
-              "12 short-form videos per month",
-              "4 paid ad creatives",
-              "16 total assets",
-              "Ad management on Meta or TikTok",
-              "Monthly reporting",
-            ]}
-          />
-          <PricingCard
-            title="Content + Ads"
-            subtitle="Both Platforms"
-            price="RM 7,500/mo"
-            features={[
-              "16 short-form videos per month",
-              "8 paid ad creatives",
-              "24 total assets",
-              "Meta + TikTok ad management",
-              "Monthly reporting and optimization",
-            ]}
-            featured
-          />
-          <PricingCard
-            title="Full Growth Media System"
-            price="RM 9,500/mo"
-            features={[
-              "20 short-form videos per month",
-              "12 paid ad creatives",
-              "32 total assets",
-              "Meta + TikTok ad management",
-              "Monthly strategy session",
-              "Performance review and optimization",
-            ]}
-          />
-        </div>
-
-        <div className="mt-10">
-          <div className="bg-surface/50 rounded-2xl p-6 md:p-8 border border-border/50 mb-10">
-             <h4 className="font-bold text-primary mb-4 uppercase text-sm tracking-wider">System Deliverables:</h4>
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-3 gap-x-6 mb-8">
-              {[
-                "Short-form video assets",
-                "Scripts, hooks, and captions",
-                "Organic content system",
-                "Paid ad creatives",
-                "Meta / TikTok campaign management",
-                "Monthly media calendar",
-                "Weekly buyer-pain content themes",
-                "Performance reporting and optimization notes",
-              ].map(item => (
+          {/* Standardized Core Deliverables */}
+          <div className="border-t border-border/50 pt-10">
+            <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-primary mb-6">
+              Standardized System Deliverables Across Every Implementation:
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-3.5 gap-x-6">
+              {coreDeliverables.map((item) => (
                 <div key={item} className="flex items-start gap-3">
-                  <Check className="mt-0.5 shrink-0 text-primary/70" size={15} />
-                  <span className="text-sm font-sans text-muted">{item}</span>
+                  <Check className="mt-0.5 shrink-0 text-primary" size={15} />
+                  <span className="text-sm font-sans text-muted leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>
-            
-            <div className="pt-6 border-t border-border/50 text-sm font-sans text-muted space-y-2">
-              <p><strong className="text-primary">Important note:</strong> Ad spend is not included. Client pays Meta and TikTok directly.</p>
-              <p><strong className="text-primary">Recommended minimum ad spend:</strong> RM 1,500–RM 2,000 per platform per month.</p>
-              <p><strong className="text-primary">Minimum commitment:</strong> 3 months.</p>
-            </div>
-          </div>
-
-          <div className="flex justify-center">
-            <Button
-              asChild
-              variant="glass"
-              className="w-full sm:w-fit h-auto rounded-full px-8 py-5 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
-            >
-              <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-                Build My Media System
-                <ArrowRight size={13} />
-              </Link>
-            </Button>
           </div>
         </div>
       </section>
 
-      {/* Full System Install */}
+      {/* SECTION 3 — PUBLIC INVESTMENT (MAIN COMMERCIAL ANCHOR) */}
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
-        <div className="mx-auto overflow-hidden rounded-[32px] border border-primary bg-[#111111] text-white shadow-[0_28px_80px_rgba(0,0,0,0.30)] relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent pointer-events-none" />
-          
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 p-8 md:p-14 relative z-10">
-            <div>
-              <p className="mb-4 text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-white/50">
-                Flagship Offer
-              </p>
-              <h2 className="mb-6 text-4xl md:text-5xl font-black leading-none tracking-[-0.04em] text-white">
-                Full System Install
-              </h2>
-              <p className="mb-8 font-sans text-lg md:text-xl text-white/70 leading-relaxed max-w-lg">
-                For businesses ready to connect media, funnel, CRM, automation, and follow-up into one growth engine.
-              </p>
-              <p className="mb-8 font-sans text-base text-white/60 leading-relaxed max-w-lg">
-                This is the complete Strata system: media creates demand, revenue infrastructure captures it, automation follows up, and the sales pipeline gives the business control.
-              </p>
-              <div className="mb-8">
-                <p className="text-4xl md:text-5xl font-mono font-bold text-white mb-2">RM 30,000</p>
-                <p className="text-sm font-mono text-white/50 uppercase tracking-widest">Saves approximately RM 4,000.</p>
-                <p className="text-sm font-mono text-white/50 uppercase tracking-widest mt-2">Growth Media System continuation from Month 4 onwards: RM 7,500/mo.</p>
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMERCIAL INVESTMENT</p>
+          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-primary uppercase">
+            Standard Investment Anchor
+          </h2>
+        </div>
+
+        <div className="max-w-3xl mx-auto">
+          <article className="relative overflow-hidden rounded-[32px] border-2 border-primary bg-white p-8 md:p-14 shadow-[0_24px_72px_rgba(0,0,0,0.08)]">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-border/60">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] text-muted block mb-1">
+                  STANDARD IMPLEMENTATION
+                </span>
+                <h3 className="text-3xl md:text-4xl font-black text-primary uppercase tracking-tight">
+                  Strata Core
+                </h3>
               </div>
+              <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-primary text-white font-mono text-[9px] font-bold uppercase tracking-widest">
+                MOST RECOMMENDED
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 p-6 rounded-2xl bg-surface border border-border/50">
+              <div>
+                <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">IMPLEMENTATION</span>
+                <span className="font-mono text-2xl font-bold text-primary">FROM RM 5,000</span>
+                <span className="block text-[10px] font-mono text-muted mt-1">One-time setup &amp; build</span>
+              </div>
+              <div className="md:border-l md:border-border/50 md:pl-6">
+                <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">MONTHLY OPERATING FEE</span>
+                <span className="font-mono text-2xl font-bold text-primary">FROM RM 5,000 / MO</span>
+                <span className="block text-[10px] font-mono text-muted mt-1">System, AI &amp; media ops</span>
+              </div>
+              <div className="md:border-l md:border-border/50 md:pl-6">
+                <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">AD SPEND</span>
+                <span className="font-mono text-2xl font-bold text-primary">SEPARATE</span>
+                <span className="block text-[10px] font-mono text-muted mt-1">Billed directly by ad platforms</span>
+              </div>
+            </div>
+
+            <p className="text-sm font-sans text-muted leading-relaxed mb-8">
+              Final investment depends on your customer value, gross margin, monthly lead volume, sales team capacity, locations, operational complexity, and required software integrations.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-border/50">
+              <span className="font-mono text-xs text-muted uppercase tracking-widest">
+                Recommended for qualified service operations
+              </span>
               <Button
                 asChild
-                variant="glassOnDark"
-                className="w-full sm:w-fit h-auto rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
+                variant="glassStrong"
+                size="lg"
+                className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
               >
                 <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
-                  Request Full System Diagnosis
-                  <ArrowRight size={13} />
+                  Book a Revenue Systems Audit
+                  <ArrowRight size={14} />
                 </Link>
               </Button>
             </div>
-            
-            <div className="flex flex-col justify-center">
-              <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-white/50 mb-6 border-b border-white/10 pb-4">
-                What's Included
+          </article>
+        </div>
+      </section>
+
+      {/* SECTION 4 — HOW WE PRICE (DETERMINATION FACTORS) */}
+      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
+          <div className="max-w-2xl">
+            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">PRICING LOGIC</p>
+            <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary uppercase">
+              What Determines Your Investment
+            </h2>
+          </div>
+          <div className="max-w-md border-l border-primary/20 pl-6">
+            <p className="text-sm font-sans text-primary font-medium leading-relaxed mb-1">
+              "We do not price by niche. We price by value, economics, and delivery complexity."
+            </p>
+            <p className="text-[10px] font-mono text-muted uppercase tracking-widest">
+              Commercial Pricing Principles
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {pricingFactors.map((factor, idx) => (
+            <motion.div
+              key={factor.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.08 }}
+              className="bg-white border border-border/60 rounded-[28px] p-8 flex flex-col justify-between hover:shadow-lg transition-all duration-300"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-6 pb-4 border-b border-border/40">
+                  <h3 className="font-mono text-base font-bold uppercase tracking-wider text-primary">{factor.title}</h3>
+                  <span className="font-mono text-xs font-bold text-muted">{factor.num}</span>
+                </div>
+                <p className="text-muted font-sans text-sm leading-relaxed">
+                  {factor.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Summary Card */}
+          <div className="bg-primary text-white rounded-[28px] p-8 flex flex-col justify-between">
+            <div>
+              <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-white/50 block mb-3">
+                NO RANDOM DISCOUNTS
+              </span>
+              <h3 className="text-xl font-bold uppercase tracking-tight text-white mb-3">
+                Fair &amp; Value-Based
+              </h3>
+              <p className="text-white/75 font-sans text-xs md:text-sm leading-relaxed">
+                Your investment is mapped strictly to the required infrastructure scope and commercial value created.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-white/10 font-mono text-[10px] uppercase tracking-widest text-white/50">
+              Commercial Integrity
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5 — EXPANDED SCOPE */}
+      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+        <div className="bg-[#111113] text-white rounded-[32px] p-8 md:p-14 shadow-2xl relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 relative z-10 items-center">
+            <div>
+              <span className="mb-3 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
+                HIGH COMPLEXITY &amp; ENTERPRISE
+              </span>
+              <h2 className="mb-6 text-4xl md:text-5xl font-black uppercase leading-tight text-white">
+                Expanded Scope
+              </h2>
+              <p className="mb-8 font-sans text-base md:text-lg text-white/75 leading-relaxed max-w-lg">
+                For growing businesses requiring additional infrastructure beyond the standard Strata Core implementation.
+              </p>
+
+              <div className="grid grid-cols-2 gap-4 mb-8 p-5 rounded-2xl bg-white/5 border border-white/10">
+                <div>
+                  <span className="block font-mono text-[9px] uppercase tracking-widest text-white/50 mb-1">IMPLEMENTATION</span>
+                  <span className="font-mono text-xl font-bold text-white">RM 7,500+</span>
+                </div>
+                <div>
+                  <span className="block font-mono text-[9px] uppercase tracking-widest text-white/50 mb-1">MONTHLY FEE</span>
+                  <span className="font-mono text-xl font-bold text-white">RM 7,500+ / MO</span>
+                </div>
+              </div>
+
+              <p className="mb-8 font-sans text-xs text-white/60 leading-relaxed">
+                Expanded Scope uses the same Strata Core system architecture with additional infrastructure, routing logic, and integrations built around operational requirements.
+              </p>
+
+              <Button
+                asChild
+                variant="glassOnDark"
+                size="lg"
+                className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
+              >
+                <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
+                  Book a Revenue Systems Audit
+                  <ArrowRight size={14} />
+                </Link>
+              </Button>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-[24px] p-6 md:p-8">
+              <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-white/50 mb-6 border-b border-white/10 pb-3">
+                Common Triggers for Expanded Scope:
               </h4>
-              <ul className="grid gap-5">
-                {[
-                  "Revenue Infrastructure Foundation",
-                  "System Care Plan for first 3 months",
-                  "Growth Media System for 3 months",
-                  "Content + Ads on both platforms",
-                  "Onboarding and strategy",
-                  "Monthly check-ins",
-                ].map((feature) => (
-                  <li key={feature} className="flex items-start gap-4">
-                    <div className="mt-0.5 shrink-0 rounded-full bg-white/10 p-1">
-                      <Check className="text-white" size={14} />
-                    </div>
-                    <span className="text-base font-sans leading-relaxed text-white/80">{feature}</span>
+              <ul className="grid grid-cols-1 gap-3.5">
+                {expandedScopeReasons.map((reason) => (
+                  <li key={reason} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                    <span className="text-xs md:text-sm font-sans text-white/80">{reason}</span>
                   </li>
                 ))}
               </ul>
@@ -292,198 +403,124 @@ export const Pricing = () => {
         </div>
       </section>
 
-      {/* System Care Plan */}
+      {/* SECTION 6 — HOW QUOTING WORKS */}
+      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">TRANSPARENT PROCESS</p>
+          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-primary uppercase">
+            How Quoting Works
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {quotingSteps.map((step) => (
+            <div key={step.num} className="bg-surface border border-border/60 rounded-[28px] p-8 flex flex-col justify-between">
+              <div>
+                <span className="font-mono text-2xl font-bold text-primary/20 block mb-4">{step.num}</span>
+                <h3 className="font-mono text-base font-bold uppercase tracking-wider text-primary mb-3">{step.title}</h3>
+                <p className="text-muted font-sans text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 7 — POST-LAUNCH SUPPORT (SYSTEM CARE) */}
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-primary mb-4">
-            System Care Plan
+          <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">ONGOING MAINTENANCE</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-primary uppercase mb-3">
+            Post-Launch Support &amp; System Care
           </h2>
-          <p className="text-lg font-sans text-muted">
-            For keeping the funnel, CRM, automations, and technical system healthy after launch.
+          <p className="text-sm font-sans text-muted max-w-2xl mx-auto">
+            Available for businesses requiring ongoing uptime monitoring, technical maintenance, and minor updates after implementation.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <PricingCard
-            title="Monitor"
-            price="RM 299/mo"
-            features={[
-              "CRM / funnel uptime checks",
-              "Bug fixes",
-              "Basic ticket support",
-            ]}
-            compact
-          />
-          <PricingCard
-            title="Support"
-            price="RM 599/mo"
-            features={[
-              "Everything in Monitor",
-              "Up to 2 hours of changes",
-              "Form checks",
-              "CRM integration monitoring",
-              "Minor copy / layout updates",
-            ]}
-            compact
-          />
-          <PricingCard
-            title="Growth"
-            price="RM 999/mo"
-            features={[
-              "Everything in Support",
-              "Monthly pipeline / funnel performance review",
-              "Priority response within 24 hours",
-            ]}
-            compact
-          />
-        </div>
-      </section>
-
-      {/* Which one should you choose */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
-        <div className="max-w-4xl mx-auto bg-surface rounded-[24px] md:rounded-[32px] p-8 md:p-12 border border-border/50">
-          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-primary mb-8 text-center">
-            Which system do you need first?
-          </h2>
-          
-          <div className="grid gap-4 mb-10">
-            <ComparisonRow 
-              situation="You get leads but lose follow-up."
-              recommendation="Revenue Infrastructure"
-            />
-            <ComparisonRow 
-              situation="Your ads are running but leads are not converting."
-              recommendation="Revenue Infrastructure"
-            />
-            <ComparisonRow 
-              situation="You do not post consistently."
-              recommendation="Growth Media System"
-            />
-            <ComparisonRow 
-              situation="You need organic content and paid media."
-              recommendation="Growth Media System"
-            />
-            <ComparisonRow 
-              situation="You need media, funnel, CRM, automation, and follow-up together."
-              recommendation="Full System Install"
-              highlight
-            />
+          <div className="bg-white border border-border/60 rounded-[24px] p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <h3 className="font-display font-bold text-xl text-primary mb-1">Monitor</h3>
+              <p className="font-mono text-lg font-bold text-primary mb-4">RM 299/mo</p>
+              <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> CRM &amp; funnel uptime checks</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Bug fixes &amp; error resolution</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Basic ticket support</li>
+              </ul>
+            </div>
           </div>
 
-          <div className="flex justify-center">
-            <Button
-              asChild
-              variant="glassStrong"
-              className="w-full sm:w-fit h-auto rounded-full px-8 py-5 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
-            >
-              <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
-                Request Diagnosis
-                <ArrowRight size={13} />
-              </Link>
-            </Button>
+          <div className="bg-white border-2 border-primary rounded-[24px] p-6 shadow-md flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <h3 className="font-display font-bold text-xl text-primary">Support</h3>
+                <span className="text-[8px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 bg-primary text-white rounded-full">POPULAR</span>
+              </div>
+              <p className="font-mono text-lg font-bold text-primary mb-4">RM 599/mo</p>
+              <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Everything in Monitor</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Up to 2 hours of changes/month</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Form &amp; integration health checks</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Minor copy &amp; layout updates</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-white border border-border/60 rounded-[24px] p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <h3 className="font-display font-bold text-xl text-primary mb-1">Growth</h3>
+              <p className="font-mono text-lg font-bold text-primary mb-4">RM 999/mo</p>
+              <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Everything in Support</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Monthly pipeline &amp; funnel review</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Priority 24-hour response SLA</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* SECTION 8 — FAQ & FINAL CTA */}
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-primary">
-              Frequently Asked Questions
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMON QUESTIONS</p>
+            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-primary uppercase">
+              Commercial FAQ
             </h2>
           </div>
           
-          <div className="grid gap-6">
-            <FaqItem 
-              question="Do I need both systems?"
-              answer="No. If you already have demand, start with Revenue Infrastructure. If you need more attention and traffic, start with Growth Media System. If both are weak, install the full system."
-            />
-            <FaqItem 
-              question="Is ad spend included?"
-              answer="No. Ad spend is paid directly by the client to Meta or TikTok. Strata’s fee covers strategy, content production, campaign management, system build, and optimization depending on scope."
-            />
-            <FaqItem 
-              question="Do I need to film content?"
-              answer="No. Strata can produce short-form video assets using an AI-assisted production workflow, including scripts, hooks, captions, and creative direction."
-            />
-            <FaqItem 
-              question="Why is there a 3-month minimum for Growth Media System?"
-              answer="Because the first month is testing and calibration. Real optimization starts after enough content, campaign, and lead-flow data is collected."
-            />
-            <FaqItem 
-              question="Do you guarantee results?"
-              answer="No. Strata does not guarantee specific revenue, ROAS, or lead volume. Strata builds the system, strategy, execution, and optimization layer. Results depend on the offer, market, budget, and follow-through."
-            />
-            <FaqItem 
-              question="What happens after I request a diagnosis?"
-              answer="Strata reviews your lead flow, diagnoses the current leak, recommends the right system, scopes the engagement, and provides a clear implementation plan."
-            />
+          <div className="grid gap-6 mb-16">
+            {faqs.map((faq) => (
+              <div key={faq.question} className="bg-surface/50 border border-border/50 rounded-2xl p-6 md:p-8">
+                <h4 className="text-lg md:text-xl font-bold font-sans text-primary mb-3">{faq.question}</h4>
+                <p className="text-sm md:text-base font-sans text-muted leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Final Conversion Block */}
+          <div className="bg-primary text-white rounded-[32px] p-8 md:p-14 text-center shadow-xl">
+            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight mb-6 text-white">
+              Ready to price your revenue operating system?
+            </h3>
+            <p className="text-white/80 font-sans text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+              Book a Revenue Systems Audit. We'll map your current lead flow, review your customer economics, and specify your exact Strata Core implementation scope.
+            </p>
+            <Button
+              asChild
+              variant="glassOnDark"
+              size="lg"
+              className="w-full sm:w-auto h-auto py-5 px-10 rounded-full font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
+            >
+              <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-3">
+                <span>Book a Revenue Systems Audit</span>
+                <ArrowRight size={15} />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
     </div>
   );
 };
-
-// Sub-components
-
-const PricingCard = ({ 
-  title, subtitle, price, bestFor, features, featured, compact 
-}: { 
-  title: string, subtitle?: string, price: string, bestFor?: string, features: string[], featured?: boolean, compact?: boolean 
-}) => (
-  <article
-    className={`flex h-full flex-col overflow-hidden rounded-[24px] border transition-all duration-500 bg-white ${
-      featured
-        ? 'border-[#111111] border-2 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)]'
-        : 'border-border/50 shadow-sm hover:border-primary/20 hover:shadow-xl'
-    } ${compact ? 'p-6' : 'p-8 md:p-10'}`}
-  >
-    <div className={`mb-6 ${compact ? '' : 'pb-6 border-b border-border/50'}`}>
-      <h3 className={`font-display font-bold text-primary ${compact ? 'text-xl md:text-2xl mb-2' : 'text-2xl md:text-3xl mb-1'}`}>
-        {title}
-      </h3>
-      {subtitle && (
-        <p className="text-sm font-sans text-muted mb-3 font-medium">{subtitle}</p>
-      )}
-      <div className={`font-mono font-bold text-primary tracking-tight ${compact ? 'text-lg mt-3' : 'text-2xl mt-4'}`}>
-        {price}
-      </div>
-      {bestFor && (
-        <p className="mt-4 text-sm font-sans leading-relaxed text-muted font-medium">
-          "{bestFor}"
-        </p>
-      )}
-    </div>
-
-    <ul className="grid gap-3 mt-auto">
-      {features.map((feature) => (
-        <li key={feature} className="flex items-start gap-3">
-          <Check className="mt-0.5 shrink-0 text-primary/70" size={compact ? 14 : 15} />
-          <span className={`font-sans text-muted leading-relaxed ${compact ? 'text-xs' : 'text-sm'}`}>{feature}</span>
-        </li>
-      ))}
-    </ul>
-  </article>
-);
-
-const ComparisonRow = ({ situation, recommendation, highlight }: { situation: string, recommendation: string, highlight?: boolean }) => (
-  <div className={`flex flex-col md:flex-row md:items-center justify-between p-5 md:p-6 rounded-2xl border ${highlight ? 'bg-primary/5 border-primary/20' : 'bg-white border-border/50'}`}>
-    <div className="mb-3 md:mb-0">
-      <p className="text-[10px] font-mono uppercase tracking-widest text-muted mb-1">Situation</p>
-      <p className="text-sm md:text-base font-sans font-medium text-primary">"{situation}"</p>
-    </div>
-    <div className="md:text-right">
-      <p className="text-[10px] font-mono uppercase tracking-widest text-muted mb-1">Recommendation</p>
-      <p className={`text-sm md:text-base font-mono font-bold tracking-tight uppercase ${highlight ? 'text-primary' : 'text-primary/80'}`}>{recommendation}</p>
-    </div>
-  </div>
-);
-
-const FaqItem = ({ question, answer }: { question: string, answer: string }) => (
-  <div className="bg-surface/50 border border-border/50 rounded-2xl p-6 md:p-8">
-    <h4 className="text-lg md:text-xl font-bold font-sans text-primary mb-3">{question}</h4>
-    <p className="text-sm md:text-base font-sans text-muted leading-relaxed">{answer}</p>
-  </div>
-);
