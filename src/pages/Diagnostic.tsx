@@ -600,12 +600,11 @@ export const Diagnostic = () => {
                   {/* Step 3: Build Requirement */}
                   {step === 3 && (
                     <div className="space-y-8">
-                      <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">What do you need Strata to help with?</h3>
+                      <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">What is your primary Strata Core focus area?</h3>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {[
-                          "Revenue Infrastructure Install", "Growth Media System", "CRM & Pipeline Setup",
-                          "WhatsApp & Lead Automation", "Lead Leakage Repair", "Full Revenue System Bundle",
-                          "Lead Capture Funnel", "Staff Workflow & Dashboard", "Not sure yet"
+                          "Full Strata Core Install", "CRM & Pipeline Setup", "WhatsApp & AI Automation",
+                          "Content & Ad Attention Engine", "Lead Leakage Audit", "Custom System Scope"
                         ].map((req) => (
                           <button
                             key={req}

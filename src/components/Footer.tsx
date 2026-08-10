@@ -53,12 +53,12 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">ACTIVE OFFERS</h4>
+            <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">STRATA CORE</h4>
             <ul className="space-y-4">
-              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Revenue Infrastructure</Link></li>
-              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Growth Media System</Link></li>
-              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">System Care Plan</Link></li>
-              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Full System Install Bundle</Link></li>
+              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Strata Core Overview</Link></li>
+              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Commercial Pricing</Link></li>
+              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">System Architecture</Link></li>
+              <li><Link to={CONTACT.requestDemoPath} className="text-muted hover:text-primary font-sans transition-colors text-sm">Book Revenue Audit</Link></li>
             </ul>
           </div>
           
@@ -85,8 +85,8 @@ export const Footer = () => {
             &copy; {new Date().getFullYear()} Strata Agency. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-muted hover:text-primary transition-colors font-mono tracking-widest uppercase text-xs">Privacy Policy</a>
-            <a href="#" className="text-muted hover:text-primary transition-colors font-mono tracking-widest uppercase text-xs">Terms of Service</a>
+            <Link to="/about" className="text-muted hover:text-primary transition-colors font-mono tracking-widest uppercase text-xs">Privacy &amp; Terms</Link>
+            <Link to="/pricing" className="text-muted hover:text-primary transition-colors font-mono tracking-widest uppercase text-xs">Commercial Terms</Link>
           </div>
         </div>
       </div>

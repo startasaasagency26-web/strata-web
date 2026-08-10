@@ -424,12 +424,12 @@ export const Pricing = () => {
       {/* SECTION 7 — POST-LAUNCH SUPPORT (SYSTEM CARE) */}
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">ONGOING MAINTENANCE</p>
+          <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">OPTIONAL ADD-ONS</p>
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-primary uppercase mb-3">
-            Post-Launch Support &amp; System Care
+            Optional Strata Core Support &amp; SLA Add-ons
           </h2>
           <p className="text-sm font-sans text-muted max-w-2xl mx-auto">
-            Available for businesses requiring ongoing uptime monitoring, technical maintenance, and minor updates after implementation.
+            Optional post-launch add-ons for businesses requiring ongoing uptime monitoring, technical SLA maintenance, and continuous optimization after Strata Core installation.
           </p>
         </div>
 

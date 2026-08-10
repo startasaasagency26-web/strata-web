@@ -353,29 +353,29 @@ export const About = () => {
           {[
             {
               name: "J-ARMOR",
-              description: "Brand website for product positioning and customer education.",
+              description: "Product positioning and digital conversion funnel.",
               href: "https://www.j-armor.net",
             },
             {
               name: "J-ARMOR SHOP",
-              description: "E-commerce product store built for online sales.",
+              description: "E-commerce revenue engine and product sales system.",
               href: "https://www.j-armor.shop",
             },
             {
               name: "THUNDERFIX",
-              description: "Service business website with modern layout, trust structure, and conversion-focused customer flow.",
+              description: "Service business lead capture and conversion infrastructure.",
               href: "https://www.thunderfix.online",
             },
             {
               name: "ONESPECIALIST",
-              description: "Local service website structured for lead generation.",
+              description: "Local service lead generation and enquiry routing system.",
               href: "https://www.onespecialist.my",
             },
             {
               name: "1MOBILE ROS",
-              description: "Operational web system / dashboard built around repair business visibility, workflow, and customer flow.",
+              description: "Strata Core operational CRM & repair workflow system.",
               href: null,
-              badge: "INTERNAL SYSTEM",
+              badge: "INTERNAL INFRASTRUCTURE",
             },
           ].map((project, idx) => {
             const isLinked = Boolean(project.href);

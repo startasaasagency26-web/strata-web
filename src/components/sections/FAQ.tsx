@@ -4,28 +4,28 @@ import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'What does Strata actually build?',
-    answer: 'Strata builds revenue infrastructure and growth media systems: landing pages, CRM pipelines, automations, content assets, paid media workflows, and performance reporting.',
+    question: 'What is Strata Core?',
+    answer: 'Strata Core is our single-product revenue operating system for local service businesses. It connects short-form content, Meta/TikTok ads, landing pages, WhatsApp CRM, AI qualification, automated follow-up, and reporting into one unified commercial engine.',
   },
   {
-    question: 'Do I need both systems?',
-    answer: 'No. If you already have demand, start with Revenue Infrastructure. If you need more attention and traffic, start with Growth Media System. If both are weak, install the full system.',
+    question: 'How do the components inside Strata Core work together?',
+    answer: 'Strata Core combines Layer 1 (Growth Media / Attention Creation) with Layer 2 (Revenue Infrastructure / Lead Capture & CRM). They function as integrated layers inside one system, ensuring inbound attention is automatically qualified and converted.',
   },
   {
-    question: 'Is ad spend included?',
-    answer: 'No. Ad spend is paid directly by the client to Meta or TikTok. Strata\'s fee covers strategy, media management, content production, system build, and optimization depending on scope.',
+    question: 'Is ad spend included in Strata Core?',
+    answer: 'No. Ad spend is paid directly by your business account to Meta or TikTok. Strata\'s fee covers system implementation, campaign management, video content production, workflow automation, and monthly optimization.',
   },
   {
-    question: 'Do I need to film content?',
-    answer: 'No. Strata can produce short-form video assets using an AI-assisted production workflow, including scripts, hooks, captions, and creative direction.',
+    question: 'Do I need to film video content myself?',
+    answer: 'No. Strata handles short-form video production using our specialized media workflow, including scripts, hooks, editing, captions, and creative direction.',
   },
   {
-    question: 'Do you guarantee results?',
-    answer: 'No. Strata does not guarantee specific revenue, ROAS, or lead volume. Strata builds the system, strategy, execution, and optimization layer. Results depend on offer, market, budget, and follow-through.',
+    question: 'Do you guarantee specific revenue or lead numbers?',
+    answer: 'No. We do not make unverified revenue guarantees. Strata builds the infrastructure, qualification pipeline, and campaign execution layer to significantly reduce lead leakage and improve follow-up consistency.',
   },
   {
-    question: 'What happens after I request a diagnosis?',
-    answer: 'Strata reviews your lead flow, diagnoses the current leak, recommends the right system, scopes the engagement, and provides a clear implementation plan.',
+    question: 'What happens after I book a Revenue Audit?',
+    answer: 'We review your existing lead path, diagnose where enquiries are being dropped or delayed, verify your business economics, and provide a clear Strata Core implementation plan.',
   },
 ];
 

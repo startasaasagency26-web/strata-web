@@ -8,11 +8,11 @@ import { ArrowRight } from 'lucide-react';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const proofChips = [
-  'Demand Engine',
-  'Revenue OS',
+  'Strata Core',
+  'Revenue Infrastructure',
+  'Growth Media Layer',
   'AI Qualification',
-  'CRM + Automation',
-  'Sales Pipeline',
+  'WhatsApp CRM',
 ];
 
 export const Hero = () => {
@@ -56,15 +56,15 @@ export const Hero = () => {
             className="font-black leading-[0.88] tracking-[-0.055em] text-primary mb-6"
             style={{ fontSize: 'clamp(2.75rem, 8.5vw, 8rem)' }}
           >
-            The AI-Powered Revenue Operating System for Modern Businesses.
+            The AI-Powered Revenue Operating System for Local Service Businesses.
           </h1>
         </motion.div>
 
         <motion.p
           {...fadeUp(0.18)}
-          className="mb-5 text-[clamp(0.95rem,2vw,1.15rem)] font-black uppercase tracking-[-0.02em] text-primary/40 leading-tight"
+          className="mb-5 text-[clamp(0.95rem,2vw,1.15rem)] font-black uppercase tracking-[-0.02em] text-primary/80 leading-tight"
         >
-          Demand Engine creates attention. Revenue OS captures, qualifies and converts it.
+          Strata Core connects attention creation directly into your revenue infrastructure.
         </motion.p>
 
         <motion.p
