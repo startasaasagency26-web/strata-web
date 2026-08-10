@@ -886,12 +886,12 @@ export const Diagnostic = () => {
                   </span>
                   <ul className="space-y-4">
                     {[
-                      "Malaysian SMEs that need stronger revenue infrastructure",
-                      "Service businesses with weak lead capture",
-                      "Brands with unclear websites or poor mobile flow",
-                      "Operators replacing manual workflows",
-                      "E-commerce businesses needing clearer product journeys",
-                      "Founders who want strategy before design"
+                      "Malaysian SMEs scaling revenue infrastructure",
+                      "Service businesses with leaking WhatsApp enquiries",
+                      "Operators replacing manual follow-up workflows",
+                      "Businesses needing automated lead scoring & CRM",
+                      "Founders upgrading service operations",
+                      "Teams with clear sales capacity and customer value"
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-4">
                         <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/40" />
@@ -910,11 +910,11 @@ export const Diagnostic = () => {
                   </span>
                   <ul className="space-y-4">
                     {[
-                      "You only want the cheapest template",
-                      "You have no clear business goal",
-                      "You are not ready to provide project details",
-                      "You want visuals without structure",
-                      "You expect premium work at throwaway pricing"
+                      "You only want cheap isolated website templates",
+                      "You have no active lead flow or clear business goal",
+                      "You are not ready to provide operational details",
+                      "You want design tweaks without system structure",
+                      "You expect high-scale system builds at throwaway pricing"
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-4">
                         <div className="mt-[9px] h-0.5 w-1.5 shrink-0 bg-white/20" />
@@ -948,10 +948,10 @@ export const Diagnostic = () => {
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {[
-            { id: "01", title: "Submit the Diagnostic", desc: "You tell us about your business, current problem, intended build, budget, and timeline." },
-            { id: "02", title: "Strata Reviews Fit", desc: "We review your details and check whether Strata is the right team for the problem." },
-            { id: "03", title: "Diagnosis Call", desc: "We walk through where your lead flow is leaking and which system closes the gap." },
-            { id: "04", title: "System Roadmap", desc: "If there is fit, we outline the next step, rough scope, and execution path." }
+            { id: "01", title: "Submit the Diagnostic", desc: "You tell us about your business, current lead leakage, required system components, and timeline." },
+            { id: "02", title: "Strata Reviews Fit", desc: "We review your operational economics and check whether Strata Core is the right solution." },
+            { id: "03", title: "Diagnosis Call", desc: "We walk through where your lead flow is leaking and which infrastructure components close the gap." },
+            { id: "04", title: "System Roadmap", desc: "If there is fit, we outline the exact Strata Core scope, timeline, and commercial investment." }
           ].map((item) => (
             <div key={item.id} className="space-y-6">
               <span className="font-mono text-xs font-bold text-white/20">{item.id}</span>
@@ -969,16 +969,16 @@ export const Diagnostic = () => {
             CREDIBILITY
           </span>
           <h2 className="text-4xl font-black tracking-tight text-primary md:text-5xl lg:text-6xl">
-            Built Across Brand, Service, Commerce, and Operations
+            Built Across Service Operations &amp; Conversion Systems
           </h2>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
           {[
-            "J-ARMOR — Brand website / product positioning",
-            "J-ARMOR SHOP — E-commerce product store",
-            "THUNDERFIX — Service website / trust and conversion flow",
-            "ONESPECIALIST — Local service website / lead generation",
-            "1MOBILE ROS — Internal repair operations system"
+            "J-ARMOR — Conversion funnel & positioning",
+            "J-ARMOR SHOP — E-commerce revenue engine",
+            "THUNDERFIX — Lead capture & conversion infrastructure",
+            "ONESPECIALIST — Local service enquiry routing system",
+            "1MOBILE ROS — Operational CRM & repair workflow system"
           ].map((project) => (
             <div key={project} className="group rounded-2xl border border-primary/5 bg-white p-6 shadow-sm transition-all hover:shadow-md">
               <p className="font-mono text-[9px] font-bold uppercase leading-relaxed tracking-widest text-primary/60">
@@ -988,7 +988,7 @@ export const Diagnostic = () => {
           ))}
         </div>
         <div className="mt-16 text-center">
-          <Link to="/#selected-work" className="group inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-widest text-primary">
+          <Link to="/about#selected-work" className="group inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-widest text-primary">
             <span>View Selected Work</span>
             <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
           </Link>
@@ -1010,15 +1010,15 @@ export const Diagnostic = () => {
             {[
               {
                 q: "Is the diagnostic free?",
-                a: "Yes. The initial diagnostic review and diagnosis call are complimentary. Our goal is to ensure we only take on projects where Strata is genuinely the right fit."
+                a: "Yes. The initial diagnostic review and diagnosis call are complimentary. Our goal is to ensure we only take on projects where Strata Core is genuinely the right fit."
               },
               {
                 q: "Do I need to know exactly what I want built?",
-                a: "No. That is exactly what the diagnosis is for. We help you decide whether the gap is in demand, capture, CRM, or follow-up, and which system to install first."
+                a: "No. That is exactly what the diagnosis is for. We help you identify where leads are being dropped and which Strata Core layers to install first."
               },
               {
-                q: "Does Strata only build websites?",
-                a: "No. Strata builds revenue infrastructure — lead capture, CRM, automation, follow-up, and reporting — plus the Growth Media System that creates demand. A page is one component, not the product."
+                q: "What does a Strata Core implementation include?",
+                a: "Strata Core is a complete revenue operating system including lead capture funnels, Meta/TikTok campaign management, WhatsApp CRM, AI qualification agents, automated follow-up sequences, staff workflow tools, and executive reporting dashboards."
               },
               {
                 q: "What should I prepare before the call?",

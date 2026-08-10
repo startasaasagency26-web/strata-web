@@ -26,6 +26,65 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://strataagency.tech/#organization",
+          "name": "Strata Agency",
+          "url": "https://strataagency.tech/",
+          "logo": "https://strataagency.tech/strata-sa-mark.png",
+          "email": "startasaasagency26@gmail.com",
+          "description": "Execution infrastructure company for service-based businesses. Strata builds AI-powered revenue systems connecting lead capture, WhatsApp CRM, automation, and sales operations.",
+          "founder": {
+            "@type": "Person",
+            "name": "Amirul Afiz"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://strataagency.tech/#service-stratacore",
+          "name": "Strata Core Revenue Operating System",
+          "provider": {
+            "@id": "https://strataagency.tech/#organization"
+          },
+          "serviceType": "Revenue Infrastructure & Growth Systems",
+          "description": "Integrated revenue operating system including Meta/TikTok ad strategy, short-form video media, lead capture funnels, WhatsApp CRM, AI qualification agents, and automated follow-up.",
+          "offers": {
+            "@type": "Offer",
+            "price": "5000",
+            "priceCurrency": "MYR",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://strataagency.tech/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Strata Core?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Strata Core is our single-product revenue operating system for local service businesses. It connects short-form content, Meta/TikTok ads, landing pages, WhatsApp CRM, AI qualification, automated follow-up, and reporting into one unified commercial engine."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do the components inside Strata Core work together?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Strata Core combines Layer 1 (Growth Media / Attention Creation) with Layer 2 (Revenue Infrastructure / Lead Capture & CRM). They function as integrated layers inside one system, ensuring inbound attention is automatically qualified and converted."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body class="bg-background text-accent antialiased selection:bg-primary/30">
     <div id="root"></div>
