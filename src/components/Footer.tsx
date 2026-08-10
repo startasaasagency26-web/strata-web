@@ -15,7 +15,7 @@ export const Footer = () => {
               <Logo className="h-10 origin-left mb-6 justify-start" />
             </Link>
             <p className="text-muted text-sm font-sans leading-relaxed mb-6">
-              Strata builds AI-powered revenue systems connecting marketing, lead capture, CRM, AI automation, follow-up, and sales operations into one scalable business infrastructure.
+              Strata installs revenue infrastructure for service businesses—connecting lead capture, CRM, automation, follow-up, and growth media into one operating system.
             </p>
             <div className="flex gap-4">
               <a
@@ -53,12 +53,12 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">SYSTEM MODULES</h4>
+            <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">ACTIVE OFFERS</h4>
             <ul className="space-y-4">
-              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">Revenue OS</Link></li>
-              <li><Link to="/#services" className="text-muted hover:text-primary font-sans transition-colors text-sm">Demand Engine</Link></li>
-              <li><Link to="/#ai-operating-system" className="text-muted hover:text-primary font-sans transition-colors text-sm">Strata AIOS</Link></li>
-              <li><Link to={CONTACT.requestDemoPath} className="text-muted hover:text-primary font-sans transition-colors text-sm">Revenue Systems Audit</Link></li>
+              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Revenue Infrastructure</Link></li>
+              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Growth Media System</Link></li>
+              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">System Care Plan</Link></li>
+              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Full System Install Bundle</Link></li>
             </ul>
           </div>
           

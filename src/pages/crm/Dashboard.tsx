@@ -1,19 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
-  Users,
-  TrendingUp,
-  CheckCircle2,
-  ArrowUpRight,
-  Clock,
   AlertCircle,
-  ChevronRight,
+  ArrowUpRight,
+  CalendarCheck,
+  CheckCircle2,
+  ClipboardList,
+  Clock,
+  FileText,
+  Megaphone,
+  MessageCircle,
+  Search,
+  Send,
+  Target,
+  TrendingUp,
+  Users,
   Zap,
 } from 'lucide-react';
-import { CrmShell } from '../../components/crm/CrmShell';
-import { ErrorState, LoadingState, StatusBadge } from '../../components/crm/CrmUI';
-import { getDashboard, getLeads } from '../../lib/crm/client';
-import type { DashboardMetrics, Lead } from '../../types/crm';
 import { Link } from 'react-router-dom';
+import { CrmShell } from '../../components/crm/CrmShell';
+import { ErrorState, LoadingState, PriorityBadge, StatusBadge } from '../../components/crm/CrmUI';
+import { getDashboard, getFollowUps, getLeads } from '../../lib/crm/client';
+import type { DashboardMetrics, FollowUp, Lead } from '../../types/crm';
 import { cn } from '../../lib/utils';
 
 const zeroMetrics: DashboardMetrics = {
@@ -30,93 +37,94 @@ const zeroMetrics: DashboardMetrics = {
   pipelineValue: null,
 };
 
-const AVATAR_COLORS = [
-  'from-blue-400 to-blue-600',
-  'from-purple-400 to-purple-600',
-  'from-amber-400 to-amber-600',
-  'from-emerald-400 to-emerald-600',
-  'from-rose-400 to-rose-600',
+const claritySprint = [
+  {
+    label: 'Pinned clarity post',
+    detail: 'Explain what Strata actually does before posting more advice.',
+    action: 'Write / publish',
+  },
+  {
+    label: 'Manual distribution',
+    detail: 'Send today\'s strongest post to 5-10 service operators.',
+    action: 'DM owners',
+  },
+  {
+    label: 'Proof capture',
+    detail: 'Turn one delivery screenshot or workflow into a proof asset.',
+    action: 'Add proof',
+  },
 ];
 
-function getInitials(name: string): string {
-  return name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
+const offerShortlist = [
+  'Revenue Infrastructure',
+  'Growth Media System',
+  'System Care Plan',
+  'Full System Install',
+];
+
+function formatDate(value?: string) {
+  if (!value) return 'No date';
+  return new Date(value).toLocaleDateString('en-MY', { day: 'numeric', month: 'short' });
 }
 
-function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-MY', { day: 'numeric', month: 'short' });
+function isActiveLead(lead: Lead) {
+  return !['won', 'lost', 'unresponsive'].includes(lead.status);
 }
 
-interface MetricItem {
-  label: string;
-  value: string | number;
-  icon: React.ReactNode;
-  accent: string;
-  bg: string;
+function isOutreachReady(lead: Lead) {
+  return ['new', 'contacted', 'qualified'].includes(lead.status) && lead.priority !== 'cold';
 }
 
-const MetricStrip = ({ items }: { items: MetricItem[] }) => (
-  <div className="bg-white/60 backdrop-blur-xl border border-white/50 rounded-[32px] overflow-hidden shadow-sm">
-    <div className="flex divide-x divide-white/40 overflow-x-auto">
-      {items.map((m, i) => (
-        <div key={i} className="flex-1 min-w-[140px] px-6 py-5 hover:bg-white/40 transition-colors">
-          <div className={cn('inline-flex items-center gap-1.5 mb-3 px-2 py-1 rounded-lg text-[10px] font-mono font-bold tracking-widest uppercase', m.bg, m.accent)}>
-            {m.icon}
-            {m.label}
-          </div>
-          <div className="text-2xl font-display font-bold text-[#111827]">{m.value}</div>
-        </div>
-      ))}
-    </div>
+function getVisibleLeak(lead: Lead) {
+  const raw = lead.rawPayload || {};
+  const rawLeak = raw.visibleSystemLeak || raw.systemLeak || raw.visible_gap || raw.visibleGap;
+  if (typeof rawLeak === 'string' && rawLeak.trim()) return rawLeak;
+  if (lead.currentProblem?.trim()) return lead.currentProblem;
+  if (lead.projectGoal?.trim()) return lead.projectGoal;
+  if (lead.serviceNeed?.trim()) return lead.serviceNeed;
+  return 'Needs lead path diagnosis';
+}
+
+function getRecommendedOffer(lead: Lead) {
+  const raw = lead.rawPayload || {};
+  const rawOffer = raw.recommendedOffer || raw.recommended_offer || raw.selectedOffer;
+  if (typeof rawOffer === 'string' && rawOffer.trim()) return rawOffer;
+  if (lead.selectedPackage?.trim()) return lead.selectedPackage;
+  const text = `${lead.serviceNeed} ${lead.currentProblem} ${lead.projectGoal}`.toLowerCase();
+  if (text.includes('content') || text.includes('ads') || text.includes('media')) return 'Growth Media System';
+  if (text.includes('maintenance') || text.includes('support')) return 'System Care Plan';
+  if (text.includes('full') || text.includes('complete')) return 'Full System Install';
+  return 'Revenue Infrastructure';
+}
+
+function getInitials(name: string) {
+  return name.split(' ').map((part) => part[0]).join('').slice(0, 2).toUpperCase();
+}
+
+const Panel = ({ children, className = '', id }: { children: React.ReactNode; className?: string; id?: string }) => (
+  <div id={id} className={cn('rounded-[28px] border border-white/50 bg-white/60 shadow-sm backdrop-blur-md', className)}>
+    {children}
   </div>
 );
 
-interface DealCardProps {
-  lead: Lead;
-  index: number;
-}
-
-const DealCard = ({ lead, index }: DealCardProps) => {
-  const avatarColor = AVATAR_COLORS[index % AVATAR_COLORS.length];
-  const createdDate = lead.createdAt ? formatDate(lead.createdAt) : '—';
-
-  return (
-    <Link
-      to={`/crm/leads/${lead.id}`}
-      className="group flex items-center gap-4 px-5 py-4 rounded-[24px] border border-white/50 bg-white/40 hover:bg-white backdrop-blur-sm hover:shadow-sm transition-all duration-200"
-    >
-      <div className={cn('w-10 h-10 rounded-full border-2 border-white shadow-sm bg-gradient-to-br flex items-center justify-center font-display text-xs font-bold shrink-0 text-white', avatarColor)}>
-        {getInitials(lead.fullName)}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-bold text-[#111827] truncate">{lead.fullName}</p>
-        <p className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest truncate mt-0.5">{lead.companyName || 'Independent'}</p>
-      </div>
-      <div className="hidden sm:block shrink-0">
-        <StatusBadge status={lead.status} />
-      </div>
-      {lead.budgetRange && (
-        <div className="hidden md:block text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest shrink-0">{lead.budgetRange}</div>
-      )}
-      <div className="hidden lg:block text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest shrink-0">{createdDate}</div>
-      <ChevronRight size={16} className="text-gray-400 group-hover:text-[#111827] group-hover:translate-x-1 transition-all shrink-0" />
-    </Link>
-  );
-};
-
 export const Dashboard = () => {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
-  const [recentLeads, setRecentLeads] = useState<Lead[]>([]);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [followUps, setFollowUps] = useState<FollowUp[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isDataUnavailable, setIsDataUnavailable] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [m, l] = await Promise.all([getDashboard(), getLeads()]);
-        setMetrics(m || zeroMetrics);
-        setRecentLeads(l.slice(0, 8));
-        setIsDataUnavailable((m?.totalLeads ?? 0) === 0 && l.length === 0);
+        const [dashboardMetrics, leadData, taskData] = await Promise.all([
+          getDashboard(),
+          getLeads({ limit: 100, sort: 'follow_up' }),
+          getFollowUps(),
+        ]);
+        setMetrics(dashboardMetrics || zeroMetrics);
+        setLeads(leadData);
+        setFollowUps(taskData);
       } catch (err) {
         console.error('[crm/dashboard] Data fetch failed:', err);
         setError(err instanceof Error ? err.message : 'Failed to load dashboard data.');
@@ -127,156 +135,537 @@ export const Dashboard = () => {
     fetchData();
   }, []);
 
-  if (isLoading) return <CrmShell><LoadingState message="Loading dashboard..." /></CrmShell>;
+  const today = useMemo(() => new Date().toLocaleDateString('en-MY', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  }), []);
+
+  if (isLoading) return <CrmShell><LoadingState message="Loading Strata HQ..." /></CrmShell>;
   if (error) return <CrmShell><ErrorState message={error} onRetry={() => window.location.reload()} /></CrmShell>;
-  if (!metrics) return null;
 
-  const today = new Date().toLocaleDateString('en-MY', { weekday: 'long', day: 'numeric', month: 'long' });
+  const resolvedMetrics = metrics || zeroMetrics;
+  const activeLeads = leads.filter(isActiveLead);
+  const hotLeads = activeLeads.filter((lead) => lead.priority === 'hot');
+  const outreachQueue = activeLeads.filter(isOutreachReady).slice(0, 5);
+  const proposalReady = leads.filter((lead) => ['qualified', 'discovery_scheduled', 'proposal_sent', 'negotiating'].includes(lead.status));
+  const todayEnd = new Date();
+  todayEnd.setHours(24, 0, 0, 0);
+  const dueFollowUps = followUps
+    .filter((task) => ['pending', 'overdue'].includes(task.status) && new Date(task.dueAt).getTime() < todayEnd.getTime())
+    .slice(0, 5);
 
-  const metricItems: MetricItem[] = [
-    { label: 'Total Leads',  value: metrics.totalLeads,                        icon: <Users size={11} />,        accent: 'text-gray-600',   bg: 'bg-gray-100' },
-    { label: 'This Week',    value: metrics.leadsThisWeek,                     icon: <Zap size={11} />,          accent: 'text-blue-600',   bg: 'bg-blue-50' },
-    { label: 'Qualified',    value: metrics.qualifiedLeads,                    icon: <TrendingUp size={11} />,   accent: 'text-amber-600',  bg: 'bg-amber-50' },
-    { label: 'Won',          value: metrics.won,                               icon: <CheckCircle2 size={11} />, accent: 'text-emerald-700',bg: 'bg-emerald-50' },
-    { label: 'Conversion',   value: `${metrics.conversionRate.toFixed(1)}%`,   icon: <ArrowUpRight size={11} />, accent: 'text-purple-600', bg: 'bg-purple-50' },
+  const metricItems = [
+    { label: 'Active leads', value: activeLeads.length, icon: <Users size={15} />, tone: 'text-gray-700 bg-white' },
+    { label: 'Follow-ups due', value: resolvedMetrics.followUpsToday, icon: <Clock size={15} />, tone: 'text-orange-700 bg-orange-50' },
+    { label: 'Hot review', value: hotLeads.length, icon: <Zap size={15} />, tone: 'text-blue-700 bg-blue-50' },
+    { label: 'Proposal ready', value: proposalReady.length, icon: <FileText size={15} />, tone: 'text-purple-700 bg-purple-50' },
+    { label: 'Won', value: resolvedMetrics.won, icon: <CheckCircle2 size={15} />, tone: 'text-emerald-700 bg-emerald-50' },
   ];
 
   return (
     <CrmShell>
       <div className="space-y-6">
-
-        {/* Header */}
-        <div className="flex items-end justify-between">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-gray-500 uppercase mb-1">{today}</p>
-            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827]">Overview</h1>
+            <p className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-500">{today}</p>
+            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827] md:text-4xl">
+              Strata HQ
+            </h1>
+            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-gray-600">
+              Control room for turning attention into pipeline, pipeline into follow-up, and follow-up into revenue.
+            </p>
           </div>
-          <Link
-            to="/crm/leads"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#111827] text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 transition-all"
-          >
-            <Users size={14} /> All Leads
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              to="/crm/outreach"
+              className="inline-flex items-center gap-2 rounded-full bg-[#111827] px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
+            >
+              <Send size={14} /> Outreach Queue
+            </Link>
+            <Link
+              to="/crm/leads?add=1"
+              className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#111827] shadow-sm transition-all hover:bg-white"
+            >
+              <Users size={14} /> Add Lead
+            </Link>
+          </div>
         </div>
 
-        {isDataUnavailable && (
-          <div className="rounded-[24px] border border-amber-200/50 bg-amber-50/50 backdrop-blur-sm px-6 py-4 text-xs font-mono font-bold uppercase tracking-[0.15em] text-amber-700">
-            No data yet — leads appear once customers submit the form.
+        <div className="grid grid-cols-2 gap-3 xl:grid-cols-5">
+          {metricItems.map((item) => (
+            <Panel key={item.label} className="p-5">
+              <div className={cn('mb-4 inline-flex h-9 w-9 items-center justify-center rounded-2xl', item.tone)}>
+                {item.icon}
+              </div>
+              <div className="text-3xl font-display font-bold tracking-tight text-[#111827]">{item.value}</div>
+              <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{item.label}</div>
+            </Panel>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.35fr_0.9fr]">
+          <Panel className="overflow-hidden">
+            <div className="flex items-center justify-between border-b border-white/50 px-6 py-5">
+              <div>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Today Control Panel</h2>
+                <p className="mt-1 text-sm font-semibold text-[#111827]">The work that protects revenue today.</p>
+              </div>
+              <Link to="/crm/follow-ups" className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 hover:text-[#111827]">
+                View tasks
+              </Link>
+            </div>
+            <div className="grid gap-4 p-5 lg:grid-cols-2">
+              <div className="rounded-[24px] border border-orange-100 bg-orange-50/70 p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-orange-700">
+                    <Clock size={14} /> Follow up today
+                  </div>
+                  <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-mono font-bold text-orange-700">{dueFollowUps.length}</span>
+                </div>
+                <div className="space-y-3">
+                  {dueFollowUps.length > 0 ? dueFollowUps.map((task) => (
+                    <Link key={task.id} to={`/crm/leads/${task.leadId}`} className="block rounded-2xl bg-white/80 p-4 transition hover:bg-white">
+                      <div className="text-sm font-bold text-[#111827]">{task.title}</div>
+                      <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">
+                        {task.leadName || 'Unknown lead'} · {formatDate(task.dueAt)}
+                      </div>
+                    </Link>
+                  )) : (
+                    <div className="rounded-2xl bg-white/70 p-5 text-sm font-semibold text-gray-500">No urgent follow-ups due.</div>
+                  )}
+                </div>
+              </div>
+
+              <div className="rounded-[24px] border border-blue-100 bg-blue-50/70 p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+                    <Target size={14} /> Hot lead review
+                  </div>
+                  <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-mono font-bold text-blue-700">{hotLeads.length}</span>
+                </div>
+                <div className="space-y-3">
+                  {hotLeads.slice(0, 3).map((lead) => (
+                    <Link key={lead.id} to={`/crm/leads/${lead.id}`} className="block rounded-2xl bg-white/80 p-4 transition hover:bg-white">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="truncate text-sm font-bold text-[#111827]">{lead.fullName}</div>
+                          <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{lead.companyName || 'Independent'}</div>
+                        </div>
+                        <PriorityBadge priority={lead.priority} />
+                      </div>
+                    </Link>
+                  ))}
+                  {hotLeads.length === 0 && (
+                    <div className="rounded-2xl bg-white/70 p-5 text-sm font-semibold text-gray-500">No hot leads waiting.</div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </Panel>
+
+          <Panel className="p-6">
+            <div className="mb-5 flex items-center justify-between">
+              <div>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Clarity Sprint</h2>
+                <p className="mt-1 text-sm font-semibold text-[#111827]">Make Strata obvious before scaling posts.</p>
+              </div>
+              <Megaphone size={20} className="text-gray-400" />
+            </div>
+            <div className="space-y-3">
+              {claritySprint.map((item) => (
+                <div key={item.label} className="rounded-[20px] border border-white/60 bg-white/60 p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="text-sm font-bold text-[#111827]">{item.label}</div>
+                      <p className="mt-1 text-xs font-semibold leading-relaxed text-gray-500">{item.detail}</p>
+                    </div>
+                    <span className="shrink-0 rounded-full bg-[#111827] px-3 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-white">
+                      {item.action}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Panel>
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
+          <Panel className="xl:col-span-2">
+            <div className="flex items-center justify-between border-b border-white/50 px-6 py-5">
+              <div>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Outreach Queue</h2>
+                <p className="mt-1 text-sm font-semibold text-[#111827]">Leads worth a manual message, not another passive post.</p>
+              </div>
+              <Link to="/crm/outreach" className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 hover:text-[#111827]">
+                Open <ArrowUpRight size={13} />
+              </Link>
+            </div>
+            <div className="divide-y divide-white/50">
+              {outreachQueue.length > 0 ? outreachQueue.map((lead) => (
+                <Link key={lead.id} to={`/crm/leads/${lead.id}`} className="grid gap-4 px-6 py-5 transition hover:bg-white/50 md:grid-cols-[1fr_1.2fr_auto] md:items-center">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#111827] text-xs font-display font-bold text-white shadow-sm">
+                      {getInitials(lead.fullName)}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="truncate text-sm font-bold text-[#111827]">{lead.companyName || lead.fullName}</div>
+                      <div className="mt-1 flex flex-wrap items-center gap-2">
+                        <StatusBadge status={lead.status} />
+                        <PriorityBadge priority={lead.priority} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="min-w-0">
+                    <div className="truncate text-xs font-bold text-gray-700">{getVisibleLeak(lead)}</div>
+                    <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">{getRecommendedOffer(lead)}</div>
+                  </div>
+                  <MessageCircle size={18} className="text-gray-400" />
+                </Link>
+              )) : (
+                <div className="px-6 py-12 text-center text-sm font-semibold text-gray-500">No leads ready for outreach yet.</div>
+              )}
+            </div>
+          </Panel>
+
+          <Panel className="p-6">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Offer Focus</h2>
+            <p className="mt-1 text-sm font-semibold text-[#111827]">Default wedges to keep the sales story concrete.</p>
+            <div className="mt-5 space-y-3">
+              {offerShortlist.map((offer) => (
+                <div key={offer} className="flex items-center justify-between rounded-[18px] bg-white/60 px-4 py-3">
+                  <span className="text-sm font-bold text-[#111827]">{offer}</span>
+                  <ClipboardList size={15} className="text-gray-400" />
+                </div>
+              ))}
+            </div>
+          </Panel>
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+          <Panel className="p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <Search size={18} className="text-gray-400" />
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Pipeline Diagnosis</h2>
+            </div>
+            <div className="text-4xl font-display font-bold text-[#111827]">{resolvedMetrics.conversionRate.toFixed(1)}%</div>
+            <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">Won rate across current CRM records. Improve this by enforcing follow-up, not by adding random content.</p>
+          </Panel>
+          <Panel className="p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <CalendarCheck size={18} className="text-gray-400" />
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">This Week</h2>
+            </div>
+            <div className="text-4xl font-display font-bold text-[#111827]">{resolvedMetrics.leadsThisWeek}</div>
+            <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">New lead records captured in the last 7 days.</p>
+          </Panel>
+          <Panel className="p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <TrendingUp size={18} className="text-gray-400" />
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Pipeline Value</h2>
+            </div>
+            <div className="text-4xl font-display font-bold text-[#111827]">
+              {resolvedMetrics.pipelineValue === null ? 'TBD' : `RM ${resolvedMetrics.pipelineValue.toLocaleString()}`}
+            </div>
+            <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">Exact deal values should be added only when the offer is real.</p>
+          </Panel>
+        </div>
+
+        {leads.length === 0 && (
+          <div className="rounded-[24px] border border-amber-200 bg-amber-50 px-6 py-4 text-[10px] font-mono font-bold uppercase tracking-widest text-amber-700">
+            No CRM data yet. Add leads manually or connect diagnostic submissions before relying on dashboard metrics.
           </div>
         )}
 
-        {/* Metrics Strip */}
-        <MetricStrip items={metricItems} />
-
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-          {/* Recent Leads */}
-          <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-gray-500 uppercase">Recent Leads</h2>
-              <Link to="/crm/leads" className="flex items-center gap-1.5 text-[10px] font-mono font-bold tracking-widest text-gray-500 hover:text-[#111827] transition-colors uppercase">
-                View All <ChevronRight size={12} />
-              </Link>
-            </div>
-            <div className="space-y-2">
-              {recentLeads.length > 0 ? (
-                recentLeads.map((lead, i) => <DealCard key={lead.id} lead={lead} index={i} />)
-              ) : (
-                <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] px-8 py-20 text-center shadow-sm">
-                  <div className="w-16 h-16 rounded-full bg-white shadow-sm border border-white/50 flex items-center justify-center mx-auto mb-5">
-                    <Users size={24} className="text-gray-400" />
-                  </div>
-                  <p className="text-base font-bold text-[#111827] uppercase tracking-tight mb-2">No leads yet</p>
-                  <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">Contact form submissions appear here</p>
-                </div>
-              )}
-            </div>
+        {resolvedMetrics.followUpsToday > 0 && dueFollowUps.length === 0 && (
+          <div className="rounded-[24px] border border-blue-200 bg-blue-50 px-6 py-4 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+            <AlertCircle size={14} className="mr-2 inline" />
+            Dashboard metrics report follow-ups due, but the detailed task query returned none. Check CRM data freshness.
           </div>
+        )}
+      </div>
+    </CrmShell>
+  );
+};
 
-          {/* Right Panel */}
-          <div className="space-y-5">
-            <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-gray-500 uppercase">Daily Focus</h2>
+const demoLeads: Lead[] = [
+  {
+    id: 'preview-1',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    fullName: 'Amirul Afiz',
+    companyName: 'One Mobile Repair',
+    workEmail: 'owner@example.com',
+    whatsappPhone: '+60190000000',
+    roleInBusiness: 'Owner',
+    countryTimezone: 'Malaysia',
+    preferredLanguage: 'English',
+    businessType: 'Repair business',
+    serviceNeed: 'CRM pipeline and follow-up automation',
+    websiteUrl: 'https://example.com',
+    currentProblem: 'Leads come through WhatsApp but staff follow-up is inconsistent.',
+    projectGoal: 'Create owner visibility across enquiries, quotes, and follow-ups.',
+    budgetRange: 'RM 8,500 - RM 14,500',
+    selectedPackage: 'Revenue Infrastructure',
+    timeline: 'This month',
+    sourcePage: 'Preview',
+    status: 'qualified',
+    priority: 'hot',
+    assignedTo: null,
+    assignedProfile: null,
+    lastContactedAt: new Date().toISOString(),
+    nextFollowUpAt: new Date().toISOString(),
+    notesCount: 2,
+    rawPayload: {
+      visibleSystemLeak: 'WhatsApp enquiries are not turning into a controlled pipeline.',
+      recommendedOffer: 'Revenue Infrastructure',
+      outreachAngle: 'Lead with the owner visibility leak before mentioning tools.',
+    },
+  },
+  {
+    id: 'preview-2',
+    createdAt: new Date(Date.now() - 86400000).toISOString(),
+    updatedAt: new Date().toISOString(),
+    fullName: 'Khairul Azril',
+    companyName: 'Thunderfix Auto',
+    workEmail: 'manager@example.com',
+    whatsappPhone: '+60140000000',
+    roleInBusiness: 'Manager',
+    countryTimezone: 'Malaysia',
+    preferredLanguage: 'English',
+    businessType: 'Automotive',
+    serviceNeed: 'Content plus lead capture',
+    currentProblem: 'Content creates attention but no clear next step captures serious buyers.',
+    projectGoal: 'Connect content to enquiry capture and follow-up.',
+    budgetRange: 'RM 3,500 - RM 5,500/mo',
+    selectedPackage: 'Growth Media System',
+    timeline: '30 days',
+    sourcePage: 'Preview',
+    status: 'contacted',
+    priority: 'warm',
+    assignedTo: null,
+    assignedProfile: null,
+    lastContactedAt: new Date(Date.now() - 172800000).toISOString(),
+    nextFollowUpAt: new Date(Date.now() + 86400000).toISOString(),
+    notesCount: 1,
+    rawPayload: {
+      visibleSystemLeak: 'Strong attention, weak conversion path.',
+      recommendedOffer: 'Growth Media System',
+    },
+  },
+  {
+    id: 'preview-3',
+    createdAt: new Date(Date.now() - 172800000).toISOString(),
+    updatedAt: new Date().toISOString(),
+    fullName: 'Aina Hassan',
+    companyName: 'Local Clinic Group',
+    workEmail: 'ops@example.com',
+    whatsappPhone: '+60120000000',
+    roleInBusiness: 'Operations Lead',
+    countryTimezone: 'Malaysia',
+    preferredLanguage: 'English',
+    businessType: 'Clinic',
+    serviceNeed: 'Follow-up process and monthly care',
+    currentProblem: 'Missed callbacks and unclear staff ownership after enquiries.',
+    projectGoal: 'Install follow-up discipline and reporting.',
+    budgetRange: 'RM 599 - RM 999/mo',
+    selectedPackage: 'System Care Plan',
+    timeline: '2 weeks',
+    sourcePage: 'Preview',
+    status: 'new',
+    priority: 'warm',
+    assignedTo: null,
+    assignedProfile: null,
+    lastContactedAt: undefined,
+    nextFollowUpAt: new Date().toISOString(),
+    notesCount: 0,
+    rawPayload: {
+      visibleSystemLeak: 'No one owns the next action after the first reply.',
+      recommendedOffer: 'System Care Plan',
+    },
+  },
+];
 
-            <div className="space-y-3">
-              <Link to="/crm/follow-ups" className="group flex items-center gap-4 p-5 rounded-[24px] border border-white/50 bg-white/40 hover:bg-white backdrop-blur-sm hover:shadow-sm transition-all duration-200">
-                <div className="w-10 h-10 rounded-[14px] bg-orange-100 border border-orange-200 flex items-center justify-center text-orange-600 shrink-0">
-                  <Clock size={18} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-bold text-[#111827]">{metrics.followUpsToday} Follow-ups Due</div>
-                  <div className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest mt-0.5">
-                    {metrics.followUpsToday > 0 ? 'Needs attention' : 'All clear today'}
-                  </div>
-                </div>
-                <ChevronRight size={16} className="text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all" />
-              </Link>
+const demoFollowUps: FollowUp[] = [
+  {
+    id: 'follow-preview-1',
+    leadId: 'preview-1',
+    title: 'Send lead path diagnosis',
+    dueAt: new Date().toISOString(),
+    status: 'pending',
+    assignedTo: null,
+    assignedProfile: null,
+    createdAt: new Date().toISOString(),
+    leadName: 'Amirul Afiz',
+    leadCompany: 'One Mobile Repair',
+    contactMethod: 'whatsapp',
+    notes: 'Lead with WhatsApp pipeline leak.',
+  },
+  {
+    id: 'follow-preview-2',
+    leadId: 'preview-3',
+    title: 'Follow up on clinic callback process',
+    dueAt: new Date().toISOString(),
+    status: 'pending',
+    assignedTo: null,
+    assignedProfile: null,
+    createdAt: new Date().toISOString(),
+    leadName: 'Aina Hassan',
+    leadCompany: 'Local Clinic Group',
+    contactMethod: 'call',
+  },
+];
 
-              <Link to="/crm/leads" className="group flex items-center gap-4 p-5 rounded-[24px] border border-white/50 bg-white/40 hover:bg-white backdrop-blur-sm hover:shadow-sm transition-all duration-200">
-                <div className="w-10 h-10 rounded-[14px] bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-600 shrink-0">
-                  <AlertCircle size={18} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-bold text-[#111827]">{metrics.newLeads} New Leads</div>
-                  <div className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest mt-0.5">Ready to qualify</div>
-                </div>
-                <ChevronRight size={16} className="text-gray-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
-              </Link>
+const demoMetrics: DashboardMetrics = {
+  totalLeads: 3,
+  newLeads: 1,
+  contactedLeads: 1,
+  qualifiedLeads: 1,
+  proposalSent: 0,
+  won: 0,
+  lost: 0,
+  conversionRate: 0,
+  leadsThisWeek: 3,
+  followUpsToday: 2,
+  pipelineValue: 31500,
+};
 
-              <Link to="/crm/pipeline" className="group flex items-center gap-4 p-5 rounded-[24px] border border-white/50 bg-white/40 hover:bg-white backdrop-blur-sm hover:shadow-sm transition-all duration-200">
-                <div className="w-10 h-10 rounded-[14px] bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
-                  <TrendingUp size={18} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-bold text-[#111827]">Pipeline</div>
-                  <div className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest mt-0.5">View deal stages</div>
-                </div>
-                <ChevronRight size={16} className="text-gray-400 group-hover:text-emerald-500 group-hover:translate-x-1 transition-all" />
-              </Link>
-            </div>
+export const DashboardPreview = () => {
+  const activeLeads = demoLeads.filter(isActiveLead);
+  const hotLeads = activeLeads.filter((lead) => lead.priority === 'hot');
+  const outreachQueue = activeLeads.filter(isOutreachReady);
+  const today = new Date().toLocaleDateString('en-MY', { weekday: 'long', day: 'numeric', month: 'long' });
 
-            {/* Pipeline Value */}
-            <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] p-8 shadow-sm">
-              <div className="text-xs font-mono font-bold tracking-[0.2em] text-gray-500 uppercase mb-2">Pipeline Value</div>
-              <div className="text-4xl font-display font-bold text-[#111827] tracking-tight">
-                {metrics.pipelineValue === null ? 'Unavailable' : `RM ${metrics.pipelineValue.toLocaleString()}`}
-              </div>
-              <div className="flex items-center gap-2 text-gray-500 mt-3">
-                <TrendingUp size={14} />
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest">
-                  {metrics.pipelineValue === null ? 'Budget ranges are not exact deal values yet' : 'Computed from lead values'}
-                </span>
-              </div>
-            </div>
+  const metricItems = [
+    { label: 'Active leads', value: activeLeads.length, icon: <Users size={15} />, tone: 'text-gray-700 bg-white' },
+    { label: 'Follow-ups due', value: demoMetrics.followUpsToday, icon: <Clock size={15} />, tone: 'text-orange-700 bg-orange-50' },
+    { label: 'Hot review', value: hotLeads.length, icon: <Zap size={15} />, tone: 'text-blue-700 bg-blue-50' },
+    { label: 'Proposal ready', value: 1, icon: <FileText size={15} />, tone: 'text-purple-700 bg-purple-50' },
+    { label: 'Pipeline value', value: `RM ${demoMetrics.pipelineValue?.toLocaleString()}`, icon: <TrendingUp size={15} />, tone: 'text-emerald-700 bg-emerald-50' },
+  ];
 
-            {/* Funnel */}
-            <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] p-8 shadow-sm space-y-4">
-              <div className="text-xs font-mono font-bold tracking-[0.2em] text-gray-500 uppercase">Stage Funnel</div>
-              <div className="space-y-4">
-                {[
-                  { label: 'New',       value: metrics.newLeads,       color: 'bg-blue-500' },
-                  { label: 'Contacted', value: metrics.contactedLeads, color: 'bg-purple-500' },
-                  { label: 'Qualified', value: metrics.qualifiedLeads, color: 'bg-amber-500' },
-                  { label: 'Proposal',  value: metrics.proposalSent,   color: 'bg-orange-500' },
-                  { label: 'Won',       value: metrics.won,            color: 'bg-emerald-500' },
-                ].map((stage) => {
-                  const pct = metrics.totalLeads > 0 ? Math.round((stage.value / metrics.totalLeads) * 100) : 0;
-                  return (
-                    <div key={stage.label} className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono font-bold text-gray-600 uppercase tracking-widest">{stage.label}</span>
-                        <span className="text-[10px] font-mono font-bold text-[#111827]">{stage.value}</span>
-                      </div>
-                      <div className="h-2 rounded-full bg-white border border-white/50 shadow-inner overflow-hidden">
-                        <div className={cn('h-full rounded-full transition-all duration-500', stage.color)} style={{ width: `${pct}%` }} />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+  return (
+    <CrmShell>
+      <div className="space-y-6">
+        <div className="rounded-[24px] border border-blue-200 bg-blue-50 px-6 py-4 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+          Preview mode uses safe demo data. Real CRM remains protected behind login.
+        </div>
+
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-500">{today}</p>
+            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827] md:text-4xl">Strata HQ Preview</h1>
+            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-gray-600">
+              Control room for turning attention into pipeline, pipeline into follow-up, and follow-up into revenue.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a href="#preview-outreach" className="inline-flex items-center gap-2 rounded-full bg-[#111827] px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-white shadow-lg transition-all hover:bg-gray-800">
+              <Send size={14} /> Preview Outreach
+            </a>
           </div>
         </div>
+
+        <div className="grid grid-cols-2 gap-3 xl:grid-cols-5">
+          {metricItems.map((item) => (
+            <Panel key={item.label} className="p-5">
+              <div className={cn('mb-4 inline-flex h-9 w-9 items-center justify-center rounded-2xl', item.tone)}>{item.icon}</div>
+              <div className="text-3xl font-display font-bold tracking-tight text-[#111827]">{item.value}</div>
+              <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{item.label}</div>
+            </Panel>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.35fr_0.9fr]">
+          <Panel className="overflow-hidden">
+            <div className="border-b border-white/50 px-6 py-5">
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Today Control Panel</h2>
+              <p className="mt-1 text-sm font-semibold text-[#111827]">The work that protects revenue today.</p>
+            </div>
+            <div className="grid gap-4 p-5 lg:grid-cols-2">
+              <div className="rounded-[24px] border border-orange-100 bg-orange-50/70 p-5">
+                <div className="mb-4 flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-widest text-orange-700">
+                  <span className="flex items-center gap-2"><Clock size={14} /> Follow up today</span>
+                  <span className="rounded-full bg-white px-2.5 py-1">{demoFollowUps.length}</span>
+                </div>
+                <div className="space-y-3">
+                  {demoFollowUps.map((task) => (
+                    <div key={task.id} className="rounded-2xl bg-white/80 p-4">
+                      <div className="text-sm font-bold text-[#111827]">{task.title}</div>
+                      <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{task.leadCompany} · {formatDate(task.dueAt)}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-[24px] border border-blue-100 bg-blue-50/70 p-5">
+                <div className="mb-4 flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+                  <span className="flex items-center gap-2"><Target size={14} /> Hot lead review</span>
+                  <span className="rounded-full bg-white px-2.5 py-1">{hotLeads.length}</span>
+                </div>
+                <div className="space-y-3">
+                  {hotLeads.map((lead) => (
+                    <div key={lead.id} className="rounded-2xl bg-white/80 p-4">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="truncate text-sm font-bold text-[#111827]">{lead.fullName}</div>
+                          <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{lead.companyName}</div>
+                        </div>
+                        <PriorityBadge priority={lead.priority} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Panel>
+
+          <Panel className="p-6">
+            <div className="mb-5 flex items-center justify-between">
+              <div>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Clarity Sprint</h2>
+                <p className="mt-1 text-sm font-semibold text-[#111827]">Make Strata obvious before scaling posts.</p>
+              </div>
+              <Megaphone size={20} className="text-gray-400" />
+            </div>
+            <div className="space-y-3">
+              {claritySprint.map((item) => (
+                <div key={item.label} className="rounded-[20px] border border-white/60 bg-white/60 p-4">
+                  <div className="text-sm font-bold text-[#111827]">{item.label}</div>
+                  <p className="mt-1 text-xs font-semibold leading-relaxed text-gray-500">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </Panel>
+        </div>
+
+        <Panel className="overflow-hidden" id="preview-outreach">
+          <div className="border-b border-white/50 px-6 py-5">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Outreach Queue</h2>
+            <p className="mt-1 text-sm font-semibold text-[#111827]">Leads worth a manual message, not another passive post.</p>
+          </div>
+          <div className="divide-y divide-white/50">
+            {outreachQueue.map((lead) => (
+              <div key={lead.id} className="grid gap-4 px-6 py-5 md:grid-cols-[1fr_1.2fr_auto] md:items-center">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#111827] text-xs font-display font-bold text-white shadow-sm">{getInitials(lead.fullName)}</div>
+                  <div className="min-w-0">
+                    <div className="truncate text-sm font-bold text-[#111827]">{lead.companyName}</div>
+                    <div className="mt-1 flex flex-wrap items-center gap-2">
+                      <StatusBadge status={lead.status} />
+                      <PriorityBadge priority={lead.priority} />
+                    </div>
+                  </div>
+                </div>
+                <div className="min-w-0">
+                  <div className="truncate text-xs font-bold text-gray-700">{getVisibleLeak(lead)}</div>
+                  <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">{getRecommendedOffer(lead)}</div>
+                </div>
+                <MessageCircle size={18} className="text-gray-400" />
+              </div>
+            ))}
+          </div>
+        </Panel>
       </div>
     </CrmShell>
   );

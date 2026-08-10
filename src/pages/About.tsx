@@ -438,38 +438,43 @@ export const About = () => {
         </div>
       </section>
 
-      {/* SECTION 6 — STRATA APPROACH */}
-      <section className="bg-primary px-6 py-24 text-white lg:px-20 lg:py-32">
-        <div className="mb-16">
-          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
-            THE STRATA METHOD
-          </span>
-          <h2 className="text-4xl font-black tracking-tight text-white md:text-5xl lg:text-6xl">
-            Not Decoration. Structure.
-          </h2>
+      {/* SECTION 6 — PROCESS OVERVIEW */}
+      <section className="border-t border-border/50 bg-[#111113] px-6 py-24 text-white lg:px-20 lg:py-32">
+        <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p className="mb-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
+              OUR PROCESS
+            </p>
+            <h2 className="text-4xl font-black uppercase tracking-tight text-white md:text-5xl lg:text-6xl">
+              HOW WE BUILD YOUR INFRASTRUCTURE.
+            </h2>
+          </div>
+          <p className="max-w-md text-xs font-mono uppercase text-white/50">
+            A structured execution flow designed to eliminate revenue leakage and build scalable sales operations.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {[
             {
               step: "Step 1",
-              title: "Clarify the Business",
-              desc: "We define the offer, audience, trust gaps, customer journey, and conversion goal before design begins.",
+              title: "System Diagnosis",
+              desc: "We audit lead intake, enquiry handling, WhatsApp response times, and follow-up leakage to identify revenue bottlenecks.",
             },
             {
               step: "Step 2",
-              title: "Architect the Pages",
-              desc: "We structure the website around clarity, proof, service flow, mobile experience, and enquiry action.",
+              title: "Infrastructure Design",
+              desc: "We architect the lead capture funnel, CRM deal stages, AI qualification rules, and staff notification triggers.",
             },
             {
               step: "Step 3",
-              title: "Build the Digital Asset",
-              desc: "We develop a clean, responsive, performance-conscious website or system that supports the business.",
+              title: "Core System Install",
+              desc: "We install and integrate your CRM, WhatsApp automation, email sequences, and lead capture assets into one operating system.",
             },
             {
               step: "Step 4",
-              title: "Optimize the Customer Path",
-              desc: "We refine calls-to-action, lead capture, SEO basics, content flow, and customer decision points.",
+              title: "Revenue Optimization",
+              desc: "We refine content angles, paid ad campaigns, conversion flows, and team execution to maximize deal throughput.",
             },
           ].map((step, idx) => (
             <motion.div
@@ -507,17 +512,17 @@ export const About = () => {
           className="mx-auto max-w-4xl"
         >
           <h2 className="mb-10 text-4xl font-black tracking-tight text-primary md:text-5xl lg:text-7xl">
-            A Website Should Not Just Exist. It Should Work.
+            A Business System Should Produce Revenue, Not Administrative Drag.
           </h2>
           <div className="space-y-6 text-lg leading-relaxed text-primary/60 md:text-xl">
             <p>
-              Strata believes a website is not just a digital brochure. It is part of the business system.
+              Strata believes digital systems should not be isolated brochures or static websites. They must function as active revenue infrastructure.
             </p>
             <p>
-              A strong website should make people understand what you do, why they should trust you, how to take action, and what makes your business different.
+              A complete system ensures every inbound enquiry is captured, qualified, assigned, and followed up without relying on manual memory.
             </p>
             <p className="font-bold text-primary">
-              That is the standard behind every Strata build.
+              That is the execution standard behind every Strata install.
             </p>
           </div>
         </motion.div>

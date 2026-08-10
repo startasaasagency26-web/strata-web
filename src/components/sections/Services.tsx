@@ -7,25 +7,25 @@ import { CONTACT } from '../../config/contact';
 const systems = [
   {
     icon: <Clapperboard size={26} className="text-primary" />,
-    title: 'Demand Engine',
-    subtitle: 'Create & Feed Attention',
+    title: 'Growth Media System',
+    subtitle: 'Content & Paid Acquisition',
     description:
-      'Generates targeted commercial attention through high-converting content, paid creative, and campaigns that feed qualified demand directly into your operating system.',
+      'Generates targeted commercial attention through short-form video content, paid creative testing, and Meta/TikTok campaigns that feed qualified demand directly into your business.',
     bullets: [
       'Content production: short-form video assets, hooks, and scripts',
       'Paid media execution: Meta and TikTok campaign management',
       'Acquisition strategy: offer design and creative testing',
-      'Landing experiences: conversion-focused assets',
+      'High-converting landing assets: message-matched entry points',
       'Demand analytics: campaign performance and audience tracking',
     ],
-    cta: 'Book a Revenue Systems Audit',
+    cta: 'Book a Revenue Audit',
   },
   {
     icon: <ChartNoAxesCombined size={26} className="text-primary" />,
-    title: 'Revenue OS',
-    subtitle: 'Convert, Operate & Optimize Demand',
+    title: 'Revenue Infrastructure',
+    subtitle: 'Funnel, CRM & Automation Install',
     description:
-      'The central operating infrastructure that captures inbound leads, runs AI qualification, automates follow-up, and manages sales pipelines with full operational visibility.',
+      'The central operating infrastructure that captures inbound leads, runs AI qualification, automates WhatsApp/email follow-up, and manages sales pipelines with full staff visibility.',
     bullets: [
       'Inbound capture: landing pages, forms, and WhatsApp widgets',
       'Centralized CRM: deal stages, lead history, and ownership',
@@ -33,7 +33,7 @@ const systems = [
       'Automation: WhatsApp & email follow-up sequences',
       'Sales operations: staff task assignment and performance reporting',
     ],
-    cta: 'Book a Revenue Systems Audit',
+    cta: 'Book a Revenue Audit',
   },
 ];
 
@@ -45,7 +45,7 @@ export const Services = () => {
           <div className="max-w-2xl">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">CORE SYSTEMS</p>
             <h2 className="text-5xl md:text-6xl font-black leading-none tracking-[-0.04em] text-primary uppercase">
-              Demand Engine <br /> Feeds Revenue OS.
+              Revenue Infrastructure <br /> Powers Growth.
             </h2>
           </div>
           <p className="text-xs font-mono text-muted max-w-md uppercase leading-relaxed">
@@ -108,7 +108,7 @@ export const Services = () => {
           transition={{ duration: 0.6 }}
           className="mx-auto mt-14 max-w-3xl text-center text-2xl md:text-4xl font-black tracking-[-0.04em] text-primary uppercase"
         >
-          Demand Engine creates attention. Revenue OS captures, qualifies, and converts it.
+          Growth Media creates attention. Revenue Infrastructure captures, qualifies, and converts it.
         </motion.p>
       </div>
     </section>

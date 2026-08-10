@@ -6,6 +6,7 @@ import {
   Users,
   Kanban,
   Clock,
+  Send,
   Settings,
   Menu,
   X,
@@ -119,6 +120,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
     { name: 'Leads', href: '/crm/leads', icon: <Users size={20} /> },
     { name: 'Pipeline', href: '/crm/pipeline', icon: <Kanban size={20} /> },
     { name: 'Follow-ups', href: '/crm/follow-ups', icon: <Clock size={20} /> },
+    { name: 'Outreach', href: '/crm/outreach', icon: <Send size={20} /> },
     { name: 'Settings', href: '/crm/settings', icon: <Settings size={20} /> },
   ];
 

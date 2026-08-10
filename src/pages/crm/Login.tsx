@@ -1,5 +1,5 @@
 import { useState, useEffect, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Loader2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase/browser';
@@ -126,6 +126,13 @@ export const Login = () => {
                 'Login to CRM'
               )}
             </button>
+
+            <Link
+              to="/crm/reset-password"
+              className="block text-center text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white/35 transition hover:text-white"
+            >
+              Forgot CRM access?
+            </Link>
           </form>
 
           <div className="mt-12 pt-8 border-t border-white/5 text-center">

@@ -25,3 +25,11 @@ research-leads.local/
 *.sw?
 
 .vercel
+.env*
+.codex/
+Strata Ai CRM/
+Strata Argentic OS/
+Strata Marketing/
+ui-ux-pro-max-skill-main.zip
+build_log.txt
+.tmp-lead-schema-test/
