@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
@@ -8,6 +8,7 @@ import { CONTACT } from '../config/contact';
 import { Button } from './ui/liquid-glass-button';
 
 export const Navbar = () => {
+  const shouldReduceMotion = useReducedMotion();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
@@ -19,20 +20,19 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'REVENUE OS', href: '/#services' },
-    { name: 'AIOS', href: '/#ai-operating-system' },
-    { name: 'WHO IT\'S FOR', href: '/#industries' },
-    { name: 'PROCESS', href: '/#process' },
-    { name: 'OFFERS', href: '/pricing' },
+    { name: 'PLATFORM', href: '/#operating-layer' },
+    { name: 'OPERATING MEMORY', href: '/#operating-memory' },
+    { name: 'AI EMPLOYEES', href: '/#governed-ai' },
+    { name: 'PRICING', href: '/pricing' },
     { name: 'ABOUT', href: '/about' },
   ];
 
   return (
     <>
       <motion.header
-        initial={{ y: -24, opacity: 0 }}
+        initial={shouldReduceMotion ? false : { y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }}
         className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-8 md:pt-5"
       >
         <div
@@ -50,7 +50,7 @@ export const Navbar = () => {
             <Link
               to="/"
               className="flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              aria-label="Strata Agency Home"
+              aria-label="Strata Growth Technologies Home"
               onClick={() => setMobileMenuOpen(false)}
             >
               <Logo className="transition-transform duration-300 group-hover:scale-105 brightness-0 invert" />
@@ -59,7 +59,7 @@ export const Navbar = () => {
 
           {/* Mobile-only centered brand text — hidden on desktop where nav links show */}
           <div className="absolute left-1/2 -translate-x-1/2 xl:hidden pointer-events-none">
-            <span className="font-mono text-[11px] font-bold tracking-[0.28em] text-white/75 uppercase">
+            <span className="font-mono text-[11px] font-bold tracking-[0.28em] text-white/75 uppercase whitespace-nowrap">
               STRATA
             </span>
           </div>
@@ -74,20 +74,15 @@ export const Navbar = () => {
                 <li key={link.name} className="relative">
                   <Link
                     to={link.href}
-                    className="relative z-10 px-4 py-2 block text-[10px] font-mono font-bold tracking-[0.2em] transition-colors duration-200 text-white/55 hover:text-white whitespace-nowrap focus-visible:outline-none focus-visible:text-white"
+                    className="relative z-10 block px-4 py-3 font-mono text-[11px] font-bold tracking-[0.2em] text-white/55 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:text-white whitespace-nowrap"
                     onMouseEnter={() => setHoveredLink(link.name)}
                     onMouseLeave={() => setHoveredLink(null)}
                   >
                     {link.name}
                   </Link>
                   {hoveredLink === link.name && (
-                    <motion.div
-                      layoutId="nav-hover-pill"
+                    <div
                       className="absolute inset-0 rounded-full bg-white/[0.08] pointer-events-none z-0"
-                      initial={{ opacity: 0, scale: 0.85 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.85 }}
-                      transition={{ type: 'spring', stiffness: 380, damping: 28 }}
                     />
                   )}
                 </li>
@@ -101,17 +96,17 @@ export const Navbar = () => {
               asChild
               variant="glass"
               size="sm"
-              className="hidden lg:inline-flex rounded-full text-[10px] font-mono font-bold tracking-[0.2em] px-6 h-auto py-2.5"
+              className="hidden lg:inline-flex rounded-full text-[11px] font-mono font-bold tracking-[0.2em] px-6 h-auto py-2.5 whitespace-nowrap"
             >
-              <Link to={CONTACT.requestDemoPath}>BOOK REVENUE AUDIT</Link>
+              <Link to={CONTACT.requestDemoPath}>BOOK A DEMO</Link>
             </Button>
 
             <motion.button
-              whileHover={{ rotate: 90 }}
-              whileTap={{ scale: 0.88 }}
+              whileHover={shouldReduceMotion ? undefined : { rotate: 90 }}
+              whileTap={shouldReduceMotion ? undefined : { scale: 0.88 }}
               transition={{ type: 'spring', stiffness: 280, damping: 20 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/[0.18] transition-colors duration-200 shrink-0 ml-1"
+              className="w-11 h-11 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/[0.18] transition-colors duration-200 shrink-0 ml-1"
               aria-label="Toggle Menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -125,10 +120,10 @@ export const Navbar = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={shouldReduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.25 }}
             className="fixed inset-0 z-40 bg-[#111113] flex flex-col justify-center items-center px-6"
           >
             <nav aria-label="Mobile navigation">
@@ -136,9 +131,9 @@ export const Navbar = () => {
                 {navLinks.map((link, idx) => (
                   <motion.li
                     key={link.name}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 + idx * 0.05 }}
+                    transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.05 + idx * 0.05, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Link
                       to={link.href}
@@ -150,29 +145,29 @@ export const Navbar = () => {
                   </motion.li>
                 ))}
                 <motion.li
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.33 }}
+                  transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.33, ease: [0.22, 1, 0.36, 1] }}
                   className="mt-6 w-full max-w-xs"
                 >
                   <Button
                     asChild
                     variant="glass"
-                    className="w-full h-14 rounded-full text-[10px] font-mono font-bold tracking-[0.2em] uppercase"
+                    className="w-full h-14 rounded-full text-[11px] font-mono font-bold tracking-[0.2em] uppercase"
                   >
                     <Link to={CONTACT.requestDemoPath} onClick={() => setMobileMenuOpen(false)}>
-                      BOOK REVENUE AUDIT
+                      BOOK A DEMO
                     </Link>
                   </Button>
                 </motion.li>
                 <motion.li
-                  initial={{ opacity: 0 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.4 }}
                   className="mt-2 w-full max-w-xs"
                 >
-                  <p className="text-center font-mono text-[9px] font-bold uppercase leading-relaxed tracking-[0.24em] text-white/35">
-                    AI-Powered Revenue Operating System
+                  <p className="text-center font-mono text-[11px] font-bold uppercase leading-relaxed tracking-[0.24em] text-white/35">
+                    AI-Powered Business Infrastructure
                   </p>
                 </motion.li>
               </ul>

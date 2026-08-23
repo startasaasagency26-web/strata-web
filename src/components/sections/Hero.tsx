@@ -1,180 +1,63 @@
-import { useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Button } from '../ui/liquid-glass-button';
-import { CONTACT } from '../../config/contact';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { CONTACT } from '../../config/contact';
+import { ProductFrame } from '../product/ProductFrame';
+import { Button } from '../ui/liquid-glass-button';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const proofChips = [
-  'Strata Core',
-  'Revenue Infrastructure',
-  'Growth Media Layer',
-  'AI Qualification',
-  'WhatsApp CRM',
-];
-
 export const Hero = () => {
-  const heroRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
-
-  const fadeUp = (delay = 0) =>
-    shouldReduceMotion
-      ? {}
-      : { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8, delay, ease: EASE } };
+  const fadeUp = (delay = 0) => ({
+    initial: shouldReduceMotion ? false : { opacity: 0, y: 12 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: shouldReduceMotion ? 0 : 0.4, delay, ease: EASE },
+  });
 
   return (
     <section
-      ref={heroRef}
       id="hero"
-      aria-labelledby="hero-headline"
-      className="relative min-h-[90svh] flex flex-col items-center justify-center overflow-hidden px-5 md:px-12 pt-28 md:pt-32 pb-16"
+      aria-labelledby="hero-heading"
+      className="relative overflow-hidden px-5 pb-20 pt-32 sm:px-8 md:px-12 md:pb-28 md:pt-40"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(29,29,31,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(29,29,31,0.035) 1px, transparent 1px)',
-          backgroundSize: '72px 72px',
-          maskImage: 'radial-gradient(ellipse at 50% 30%, black 20%, transparent 78%)',
-        }}
-      />
-
-      <div className="relative z-10 mx-auto w-full max-w-5xl text-center">
-        <motion.p
-          {...fadeUp(0)}
-          className="mb-6 text-[10px] font-mono tracking-[0.3em] text-muted uppercase"
-        >
-          AI-POWERED REVENUE OPERATING SYSTEM
-        </motion.p>
-
-        <motion.div {...fadeUp(0.1)}>
-          <h1
-            id="hero-headline"
-            className="font-black leading-[0.88] tracking-[-0.055em] text-primary mb-6"
-            style={{ fontSize: 'clamp(2.75rem, 8.5vw, 8rem)' }}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(0,102,204,0.12),transparent_40%)]" aria-hidden="true" />
+      <div className="relative mx-auto max-w-6xl">
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.p {...fadeUp()} className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-accent">
+            STRATA CORE · AI OPERATING LAYER
+          </motion.p>
+          <motion.h1
+            {...fadeUp(0.05)}
+            id="hero-heading"
+            className="text-[clamp(3rem,8vw,7.5rem)] font-black uppercase leading-[0.88] tracking-[-0.055em] text-primary"
           >
-            The AI-Powered Revenue Operating System for Local Service Businesses.
-          </h1>
-        </motion.div>
+            Run the business from one shared operating layer.
+          </motion.h1>
+          <motion.p {...fadeUp(0.1)} className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted md:text-xl">
+            Strata Core connects customer signals, operating rules, team actions and governed AI in one system—so work moves with context, control and a visible record.
+          </motion.p>
+          <motion.div {...fadeUp(0.15)} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild variant="glassStrong" size="lg" className="h-12 rounded-full px-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
+              <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
+                Book a demo <ArrowRight size={14} />
+              </Link>
+            </Button>
+            <Button asChild variant="glass" size="lg" className="h-12 rounded-full px-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
+              <Link to="/#operating-layer">Explore the platform</Link>
+            </Button>
+          </motion.div>
+        </div>
 
-        <motion.p
-          {...fadeUp(0.18)}
-          className="mb-5 text-[clamp(0.95rem,2vw,1.15rem)] font-black uppercase tracking-[-0.02em] text-primary/80 leading-tight"
-        >
-          Strata Core connects attention creation directly into your revenue infrastructure.
-        </motion.p>
-
-        <motion.p
-          {...fadeUp(0.26)}
-          className="mx-auto mb-10 max-w-3xl font-sans text-sm md:text-base leading-relaxed text-muted"
-        >
-          Strata connects your marketing, lead capture, CRM, AI automation, follow-up and sales operations into one revenue system built to convert demand into measurable growth.
-        </motion.p>
-
-        <motion.div
-          {...fadeUp(0.34)}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10"
-        >
-          <Button
-            asChild
-            variant="glassStrong"
-            size="lg"
-            className="rounded-full font-mono font-bold tracking-[0.16em] text-[10px] uppercase px-8 h-12"
-          >
-            <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-              Book a Revenue Systems Audit
-              <ArrowRight size={13} />
-            </Link>
-          </Button>
-
-          <Button
-            asChild
-            variant="glass"
-            size="lg"
-            className="rounded-full font-mono font-bold tracking-[0.16em] text-[10px] uppercase px-8 h-12"
-          >
-            <Link to="/#system-flow">
-              See How Strata Works
-            </Link>
-          </Button>
-        </motion.div>
-
-        <motion.div
-          {...fadeUp(0.42)}
-          className="flex flex-wrap items-center justify-center gap-2"
-        >
-          {proofChips.map((chip) => (
-            <span
-              key={chip}
-              className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-primary/[0.08] rounded-full px-3.5 py-1.5 text-[9px] font-mono font-bold tracking-widest text-primary uppercase"
-            >
-              {chip}
-            </span>
-          ))}
+        <motion.div {...fadeUp(0.2)} className="mx-auto mt-14 max-w-5xl">
+          <ProductFrame
+            src="/strata-core-operating-layer.webp"
+            alt="Abstract layered system graphic representing Strata Core's shared operating layer"
+            urlLabel="core.strataagency.tech / operating-layer"
+          />
         </motion.div>
       </div>
-
-      <motion.div
-        {...(shouldReduceMotion
-          ? {}
-          : { initial: { opacity: 0, y: 32, scale: 0.97 }, animate: { opacity: 1, y: 0, scale: 1 }, transition: { duration: 1.0, delay: 0.52, ease: EASE } }
-        )}
-        className="relative z-10 mt-14 w-full max-w-[1080px] mx-auto"
-      >
-        <div
-          aria-hidden="true"
-          className="w-full rounded-[28px] bg-white border border-border/60 shadow-[0_30px_90px_rgba(0,0,0,0.10)] overflow-hidden"
-        >
-          <div className="flex items-center gap-3 px-5 py-3 bg-[#F5F5F7] border-b border-border/50">
-            <div className="flex items-center gap-1.5 flex-shrink-0">
-              <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-              <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-              <span className="w-3 h-3 rounded-full bg-[#28C840]" />
-            </div>
-            <div className="flex-1 flex justify-center">
-              <div className="bg-white/70 border border-border/60 rounded-md px-3 py-1 max-w-[280px] w-full flex items-center justify-center">
-                <span className="text-[10px] font-mono text-muted truncate">
-                  strataagency.tech/revenue-command-center
-                </span>
-              </div>
-            </div>
-            <div className="w-[54px] flex-shrink-0" />
-          </div>
-
-          <div className="relative w-full aspect-[16/9] bg-[#eef0f2]">
-            <video
-              src="/videos/strata-ai-dashboard-browser.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              className="w-full h-full object-contain object-top"
-            />
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        {...(shouldReduceMotion ? {} : { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.6, delay: 0.9, ease: EASE } })}
-        className="relative z-10 mt-10"
-      >
-        <Link
-          to="/about"
-          className="inline-flex items-center gap-3 bg-primary text-white pl-3 pr-5 py-2.5 rounded-full shadow-lg border border-white/5 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-        >
-          <div className="w-8 h-8 rounded-full bg-white/10 flex-shrink-0 border border-white/10 overflow-hidden">
-            <img src="/founder.jpg" alt="Amirul Afiz" className="w-full h-full object-cover" />
-          </div>
-          <div>
-            <p className="text-[8px] font-mono font-bold tracking-widest text-white/40 uppercase">Founder-led Studio</p>
-            <p className="text-[10px] font-mono text-white/80 leading-tight">Build with Amirul Afiz and Strata.</p>
-          </div>
-        </Link>
-      </motion.div>
     </section>
   );
 };

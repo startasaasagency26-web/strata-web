@@ -1,31 +1,21 @@
-import { Hero } from '../components/sections/Hero';
-import { BusinessProblem } from '../components/sections/BusinessProblem';
-import { SystemFlow } from '../components/sections/SystemFlow';
-import { AiOperatingSystem } from '../components/sections/AiOperatingSystem';
-import { Services } from '../components/sections/Services';
-import { Benefits } from '../components/sections/Benefits';
-import { Industries } from '../components/sections/Industries';
-import { SelectedWork } from '../components/sections/SelectedWork';
-import { Process } from '../components/sections/Process';
-import { Technology } from '../components/sections/Technology';
-import { FAQ } from '../components/sections/FAQ';
+import { DeploymentPath } from '../components/product/DeploymentPath';
+import { GovernedAI } from '../components/product/GovernedAI';
+import { OperatingLayer } from '../components/product/OperatingLayer';
+import { OperatingLoop } from '../components/product/OperatingLoop';
+import { OperatingMemory } from '../components/product/OperatingMemory';
+import { TheDisconnect } from '../components/sections/BusinessProblem';
 import { FinalCTA } from '../components/sections/FinalCTA';
+import { Hero } from '../components/sections/Hero';
 
-export const Home = () => {
-  return (
-    <>
-      <Hero />
-      <BusinessProblem />
-      <SystemFlow />
-      <AiOperatingSystem />
-      <Services />
-      <Benefits />
-      <Industries />
-      <SelectedWork />
-      <Process />
-      <Technology />
-      <FAQ />
-      <FinalCTA />
-    </>
-  );
-};
+export const Home = () => (
+  <>
+    <Hero />
+    <TheDisconnect />
+    <OperatingLayer />
+    <OperatingMemory />
+    <OperatingLoop />
+    <GovernedAI />
+    <DeploymentPath />
+    <FinalCTA />
+  </>
+);

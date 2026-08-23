@@ -10,25 +10,24 @@ export default {
         background: '#F5F5F7',
         surface: '#FFFFFF',
         primary: '#1D1D1F',
-        muted: '#86868B',
+        muted: '#6E6E73',
         border: '#D2D2D7',
-        accent: '#0066CC'
+        accent: '#0066CC',
+        line: '#E5E5E7',
+        surface2: '#FAFAFB',
+        positive: '#1D8348',
+        caution: '#B7791F'
       },
       fontFamily: {
-        // Apple system font stack — SF Pro renders on macOS/iOS automatically
         sans: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'SF Pro Text',
           'Inter',
+          'SF Pro Text',
           'system-ui',
           'sans-serif',
         ],
         display: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'SF Pro Display',
           'Inter',
+          'SF Pro Display',
           'system-ui',
           'sans-serif',
         ],

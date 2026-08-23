@@ -10,31 +10,26 @@ const systemCards = [
     label: 'DIAGNOSE',
     position: 'left-[10%] top-[18%] rotate-[-4deg]',
     visibility: 'md:block',
-    delay: '0s',
   },
   {
     label: 'MEDIA',
     position: 'right-[12%] top-[20%] rotate-[3deg]',
     visibility: 'md:block',
-    delay: '-5s',
   },
   {
     label: 'CRM',
     position: 'left-[20%] top-[41%] rotate-[2deg]',
     visibility: 'lg:block',
-    delay: '-9s',
   },
   {
     label: 'FOLLOW-UP',
     position: 'right-[21%] top-[43%] rotate-[-2deg]',
     visibility: 'lg:block',
-    delay: '-2s',
   },
   {
     label: 'PIPELINE',
     position: 'left-1/2 top-[31%] -translate-x-1/2 rotate-[1deg]',
     visibility: 'md:block',
-    delay: '-12s',
   },
 ] as const;
 
@@ -42,7 +37,7 @@ export const FinalCTA = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden bg-primary py-32 text-white md:py-48">
+    <section id="final-cta" aria-labelledby="final-cta-heading" className="relative overflow-hidden bg-primary py-32 text-white md:py-48">
       {/* Strategy architecture field */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute inset-x-0 top-0 h-[62%] opacity-60 [mask-image:linear-gradient(to_bottom,black_0%,black_45%,transparent_100%)] md:opacity-80">
@@ -88,10 +83,9 @@ export const FinalCTA = () => {
               className={`absolute hidden ${card.visibility} ${card.position}`}
             >
               <div
-                className="final-cta-system-card flex h-14 min-w-[8.25rem] items-center justify-between gap-5 border border-white/[0.12] bg-white/[0.035] px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_18px_50px_rgba(0,0,0,0.34)] backdrop-blur-[2px]"
-                style={{ animationDelay: card.delay }}
+                className="flex h-14 min-w-[8.25rem] items-center justify-between gap-5 border border-white/[0.12] bg-white/[0.035] px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_18px_50px_rgba(0,0,0,0.34)] backdrop-blur-[2px]"
               >
-                <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/45">
+                <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-white/45">
                   {card.label}
                 </span>
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full border border-white/25 bg-white/20 shadow-[0_0_18px_rgba(255,255,255,0.3)]" />
@@ -103,13 +97,13 @@ export const FinalCTA = () => {
         <div className="absolute inset-x-0 top-[34%] h-[58%] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.15)_0%,rgba(255,255,255,0.055)_34%,transparent_72%)]" />
 
         <div className="hidden lg:block">
-          <span className="absolute left-[1.35rem] top-[18%] font-mono text-[10px] uppercase tracking-[0.55em] text-white/[0.055] [writing-mode:vertical-rl]">
+          <span className="absolute left-[1.35rem] top-[18%] font-mono text-[11px] uppercase tracking-[0.55em] text-white/[0.055] [writing-mode:vertical-rl]">
             Diagnosis
           </span>
-          <span className="absolute right-[1.35rem] top-[25%] font-mono text-[10px] uppercase tracking-[0.55em] text-white/[0.055] [writing-mode:vertical-rl]">
+          <span className="absolute right-[1.35rem] top-[25%] font-mono text-[11px] uppercase tracking-[0.55em] text-white/[0.055] [writing-mode:vertical-rl]">
             Infrastructure
           </span>
-          <span className="absolute left-[1.35rem] bottom-[16%] font-mono text-[10px] uppercase tracking-[0.55em] text-white/[0.055] [writing-mode:vertical-rl]">
+          <span className="absolute left-[1.35rem] bottom-[16%] font-mono text-[11px] uppercase tracking-[0.55em] text-white/[0.055] [writing-mode:vertical-rl]">
             Pipeline
           </span>
         </div>
@@ -123,10 +117,10 @@ export const FinalCTA = () => {
 
       <div className="container relative z-10 mx-auto flex flex-col items-center px-6 text-center md:px-12">
         <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: shouldReduceMotion ? 0 : 0.8 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="w-full max-w-4xl"
         >
           <div className="mb-12 flex justify-center md:mb-14">
@@ -135,7 +129,7 @@ export const FinalCTA = () => {
               <div className="absolute inset-3 rounded-full border border-white/[0.17]" />
               <div className="absolute inset-6 rounded-full border border-white/20" />
               <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.14)_0%,transparent_62%)]" />
-              <div className="final-cta-radar-sweep absolute inset-0 overflow-hidden rounded-full">
+              <div className="absolute inset-0 overflow-hidden rounded-full">
                 <span className="absolute left-1/2 top-1/2 h-px w-1/2 origin-left bg-gradient-to-r from-white/35 to-transparent" />
               </div>
               <div className="final-cta-pulse-ring absolute h-4 w-4 rounded-full border border-white/25" />
@@ -143,35 +137,35 @@ export const FinalCTA = () => {
             </div>
           </div>
 
-          <h2 className="mb-8 text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-white md:text-7xl lg:text-8xl">
-            Ready to stop <br /> leaking revenue?
+          <h2 id="final-cta-heading" className="mb-8 text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-white md:text-7xl lg:text-8xl">
+            Make your operating <br /> system explicit.
           </h2>
 
           <p className="mx-auto mb-10 max-w-2xl font-sans text-lg leading-relaxed text-white/80 md:text-xl">
-            Book a Revenue Systems Audit with Strata. We'll map your lead flow, uncover conversion leaks, and design your connected operating system.
+            Bring one critical workflow. We'll map the context, ownership and controls Strata Core needs to support it.
           </p>
 
           {/* What happens during audit box */}
           <div className="mx-auto mb-12 max-w-2xl bg-white/5 border border-white/10 rounded-[24px] p-6 text-left backdrop-blur-sm">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-white/50 mb-3">
-              WHAT HAPPENS DURING YOUR REVENUE SYSTEMS AUDIT:
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-white/50 mb-3">
+              WHAT WE MAP WITH YOU:
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-sans text-white/80">
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-white/50 shrink-0" />
-                Review current lead acquisition &amp; traffic flow
+                The signal that starts the workflow
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-white/50 shrink-0" />
-                Pinpoint conversion leaks &amp; drop-off points
+                The decisions and business rules involved
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-white/50 shrink-0" />
-                Evaluate CRM &amp; follow-up infrastructure
+                The people, records and approval boundaries
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-white/50 shrink-0" />
-                Identify AI &amp; automation opportunities
+                The outcome that should be visible
               </li>
             </ul>
           </div>
@@ -184,7 +178,7 @@ export const FinalCTA = () => {
               className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
             >
               <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-4">
-                <span>Book a Revenue Systems Audit</span>
+                <span>Book a Strata Core demo</span>
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 transition-colors duration-300">
                   <ArrowRight size={16} />
                 </div>

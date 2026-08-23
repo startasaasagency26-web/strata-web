@@ -25,10 +25,6 @@
     @apply bg-white/40 backdrop-blur-xl border border-white/10 text-primary shadow-sm hover:shadow-md hover:bg-white/60 transition-all duration-500;
   }
 
-  .bento-card {
-    @apply bg-surface rounded-[24px] border border-border/40 p-8 shadow-[0_4px_6px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:scale-[1.01] transition-all duration-500 overflow-hidden;
-  }
-
   .final-cta-blueprint {
     background-image:
       linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
@@ -41,39 +37,8 @@
     transform-origin: top center;
   }
 
-  .final-cta-system-card {
-    animation: final-cta-card-drift 18s ease-in-out infinite;
-  }
-
-  .final-cta-radar-sweep {
-    animation: final-cta-radar-sweep 18s linear infinite;
-  }
-
   .final-cta-pulse-ring {
     animation: final-cta-pulse-ring 4.8s ease-in-out infinite;
-  }
-}
-
-@keyframes final-cta-card-drift {
-  0%,
-  100% {
-    opacity: 0.72;
-    transform: translate3d(0, 0, 0);
-  }
-
-  50% {
-    opacity: 0.94;
-    transform: translate3d(0, -8px, 0);
-  }
-}
-
-@keyframes final-cta-radar-sweep {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
   }
 }
 
@@ -91,8 +56,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .final-cta-system-card,
-  .final-cta-radar-sweep,
   .final-cta-pulse-ring {
     animation: none;
   }
