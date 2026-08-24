@@ -19,10 +19,10 @@ export const About = () => {
               ABOUT STRATA
             </span>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-[-0.04em] text-text md:text-7xl lg:text-8xl">
-              AI-Powered Revenue Systems &amp; Infrastructure
+              Business systems built around how work really happens
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
-              Founded in mid-2025, Strata is a founder-led implementation partner that builds AI-powered revenue operating systems for growing businesses: connecting marketing, lead capture, CRM, AI qualification, follow-up, and sales operations.
+              Founded in mid-2025, Strata delivers Revenue Systems engagements for growing businesses today while shaping the in-development Strata Core platform with design partners.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
@@ -287,26 +287,26 @@ export const About = () => {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-2 lg:gap-6">
           {[
             {
-              title: "Lead Capture",
-              desc: "Landing pages, sales pages, and forms built to turn attention into structured enquiries instead of scattered messages.",
+              title: "Revenue System Design",
+              desc: "We map the customer journey, commercial handoffs, owners and controls before tools are configured.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-md border-2 border-gold/20" />
             },
             {
-              title: "CRM & Pipeline",
-              desc: "Lead stages, ownership, and next actions so every enquiry has a clear position and a clear owner.",
+              title: "Lead Capture Infrastructure",
+              desc: "We build pages and forms that turn attention into structured enquiries with a clear next destination.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-full border-2 border-gold/20" />
             },
             {
-              title: "Automation & Follow-Up",
-              desc: "WhatsApp and email flows that reduce response delay and remove dependence on staff memory.",
+              title: "Follow-Up Operations",
+              desc: "We configure ownership, reminders and approved communication flows so next actions do not depend on memory.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rotate-45 border-2 border-gold/20" />
             },
             {
-              title: "Growth Media System",
-              desc: "Content and paid media that create the demand the infrastructure captures, plus reporting owners can read.",
+              title: "Growth Media Execution",
+              desc: "We create and manage the content and paid-media work that feeds the revenue system, with reporting owners can read.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-lg bg-gold/5 flex items-center justify-center"><div className="h-2 w-2 rounded-full bg-gold/20" /></div>
             },
@@ -373,7 +373,7 @@ export const About = () => {
             },
             {
               name: "1MOBILE ROS",
-              description: "Strata Core operational CRM & repair workflow system.",
+              description: "Internal repair operations and CRM workflow system.",
               href: null,
               badge: "INTERNAL INFRASTRUCTURE",
             },
@@ -464,12 +464,12 @@ export const About = () => {
             {
               step: "Step 2",
               title: "Infrastructure Design",
-              desc: "We architect the lead capture funnel, CRM deal stages, AI qualification rules, and staff notification triggers.",
+              desc: "We design intake, ownership, handoffs, approval rules and staff notification points around the real workflow.",
             },
             {
               step: "Step 3",
-              title: "Core System Install",
-              desc: "We install and integrate your CRM, WhatsApp automation, email sequences, and lead capture assets into one operating system.",
+              title: "System Implementation",
+              desc: "We implement the agreed tools, workflows, communication steps and reporting structure as a scoped service engagement.",
             },
             {
               step: "Step 4",

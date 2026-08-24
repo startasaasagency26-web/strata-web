@@ -69,8 +69,8 @@ export const Diagnostic = () => {
       document.head.appendChild(activeDescription);
     }
 
-    document.title = "Book a Revenue Systems Audit | Strata Agency";
-    activeDescription.content = "Tell Strata where your lead flow is breaking. Book a revenue systems audit to see where enquiries are lost across capture, CRM, AI qualification, follow-up, and demand.";
+    document.title = "Book a Revenue Systems Audit | Strata";
+    activeDescription.content = "Tell Strata where your revenue process is breaking. We will review capture, ownership, handoffs, follow-up and reporting, then outline a practical service scope.";
 
     return () => {
       document.title = previousTitle;
@@ -264,7 +264,7 @@ export const Diagnostic = () => {
               Book Your Revenue Systems Audit
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-text/60 md:text-xl">
-              Tell us how enquiries reach you today and what happens after they arrive. We'll map your lead flow, uncover conversion leaks across capture, CRM, AI, and follow-up — and design your revenue operating system.
+              Tell us how enquiries reach you and what happens next. We’ll map the handoffs, ownership and follow-up gaps, then recommend the Revenue Systems work that fits your operation.
             </p>
             <div className="flex flex-wrap gap-4">
               <button
@@ -293,8 +293,8 @@ export const Diagnostic = () => {
                 {[
                   { id: "01", title: "Demand Sources" },
                   { id: "02", title: "Lead Capture" },
-                  { id: "03", title: "CRM & Follow-Up" },
-                  { id: "04", title: "System Roadmap" },
+                  { id: "03", title: "Sales Operations" },
+                  { id: "04", title: "Implementation Scope" },
                 ].map((item) => (
                   <div key={item.id} className="flex items-center gap-6 border-b border-border pb-6 last:border-0 last:pb-0">
                     <span className="font-mono text-xs font-bold text-muted">{item.id}</span>
@@ -315,11 +315,11 @@ export const Diagnostic = () => {
           {[
             {
               title: "Locate the Leak",
-              desc: "We trace where enquiries are lost: weak demand, weak capture, no CRM structure, or slow follow-up."
+              desc: "We trace where enquiries are lost: weak demand, broken capture, unclear ownership, slow response or missed handoffs."
             },
             {
               title: "Map the Capture Path",
-              desc: "We map how attention should move into a page, a form, a pipeline stage, and a next action."
+              desc: "We map how attention should become a structured enquiry, an owned next action and a measurable commercial outcome."
             },
             {
               title: "Pick the Right System",
@@ -600,11 +600,11 @@ export const Diagnostic = () => {
                   {/* Step 3: Build Requirement */}
                   {step === 3 && (
                     <div className="space-y-8">
-                      <h3 className="text-2xl font-bold uppercase tracking-tight text-text">What is your primary Strata Core focus area?</h3>
+                      <h3 className="text-2xl font-bold uppercase tracking-tight text-text">Which Revenue Systems area needs attention first?</h3>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {[
-                          "Full Strata Core Install", "CRM & Pipeline Setup", "WhatsApp & AI Automation",
-                          "Content & Ad Attention Engine", "Lead Leakage Audit", "Custom System Scope"
+                          "Revenue Systems Audit", "Lead Capture & Routing", "CRM Configuration",
+                          "WhatsApp Follow-Up Workflow", "Sales Reporting & Accountability", "Custom Operations Scope"
                         ].map((req) => (
                           <button
                             key={req}
@@ -886,10 +886,10 @@ export const Diagnostic = () => {
                   </span>
                   <ul className="space-y-4">
                     {[
-                      "Malaysian SMEs scaling revenue infrastructure",
-                      "Service businesses with leaking WhatsApp enquiries",
-                      "Operators replacing manual follow-up workflows",
-                      "Businesses needing automated lead scoring & CRM",
+                      "Malaysian SMEs improving revenue operations",
+                      "Service businesses losing WhatsApp enquiries",
+                      "Teams with unclear ownership and missed handoffs",
+                      "Operators replacing manual follow-up work",
                       "Founders upgrading service operations",
                       "Teams with clear sales capacity and customer value"
                     ].map((item) => (
@@ -949,9 +949,9 @@ export const Diagnostic = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {[
             { id: "01", title: "Submit the Diagnostic", desc: "You tell us about your business, current lead leakage, required system components, and timeline." },
-            { id: "02", title: "Strata Reviews Fit", desc: "We review your operational economics and check whether Strata Core is the right solution." },
+            { id: "02", title: "Strata Reviews Fit", desc: "We review your operational economics and check whether a Revenue Systems engagement is the right next step." },
             { id: "03", title: "Diagnosis Call", desc: "We walk through where your lead flow is leaking and which infrastructure components close the gap." },
-            { id: "04", title: "System Roadmap", desc: "If there is fit, we outline the exact Strata Core scope, timeline, and commercial investment." }
+            { id: "04", title: "System Roadmap", desc: "If there is fit, we outline the exact Revenue Systems scope, timeline and commercial investment." }
           ].map((item) => (
             <div key={item.id} className="space-y-6">
               <span className="font-mono text-xs font-bold text-muted">{item.id}</span>
@@ -978,7 +978,7 @@ export const Diagnostic = () => {
             "J-ARMOR SHOP — E-commerce revenue engine",
             "THUNDERFIX — Lead capture & conversion infrastructure",
             "ONESPECIALIST — Local service enquiry routing system",
-            "1MOBILE ROS — Operational CRM & repair workflow system"
+            "1MOBILE ROS — Internal repair operations and CRM workflow system"
           ].map((project) => (
             <div key={project} className="group rounded-2xl border border-gold/5 bg-surface p-6 shadow-sm transition-all hover:shadow-md">
               <p className="font-mono text-[9px] font-bold uppercase leading-relaxed tracking-widest text-text/60">
@@ -1010,15 +1010,15 @@ export const Diagnostic = () => {
             {[
               {
                 q: "Is the diagnostic free?",
-                a: "Yes. The initial diagnostic review and diagnosis call are complimentary. Our goal is to ensure we only take on projects where Strata Core is genuinely the right fit."
+                a: "Yes. The initial review and diagnosis call are complimentary. We use them to confirm whether a paid Revenue Systems engagement is genuinely the right fit."
               },
               {
                 q: "Do I need to know exactly what I want built?",
-                a: "No. That is exactly what the diagnosis is for. We help you identify where leads are being dropped and which Strata Core layers to install first."
+                a: "No. The diagnosis identifies where enquiries are being dropped, which handoffs are unclear and what implementation work should come first."
               },
               {
-                q: "What does a Strata Core implementation include?",
-                a: "Strata Core is a complete revenue operating system including lead capture funnels, Meta/TikTok campaign management, WhatsApp CRM, AI qualification agents, automated follow-up sequences, staff workflow tools, and executive reporting dashboards."
+                q: "What can a Revenue Systems engagement include?",
+                a: "Each engagement is scoped to the business. Strata may design and implement agreed lead-capture assets, sales-process configuration, WhatsApp or email follow-up workflows, staff handoffs and reporting. These are services Strata performs, not a claim that Strata Core is finished."
               },
               {
                 q: "What should I prepare before the call?",

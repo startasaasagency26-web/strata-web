@@ -4,10 +4,10 @@ import { SectionShell } from './SectionShell';
 
 export const OperatingLoop = () => (
   <SectionShell
-    id="operating-loop"
-    eyebrow="05 · THE OPERATING LOOP"
-    headline="One operating loop from signal to learning."
-    support="Every stage stays visible. Live CRM steps are separated from planned decision, verification and learning layers so the product boundary is clear."
+    id="revenue-flow"
+    eyebrow="05 · THE REVENUE FLOW"
+    headline="Follow the work from first message to revenue."
+    support="The product direction connects each commercial handoff so a conversation can become a customer, opportunity, appointment, sale and measurable revenue without losing its history. Every stage shown here is planned."
     tone="surface2"
   >
     <div className="relative grid gap-4 lg:grid-cols-7">

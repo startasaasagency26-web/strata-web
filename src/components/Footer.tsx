@@ -15,7 +15,7 @@ export const Footer = () => {
               <Logo variant="lockup" tone="gold" className="mb-6 h-10 w-auto origin-left" />
             </Link>
             <p className="text-muted text-sm font-sans leading-relaxed mb-6">
-              Strata Core connects operating context, business rules, team actions and governed AI in one visible layer.
+              Strata delivers Revenue Systems today while developing Strata Core for connected, controlled business operations.
             </p>
             <div className="flex gap-4">
               <a
@@ -44,10 +44,10 @@ export const Footer = () => {
           <div>
             <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">QUICK LINKS</h4>
             <ul className="space-y-4">
-              <li><Link to="/#operating-layer" className="text-muted hover:text-gold font-sans transition-colors text-sm">Platform</Link></li>
-              <li><Link to="/#operating-memory" className="text-muted hover:text-gold font-sans transition-colors text-sm">Operating Memory</Link></li>
-              <li><Link to="/#governed-ai" className="text-muted hover:text-gold font-sans transition-colors text-sm">AI Employees</Link></li>
-              <li><Link to="/pricing" className="text-muted hover:text-gold font-sans transition-colors text-sm">Pricing</Link></li>
+              <li><Link to="/#platform" className="text-muted hover:text-gold font-sans transition-colors text-sm">Platform Vision</Link></li>
+              <li><Link to="/#business-rules" className="text-muted hover:text-gold font-sans transition-colors text-sm">Company Rules</Link></li>
+              <li><Link to="/#revenue-flow" className="text-muted hover:text-gold font-sans transition-colors text-sm">Revenue Flow</Link></li>
+              <li><Link to="/pricing" className="text-muted hover:text-gold font-sans transition-colors text-sm">Revenue Systems</Link></li>
               <li><Link to="/about" className="text-muted hover:text-gold font-sans transition-colors text-sm">About Strata</Link></li>
             </ul>
           </div>
@@ -55,24 +55,24 @@ export const Footer = () => {
           <div>
             <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">STRATA CORE</h4>
             <ul className="space-y-4">
-              <li><Link to="/#operating-layer" className="text-muted hover:text-gold font-sans transition-colors text-sm">Operating Layer</Link></li>
-              <li><Link to="/#operating-memory" className="text-muted hover:text-gold font-sans transition-colors text-sm">Operating Memory</Link></li>
-              <li><Link to="/#governed-ai" className="text-muted hover:text-gold font-sans transition-colors text-sm">Governed AI</Link></li>
-              <li><Link to={CONTACT.requestDemoPath} className="text-muted hover:text-gold font-sans transition-colors text-sm">Book a Demo</Link></li>
+              <li><Link to="/#platform" className="text-muted hover:text-gold font-sans transition-colors text-sm">Platform Architecture</Link></li>
+              <li><Link to="/#business-rules" className="text-muted hover:text-gold font-sans transition-colors text-sm">Company Rules</Link></li>
+              <li><Link to="/#controlled-assistance" className="text-muted hover:text-gold font-sans transition-colors text-sm">Controlled Assistance</Link></li>
+              <li><a href={`${CONTACT.mailto}?subject=Strata%20Core%20Vision%20Demo`} className="text-muted hover:text-gold font-sans transition-colors text-sm">Vision Demo</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">READY TO SCALE?</h4>
-            <p className="text-muted font-sans text-sm mb-4">Choose one critical operating loop and map how Strata Core can support it.</p>
+            <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">MAP THE GAPS</h4>
+            <p className="text-muted font-sans text-sm mb-4">Bring one recurring workflow. We’ll map the missing context, ownership and controls with you.</p>
             <Button
               asChild
               variant="glassStrong"
               className="mt-2 w-full sm:w-auto rounded-full font-mono tracking-widest text-[11px] font-bold uppercase h-auto py-3 px-6"
             >
-              <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-                BOOK A DEMO <ArrowRight size={16} />
-              </Link>
+              <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`} className="flex items-center gap-2">
+                BUSINESS OPS AUDIT <ArrowRight size={16} />
+              </a>
             </Button>
             <a href={CONTACT.mailto} className="mt-4 block break-all font-mono text-xs font-bold tracking-widest text-muted transition-colors hover:text-gold">
               {CONTACT.email}

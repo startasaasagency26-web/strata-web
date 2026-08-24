@@ -3,10 +3,10 @@ import { SectionShell } from './SectionShell';
 
 export const GovernedAI = () => (
   <SectionShell
-    id="governed-ai"
-    eyebrow="06 · GOVERNED AI EMPLOYEES"
-    headline="AI employees, with boundaries built in."
-    support="Each planned AI role has a defined remit, explicit permissions and a human approval boundary. Actions are designed to be attributable and reviewable."
+    id="controlled-assistance"
+    eyebrow="06 · CONTROLLED ASSISTANCE"
+    headline="Automation stops where judgement starts."
+    support="Strata Core is intended to support narrowly defined tasks with explicit permissions, human approval points and reviewable actions. The roles below are planned examples, not released assistants."
   >
     <AgentGovernance />
   </SectionShell>

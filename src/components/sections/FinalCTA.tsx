@@ -1,33 +1,32 @@
 import { ArrowRight, MessageSquare } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { CONTACT } from '../../config/contact';
 import { WhatsAppChoice } from '../WhatsAppChoice';
 import { Button } from '../ui/liquid-glass-button';
 
 const systemCards = [
   {
-    label: 'DIAGNOSE',
+    label: 'CONTEXT',
     position: 'left-[10%] top-[18%] rotate-[-4deg]',
     visibility: 'md:block',
   },
   {
-    label: 'MEDIA',
+    label: 'OWNERSHIP',
     position: 'right-[12%] top-[20%] rotate-[3deg]',
     visibility: 'md:block',
   },
   {
-    label: 'CRM',
+    label: 'RULES',
     position: 'left-[20%] top-[41%] rotate-[2deg]',
     visibility: 'lg:block',
   },
   {
-    label: 'FOLLOW-UP',
+    label: 'APPROVALS',
     position: 'right-[21%] top-[43%] rotate-[-2deg]',
     visibility: 'lg:block',
   },
   {
-    label: 'PIPELINE',
+    label: 'OUTCOMES',
     position: 'left-1/2 top-[31%] -translate-x-1/2 rotate-[1deg]',
     visibility: 'md:block',
   },
@@ -98,13 +97,13 @@ export const FinalCTA = () => {
 
         <div className="hidden lg:block">
           <span className="absolute left-[1.35rem] top-[18%] font-mono text-[11px] uppercase tracking-[0.55em] text-muted [writing-mode:vertical-rl]">
-            Diagnosis
+            Context
           </span>
           <span className="absolute right-[1.35rem] top-[25%] font-mono text-[11px] uppercase tracking-[0.55em] text-muted [writing-mode:vertical-rl]">
-            Infrastructure
+            Ownership
           </span>
           <span className="absolute left-[1.35rem] bottom-[16%] font-mono text-[11px] uppercase tracking-[0.55em] text-muted [writing-mode:vertical-rl]">
-            Pipeline
+            Outcomes
           </span>
         </div>
       </div>
@@ -142,7 +141,7 @@ export const FinalCTA = () => {
           </h2>
 
           <p className="mx-auto mb-10 max-w-2xl font-sans text-lg leading-relaxed text-muted md:text-xl">
-            Bring one critical workflow. We'll map the context, ownership and controls Strata Core needs to support it.
+            Bring one critical workflow. We'll map where context breaks, ownership blurs and decisions depend on memory.
           </p>
 
           {/* What happens during audit box */}
@@ -177,12 +176,12 @@ export const FinalCTA = () => {
               size="lg"
               className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
             >
-              <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-4">
-                <span>Book a Strata Core demo</span>
+              <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`} className="flex items-center justify-center gap-4">
+                <span>Book a business operations audit</span>
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-surface2 transition-colors duration-300">
                   <ArrowRight size={16} />
                 </div>
-              </Link>
+              </a>
             </Button>
 
             <WhatsAppChoice className="group inline-flex w-full items-center justify-center gap-4 rounded-full border border-border px-10 py-6 font-mono font-bold uppercase tracking-widest text-text transition-colors duration-300 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus sm:w-auto">

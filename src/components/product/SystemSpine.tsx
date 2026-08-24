@@ -17,13 +17,13 @@ export const SystemSpine = () => (
     </div>
 
     <svg viewBox="0 0 940 250" role="img" className="hidden w-full lg:block" aria-labelledby="system-spine-title">
-      <title id="system-spine-title">Six connected Strata Core modules: Capture, Qualify, Route, Follow up, Operate and Learn.</title>
+      <title id="system-spine-title">Six planned parts of the Strata Core platform architecture.</title>
       <line x1="85" y1="112" x2="860" y2="112" className="stroke-gold" strokeWidth="2" />
       {operatingModules.map((module, index) => (
         <g key={module.id} transform={`translate(${positions[index]} 112)`}>
-          <circle r="54" className={index < 4 ? 'fill-gold stroke-gold' : 'fill-surface3 stroke-gold'} strokeWidth="2" />
-          <text textAnchor="middle" y="-5" className={index < 4 ? 'fill-void' : 'fill-gold'} fontFamily="Space Mono, monospace" fontSize="11" fontWeight="700">0{index + 1}</text>
-          <text textAnchor="middle" y="17" className={index < 4 ? 'fill-void' : 'fill-text'} fontFamily="Inter, sans-serif" fontSize="14" fontWeight="700">{module.name}</text>
+          <circle r="54" className="fill-surface3 stroke-gold" strokeWidth="2" />
+          <text textAnchor="middle" y="-5" className="fill-gold" fontFamily="Space Mono, monospace" fontSize="11" fontWeight="700">0{index + 1}</text>
+          <text textAnchor="middle" y="17" className="fill-text" fontFamily="Inter, sans-serif" fontSize="12" fontWeight="700">{module.name}</text>
         </g>
       ))}
     </svg>
@@ -40,7 +40,7 @@ export const SystemSpine = () => (
       ))}
     </div>
     <figcaption className="mt-5 text-sm leading-relaxed text-muted">
-      Six connected Strata Core modules: Capture, Qualify, Route, Follow up, Operate and Learn.
+      Planned architecture only. These parts describe the product direction and are not presented as released capabilities.
     </figcaption>
   </figure>
 );

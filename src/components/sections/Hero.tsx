@@ -31,26 +31,26 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
         <motion.div style={animateStage ? { opacity: contentOpacity } : undefined}>
           <div className="max-w-5xl">
           <motion.p {...fadeUp()} className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-accent">
-            STRATA CORE · AI OPERATING LAYER
+            STRATA CORE · IN DEVELOPMENT
           </motion.p>
           <motion.h1
             {...fadeUp(0.05)}
             id="hero-heading"
             className="text-[clamp(3rem,8vw,7.5rem)] font-black uppercase leading-[0.88] tracking-[-0.055em] text-primary"
           >
-            Run the business from one shared operating layer.
+            Turn scattered work into one controlled business flow.
           </motion.h1>
           <motion.p {...fadeUp(0.1)} className="mt-7 max-w-2xl text-base leading-relaxed text-muted md:text-xl">
-            Strata Core connects customer signals, operating rules, team actions and governed AI in one system—so work moves with context, control and a visible record.
+            Strata Core is being designed to connect the facts, rules, owners and approvals behind everyday operations—so teams can move from customer conversation to revenue without losing context.
           </motion.p>
           <motion.div {...fadeUp(0.15)} className="mt-9 flex flex-col items-start gap-3 sm:flex-row">
             <Button asChild variant="glassStrong" size="lg" className="h-12 rounded-full px-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
-              <Link to={CONTACT.requestDemoPath} className="flex items-center gap-2">
-                Book a demo <ArrowRight size={14} />
-              </Link>
+              <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`} className="flex items-center gap-2">
+                Business operations audit <ArrowRight size={14} />
+              </a>
             </Button>
             <Button asChild variant="glass" size="lg" className="h-12 rounded-full px-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
-              <Link to="/#operating-layer">Explore the platform</Link>
+              <Link to="/#platform">See the platform vision</Link>
             </Button>
           </motion.div>
           </div>

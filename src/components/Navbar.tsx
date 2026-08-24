@@ -20,10 +20,10 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'PLATFORM', href: '/#operating-layer' },
-    { name: 'OPERATING MEMORY', href: '/#operating-memory' },
-    { name: 'AI EMPLOYEES', href: '/#governed-ai' },
-    { name: 'PRICING', href: '/pricing' },
+    { name: 'PLATFORM', href: '/#platform' },
+    { name: 'COMPANY RULES', href: '/#business-rules' },
+    { name: 'CONTROLLED ASSISTANCE', href: '/#controlled-assistance' },
+    { name: 'REVENUE SYSTEMS', href: '/pricing' },
     { name: 'ABOUT', href: '/about' },
   ];
 
@@ -98,7 +98,7 @@ export const Navbar = () => {
               size="sm"
               className="hidden h-10 rounded-full px-6 font-mono text-[11px] font-bold tracking-[0.2em] whitespace-nowrap xl:inline-flex"
             >
-              <Link to={CONTACT.requestDemoPath}>BOOK A DEMO</Link>
+              <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`}>BUSINESS OPS AUDIT</a>
             </Button>
 
             <motion.button
@@ -155,9 +155,9 @@ export const Navbar = () => {
                     variant="glass"
                     className="w-full h-14 rounded-full text-[11px] font-mono font-bold tracking-[0.2em] uppercase"
                   >
-                    <Link to={CONTACT.requestDemoPath} onClick={() => setMobileMenuOpen(false)}>
-                      BOOK A DEMO
-                    </Link>
+                    <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`} onClick={() => setMobileMenuOpen(false)}>
+                      BUSINESS OPERATIONS AUDIT
+                    </a>
                   </Button>
                 </motion.li>
                 <motion.li
@@ -167,7 +167,7 @@ export const Navbar = () => {
                   className="mt-2 w-full max-w-xs"
                 >
                   <p className="text-left font-mono text-[11px] font-bold uppercase leading-relaxed tracking-[0.24em] text-muted">
-                    AI-Powered Business Infrastructure
+                    Operations designed for control
                   </p>
                 </motion.li>
               </ul>

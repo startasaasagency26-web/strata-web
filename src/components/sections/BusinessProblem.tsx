@@ -13,7 +13,7 @@ export const TheDisconnect = () => (
     id="the-disconnect"
     eyebrow="02 · THE DISCONNECT"
     headline="Your business has tools. It still has no shared context."
-    support="A CRM can hold records. A chat can hold conversations. A spreadsheet can hold status. None of them becomes an operating layer until rules, ownership and outcomes share one visible system."
+    support="A CRM can hold records. A chat can hold conversations. A spreadsheet can hold status. But when decisions and handoffs stay split across them, owners still cannot see what is stuck, who owns it or what should happen next."
   >
     <div className="grid gap-4 sm:grid-cols-2">
       {disconnects.map(({ icon: Icon, title, description }) => (

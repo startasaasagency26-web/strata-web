@@ -7,7 +7,7 @@ export const DeploymentPath = () => (
     id="deployment-path"
     eyebrow="07 · DEPLOYMENT PATH"
     headline="Start with the workflow that matters most."
-    support="The planned deployment path begins with one bounded operating loop. Context, rules and human controls come before wider rollout."
+    support="The planned deployment path begins with one bounded workflow. Context, rules and human controls come before wider rollout."
     tone="surface2"
   >
     <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">

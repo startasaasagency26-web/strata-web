@@ -3,7 +3,7 @@ import { auditEntries } from '../../content/agents';
 export const AuditLog = () => (
   <div className="overflow-hidden rounded-[24px] border border-gold/25 bg-surface2 text-text shadow-lg shadow-gold/5">
     <div className="border-b border-border px-6 py-4">
-      <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">Illustrative audit record</p>
+      <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">Illustrative audit record · planned behavior</p>
     </div>
     <div className="divide-y divide-white/10">
       {auditEntries.map((entry) => (

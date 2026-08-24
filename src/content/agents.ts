@@ -9,9 +9,9 @@ export interface GovernedAgent {
 }
 
 export const governedAgents: GovernedAgent[] = [
-  { name: 'Intake agent', remit: 'Structure new enquiry context for review.', may: ['Draft a lead summary', 'Flag missing fields'], mayNot: ['Send a customer message', 'Change commercial terms'], availability: 'planned' },
-  { name: 'Follow-up agent', remit: 'Prepare the approved next step for a due task.', may: ['Draft within policy', 'Surface prior context'], mayNot: ['Contact without approval', 'Close an opportunity'], availability: 'planned' },
-  { name: 'Pipeline analyst', remit: 'Find exceptions that need human attention.', may: ['Identify stalled records', 'Explain its source data'], mayNot: ['Reassign ownership', 'Alter source records'], availability: 'planned' },
+  { name: 'Intake assistant', remit: 'Organise a new conversation into clear customer context for human review.', may: ['Draft a factual summary', 'Flag missing information'], mayNot: ['Send a customer message', 'Decide whether the customer qualifies'], availability: 'planned' },
+  { name: 'Follow-up assistant', remit: 'Prepare the next approved communication with the relevant history attached.', may: ['Draft from approved guidance', 'Surface prior decisions'], mayNot: ['Contact without approval', 'Change prices or terms'], availability: 'planned' },
+  { name: 'Pipeline analyst', remit: 'Highlight stalled opportunities and gaps that need human attention.', may: ['Flag stalled work', 'Explain the data used'], mayNot: ['Alter source records', 'Promise a revenue outcome'], availability: 'planned' },
 ];
 
 export interface AuditEntry {
@@ -22,8 +22,8 @@ export interface AuditEntry {
 }
 
 export const auditEntries: AuditEntry[] = [
-  { time: '09:12', actor: 'Intake agent', action: 'Drafted lead summary', result: 'Awaiting review' },
-  { time: '09:16', actor: 'Sales lead', action: 'Approved lead priority', result: 'Recorded' },
-  { time: '09:22', actor: 'Follow-up agent', action: 'Prepared next-step draft', result: 'Approval required' },
-  { time: '09:31', actor: 'Account owner', action: 'Completed follow-up task', result: 'Recorded' },
+  { time: '09:12', actor: 'Intake assistant', action: 'Drafted customer context', result: 'Awaiting review' },
+  { time: '09:16', actor: 'Operations lead', action: 'Approved the next owner', result: 'Recorded' },
+  { time: '09:22', actor: 'Follow-up assistant', action: 'Prepared a response draft', result: 'Approval required' },
+  { time: '09:31', actor: 'Account owner', action: 'Approved and completed action', result: 'Recorded' },
 ];

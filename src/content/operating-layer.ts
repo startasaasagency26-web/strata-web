@@ -8,10 +8,10 @@ export interface OperatingModule {
 }
 
 export const operatingModules: OperatingModule[] = [
-  { id: 'capture', name: 'Capture', description: 'Create and organise lead records from one controlled workspace.', availability: 'live' },
-  { id: 'qualify', name: 'Qualify', description: 'Record priority, status and the context behind the opportunity.', availability: 'live' },
-  { id: 'route', name: 'Route', description: 'Move qualified work through a visible sales pipeline.', availability: 'live' },
-  { id: 'follow-up', name: 'Follow up', description: 'Schedule, assign and complete follow-up work against each lead.', availability: 'live' },
-  { id: 'operate', name: 'Operate', description: 'Coordinate cross-team actions from shared business rules.', availability: 'planned' },
-  { id: 'learn', name: 'Learn', description: 'Turn outcomes into reusable operating context.', availability: 'planned' },
+  { id: 'shared-core', name: 'Shared Core', description: 'A common foundation for business data, identity, permissions and audit history.', availability: 'planned' },
+  { id: 'vertical-packs', name: 'Vertical Packs', description: 'Industry-specific definitions and workflow patterns built on the shared foundation.', availability: 'planned' },
+  { id: 'company-rules', name: 'Company Rules', description: 'Each company’s policies, procedures, exceptions and approval boundaries.', availability: 'planned' },
+  { id: 'assisted-roles', name: 'Assisted Roles', description: 'Bounded automation for defined tasks, with people retaining judgement and approval.', availability: 'planned' },
+  { id: 'web-workspace', name: 'Web Workspace', description: 'The primary place for teams to review context, decisions and work in progress.', availability: 'planned' },
+  { id: 'connected-channels', name: 'Connected Channels', description: 'Approved messaging, tools and data sources without making the platform web-dependent.', availability: 'planned' },
 ];

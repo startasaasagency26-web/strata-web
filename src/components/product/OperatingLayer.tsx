@@ -3,10 +3,10 @@ import { SystemSpine } from './SystemSpine';
 
 export const OperatingLayer = () => (
   <SectionShell
-    id="operating-layer"
-    eyebrow="03 · THE OPERATING LAYER"
-    headline="One system spine for the way work actually moves."
-    support="Strata Core is organised around the flow of business context—not a pile of disconnected screens. The live CRM surface covers the commercial core today; wider operating modules remain clearly marked as planned."
+    id="platform"
+    eyebrow="03 · STRATA CORE"
+    headline="See how the whole business should work together."
+    support="Strata Core is in development. This model shows how shared foundations, industry logic, company rules, assisted roles and multiple interfaces are intended to fit together. It is a product direction, not a released feature list."
     tone="surface2"
   >
     <SystemSpine />
