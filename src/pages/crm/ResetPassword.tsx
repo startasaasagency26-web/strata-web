@@ -91,16 +91,16 @@ export const ResetPassword = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-        <Loader2 className="animate-spin text-white/20" size={32} />
+      <div className="min-h-screen bg-void flex items-center justify-center">
+        <Loader2 className="animate-spin text-muted" size={32} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-void flex items-center justify-center p-6 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        <div className="absolute top-1/2 left-1/2 h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/5 blur-[120px]" />
       </div>
 
       <motion.div
@@ -109,14 +109,14 @@ export const ResetPassword = () => {
         transition={{ duration: 0.55 }}
         className="relative z-10 w-full max-w-md"
       >
-        <div className="rounded-[32px] border border-white/10 bg-[#0A0A0A] p-8 shadow-2xl md:p-12">
+        <div className="rounded-[32px] border border-gold/25 bg-surface p-8 shadow-2xl shadow-gold/5 md:p-12">
           <div className="mb-9 flex flex-col items-center">
             <Logo variant="lockup" tone="gold" className="mb-6 h-12 w-auto" />
             <div className="text-center">
-              <h1 className="mb-2 text-3xl font-display font-bold uppercase tracking-tight text-white">
+              <h1 className="mb-2 text-3xl font-display font-bold uppercase tracking-tight text-text">
                 {hasRecoverySession ? 'Set New Password' : 'Reset CRM Access'}
               </h1>
-              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-muted">
                 {hasRecoverySession ? 'Recovery session active' : 'Password recovery'}
               </p>
             </div>
@@ -126,7 +126,7 @@ export const ResetPassword = () => {
             <form onSubmit={handleUpdatePassword} className="space-y-6">
               <div className="space-y-4">
                 <div className="relative">
-                  <KeyRound size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
+                  <KeyRound size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
                   <CrmInput
                     type="password"
                     placeholder="New Password"
@@ -137,7 +137,7 @@ export const ResetPassword = () => {
                   />
                 </div>
                 <div className="relative">
-                  <KeyRound size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
+                  <KeyRound size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
                   <CrmInput
                     type="password"
                     placeholder="Confirm New Password"
@@ -149,13 +149,13 @@ export const ResetPassword = () => {
                 </div>
               </div>
 
-              {error && <p className="text-center text-[10px] font-mono font-bold uppercase tracking-wider text-red-400">{error}</p>}
-              {message && <p className="text-center text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400">{message}</p>}
+              {error && <p className="text-center text-[10px] font-mono font-bold uppercase tracking-wider text-danger">{error}</p>}
+              {message && <p className="text-center text-[10px] font-mono font-bold uppercase tracking-wider text-positive">{message}</p>}
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex w-full items-center justify-center gap-3 rounded-xl bg-white py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-white/90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex w-full items-center justify-center gap-3 rounded-xl bg-gold py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-void transition-all hover:bg-goldHover active:bg-goldActive active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
               >
                 {isSubmitting && <Loader2 size={16} className="animate-spin" />}
                 {isSubmitting ? 'Updating...' : 'Update Password'}
@@ -164,7 +164,7 @@ export const ResetPassword = () => {
           ) : (
             <form onSubmit={handleSendRecovery} className="space-y-6">
               <div className="relative">
-                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
+                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
                 <CrmInput
                   type="email"
                   placeholder="CRM Email Address"
@@ -175,13 +175,13 @@ export const ResetPassword = () => {
                 />
               </div>
 
-              {error && <p className="text-center text-[10px] font-mono font-bold uppercase tracking-wider text-red-400">{error}</p>}
-              {message && <p className="text-center text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400">{message}</p>}
+              {error && <p className="text-center text-[10px] font-mono font-bold uppercase tracking-wider text-danger">{error}</p>}
+              {message && <p className="text-center text-[10px] font-mono font-bold uppercase tracking-wider text-positive">{message}</p>}
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex w-full items-center justify-center gap-3 rounded-xl bg-white py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-white/90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex w-full items-center justify-center gap-3 rounded-xl bg-gold py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-void transition-all hover:bg-goldHover active:bg-goldActive active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
               >
                 {isSubmitting && <Loader2 size={16} className="animate-spin" />}
                 {isSubmitting ? 'Sending...' : 'Send Recovery Email'}
@@ -191,7 +191,7 @@ export const ResetPassword = () => {
 
           <Link
             to="/crm/login"
-            className="mt-8 flex items-center justify-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-white/35 transition hover:text-white"
+            className="mt-8 flex items-center justify-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-muted transition hover:text-text"
           >
             <ArrowLeft size={13} /> Back to login
           </Link>

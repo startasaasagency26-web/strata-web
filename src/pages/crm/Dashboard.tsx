@@ -102,7 +102,7 @@ function getInitials(name: string) {
 }
 
 const Panel = ({ children, className = '', id }: { children: React.ReactNode; className?: string; id?: string }) => (
-  <div id={id} className={cn('rounded-[28px] border border-white/50 bg-white/60 shadow-sm backdrop-blur-md', className)}>
+  <div id={id} className={cn('rounded-[28px] border border-border bg-surface2 shadow-sm backdrop-blur-md', className)}>
     {children}
   </div>
 );
@@ -156,11 +156,11 @@ export const Dashboard = () => {
     .slice(0, 5);
 
   const metricItems = [
-    { label: 'Active leads', value: activeLeads.length, icon: <Users size={15} />, tone: 'text-gray-700 bg-white' },
-    { label: 'Follow-ups due', value: resolvedMetrics.followUpsToday, icon: <Clock size={15} />, tone: 'text-orange-700 bg-orange-50' },
-    { label: 'Hot review', value: hotLeads.length, icon: <Zap size={15} />, tone: 'text-blue-700 bg-blue-50' },
-    { label: 'Proposal ready', value: proposalReady.length, icon: <FileText size={15} />, tone: 'text-purple-700 bg-purple-50' },
-    { label: 'Won', value: resolvedMetrics.won, icon: <CheckCircle2 size={15} />, tone: 'text-emerald-700 bg-emerald-50' },
+    { label: 'Active leads', value: activeLeads.length, icon: <Users size={15} />, tone: 'text-text2 bg-surface' },
+    { label: 'Follow-ups due', value: resolvedMetrics.followUpsToday, icon: <Clock size={15} />, tone: 'text-caution bg-cautionSoft' },
+    { label: 'Hot review', value: hotLeads.length, icon: <Zap size={15} />, tone: 'text-info bg-infoSoft' },
+    { label: 'Proposal ready', value: proposalReady.length, icon: <FileText size={15} />, tone: 'text-info bg-infoSoft' },
+    { label: 'Won', value: resolvedMetrics.won, icon: <CheckCircle2 size={15} />, tone: 'text-positive bg-positiveSoft' },
   ];
 
   return (
@@ -168,11 +168,11 @@ export const Dashboard = () => {
       <div className="space-y-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-500">{today}</p>
+            <p className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-muted">{today}</p>
             <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text md:text-4xl">
               Strata HQ
             </h1>
-            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-gray-600">
+            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-text2">
               Control room for turning attention into pipeline, pipeline into follow-up, and follow-up into revenue.
             </p>
           </div>
@@ -185,7 +185,7 @@ export const Dashboard = () => {
             </Link>
             <Link
               to="/crm/leads?add=1"
-              className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-text shadow-sm transition-all hover:bg-white"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface2 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-text shadow-sm transition-all hover:bg-surface3"
             >
               <Users size={14} /> Add Lead
             </Link>
@@ -199,65 +199,65 @@ export const Dashboard = () => {
                 {item.icon}
               </div>
               <div className="text-3xl font-display font-bold tracking-tight text-text">{item.value}</div>
-              <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{item.label}</div>
+              <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{item.label}</div>
             </Panel>
           ))}
         </div>
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.35fr_0.9fr]">
           <Panel className="overflow-hidden">
-            <div className="flex items-center justify-between border-b border-white/50 px-6 py-5">
+            <div className="flex items-center justify-between border-b border-border px-6 py-5">
               <div>
-                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Today Control Panel</h2>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Today Control Panel</h2>
                 <p className="mt-1 text-sm font-semibold text-text">The work that protects revenue today.</p>
               </div>
-              <Link to="/crm/follow-ups" className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 hover:text-text">
+              <Link to="/crm/follow-ups" className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted hover:text-text">
                 View tasks
               </Link>
             </div>
             <div className="grid gap-4 p-5 lg:grid-cols-2">
-              <div className="rounded-[24px] border border-orange-100 bg-orange-50/70 p-5">
+              <div className="rounded-[24px] border border-caution/30 bg-cautionSoft/70 p-5">
                 <div className="mb-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-orange-700">
+                  <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-caution">
                     <Clock size={14} /> Follow up today
                   </div>
-                  <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-mono font-bold text-orange-700">{dueFollowUps.length}</span>
+                  <span className="rounded-full bg-surface px-2.5 py-1 text-[10px] font-mono font-bold text-caution">{dueFollowUps.length}</span>
                 </div>
                 <div className="space-y-3">
                   {dueFollowUps.length > 0 ? dueFollowUps.map((task) => (
-                    <Link key={task.id} to={`/crm/leads/${task.leadId}`} className="block rounded-2xl bg-white/80 p-4 transition hover:bg-white">
+                    <Link key={task.id} to={`/crm/leads/${task.leadId}`} className="block rounded-2xl bg-surface2 p-4 transition hover:bg-surface3">
                       <div className="text-sm font-bold text-text">{task.title}</div>
-                      <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">
+                      <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-muted">
                         {task.leadName || 'Unknown lead'} · {formatDate(task.dueAt)}
                       </div>
                     </Link>
                   )) : (
-                    <div className="rounded-2xl bg-white/70 p-5 text-sm font-semibold text-gray-500">No urgent follow-ups due.</div>
+                    <div className="rounded-2xl bg-surface2 p-5 text-sm font-semibold text-muted">No urgent follow-ups due.</div>
                   )}
                 </div>
               </div>
 
-              <div className="rounded-[24px] border border-blue-100 bg-blue-50/70 p-5">
+              <div className="rounded-[24px] border border-info/30 bg-infoSoft/70 p-5">
                 <div className="mb-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+                  <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-info">
                     <Target size={14} /> Hot lead review
                   </div>
-                  <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-mono font-bold text-blue-700">{hotLeads.length}</span>
+                  <span className="rounded-full bg-surface px-2.5 py-1 text-[10px] font-mono font-bold text-info">{hotLeads.length}</span>
                 </div>
                 <div className="space-y-3">
                   {hotLeads.slice(0, 3).map((lead) => (
-                    <Link key={lead.id} to={`/crm/leads/${lead.id}`} className="block rounded-2xl bg-white/80 p-4 transition hover:bg-white">
+                    <Link key={lead.id} to={`/crm/leads/${lead.id}`} className="block rounded-2xl bg-surface2 p-4 transition hover:bg-surface3">
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
                           <div className="truncate text-sm font-bold text-text">{lead.fullName}</div>
-                          <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{lead.companyName || 'Independent'}</div>
+                          <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{lead.companyName || 'Independent'}</div>
                         </div>
                         <PriorityBadge priority={lead.priority} />
                       </div>
                     </Link>
                   ))}
                   {hotLeads.length === 0 && (
-                    <div className="rounded-2xl bg-white/70 p-5 text-sm font-semibold text-gray-500">No hot leads waiting.</div>
+                    <div className="rounded-2xl bg-surface2 p-5 text-sm font-semibold text-muted">No hot leads waiting.</div>
                   )}
                 </div>
               </div>
@@ -267,18 +267,18 @@ export const Dashboard = () => {
           <Panel className="p-6">
             <div className="mb-5 flex items-center justify-between">
               <div>
-                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Clarity Sprint</h2>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Clarity Sprint</h2>
                 <p className="mt-1 text-sm font-semibold text-text">Make Strata obvious before scaling posts.</p>
               </div>
-              <Megaphone size={20} className="text-gray-400" />
+              <Megaphone size={20} className="text-muted" />
             </div>
             <div className="space-y-3">
               {claritySprint.map((item) => (
-                <div key={item.label} className="rounded-[20px] border border-white/60 bg-white/60 p-4">
+                <div key={item.label} className="rounded-[20px] border border-border bg-surface2 p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <div className="text-sm font-bold text-text">{item.label}</div>
-                      <p className="mt-1 text-xs font-semibold leading-relaxed text-gray-500">{item.detail}</p>
+                      <p className="mt-1 text-xs font-semibold leading-relaxed text-muted">{item.detail}</p>
                     </div>
                     <span className="shrink-0 rounded-full bg-gold px-3 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-void">
                       {item.action}
@@ -292,18 +292,18 @@ export const Dashboard = () => {
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
           <Panel className="xl:col-span-2">
-            <div className="flex items-center justify-between border-b border-white/50 px-6 py-5">
+            <div className="flex items-center justify-between border-b border-border px-6 py-5">
               <div>
-                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Outreach Queue</h2>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Outreach Queue</h2>
                 <p className="mt-1 text-sm font-semibold text-text">Leads worth a manual message, not another passive post.</p>
               </div>
-              <Link to="/crm/outreach" className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 hover:text-text">
+              <Link to="/crm/outreach" className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-widest text-muted hover:text-text">
                 Open <ArrowUpRight size={13} />
               </Link>
             </div>
             <div className="divide-y divide-white/50">
               {outreachQueue.length > 0 ? outreachQueue.map((lead) => (
-                <Link key={lead.id} to={`/crm/leads/${lead.id}`} className="grid gap-4 px-6 py-5 transition hover:bg-white/50 md:grid-cols-[1fr_1.2fr_auto] md:items-center">
+                <Link key={lead.id} to={`/crm/leads/${lead.id}`} className="grid gap-4 px-6 py-5 transition hover:bg-surface3 md:grid-cols-[1fr_1.2fr_auto] md:items-center">
                   <div className="flex items-center gap-4">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gold text-xs font-display font-bold text-void shadow-sm">
                       {getInitials(lead.fullName)}
@@ -317,25 +317,25 @@ export const Dashboard = () => {
                     </div>
                   </div>
                   <div className="min-w-0">
-                    <div className="truncate text-xs font-bold text-gray-700">{getVisibleLeak(lead)}</div>
-                    <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">{getRecommendedOffer(lead)}</div>
+                    <div className="truncate text-xs font-bold text-text2">{getVisibleLeak(lead)}</div>
+                    <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{getRecommendedOffer(lead)}</div>
                   </div>
-                  <MessageCircle size={18} className="text-gray-400" />
+                  <MessageCircle size={18} className="text-muted" />
                 </Link>
               )) : (
-                <div className="px-6 py-12 text-center text-sm font-semibold text-gray-500">No leads ready for outreach yet.</div>
+                <div className="px-6 py-12 text-center text-sm font-semibold text-muted">No leads ready for outreach yet.</div>
               )}
             </div>
           </Panel>
 
           <Panel className="p-6">
-            <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Offer Focus</h2>
+            <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Offer Focus</h2>
             <p className="mt-1 text-sm font-semibold text-text">Default wedges to keep the sales story concrete.</p>
             <div className="mt-5 space-y-3">
               {offerShortlist.map((offer) => (
-                <div key={offer} className="flex items-center justify-between rounded-[18px] bg-white/60 px-4 py-3">
+                <div key={offer} className="flex items-center justify-between rounded-[18px] bg-surface2 px-4 py-3">
                   <span className="text-sm font-bold text-text">{offer}</span>
-                  <ClipboardList size={15} className="text-gray-400" />
+                  <ClipboardList size={15} className="text-muted" />
                 </div>
               ))}
             </div>
@@ -345,29 +345,29 @@ export const Dashboard = () => {
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
           <Panel className="p-6">
             <div className="mb-4 flex items-center gap-3">
-              <Search size={18} className="text-gray-400" />
-              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Pipeline Diagnosis</h2>
+              <Search size={18} className="text-muted" />
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Pipeline Diagnosis</h2>
             </div>
             <div className="text-4xl font-display font-bold text-text">{resolvedMetrics.conversionRate.toFixed(1)}%</div>
-            <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">Won rate across current CRM records. Improve this by enforcing follow-up, not by adding random content.</p>
+            <p className="mt-2 text-xs font-semibold leading-relaxed text-muted">Won rate across current CRM records. Improve this by enforcing follow-up, not by adding random content.</p>
           </Panel>
           <Panel className="p-6">
             <div className="mb-4 flex items-center gap-3">
-              <CalendarCheck size={18} className="text-gray-400" />
-              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">This Week</h2>
+              <CalendarCheck size={18} className="text-muted" />
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">This Week</h2>
             </div>
             <div className="text-4xl font-display font-bold text-text">{resolvedMetrics.leadsThisWeek}</div>
-            <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">New lead records captured in the last 7 days.</p>
+            <p className="mt-2 text-xs font-semibold leading-relaxed text-muted">New lead records captured in the last 7 days.</p>
           </Panel>
           <Panel className="p-6">
             <div className="mb-4 flex items-center gap-3">
-              <TrendingUp size={18} className="text-gray-400" />
-              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Pipeline Value</h2>
+              <TrendingUp size={18} className="text-muted" />
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Pipeline Value</h2>
             </div>
             <div className="text-4xl font-display font-bold text-text">
               {resolvedMetrics.pipelineValue === null ? 'TBD' : `RM ${resolvedMetrics.pipelineValue.toLocaleString()}`}
             </div>
-            <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">Exact deal values should be added only when the offer is real.</p>
+            <p className="mt-2 text-xs font-semibold leading-relaxed text-muted">Exact deal values should be added only when the offer is real.</p>
           </Panel>
         </div>
 
@@ -378,7 +378,7 @@ export const Dashboard = () => {
         )}
 
         {resolvedMetrics.followUpsToday > 0 && dueFollowUps.length === 0 && (
-          <div className="rounded-[24px] border border-blue-200 bg-blue-50 px-6 py-4 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+          <div className="rounded-[24px] border border-info/30 bg-infoSoft px-6 py-4 text-[10px] font-mono font-bold uppercase tracking-widest text-info">
             <AlertCircle size={14} className="mr-2 inline" />
             Dashboard metrics report follow-ups due, but the detailed task query returned none. Check CRM data freshness.
           </div>
@@ -537,25 +537,25 @@ export const DashboardPreview = () => {
   const today = new Date().toLocaleDateString('en-MY', { weekday: 'long', day: 'numeric', month: 'long' });
 
   const metricItems = [
-    { label: 'Active leads', value: activeLeads.length, icon: <Users size={15} />, tone: 'text-gray-700 bg-white' },
-    { label: 'Follow-ups due', value: demoMetrics.followUpsToday, icon: <Clock size={15} />, tone: 'text-orange-700 bg-orange-50' },
-    { label: 'Hot review', value: hotLeads.length, icon: <Zap size={15} />, tone: 'text-blue-700 bg-blue-50' },
-    { label: 'Proposal ready', value: 1, icon: <FileText size={15} />, tone: 'text-purple-700 bg-purple-50' },
-    { label: 'Pipeline value', value: `RM ${demoMetrics.pipelineValue?.toLocaleString()}`, icon: <TrendingUp size={15} />, tone: 'text-emerald-700 bg-emerald-50' },
+    { label: 'Active leads', value: activeLeads.length, icon: <Users size={15} />, tone: 'text-text2 bg-surface' },
+    { label: 'Follow-ups due', value: demoMetrics.followUpsToday, icon: <Clock size={15} />, tone: 'text-caution bg-cautionSoft' },
+    { label: 'Hot review', value: hotLeads.length, icon: <Zap size={15} />, tone: 'text-info bg-infoSoft' },
+    { label: 'Proposal ready', value: 1, icon: <FileText size={15} />, tone: 'text-info bg-infoSoft' },
+    { label: 'Pipeline value', value: `RM ${demoMetrics.pipelineValue?.toLocaleString()}`, icon: <TrendingUp size={15} />, tone: 'text-positive bg-positiveSoft' },
   ];
 
   return (
     <CrmShell>
       <div className="space-y-6">
-        <div className="rounded-[24px] border border-blue-200 bg-blue-50 px-6 py-4 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+        <div className="rounded-[24px] border border-info/30 bg-infoSoft px-6 py-4 text-[10px] font-mono font-bold uppercase tracking-widest text-info">
           Preview mode uses safe demo data. Real CRM remains protected behind login.
         </div>
 
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-500">{today}</p>
+            <p className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-muted">{today}</p>
             <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text md:text-4xl">Strata HQ Preview</h1>
-            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-gray-600">
+            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-text2">
               Control room for turning attention into pipeline, pipeline into follow-up, and follow-up into revenue.
             </p>
           </div>
@@ -571,45 +571,45 @@ export const DashboardPreview = () => {
             <Panel key={item.label} className="p-5">
               <div className={cn('mb-4 inline-flex h-9 w-9 items-center justify-center rounded-2xl', item.tone)}>{item.icon}</div>
               <div className="text-3xl font-display font-bold tracking-tight text-text">{item.value}</div>
-              <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{item.label}</div>
+              <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{item.label}</div>
             </Panel>
           ))}
         </div>
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.35fr_0.9fr]">
           <Panel className="overflow-hidden">
-            <div className="border-b border-white/50 px-6 py-5">
-              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Today Control Panel</h2>
+            <div className="border-b border-border px-6 py-5">
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Today Control Panel</h2>
               <p className="mt-1 text-sm font-semibold text-text">The work that protects revenue today.</p>
             </div>
             <div className="grid gap-4 p-5 lg:grid-cols-2">
-              <div className="rounded-[24px] border border-orange-100 bg-orange-50/70 p-5">
-                <div className="mb-4 flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-widest text-orange-700">
+              <div className="rounded-[24px] border border-caution/30 bg-cautionSoft/70 p-5">
+                <div className="mb-4 flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-widest text-caution">
                   <span className="flex items-center gap-2"><Clock size={14} /> Follow up today</span>
-                  <span className="rounded-full bg-white px-2.5 py-1">{demoFollowUps.length}</span>
+                  <span className="rounded-full bg-surface px-2.5 py-1">{demoFollowUps.length}</span>
                 </div>
                 <div className="space-y-3">
                   {demoFollowUps.map((task) => (
-                    <div key={task.id} className="rounded-2xl bg-white/80 p-4">
+                    <div key={task.id} className="rounded-2xl bg-surface2 p-4">
                       <div className="text-sm font-bold text-text">{task.title}</div>
-                      <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{task.leadCompany} · {formatDate(task.dueAt)}</div>
+                      <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{task.leadCompany} · {formatDate(task.dueAt)}</div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-[24px] border border-blue-100 bg-blue-50/70 p-5">
-                <div className="mb-4 flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+              <div className="rounded-[24px] border border-info/30 bg-infoSoft/70 p-5">
+                <div className="mb-4 flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-widest text-info">
                   <span className="flex items-center gap-2"><Target size={14} /> Hot lead review</span>
-                  <span className="rounded-full bg-white px-2.5 py-1">{hotLeads.length}</span>
+                  <span className="rounded-full bg-surface px-2.5 py-1">{hotLeads.length}</span>
                 </div>
                 <div className="space-y-3">
                   {hotLeads.map((lead) => (
-                    <div key={lead.id} className="rounded-2xl bg-white/80 p-4">
+                    <div key={lead.id} className="rounded-2xl bg-surface2 p-4">
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
                           <div className="truncate text-sm font-bold text-text">{lead.fullName}</div>
-                          <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{lead.companyName}</div>
+                          <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{lead.companyName}</div>
                         </div>
                         <PriorityBadge priority={lead.priority} />
                       </div>
@@ -623,16 +623,16 @@ export const DashboardPreview = () => {
           <Panel className="p-6">
             <div className="mb-5 flex items-center justify-between">
               <div>
-                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Clarity Sprint</h2>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Clarity Sprint</h2>
                 <p className="mt-1 text-sm font-semibold text-text">Make Strata obvious before scaling posts.</p>
               </div>
-              <Megaphone size={20} className="text-gray-400" />
+              <Megaphone size={20} className="text-muted" />
             </div>
             <div className="space-y-3">
               {claritySprint.map((item) => (
-                <div key={item.label} className="rounded-[20px] border border-white/60 bg-white/60 p-4">
+                <div key={item.label} className="rounded-[20px] border border-border bg-surface2 p-4">
                   <div className="text-sm font-bold text-text">{item.label}</div>
-                  <p className="mt-1 text-xs font-semibold leading-relaxed text-gray-500">{item.detail}</p>
+                  <p className="mt-1 text-xs font-semibold leading-relaxed text-muted">{item.detail}</p>
                 </div>
               ))}
             </div>
@@ -640,8 +640,8 @@ export const DashboardPreview = () => {
         </div>
 
         <Panel className="overflow-hidden" id="preview-outreach">
-          <div className="border-b border-white/50 px-6 py-5">
-            <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Outreach Queue</h2>
+          <div className="border-b border-border px-6 py-5">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Outreach Queue</h2>
             <p className="mt-1 text-sm font-semibold text-text">Leads worth a manual message, not another passive post.</p>
           </div>
           <div className="divide-y divide-white/50">
@@ -658,10 +658,10 @@ export const DashboardPreview = () => {
                   </div>
                 </div>
                 <div className="min-w-0">
-                  <div className="truncate text-xs font-bold text-gray-700">{getVisibleLeak(lead)}</div>
-                  <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">{getRecommendedOffer(lead)}</div>
+                  <div className="truncate text-xs font-bold text-text2">{getVisibleLeak(lead)}</div>
+                  <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{getRecommendedOffer(lead)}</div>
                 </div>
-                <MessageCircle size={18} className="text-gray-400" />
+                <MessageCircle size={18} className="text-muted" />
               </div>
             ))}
           </div>

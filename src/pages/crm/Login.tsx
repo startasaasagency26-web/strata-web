@@ -48,17 +48,17 @@ export const Login = () => {
 
   if (isAuthLoading) {
     return (
-      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-        <Loader2 className="animate-spin text-white/20" size={32} />
+      <div className="min-h-screen bg-void flex items-center justify-center">
+        <Loader2 className="animate-spin text-muted" size={32} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-void flex items-center justify-center p-6 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-[120px]" />
       </div>
 
       <motion.div
@@ -67,19 +67,19 @@ export const Login = () => {
         transition={{ duration: 0.8 }}
         className="w-full max-w-md relative z-10"
       >
-        <div className="bg-[#0A0A0A] border border-white/10 rounded-[32px] p-8 md:p-12 shadow-2xl">
+        <div className="bg-surface border border-gold/25 rounded-[32px] p-8 md:p-12 shadow-2xl shadow-gold/5">
           <div className="flex flex-col items-center mb-10">
             <Logo variant="lockup" tone="gold" className="mb-6 h-12 w-auto" />
             <div className="text-center">
-              <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-white mb-2">Internal CRM</h1>
-              <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-white/40 uppercase">Authorized Personnel Only</p>
+              <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text mb-2">Internal CRM</h1>
+              <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-muted uppercase">Authorized Personnel Only</p>
             </div>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div className="space-y-4">
               <div className="relative">
-                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
+                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
                 <CrmInput
                   type="email"
                   placeholder="Email Address"
@@ -90,7 +90,7 @@ export const Login = () => {
                 />
               </div>
               <div className="relative">
-                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
+                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
                 <CrmInput
                   type="password"
                   placeholder="Password"
@@ -106,7 +106,7 @@ export const Login = () => {
               <motion.p 
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="text-[10px] font-mono font-bold text-red-400 uppercase tracking-wider text-center"
+                className="text-[10px] font-mono font-bold text-danger uppercase tracking-wider text-center"
               >
                 {error}
               </motion.p>
@@ -115,7 +115,7 @@ export const Login = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-white text-black py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-[0.2em] hover:bg-white/90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+              className="w-full bg-gold text-void py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-[0.2em] hover:bg-goldHover active:bg-goldActive active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
             >
               {isLoading ? (
                 <>
@@ -129,14 +129,14 @@ export const Login = () => {
 
             <Link
               to="/crm/reset-password"
-              className="block text-center text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white/35 transition hover:text-white"
+              className="block text-center text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted transition hover:text-text"
             >
               Forgot CRM access?
             </Link>
           </form>
 
-          <div className="mt-12 pt-8 border-t border-white/5 text-center">
-            <p className="text-[8px] font-mono text-white/20 uppercase tracking-[0.1em] leading-relaxed">
+          <div className="mt-12 pt-8 border-t border-border text-center">
+            <p className="text-[8px] font-mono text-muted uppercase tracking-[0.1em] leading-relaxed">
               Proprietary software property of Strata Agency.<br />
               Unauthorized access attempt is logged.
             </p>

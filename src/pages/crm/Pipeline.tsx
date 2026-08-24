@@ -94,16 +94,16 @@ export const Pipeline = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 shrink-0">
           <div>
             <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text mb-2">Sales Pipeline</h1>
-            <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-gray-500 uppercase">Visual deal tracking & stage control</p>
+            <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-muted uppercase">Visual deal tracking & stage control</p>
           </div>
           <div className="flex gap-4">
-            <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[24px] px-6 py-3 flex items-center gap-4 shadow-sm">
+            <div className="bg-surface2 backdrop-blur-md border border-border rounded-[24px] px-6 py-3 flex items-center gap-4 shadow-sm">
               <div className="text-right">
-                <p className="text-[9px] font-mono font-bold tracking-widest text-gray-500 uppercase">Total Value</p>
+                <p className="text-[9px] font-mono font-bold tracking-widest text-muted uppercase">Total Value</p>
                 <p className="text-lg font-display font-bold text-text uppercase tracking-tight">Unavailable</p>
-                <p className="text-[8px] font-mono font-bold tracking-widest text-gray-400 uppercase">No exact deal values</p>
+                <p className="text-[8px] font-mono font-bold tracking-widest text-muted uppercase">No exact deal values</p>
               </div>
-              <TrendingUp size={24} className="text-emerald-500" />
+              <TrendingUp size={24} className="text-positive" />
             </div>
             <button
               onClick={() => navigate('/crm/leads?add=1')}
@@ -116,17 +116,17 @@ export const Pipeline = () => {
         </div>
 
         {notice && (
-          <div className="rounded-[18px] border border-emerald-200 bg-emerald-50 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-700">
+          <div className="rounded-[18px] border border-positive/30 bg-positiveSoft px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-positive">
             {notice}
           </div>
         )}
 
         {stageFilter && (
-          <div className="flex items-center justify-between rounded-[24px] border border-blue-200 bg-blue-50 px-5 py-3">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+          <div className="flex items-center justify-between rounded-[24px] border border-info/30 bg-infoSoft px-5 py-3">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-info">
               Showing {PIPELINE_STAGES.find((stage) => stage.id === stageFilter)?.name}
             </span>
-            <button onClick={() => setStageFilter(null)} className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700 hover:text-blue-900">
+            <button onClick={() => setStageFilter(null)} className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-info hover:text-info">
               <X size={12} /> Clear filter
             </button>
           </div>
@@ -142,8 +142,8 @@ export const Pipeline = () => {
                 <div key={stage.id} className="w-[300px] flex flex-col gap-4">
                   <div className="flex items-center justify-between px-2 shrink-0">
                     <div className="flex items-center gap-3">
-                      <h3 className="text-xs font-mono font-bold tracking-[0.2em] text-gray-500 uppercase">{stage.name}</h3>
-                      <span className="w-6 h-6 rounded-full bg-white border border-white/50 flex items-center justify-center text-[10px] font-mono font-bold text-text shadow-sm">
+                      <h3 className="text-xs font-mono font-bold tracking-[0.2em] text-muted uppercase">{stage.name}</h3>
+                      <span className="w-6 h-6 rounded-full bg-surface border border-border flex items-center justify-center text-[10px] font-mono font-bold text-text shadow-sm">
                         {stageLeads.length}
                       </span>
                     </div>
@@ -152,27 +152,27 @@ export const Pipeline = () => {
                         onClick={() => setOpenStageMenu(openStageMenu === stage.id ? null : stage.id)}
                         aria-label={`Open actions for ${stage.name}`}
                         aria-expanded={openStageMenu === stage.id}
-                        className="text-gray-400 hover:text-text transition-colors"
+                        className="text-muted hover:text-text transition-colors"
                       >
                         <MoreVertical size={16} />
                       </button>
                       {openStageMenu === stage.id && (
-                        <div ref={menuRef} className="absolute right-0 top-7 z-20 w-56 rounded-[18px] bg-white border border-gray-100 shadow-xl p-2">
+                        <div ref={menuRef} className="absolute right-0 top-7 z-20 w-56 rounded-[18px] bg-surface border border-border shadow-xl p-2">
                           <button
                             onClick={() => navigate(`/crm/leads?status=${stage.id}`)}
-                            className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50 text-left"
+                            className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2 text-left"
                           >
                             <Users size={14} /> View leads in this stage
                           </button>
                           <button
                             onClick={() => copyStageSummary(stage, stageLeads)}
-                            className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50 text-left"
+                            className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2 text-left"
                           >
                             <Copy size={14} /> Copy stage summary
                           </button>
                           <button
                             onClick={() => { setStageFilter(stage.id); setOpenStageMenu(null); }}
-                            className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50 text-left"
+                            className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2 text-left"
                           >
                             <Filter size={14} /> Filter by this stage
                           </button>
@@ -181,38 +181,38 @@ export const Pipeline = () => {
                     </div>
                   </div>
 
-                  <div className="flex-1 bg-white/40 border border-white/50 rounded-[32px] p-4 space-y-4 overflow-y-auto custom-scrollbar shadow-inner">
+                  <div className="flex-1 bg-surface2 border border-border rounded-[32px] p-4 space-y-4 overflow-y-auto custom-scrollbar shadow-inner">
                     {stageLeads.map((lead) => (
                       <Link 
                         key={lead.id}
                         to={`/crm/leads/${lead.id}`}
-                        className="block bg-white/60 backdrop-blur-md border border-white/50 rounded-[24px] p-5 hover:bg-white hover:border-white transition-all shadow-sm group"
+                        className="block bg-surface2 backdrop-blur-md border border-border rounded-[24px] p-5 hover:bg-surface3 hover:border-border transition-all shadow-sm group"
                       >
                         <div className="flex justify-between items-start mb-4">
                           <PriorityBadge priority={lead.priority} className="" />
-                          <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest">{new Date(lead.createdAt).toLocaleDateString()}</span>
+                          <span className="text-[10px] font-mono font-bold text-muted uppercase tracking-widest">{new Date(lead.createdAt).toLocaleDateString()}</span>
                         </div>
                         
                         <div className="mb-6">
                           <h4 className="text-sm font-bold text-text mb-1">{lead.fullName}</h4>
-                          <p className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest truncate">{lead.companyName || 'Independent'}</p>
+                          <p className="text-[10px] font-mono font-bold text-muted uppercase tracking-widest truncate">{lead.companyName || 'Independent'}</p>
                         </div>
 
-                        <div className="pt-4 border-t border-white/50 flex items-center justify-between">
-                          <div className="flex items-center gap-1.5 text-gray-500">
+                        <div className="pt-4 border-t border-border flex items-center justify-between">
+                          <div className="flex items-center gap-1.5 text-muted">
                             <DollarSign size={12} />
                             <span className="text-[10px] font-mono font-bold">{lead.budgetRange || 'Budget unavailable'}</span>
                           </div>
                           <div className="flex items-center gap-2">
                             {lead.assignedProfile ? (
                               <>
-                                <div className="w-8 h-8 rounded-full bg-white border border-white/50 shadow-sm flex items-center justify-center text-[10px] font-mono font-bold text-text">
+                                <div className="w-8 h-8 rounded-full bg-surface border border-border shadow-sm flex items-center justify-center text-[10px] font-mono font-bold text-text">
                                   {lead.assignedProfile.fullName.charAt(0).toUpperCase()}
                                 </div>
                                 <span className="sr-only">Assigned to {lead.assignedProfile.fullName}</span>
                               </>
                             ) : (
-                              <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest">Unassigned</span>
+                              <span className="text-[10px] font-mono font-bold text-muted uppercase tracking-widest">Unassigned</span>
                             )}
                           </div>
                         </div>
@@ -221,10 +221,10 @@ export const Pipeline = () => {
                     
                     {stageLeads.length === 0 && (
                       <div className="h-full flex flex-col items-center justify-center py-20 text-center opacity-60">
-                        <div className="w-16 h-16 rounded-full bg-white shadow-sm border border-white/50 flex items-center justify-center mb-4">
-                          <Users size={24} className="text-gray-400" />
+                        <div className="w-16 h-16 rounded-full bg-surface shadow-sm border border-border flex items-center justify-center mb-4">
+                          <Users size={24} className="text-muted" />
                         </div>
-                        <span className="text-[10px] font-mono font-bold text-gray-500 tracking-widest uppercase italic">Empty Stage</span>
+                        <span className="text-[10px] font-mono font-bold text-muted tracking-widest uppercase italic">Empty Stage</span>
                       </div>
                     )}
                   </div>

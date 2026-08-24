@@ -23,13 +23,13 @@ import { cn } from '../../lib/utils';
 const PAGE_SIZE = 10;
 
 const AVATAR_COLORS = [
-  'from-blue-400 to-blue-600',
-  'from-purple-400 to-purple-600',
+  'from-info to-info/60',
+  'from-info to-info/60',
   'from-amber-400 to-amber-600',
-  'from-emerald-400 to-emerald-600',
+  'from-positive to-positive/60',
   'from-rose-400 to-rose-600',
-  'from-teal-400 to-teal-600',
-  'from-indigo-400 to-indigo-600',
+  'from-positive/80 to-positive/50',
+  'from-info to-info/60',
 ];
 
 function getInitials(name: string): string {
@@ -253,7 +253,7 @@ export const Leads = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text">Leads</h1>
-            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-1">
+            <p className="text-[10px] font-mono text-muted uppercase tracking-widest mt-1">
               {total} total contacts
             </p>
           </div>
@@ -266,21 +266,21 @@ export const Leads = () => {
         </div>
 
         {notice && (
-          <div className="rounded-[18px] border border-emerald-200 bg-emerald-50 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-700">
+          <div className="rounded-[18px] border border-positive/30 bg-positiveSoft px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-positive">
             {notice}
           </div>
         )}
 
-        <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[24px] p-3 flex flex-col sm:flex-row gap-3 shadow-sm relative">
+        <div className="bg-surface2 backdrop-blur-md border border-border rounded-[24px] p-3 flex flex-col sm:flex-row gap-3 shadow-sm relative">
           <div className="relative flex-1">
-            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
             <input
               type="text"
               placeholder="Search by name or company..."
               value={searchTerm}
               onChange={(e) => handleSearchChange(e.target.value)}
               aria-label="Search leads"
-              className="w-full bg-white/40 border border-white/50 shadow-inner rounded-xl pl-11 pr-4 py-3 text-sm font-semibold text-gray-900 outline-none focus:border-blue-400 focus:bg-white transition-all placeholder:text-gray-500 font-sans"
+              className="w-full bg-surface2 border border-border shadow-inner rounded-xl pl-11 pr-4 py-3 text-sm font-semibold text-text outline-none focus:border-focus focus:bg-surface transition-all placeholder:text-muted font-sans"
             />
           </div>
           <div className="flex gap-3 sm:w-auto">
@@ -288,7 +288,7 @@ export const Leads = () => {
               value={statusFilter}
               onChange={(e) => { setStatusFilter(e.target.value as LeadStatus | 'all'); setPage(1); }}
               aria-label="Filter leads by status"
-              className="bg-white/40 border border-white/50 shadow-inner rounded-xl px-4 py-3 text-sm font-semibold text-text outline-none focus:border-blue-400 focus:bg-white transition-all appearance-none cursor-pointer min-w-[160px]"
+              className="bg-surface2 border border-border shadow-inner rounded-xl px-4 py-3 text-sm font-semibold text-text outline-none focus:border-focus focus:bg-surface transition-all appearance-none cursor-pointer min-w-[160px]"
             >
               <option value="all">All Statuses</option>
               <option value="new">New</option>
@@ -305,7 +305,7 @@ export const Leads = () => {
               onClick={() => setShowFilters((value) => !value)}
               aria-label="Open advanced lead filters"
               aria-expanded={showFilters}
-              className="w-12 h-12 rounded-xl bg-white/40 border border-white/50 shadow-inner flex items-center justify-center text-gray-500 hover:text-text hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 transition-all"
+              className="w-12 h-12 rounded-xl bg-surface2 border border-border shadow-inner flex items-center justify-center text-muted hover:text-text hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-focus transition-all"
             >
               <Filter size={18} />
             </button>
@@ -314,11 +314,11 @@ export const Leads = () => {
           {showFilters && (
             <div
               ref={filterRef}
-              className="absolute right-3 top-[calc(100%+0.5rem)] z-30 w-[300px] rounded-[24px] border border-white/60 bg-white/95 p-4 shadow-xl backdrop-blur-xl space-y-4"
+              className="absolute right-3 top-[calc(100%+0.5rem)] z-30 w-[300px] rounded-[24px] border border-border bg-surface2 p-4 shadow-xl backdrop-blur-xl space-y-4"
             >
               <div className="flex items-center justify-between">
-                <h2 className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Advanced Filters</h2>
-                <button onClick={() => setShowFilters(false)} aria-label="Close advanced filters" className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center">
+                <h2 className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted">Advanced Filters</h2>
+                <button onClick={() => setShowFilters(false)} aria-label="Close advanced filters" className="w-8 h-8 rounded-full hover:bg-surface2 flex items-center justify-center">
                   <X size={14} />
                 </button>
               </div>
@@ -343,7 +343,7 @@ export const Leads = () => {
               </CrmSelect>
               <button
                 onClick={() => { setPriorityFilter('all'); setSort('newest'); setStatusFilter('all'); setSearchTerm(''); setPage(1); }}
-                className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-50"
+                className="w-full rounded-xl border border-border px-4 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-text2 hover:bg-surface2"
               >
                 Reset filters
               </button>
@@ -351,26 +351,26 @@ export const Leads = () => {
           )}
         </div>
 
-        <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] overflow-hidden shadow-sm relative">
+        <div className="bg-surface2 backdrop-blur-md border border-border rounded-[32px] overflow-hidden shadow-sm relative">
           {isRefreshing && (
-            <div className="absolute right-6 top-5 z-10 flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500 shadow-sm">
+            <div className="absolute right-6 top-5 z-10 flex items-center gap-2 rounded-full bg-surface px-3 py-1.5 text-[9px] font-mono font-bold uppercase tracking-widest text-muted shadow-sm">
               <Loader2 size={12} className="animate-spin" /> Updating
             </div>
           )}
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[900px]">
               <thead>
-                <tr className="border-b border-white/40 bg-white/40">
+                <tr className="border-b border-border bg-surface2">
                   <th className="px-6 py-4">
-                    <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">
+                    <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold tracking-widest text-muted uppercase">
                       Contact <ArrowUpDown size={12} />
                     </span>
                   </th>
-                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">Service</th>
-                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">Status</th>
-                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">Last Contacted</th>
-                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">Reach Out</th>
-                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase text-right">Actions</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-muted uppercase">Service</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-muted uppercase">Status</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-muted uppercase">Last Contacted</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-muted uppercase">Reach Out</th>
+                  <th className="px-6 py-4 text-[10px] font-mono font-bold tracking-widest text-muted uppercase text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/40">
@@ -381,24 +381,24 @@ export const Leads = () => {
                   const canEmail = Boolean(lead.workEmail);
 
                   return (
-                    <tr key={lead.id} className="hover:bg-white/60 transition-colors group">
+                    <tr key={lead.id} className="hover:bg-surface3 transition-colors group">
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-4">
                           <div className={cn(
-                            'w-10 h-10 rounded-full border-2 border-white shadow-sm bg-gradient-to-br flex items-center justify-center font-display text-xs font-bold text-white shrink-0',
+                            'w-10 h-10 rounded-full border-2 border-border shadow-sm bg-gradient-to-br flex items-center justify-center font-display text-xs font-bold text-text shrink-0',
                             avatarColor
                           )}>
                             {getInitials(lead.fullName)}
                           </div>
                           <div>
                             <div className="font-bold text-sm text-text">{lead.fullName}</div>
-                            <div className="text-[10px] font-mono font-bold text-gray-500 tracking-widest uppercase mt-0.5">{lead.companyName || 'Independent'}</div>
+                            <div className="text-[10px] font-mono font-bold text-muted tracking-widest uppercase mt-0.5">{lead.companyName || 'Independent'}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-5">
                         <div className="text-sm font-bold text-text">{lead.selectedPackage || lead.serviceNeed || 'Not specified'}</div>
-                        <div className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest mt-0.5">{lead.budgetRange || 'Budget unavailable'}</div>
+                        <div className="text-[10px] font-mono font-bold text-muted uppercase tracking-widest mt-0.5">{lead.budgetRange || 'Budget unavailable'}</div>
                       </td>
                       <td className="px-5 py-4">
                         <div className="flex flex-col gap-1.5">
@@ -407,7 +407,7 @@ export const Leads = () => {
                         </div>
                       </td>
                       <td className="px-5 py-4">
-                        <span className={cn('text-xs font-mono font-bold', lead.lastContactedAt ? 'text-gray-700' : 'text-gray-300')}>
+                        <span className={cn('text-xs font-mono font-bold', lead.lastContactedAt ? 'text-text2' : 'text-muted/60')}>
                           {formatRelativeDate(lead.lastContactedAt)}
                         </span>
                       </td>
@@ -419,12 +419,12 @@ export const Leads = () => {
                               target="_blank"
                               rel="noreferrer"
                               aria-label={`WhatsApp ${lead.fullName}`}
-                              className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all"
+                              className="w-8 h-8 rounded-lg bg-positiveSoft border border-positive/30 flex items-center justify-center text-positive hover:bg-positiveSoft hover:text-text hover:border-positive/30 transition-all"
                             >
                               <MessageCircle size={14} />
                             </a>
                           ) : (
-                            <button disabled title="No WhatsApp number saved" aria-label="WhatsApp unavailable" className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-300 cursor-not-allowed">
+                            <button disabled title="No WhatsApp number saved" aria-label="WhatsApp unavailable" className="w-8 h-8 rounded-lg bg-surface2 border border-border flex items-center justify-center text-muted/60 cursor-not-allowed">
                               <MessageCircle size={14} />
                             </button>
                           )}
@@ -432,12 +432,12 @@ export const Leads = () => {
                             <a
                               href={`mailto:${lead.workEmail}`}
                               aria-label={`Email ${lead.fullName}`}
-                              className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all"
+                              className="w-8 h-8 rounded-lg bg-infoSoft border border-info/30 flex items-center justify-center text-info hover:bg-infoSoft hover:text-text hover:border-info/30 transition-all"
                             >
                               <Mail size={14} />
                             </a>
                           ) : (
-                            <button disabled title="No email saved" aria-label="Email unavailable" className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-300 cursor-not-allowed">
+                            <button disabled title="No email saved" aria-label="Email unavailable" className="w-8 h-8 rounded-lg bg-surface2 border border-border flex items-center justify-center text-muted/60 cursor-not-allowed">
                               <Mail size={14} />
                             </button>
                           )}
@@ -447,7 +447,7 @@ export const Leads = () => {
                         <div className="flex items-center justify-end gap-3 relative">
                           <Link
                             to={`/crm/leads/${lead.id}`}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/60 border border-white/50 text-text text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-white hover:shadow-sm transition-all"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface2 border border-border text-text text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-surface3 hover:shadow-sm transition-all"
                           >
                             View <ChevronRight size={14} />
                           </Link>
@@ -455,36 +455,36 @@ export const Leads = () => {
                             onClick={() => setOpenRowMenu(openRowMenu === lead.id ? null : lead.id)}
                             aria-label={`Open actions for ${lead.fullName}`}
                             aria-expanded={openRowMenu === lead.id}
-                            className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-text transition-colors rounded-xl hover:bg-white border border-transparent hover:border-white/50"
+                            className="w-9 h-9 flex items-center justify-center text-muted hover:text-text transition-colors rounded-xl hover:bg-surface3 border border-transparent hover:border-border"
                           >
                             <MoreVertical size={18} />
                           </button>
                           {openRowMenu === lead.id && (
                             <div
                               ref={rowMenuRef}
-                              className="absolute right-0 top-11 z-20 w-56 rounded-[18px] bg-white border border-gray-100 shadow-xl p-2 text-left"
+                              className="absolute right-0 top-11 z-20 w-56 rounded-[18px] bg-surface border border-border shadow-xl p-2 text-left"
                             >
-                              <Link to={`/crm/leads/${lead.id}`} className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50">
+                              <Link to={`/crm/leads/${lead.id}`} className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2">
                                 <ChevronRight size={14} /> View lead
                               </Link>
                               <button
                                 onClick={() => copyText(lead.workEmail, 'Email')}
                                 disabled={!lead.workEmail}
-                                className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed"
+                                className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2 disabled:text-muted/60 disabled:cursor-not-allowed"
                               >
                                 <Copy size={14} /> Copy email
                               </button>
                               <button
                                 onClick={() => copyText(lead.whatsappPhone, 'WhatsApp')}
                                 disabled={!lead.whatsappPhone}
-                                className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed"
+                                className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2 disabled:text-muted/60 disabled:cursor-not-allowed"
                               >
                                 <Copy size={14} /> Copy WhatsApp
                               </button>
                               <button
                                 onClick={() => markContacted(lead)}
                                 disabled={contactingLeadId === lead.id}
-                                className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed"
+                                className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2 disabled:text-muted/60 disabled:cursor-not-allowed"
                               >
                                 {contactingLeadId === lead.id ? <Loader2 size={14} className="animate-spin" /> : <CheckCircle2 size={14} />} Mark contacted
                               </button>
@@ -501,11 +501,11 @@ export const Leads = () => {
 
           {leads.length === 0 && (
             <div className="py-24 text-center px-4">
-              <div className="w-16 h-16 rounded-full bg-white shadow-sm border border-white/50 flex items-center justify-center mx-auto mb-5">
-                <Search size={24} className="text-gray-400" />
+              <div className="w-16 h-16 rounded-full bg-surface shadow-sm border border-border flex items-center justify-center mx-auto mb-5">
+                <Search size={24} className="text-muted" />
               </div>
               <p className="text-base font-bold text-text uppercase tracking-tight mb-2">No leads found</p>
-              <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+              <p className="text-xs font-mono text-muted uppercase tracking-widest">
                 {searchTerm || statusFilter !== 'all' || priorityFilter !== 'all'
                   ? 'Try adjusting your search or filters'
                   : 'Create a lead or wait for form submissions'}
@@ -513,8 +513,8 @@ export const Leads = () => {
             </div>
           )}
 
-          <div className="px-6 py-4 border-t border-white/40 bg-white/20 flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
-            <span className="text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase">
+          <div className="px-6 py-4 border-t border-border bg-surface2 flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-muted uppercase">
               Page {page} of {totalPages} · Showing {leads.length} of {total} leads
             </span>
             <div className="flex gap-2">
@@ -522,7 +522,7 @@ export const Leads = () => {
                 disabled={page <= 1}
                 title={page <= 1 ? 'Already on the first page' : 'Previous page'}
                 onClick={() => setPage((current) => Math.max(1, current - 1))}
-                className="px-4 py-2 rounded-xl border border-white/50 text-[10px] font-mono font-bold tracking-widest text-text uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-gray-400 disabled:cursor-not-allowed bg-white hover:shadow-sm transition-all"
+                className="px-4 py-2 rounded-xl border border-border text-[10px] font-mono font-bold tracking-widest text-text uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-muted disabled:cursor-not-allowed bg-surface hover:shadow-sm transition-all"
               >
                 Prev
               </button>
@@ -530,7 +530,7 @@ export const Leads = () => {
                 disabled={page >= totalPages}
                 title={page >= totalPages ? 'No more lead pages' : 'Next page'}
                 onClick={() => setPage((current) => Math.min(totalPages, current + 1))}
-                className="px-4 py-2 rounded-xl border border-white/50 text-[10px] font-mono font-bold tracking-widest text-text uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-gray-400 disabled:cursor-not-allowed bg-white hover:shadow-sm transition-all"
+                className="px-4 py-2 rounded-xl border border-border text-[10px] font-mono font-bold tracking-widest text-text uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-muted disabled:cursor-not-allowed bg-surface hover:shadow-sm transition-all"
               >
                 Next
               </button>
@@ -540,21 +540,21 @@ export const Leads = () => {
       </div>
 
       {showAddForm && (
-        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="add-lead-title">
+        <div className="fixed inset-0 bg-gold/20 backdrop-blur-sm z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="add-lead-title">
           <form
             ref={addModalRef}
             onSubmit={handleAddLead}
-            className="bg-white/90 backdrop-blur-md border border-white/50 rounded-[24px] p-6 w-full max-w-md shadow-xl flex flex-col gap-6"
+            className="bg-surface2 backdrop-blur-md border border-border rounded-[24px] p-6 w-full max-w-md shadow-xl flex flex-col gap-6"
           >
             <div className="flex items-center justify-between">
               <h2 id="add-lead-title" className="text-xl font-display font-bold uppercase tracking-tight text-text">Add Lead</h2>
-              <button type="button" onClick={closeAddModal} aria-label="Close add lead modal" className="w-9 h-9 rounded-full hover:bg-gray-100 flex items-center justify-center">
+              <button type="button" onClick={closeAddModal} aria-label="Close add lead modal" className="w-9 h-9 rounded-full hover:bg-surface2 flex items-center justify-center">
                 <X size={16} />
               </button>
             </div>
 
             {addError && (
-              <div className="text-[10px] font-mono font-bold text-red-500 bg-red-50 p-3 rounded-xl border border-red-100 uppercase tracking-widest">
+              <div className="text-[10px] font-mono font-bold text-danger bg-dangerSoft p-3 rounded-xl border border-danger/30 uppercase tracking-widest">
                 {addError}
               </div>
             )}
@@ -566,7 +566,7 @@ export const Leads = () => {
               <CrmInput label="WhatsApp Phone" value={whatsappPhone} onChange={(e) => setWhatsappPhone(e.target.value)} placeholder="+60123456789" />
             </div>
 
-            <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+            <div className="rounded-xl border border-info/30 bg-infoSoft px-4 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-info">
               Missing optional CRM fields are saved with internal manual-entry defaults.
             </div>
 
@@ -574,7 +574,7 @@ export const Leads = () => {
               <button
                 type="button"
                 onClick={closeAddModal}
-                className="px-5 py-2.5 rounded-full border border-gray-200 text-text text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-gray-50 transition-all"
+                className="px-5 py-2.5 rounded-full border border-border text-text text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-surface2 transition-all"
                 disabled={isSaving}
               >
                 Cancel

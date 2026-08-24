@@ -189,53 +189,53 @@ export const LeadDetail = () => {
 
   return (
     <CrmShell>
-      <div className="absolute inset-0 bg-gradient-to-br from-[#E2F0F9] via-[#F0F4EC] to-[#E9F3D8] -z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgb(var(--gold)/0.05),transparent_42%)] -z-10" />
 
       <div className="space-y-6 max-w-[1600px] mx-auto pb-20 relative z-0">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 mt-4">
           <div className="flex items-center gap-6">
-            <Link to="/crm/leads" aria-label="Back to leads" className="w-10 h-10 rounded-full bg-white/40 border border-white/50 shadow-sm flex items-center justify-center text-gray-500 hover:bg-white hover:text-gray-900 transition-all shrink-0">
+            <Link to="/crm/leads" aria-label="Back to leads" className="w-10 h-10 rounded-full bg-surface2 border border-border shadow-sm flex items-center justify-center text-muted hover:bg-surface3 hover:text-text transition-all shrink-0">
               <ChevronLeft size={18} />
             </Link>
             <div>
-              <h1 className="text-4xl md:text-[40px] font-display font-medium text-gray-900 leading-[1.1] tracking-tight">
+              <h1 className="text-4xl md:text-[40px] font-display font-medium text-text leading-[1.1] tracking-tight">
                 {lead.fullName}
               </h1>
-              <p className="mt-2 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{lead.companyName || 'Independent'}</p>
+              <p className="mt-2 text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{lead.companyName || 'Independent'}</p>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-3 bg-white/40 border border-white/50 shadow-sm rounded-full px-5 py-2.5">
-              <Globe size={16} className="text-gray-600" />
+            <div className="flex items-center gap-3 bg-surface2 border border-border shadow-sm rounded-full px-5 py-2.5">
+              <Globe size={16} className="text-text2" />
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-gray-900">{lead.sourcePage || 'Source unavailable'}</span>
-                  <span className="text-[8px] font-bold bg-[#2D5BFF] text-white px-1.5 py-0.5 rounded-full uppercase">Source</span>
+                  <span className="text-sm font-bold text-text">{lead.sourcePage || 'Source unavailable'}</span>
+                  <span className="text-[8px] font-bold bg-gold text-void px-1.5 py-0.5 rounded-full uppercase">Source</span>
                 </div>
-                <span className="text-[10px] text-gray-500">Captured from lead record</span>
+                <span className="text-[10px] text-muted">Captured from lead record</span>
               </div>
             </div>
-            <div className="flex items-center gap-3 bg-white/40 border border-white/50 shadow-sm rounded-full px-5 py-2.5">
-              <Clock size={16} className="text-gray-600" />
+            <div className="flex items-center gap-3 bg-surface2 border border-border shadow-sm rounded-full px-5 py-2.5">
+              <Clock size={16} className="text-text2" />
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-gray-900">{ageDays !== null ? `${ageDays} Days` : '—'}</span>
-                  <span className="text-[8px] font-bold bg-[#2D5BFF] text-white px-1.5 py-0.5 rounded-full uppercase">Age</span>
+                  <span className="text-sm font-bold text-text">{ageDays !== null ? `${ageDays} Days` : '—'}</span>
+                  <span className="text-[8px] font-bold bg-gold text-void px-1.5 py-0.5 rounded-full uppercase">Age</span>
                 </div>
-                <span className="text-[10px] text-gray-500">Created {new Date(lead.createdAt).toLocaleDateString()}</span>
+                <span className="text-[10px] text-muted">Created {new Date(lead.createdAt).toLocaleDateString()}</span>
               </div>
             </div>
           </div>
         </div>
 
         {notice && (
-          <div className="rounded-[18px] border border-emerald-200 bg-emerald-50 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-700">
+          <div className="rounded-[18px] border border-positive/30 bg-positiveSoft px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-positive">
             {notice}
           </div>
         )}
         {actionError && (
-          <div className="rounded-[18px] border border-red-200 bg-red-50 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-red-600">
+          <div className="rounded-[18px] border border-danger/30 bg-dangerSoft px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-danger">
             {actionError}
           </div>
         )}
@@ -243,48 +243,48 @@ export const LeadDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1.3fr_1fr] xl:grid-cols-[1.8fr_1.5fr_1fr] gap-6 items-start">
           <div className="space-y-4">
             <div className="flex items-center justify-between pl-2 mb-2">
-              <h2 className="text-sm font-bold text-gray-900">Interaction History</h2>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">{notes.length} notes</span>
+              <h2 className="text-sm font-bold text-text">Interaction History</h2>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{notes.length} notes</span>
             </div>
 
             {notes.length > 0 ? (
               <div className="space-y-3">
                 {notes.map((note) => (
-                  <div key={note.id} className="rounded-[24px] border border-white/50 bg-white/60 p-5 shadow-sm">
+                  <div key={note.id} className="rounded-[24px] border border-border bg-surface2 p-5 shadow-sm">
                     <div className="flex items-center justify-between gap-4">
                       <div>
-                        <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">{note.type.replace('_', ' ')}</p>
-                        <p className="mt-2 text-sm font-semibold text-gray-900 leading-relaxed">{note.note}</p>
+                        <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{note.type.replace('_', ' ')}</p>
+                        <p className="mt-2 text-sm font-semibold text-text leading-relaxed">{note.note}</p>
                       </div>
-                      <span className="shrink-0 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">
+                      <span className="shrink-0 text-[10px] font-mono font-bold uppercase tracking-widest text-muted">
                         {new Date(note.createdAt).toLocaleDateString()}
                       </span>
                     </div>
                     {note.createdBy && (
-                      <p className="mt-3 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">By {note.createdBy}</p>
+                      <p className="mt-3 text-[10px] font-mono font-bold uppercase tracking-widest text-muted">By {note.createdBy}</p>
                     )}
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="rounded-[32px] border border-white/50 bg-white/60 px-8 py-16 text-center shadow-sm">
+              <div className="rounded-[32px] border border-border bg-surface2 px-8 py-16 text-center shadow-sm">
                 <p className="text-base font-bold text-text uppercase tracking-tight mb-2">No notes yet</p>
-                <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">Saved notes will appear here after submission</p>
+                <p className="text-xs font-mono text-muted uppercase tracking-widest">Saved notes will appear here after submission</p>
               </div>
             )}
 
-            <form onSubmit={handleAddNote} className="bg-[#EAECE6]/50 rounded-3xl p-4 shadow-sm mt-2 flex gap-2">
+            <form onSubmit={handleAddNote} className="bg-surface2 rounded-3xl p-4 shadow-sm mt-2 flex gap-2">
               <input
                 placeholder="Add a new interaction note..."
                 value={newNote}
                 onChange={(e) => setNewNote(e.target.value)}
-                className="w-full bg-transparent border-none text-sm font-semibold text-gray-900 outline-none placeholder:text-gray-400 px-2"
+                className="w-full bg-transparent border-none text-sm font-semibold text-text outline-none placeholder:text-muted px-2"
               />
               <button
                 type="submit"
                 aria-label="Add note"
                 disabled={isSubmittingNote || !newNote.trim()}
-                className="w-10 h-10 rounded-full bg-gray-900 text-white flex items-center justify-center hover:bg-gray-800 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-10 h-10 rounded-full bg-gold text-void flex items-center justify-center hover:bg-goldHover shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmittingNote ? <Loader2 size={16} className="animate-spin" /> : <Plus size={16} />}
               </button>
@@ -292,13 +292,13 @@ export const LeadDetail = () => {
           </div>
 
           <div className="space-y-4">
-            <div className="bg-[#EAECE6]/50 rounded-[32px] p-6 shadow-sm">
+            <div className="bg-surface2 rounded-[32px] p-6 shadow-sm">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-sm font-bold text-gray-900">Lead Follow-ups</h3>
+                <h3 className="text-sm font-bold text-text">Lead Follow-ups</h3>
                 <button
                   onClick={() => navigate(`/crm/follow-ups?create=1&leadId=${lead.id}`)}
                   aria-label="Schedule follow-up for this lead"
-                  className="w-8 h-8 rounded-full bg-white/60 flex items-center justify-center text-gray-500 hover:bg-white"
+                  className="w-8 h-8 rounded-full bg-surface2 flex items-center justify-center text-muted hover:bg-surface3"
                 >
                   <Plus size={14} />
                 </button>
@@ -307,29 +307,29 @@ export const LeadDetail = () => {
               {followUps.length > 0 ? (
                 <div className="space-y-3">
                   {followUps.map((task) => (
-                    <div key={task.id} className="rounded-[18px] border border-white/50 bg-white/60 p-4">
+                    <div key={task.id} className="rounded-[18px] border border-border bg-surface2 p-4">
                       <div className="flex items-center justify-between gap-3">
                         <div>
-                          <p className="text-sm font-bold text-gray-900">{task.title}</p>
-                          <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">{task.contactMethod || 'contact'} · {task.status}</p>
+                          <p className="text-sm font-bold text-text">{task.title}</p>
+                          <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{task.contactMethod || 'contact'} · {task.status}</p>
                         </div>
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{new Date(task.dueAt).toLocaleDateString()}</span>
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted">{new Date(task.dueAt).toLocaleDateString()}</span>
                       </div>
-                      {task.notes && <p className="mt-2 text-xs text-gray-500">{task.notes}</p>}
+                      {task.notes && <p className="mt-2 text-xs text-muted">{task.notes}</p>}
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="rounded-[24px] border border-white/50 bg-white/50 px-6 py-10 text-center">
-                  <p className="text-sm font-bold text-gray-900">No follow-ups scheduled</p>
-                  <p className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">Use the plus button to schedule one</p>
+                <div className="rounded-[24px] border border-border bg-surface2 px-6 py-10 text-center">
+                  <p className="text-sm font-bold text-text">No follow-ups scheduled</p>
+                  <p className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-muted">Use the plus button to schedule one</p>
                 </div>
               )}
             </div>
 
-            <div className="bg-[#EAECE6]/50 rounded-[32px] p-6 shadow-sm flex flex-col">
+            <div className="bg-surface2 rounded-[32px] p-6 shadow-sm flex flex-col">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-sm font-bold text-gray-900">Status Progression</h3>
+                <h3 className="text-sm font-bold text-text">Status Progression</h3>
               </div>
 
               <div className="space-y-2">
@@ -339,11 +339,11 @@ export const LeadDetail = () => {
                   return (
                     <div key={stage.value} className={cn(
                       'rounded-2xl border px-4 py-3 flex items-center justify-between',
-                      isCurrent ? 'bg-white border-blue-200 shadow-sm' : 'bg-white/40 border-white/50',
-                      isComplete && 'text-emerald-700'
+                      isCurrent ? 'bg-surface border-info/30 shadow-sm' : 'bg-surface2 border-border',
+                      isComplete && 'text-positive'
                     )}>
                       <span className="text-[10px] font-mono font-bold uppercase tracking-widest">{stage.label}</span>
-                      {isComplete ? <CheckCircle2 size={14} /> : isCurrent ? <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-blue-600">Current</span> : <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-300">Pending</span>}
+                      {isComplete ? <CheckCircle2 size={14} /> : isCurrent ? <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-info">Current</span> : <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted/60">Pending</span>}
                     </div>
                   );
                 })}
@@ -352,12 +352,12 @@ export const LeadDetail = () => {
           </div>
 
           <div className="space-y-4">
-            <div className="bg-[#EAECE6]/50 rounded-[32px] p-6 shadow-sm flex flex-col items-center relative">
+            <div className="bg-surface2 rounded-[32px] p-6 shadow-sm flex flex-col items-center relative">
               <div className="absolute top-6 left-6 flex gap-2">
-                <button disabled title="Relationship graph not connected yet." aria-label="Relationship graph unavailable" className="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-gray-300 cursor-not-allowed">
+                <button disabled title="Relationship graph not connected yet." aria-label="Relationship graph unavailable" className="w-8 h-8 rounded-full bg-surface2 flex items-center justify-center text-muted/60 cursor-not-allowed">
                   <Network size={14} />
                 </button>
-                <button onClick={shareLead} aria-label="Copy lead link" className="w-8 h-8 rounded-full bg-white/60 flex items-center justify-center text-gray-600 hover:bg-white">
+                <button onClick={shareLead} aria-label="Copy lead link" className="w-8 h-8 rounded-full bg-surface2 flex items-center justify-center text-text2 hover:bg-surface3">
                   <Share2 size={14} />
                 </button>
               </div>
@@ -366,24 +366,24 @@ export const LeadDetail = () => {
                   onClick={() => setShowProfileMenu((value) => !value)}
                   aria-label="Open profile actions"
                   aria-expanded={showProfileMenu}
-                  className="w-8 h-8 rounded-full bg-white/60 flex items-center justify-center text-gray-600 hover:bg-white"
+                  className="w-8 h-8 rounded-full bg-surface2 flex items-center justify-center text-text2 hover:bg-surface3"
                 >
                   <MoreHorizontal size={14} />
                 </button>
                 {showProfileMenu && (
-                  <div ref={profileMenuRef} className="absolute right-0 top-10 z-20 w-56 rounded-[18px] bg-white border border-gray-100 shadow-xl p-2">
-                    <button onClick={() => copyText(lead.workEmail, 'Email')} disabled={!hasEmail} className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed">
+                  <div ref={profileMenuRef} className="absolute right-0 top-10 z-20 w-56 rounded-[18px] bg-surface border border-border shadow-xl p-2">
+                    <button onClick={() => copyText(lead.workEmail, 'Email')} disabled={!hasEmail} className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2 disabled:text-muted/60 disabled:cursor-not-allowed">
                       <Copy size={14} /> Copy email
                     </button>
-                    <button onClick={() => copyText(lead.whatsappPhone, 'WhatsApp')} disabled={!hasPhone} className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed">
+                    <button onClick={() => copyText(lead.whatsappPhone, 'WhatsApp')} disabled={!hasPhone} className="w-full flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2 disabled:text-muted/60 disabled:cursor-not-allowed">
                       <Copy size={14} /> Copy WhatsApp
                     </button>
                     {sourceIsUrl ? (
-                      <a href={lead.sourcePage} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 hover:bg-gray-50">
+                      <a href={lead.sourcePage} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-text2 hover:bg-surface2">
                         <Globe size={14} /> Open source
                       </a>
                     ) : (
-                      <span className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-gray-300">
+                      <span className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold text-muted/60">
                         <Globe size={14} /> No source URL
                       </span>
                     )}
@@ -391,36 +391,36 @@ export const LeadDetail = () => {
                 )}
               </div>
 
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 mb-4 mt-8 flex items-center justify-center text-white font-bold text-3xl shadow-sm">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 mb-4 mt-8 flex items-center justify-center text-text font-bold text-3xl shadow-sm">
                 {getInitials(lead.fullName)}
               </div>
-              <h2 className="text-xl font-bold text-gray-900 leading-tight">{lead.fullName}</h2>
-              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center mt-1.5 mb-6 leading-relaxed max-w-[220px]">
+              <h2 className="text-xl font-bold text-text leading-tight">{lead.fullName}</h2>
+              <p className="text-[10px] font-bold text-muted uppercase tracking-widest text-center mt-1.5 mb-6 leading-relaxed max-w-[220px]">
                 {lead.roleInBusiness || 'Role unknown'}, {lead.companyName || 'Independent'}
               </p>
 
-              <div className="flex gap-2 bg-[#DCE1DA]/60 rounded-full p-1.5 border border-white/50">
-                <button disabled title="Lead profile editing is not connected yet." aria-label="Lead profile editing unavailable" className="w-9 h-9 rounded-full flex items-center justify-center text-gray-300 cursor-not-allowed shadow-sm">
+              <div className="flex gap-2 bg-surface3 rounded-full p-1.5 border border-border">
+                <button disabled title="Lead profile editing is not connected yet." aria-label="Lead profile editing unavailable" className="w-9 h-9 rounded-full flex items-center justify-center text-muted/60 cursor-not-allowed shadow-sm">
                   <Edit2 size={14} />
                 </button>
                 {hasEmail ? (
-                  <a aria-label={`Email ${lead.fullName}`} href={`mailto:${lead.workEmail}`} className="w-9 h-9 rounded-full hover:bg-white flex items-center justify-center text-gray-600 transition-colors shadow-sm"><Mail size={14} /></a>
+                  <a aria-label={`Email ${lead.fullName}`} href={`mailto:${lead.workEmail}`} className="w-9 h-9 rounded-full hover:bg-surface3 flex items-center justify-center text-text2 transition-colors shadow-sm"><Mail size={14} /></a>
                 ) : (
-                  <button disabled title="No email saved" aria-label="Email unavailable" className="w-9 h-9 rounded-full flex items-center justify-center text-gray-300 cursor-not-allowed shadow-sm"><Mail size={14} /></button>
+                  <button disabled title="No email saved" aria-label="Email unavailable" className="w-9 h-9 rounded-full flex items-center justify-center text-muted/60 cursor-not-allowed shadow-sm"><Mail size={14} /></button>
                 )}
                 {hasPhone ? (
-                  <a aria-label={`WhatsApp ${lead.fullName}`} href={`https://wa.me/${phoneDigits}`} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full hover:bg-white flex items-center justify-center text-gray-600 transition-colors shadow-sm"><Phone size={14} /></a>
+                  <a aria-label={`WhatsApp ${lead.fullName}`} href={`https://wa.me/${phoneDigits}`} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full hover:bg-surface3 flex items-center justify-center text-text2 transition-colors shadow-sm"><Phone size={14} /></a>
                 ) : (
-                  <button disabled title="No WhatsApp number saved" aria-label="WhatsApp unavailable" className="w-9 h-9 rounded-full flex items-center justify-center text-gray-300 cursor-not-allowed shadow-sm"><Phone size={14} /></button>
+                  <button disabled title="No WhatsApp number saved" aria-label="WhatsApp unavailable" className="w-9 h-9 rounded-full flex items-center justify-center text-muted/60 cursor-not-allowed shadow-sm"><Phone size={14} /></button>
                 )}
-                <button onClick={() => navigate(`/crm/follow-ups?create=1&leadId=${lead.id}`)} aria-label="Create follow-up" className="w-9 h-9 rounded-full hover:bg-white flex items-center justify-center text-gray-600 transition-colors shadow-sm"><Plus size={14} /></button>
-                <button onClick={() => navigate(`/crm/follow-ups?leadId=${lead.id}`)} aria-label="Open lead calendar follow-ups" className="w-9 h-9 rounded-full hover:bg-white flex items-center justify-center text-gray-600 transition-colors shadow-sm"><Calendar size={14} /></button>
+                <button onClick={() => navigate(`/crm/follow-ups?create=1&leadId=${lead.id}`)} aria-label="Create follow-up" className="w-9 h-9 rounded-full hover:bg-surface3 flex items-center justify-center text-text2 transition-colors shadow-sm"><Plus size={14} /></button>
+                <button onClick={() => navigate(`/crm/follow-ups?leadId=${lead.id}`)} aria-label="Open lead calendar follow-ups" className="w-9 h-9 rounded-full hover:bg-surface3 flex items-center justify-center text-text2 transition-colors shadow-sm"><Calendar size={14} /></button>
               </div>
             </div>
 
-            <div className="bg-[#EAECE6]/50 rounded-[32px] p-6 shadow-sm">
+            <div className="bg-surface2 rounded-[32px] p-6 shadow-sm">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-sm font-bold text-gray-900">Detailed Information</h3>
+                <h3 className="text-sm font-bold text-text">Detailed Information</h3>
               </div>
 
               <div className="space-y-4">
@@ -434,10 +434,10 @@ export const LeadDetail = () => {
                 ].map((field) => (
                   <div key={field.label} className="flex items-center justify-between py-1">
                     <div className="flex gap-3 items-center min-w-0">
-                      <div className="text-gray-400 w-5 flex justify-center shrink-0">{field.icon}</div>
+                      <div className="text-muted w-5 flex justify-center shrink-0">{field.icon}</div>
                       <div className="flex flex-col min-w-0">
-                        <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">{field.label}</span>
-                        <span className="text-[13px] font-bold text-gray-900 break-words">{field.value}</span>
+                        <span className="text-[9px] font-bold text-muted uppercase tracking-wider">{field.label}</span>
+                        <span className="text-[13px] font-bold text-text break-words">{field.value}</span>
                       </div>
                     </div>
                   </div>
@@ -445,9 +445,9 @@ export const LeadDetail = () => {
               </div>
             </div>
 
-            <div className="bg-[#EAECE6]/50 border border-white/50 rounded-[32px] p-6 shadow-sm space-y-4">
+            <div className="bg-surface2 border border-border rounded-[32px] p-6 shadow-sm space-y-4">
               <div className="relative">
-                {isUpdatingStatus && <Loader2 size={14} className="absolute right-3 top-8 z-10 animate-spin text-gray-400" />}
+                {isUpdatingStatus && <Loader2 size={14} className="absolute right-3 top-8 z-10 animate-spin text-muted" />}
                 <CrmSelect
                   label="Sales Status"
                   value={lead.status}
@@ -467,7 +467,7 @@ export const LeadDetail = () => {
               </div>
 
               <div className="relative">
-                {isUpdatingPriority && <Loader2 size={14} className="absolute right-3 top-8 z-10 animate-spin text-gray-400" />}
+                {isUpdatingPriority && <Loader2 size={14} className="absolute right-3 top-8 z-10 animate-spin text-muted" />}
                 <CrmSelect
                   label="Priority Level"
                   value={lead.priority}

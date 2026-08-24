@@ -181,10 +181,10 @@ export const FollowUps = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div>
             <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text mb-2">Follow-up Manager</h1>
-            <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-gray-500 uppercase">Task discipline & relationship pacing</p>
+            <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-muted uppercase">Task discipline & relationship pacing</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
-            <div className="flex bg-white/40 border border-white/50 rounded-[24px] p-1 shadow-inner">
+            <div className="flex bg-surface2 border border-border rounded-[24px] p-1 shadow-inner">
               {[
                 { id: 'due', name: 'Due Today' },
                 { id: 'upcoming', name: 'Upcoming' },
@@ -195,7 +195,7 @@ export const FollowUps = () => {
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
                   className={cn(
                     'px-6 py-3 rounded-[16px] text-[10px] font-mono font-bold tracking-widest uppercase transition-all',
-                    activeTab === tab.id ? 'bg-white text-text shadow-sm' : 'text-gray-500 hover:text-text'
+                    activeTab === tab.id ? 'bg-surface text-text shadow-sm' : 'text-muted hover:text-text'
                   )}
                 >
                   {tab.name}
@@ -212,15 +212,15 @@ export const FollowUps = () => {
         </div>
 
         {notice && (
-          <div className="rounded-[18px] border border-emerald-200 bg-emerald-50 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-700">
+          <div className="rounded-[18px] border border-positive/30 bg-positiveSoft px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-positive">
             {notice}
           </div>
         )}
 
         {leadFilter && (
-          <div className="flex items-center justify-between rounded-[18px] border border-blue-200 bg-blue-50 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-700">
+          <div className="flex items-center justify-between rounded-[18px] border border-info/30 bg-infoSoft px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-info">
             <span>Filtered to selected lead</span>
-            <button onClick={() => setLeadFilter('')} className="flex items-center gap-2 hover:text-blue-900">
+            <button onClick={() => setLeadFilter('')} className="flex items-center gap-2 hover:text-info">
               <X size={12} /> Clear filter
             </button>
           </div>
@@ -233,37 +233,37 @@ export const FollowUps = () => {
               key={task.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8 group hover:bg-white transition-all shadow-sm"
+              className="bg-surface2 backdrop-blur-md border border-border rounded-[32px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8 group hover:bg-surface3 transition-all shadow-sm"
             >
               <div className="flex items-center gap-6 w-full md:w-auto">
                 <div className={cn(
-                  'w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border border-white/50 shadow-sm',
-                  task.status === 'completed' ? 'bg-emerald-50 text-emerald-500 border-emerald-100' : 'bg-orange-50 text-orange-500 border-orange-100'
+                  'w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border border-border shadow-sm',
+                  task.status === 'completed' ? 'bg-positiveSoft text-positive border-positive/30' : 'bg-cautionSoft text-caution border-caution/30'
                 )}>
                   {task.status === 'completed' ? <CheckCircle2 size={28} /> : <Clock size={28} />}
                 </div>
                 <div className="min-w-0">
                   <h3 className={cn(
                     'text-xl font-bold text-text mb-2 truncate',
-                    task.status === 'completed' && 'text-gray-400 line-through'
+                    task.status === 'completed' && 'text-muted line-through'
                   )}>{task.title}</h3>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                    <span className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest">Lead: {task.leadName || 'Unknown lead'}</span>
-                    <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1">
+                    <span className="text-[10px] font-mono font-bold text-muted uppercase tracking-widest">Lead: {task.leadName || 'Unknown lead'}</span>
+                    <span className="text-[10px] font-mono font-bold text-muted uppercase tracking-widest flex items-center gap-1">
                       <Calendar size={12} /> {new Date(task.dueAt).toLocaleString()}
                     </span>
                     {task.contactMethod && (
-                      <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest">{task.contactMethod}</span>
+                      <span className="text-[10px] font-mono font-bold text-muted uppercase tracking-widest">{task.contactMethod}</span>
                     )}
                   </div>
-                  {task.notes && <p className="text-xs text-gray-500 mt-3 max-w-2xl">{task.notes}</p>}
+                  {task.notes && <p className="text-xs text-muted mt-3 max-w-2xl">{task.notes}</p>}
                 </div>
               </div>
 
               <div className="flex items-center gap-4 w-full md:w-auto justify-end">
                 <Link
                   to={`/crm/leads/${task.leadId}`}
-                  className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/40 border border-white/50 text-[10px] font-mono font-bold tracking-widest text-gray-500 hover:text-text hover:bg-white hover:shadow-sm transition-all uppercase"
+                  className="flex items-center gap-2 px-5 py-3 rounded-xl bg-surface2 border border-border text-[10px] font-mono font-bold tracking-widest text-muted hover:text-text hover:bg-surface3 hover:shadow-sm transition-all uppercase"
                 >
                   Open Lead <ExternalLink size={14} />
                 </Link>
@@ -285,24 +285,24 @@ export const FollowUps = () => {
             <EmptyState
               title={activeTab === 'completed' ? 'No completed tasks yet' : 'All caught up'}
               message={activeTab === 'completed' ? 'Completed follow-ups will appear here after you mark them done.' : `There are no ${activeTab} follow-ups right now.`}
-              icon={<CheckCircle2 size={48} className="text-emerald-400" />}
+              icon={<CheckCircle2 size={48} className="text-positive" />}
             />
           )}
         </div>
       </div>
 
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="create-follow-up-title">
-          <form ref={modalRef} onSubmit={handleCreateFollowUp} className="w-full max-w-lg rounded-[24px] border border-white/50 bg-white/95 p-6 shadow-xl backdrop-blur-md space-y-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gold/20 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="create-follow-up-title">
+          <form ref={modalRef} onSubmit={handleCreateFollowUp} className="w-full max-w-lg rounded-[24px] border border-border bg-surface2 p-6 shadow-xl backdrop-blur-md space-y-5">
             <div className="flex items-center justify-between">
               <h2 id="create-follow-up-title" className="text-xl font-display font-bold uppercase tracking-tight text-text">Create Follow-up</h2>
-              <button type="button" onClick={closeCreateModal} aria-label="Close create follow-up modal" className="w-9 h-9 rounded-full hover:bg-gray-100 flex items-center justify-center">
+              <button type="button" onClick={closeCreateModal} aria-label="Close create follow-up modal" className="w-9 h-9 rounded-full hover:bg-surface2 flex items-center justify-center">
                 <X size={16} />
               </button>
             </div>
 
             {createError && (
-              <div className="rounded-xl border border-red-100 bg-red-50 p-3 text-[10px] font-mono font-bold uppercase tracking-widest text-red-500">
+              <div className="rounded-xl border border-danger/30 bg-dangerSoft p-3 text-[10px] font-mono font-bold uppercase tracking-widest text-danger">
                 {createError}
               </div>
             )}
@@ -326,11 +326,11 @@ export const FollowUps = () => {
               <option value="call">Call</option>
             </CrmSelect>
             <div className="space-y-1.5">
-              <label className="block text-[9px] font-mono font-bold tracking-widest text-gray-400 uppercase">Notes</label>
+              <label className="block text-[9px] font-mono font-bold tracking-widest text-muted uppercase">Notes</label>
               <textarea
                 value={notes}
                 onChange={(event) => setNotes(event.target.value)}
-                className="min-h-24 w-full rounded-xl border border-white/50 bg-white/40 px-4 py-3 text-sm font-semibold text-text shadow-inner outline-none transition-all placeholder:text-gray-500 focus:border-blue-400 focus:bg-white"
+                className="min-h-24 w-full rounded-xl border border-border bg-surface2 px-4 py-3 text-sm font-semibold text-text shadow-inner outline-none transition-all placeholder:text-muted focus:border-focus focus:bg-surface"
                 placeholder="Optional context for the follow-up"
               />
             </div>
@@ -342,7 +342,7 @@ export const FollowUps = () => {
             )}
 
             <div className="flex justify-end gap-3">
-              <button type="button" onClick={closeCreateModal} disabled={isCreating} className="rounded-full border border-gray-200 px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-text hover:bg-gray-50">
+              <button type="button" onClick={closeCreateModal} disabled={isCreating} className="rounded-full border border-border px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-text hover:bg-surface2">
                 Cancel
               </button>
               <button

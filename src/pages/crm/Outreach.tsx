@@ -180,40 +180,40 @@ export const Outreach = () => {
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text md:text-4xl">Outreach OS</h1>
-            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-gray-600">
+            <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-text2">
               Manual sales motion for service businesses with visible lead leaks. Approve, copy, message, follow up.
             </p>
           </div>
           <div className="grid grid-cols-3 gap-3">
-            <div className="rounded-[20px] border border-white/50 bg-white/60 px-5 py-3 text-center shadow-sm">
+            <div className="rounded-[20px] border border-border bg-surface2 px-5 py-3 text-center shadow-sm">
               <div className="text-2xl font-display font-bold text-text">{outreachQueue.length}</div>
-              <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500">Queue</div>
+              <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted">Queue</div>
             </div>
-            <div className="rounded-[20px] border border-white/50 bg-white/60 px-5 py-3 text-center shadow-sm">
+            <div className="rounded-[20px] border border-border bg-surface2 px-5 py-3 text-center shadow-sm">
               <div className="text-2xl font-display font-bold text-text">{leads.filter((lead) => lead.priority === 'hot').length}</div>
-              <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500">Hot</div>
+              <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted">Hot</div>
             </div>
-            <div className="rounded-[20px] border border-white/50 bg-white/60 px-5 py-3 text-center shadow-sm">
+            <div className="rounded-[20px] border border-border bg-surface2 px-5 py-3 text-center shadow-sm">
               <div className="text-2xl font-display font-bold text-text">{followUps.filter((task) => ['pending', 'overdue'].includes(task.status)).length}</div>
-              <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500">Follow-ups</div>
+              <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted">Follow-ups</div>
             </div>
           </div>
         </div>
 
         {notice && (
-          <div className="rounded-[18px] border border-emerald-200 bg-emerald-50 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-700">
+          <div className="rounded-[18px] border border-positive/30 bg-positiveSoft px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-positive">
             {notice}
           </div>
         )}
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.4fr_0.85fr]">
-          <div className="overflow-hidden rounded-[28px] border border-white/50 bg-white/60 shadow-sm backdrop-blur-md">
-            <div className="flex items-center justify-between border-b border-white/50 px-6 py-5">
+          <div className="overflow-hidden rounded-[28px] border border-border bg-surface2 shadow-sm backdrop-blur-md">
+            <div className="flex items-center justify-between border-b border-border px-6 py-5">
               <div>
-                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Lead Queue</h2>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Lead Queue</h2>
                 <p className="mt-1 text-sm font-semibold text-text">Prioritized by priority, status, and follow-up risk.</p>
               </div>
-              <Target size={20} className="text-gray-400" />
+              <Target size={20} className="text-muted" />
             </div>
 
             <div className="divide-y divide-white/50">
@@ -221,7 +221,7 @@ export const Outreach = () => {
                 const phoneDigits = lead.whatsappPhone?.replace(/[^0-9]/g, '');
                 const followUpsDue = getFollowUpDueCount(followUps, lead.id);
                 return (
-                  <div key={lead.id} className="grid gap-5 px-6 py-5 transition hover:bg-white/50 lg:grid-cols-[1fr_1.1fr_auto] lg:items-center">
+                  <div key={lead.id} className="grid gap-5 px-6 py-5 transition hover:bg-surface3 lg:grid-cols-[1fr_1.1fr_auto] lg:items-center">
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
                         <Link to={`/crm/leads/${lead.id}`} className="text-base font-bold text-text hover:underline">
@@ -230,23 +230,23 @@ export const Outreach = () => {
                         <StatusBadge status={lead.status} />
                         <PriorityBadge priority={lead.priority} />
                       </div>
-                      <div className="mt-2 flex flex-wrap gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">
+                      <div className="mt-2 flex flex-wrap gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-muted">
                         <span>{lead.fullName}</span>
                         <span>·</span>
                         <span>{getRecommendedOffer(lead)}</span>
                         {followUpsDue > 0 && (
                           <>
                             <span>·</span>
-                            <span className="text-orange-600">{followUpsDue} due</span>
+                            <span className="text-caution">{followUpsDue} due</span>
                           </>
                         )}
                       </div>
                     </div>
 
-                    <div className="min-w-0 rounded-[20px] border border-white/60 bg-white/50 p-4">
-                      <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-400">Visible leak</div>
+                    <div className="min-w-0 rounded-[20px] border border-border bg-surface2 p-4">
+                      <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted">Visible leak</div>
                       <p className="mt-1 text-sm font-bold leading-relaxed text-text">{getVisibleLeak(lead)}</p>
-                      <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">{getOutreachAngle(lead)}</p>
+                      <p className="mt-2 text-xs font-semibold leading-relaxed text-muted">{getOutreachAngle(lead)}</p>
                     </div>
 
                     <div className="flex flex-wrap gap-2 lg:justify-end">
@@ -262,7 +262,7 @@ export const Outreach = () => {
                           href={`https://wa.me/${phoneDigits}`}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-700 transition hover:bg-emerald-500 hover:text-white"
+                          className="inline-flex items-center gap-2 rounded-full border border-positive/30 bg-positiveSoft px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-positive transition hover:bg-positiveSoft hover:text-text"
                         >
                           <MessageCircle size={13} /> WhatsApp
                         </a>
@@ -270,14 +270,14 @@ export const Outreach = () => {
                       <button
                         onClick={() => markContacted(lead)}
                         disabled={contactingLeadId === lead.id}
-                        className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-text transition hover:shadow-sm disabled:opacity-50"
+                        className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-text transition hover:shadow-sm disabled:opacity-50"
                       >
                         {contactingLeadId === lead.id ? <Loader2 size={13} className="animate-spin" /> : <CheckCircle2 size={13} />}
                         Contacted
                       </button>
                       <Link
                         to={`/crm/leads/${lead.id}`}
-                        className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-600 transition hover:text-text hover:shadow-sm"
+                        className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-text2 transition hover:text-text hover:shadow-sm"
                       >
                         Open <ExternalLink size={13} />
                       </Link>
@@ -286,47 +286,47 @@ export const Outreach = () => {
                 );
               }) : (
                 <div className="flex flex-col items-center justify-center px-6 py-20 text-center">
-                  <Users size={42} className="mb-4 text-gray-300" />
+                  <Users size={42} className="mb-4 text-muted/60" />
                   <p className="text-base font-bold text-text">No outreach-ready leads</p>
-                  <p className="mt-1 text-xs font-mono font-bold uppercase tracking-widest text-gray-500">Add or qualify leads first.</p>
+                  <p className="mt-1 text-xs font-mono font-bold uppercase tracking-widest text-muted">Add or qualify leads first.</p>
                 </div>
               )}
             </div>
           </div>
 
           <div className="space-y-5">
-            <div className="rounded-[28px] border border-white/50 bg-white/60 p-6 shadow-sm backdrop-blur-md">
+            <div className="rounded-[28px] border border-border bg-surface2 p-6 shadow-sm backdrop-blur-md">
               <div className="mb-5 flex items-center justify-between">
                 <div>
-                  <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Copy Bank</h2>
+                  <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">Copy Bank</h2>
                   <p className="mt-1 text-sm font-semibold text-text">Use one clear angle. Then follow up.</p>
                 </div>
-                <Clipboard size={19} className="text-gray-400" />
+                <Clipboard size={19} className="text-muted" />
               </div>
               <div className="space-y-3">
                 {templates.map((template, index) => (
-                  <div key={template.title} className="rounded-[20px] border border-white/60 bg-white/60 p-4">
+                  <div key={template.title} className="rounded-[20px] border border-border bg-surface2 p-4">
                     <div className="mb-2 flex items-center justify-between gap-3">
                       <h3 className="text-sm font-bold text-text">{template.title}</h3>
                       <button
                         onClick={() => copyToClipboard(`template-${index}`, template.body, template.title)}
                         className={cn(
-                          'inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-text',
-                          copying === `template-${index}` && 'text-blue-600',
+                          'inline-flex h-8 w-8 items-center justify-center rounded-full text-muted transition hover:bg-surface3 hover:text-text',
+                          copying === `template-${index}` && 'text-info',
                         )}
                         aria-label={`Copy ${template.title}`}
                       >
                         {copying === `template-${index}` ? <Loader2 size={14} className="animate-spin" /> : <Copy size={14} />}
                       </button>
                     </div>
-                    <p className="line-clamp-3 whitespace-pre-line text-xs font-semibold leading-relaxed text-gray-500">{template.body}</p>
+                    <p className="line-clamp-3 whitespace-pre-line text-xs font-semibold leading-relaxed text-muted">{template.body}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-[28px] border border-blue-100 bg-blue-50/70 p-6 shadow-sm">
-              <div className="flex items-center gap-3 text-blue-700">
+            <div className="rounded-[28px] border border-info/30 bg-infoSoft/70 p-6 shadow-sm">
+              <div className="flex items-center gap-3 text-info">
                 <Send size={18} />
                 <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em]">Daily rule</h2>
               </div>
