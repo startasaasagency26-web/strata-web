@@ -17,7 +17,7 @@ export const SectionShell = ({ eyebrow, headline, support, id, tone = 'surface',
   const headingId = `${id}-heading`;
 
   return (
-    <section id={id} aria-labelledby={headingId} className={`${tone === 'surface2' ? 'bg-surface2' : 'bg-surface'} scroll-mt-24 border-t border-line py-20 md:py-28`}>
+    <section id={id} aria-labelledby={headingId} className={`${tone === 'surface2' ? 'bg-surface2' : 'bg-surface'} scroll-mt-[var(--section-scroll-offset)] border-t border-line py-20 md:py-28`}>
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -8,7 +8,7 @@ import { Button } from './ui/liquid-glass-button';
 export const Footer = () => {
   return (
     <footer className="bg-background pt-20 pb-10 mt-20 md:mx-6 mx-2 rounded-t-[32px] md:rounded-t-[48px]">
-      <div className="container mx-auto px-6 md:px-12">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-16">
           <div className="md:col-span-1">
             <Link to="/">

@@ -33,20 +33,20 @@ export const Navbar = () => {
         initial={shouldReduceMotion ? false : { y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: shouldReduceMotion ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-8 md:pt-5"
+        className="fixed left-[calc(0.75rem+1px)] right-[calc(0.75rem+1px)] top-0 z-50 pt-4 md:left-[calc(1.5rem+1px)] md:right-[calc(1.5rem+1px)] md:pt-5 lg:left-[calc(2rem+1px)] lg:right-[calc(2rem+1px)]"
       >
         <div
           className={cn(
             // Raised navigation surface with a restrained gold rim.
-            "relative mx-auto flex items-center justify-between w-full max-w-[1800px] rounded-full px-4 md:px-5 transition-all duration-500",
+            "relative mx-auto grid w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center rounded-full px-5 transition-[height] duration-500 sm:px-8 md:px-12",
             "bg-surface2",
             "border border-gold/30",
             "shadow-[0_18px_60px_rgb(var(--scrim)/0.36),inset_0_1px_0_rgb(var(--gold)/0.08)]",
-            isScrolled ? "py-2" : "py-3",
+            isScrolled ? "h-[var(--nav-height-scrolled)]" : "h-[var(--nav-height)]",
           )}
         >
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className="flex min-w-0 items-center justify-self-start">
             <Link
               to="/"
               className="flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
@@ -66,7 +66,7 @@ export const Navbar = () => {
 
           {/* Desktop Nav */}
           <nav
-            className="hidden xl:flex flex-1 items-center justify-center px-4 min-w-0"
+            className="hidden min-w-0 items-center justify-center px-4 xl:flex"
             aria-label="Main navigation"
           >
             <ul className="flex items-center gap-1 p-1">
@@ -91,12 +91,12 @@ export const Navbar = () => {
           </nav>
 
           {/* Right — CTA + hamburger */}
-          <div className="flex-shrink-0 flex items-center justify-end gap-2 md:gap-3">
+          <div className="flex min-w-0 items-center justify-end gap-2 justify-self-end md:gap-3">
             <Button
               asChild
               variant="glass"
               size="sm"
-              className="hidden lg:inline-flex rounded-full text-[11px] font-mono font-bold tracking-[0.2em] px-6 h-auto py-2.5 whitespace-nowrap"
+              className="hidden h-10 rounded-full px-6 font-mono text-[11px] font-bold tracking-[0.2em] whitespace-nowrap xl:inline-flex"
             >
               <Link to={CONTACT.requestDemoPath}>BOOK A DEMO</Link>
             </Button>
@@ -106,7 +106,7 @@ export const Navbar = () => {
               whileTap={shouldReduceMotion ? undefined : { scale: 0.88 }}
               transition={{ type: 'spring', stiffness: 280, damping: 20 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-11 h-11 rounded-full bg-surface3 border border-borderStrong text-text flex items-center justify-center hover:bg-gold/15 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset transition-colors duration-200 shrink-0 ml-1"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-borderStrong bg-surface3 text-text transition-colors duration-200 hover:bg-gold/15 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset xl:hidden"
               aria-label="Toggle Menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -124,10 +124,10 @@ export const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.25 }}
-            className="fixed inset-0 z-40 bg-void flex flex-col justify-center items-center px-6"
+            className="fixed bottom-0 left-[calc(0.75rem+1px)] right-[calc(0.75rem+1px)] top-[calc(var(--nav-height)+1rem)] z-40 flex flex-col justify-center bg-void xl:hidden md:left-[calc(1.5rem+1px)] md:right-[calc(1.5rem+1px)] md:top-[calc(var(--nav-height)+1.25rem)] lg:left-[calc(2rem+1px)] lg:right-[calc(2rem+1px)]"
           >
-            <nav aria-label="Mobile navigation">
-              <ul className="flex flex-col items-center gap-6 w-full">
+            <nav className="mx-auto w-full max-w-7xl px-5 sm:px-8 md:px-12" aria-label="Mobile navigation">
+              <ul className="flex w-full flex-col items-start gap-6">
                 {navLinks.map((link, idx) => (
                   <motion.li
                     key={link.name}
@@ -166,7 +166,7 @@ export const Navbar = () => {
                   transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.4 }}
                   className="mt-2 w-full max-w-xs"
                 >
-                  <p className="text-center font-mono text-[11px] font-bold uppercase leading-relaxed tracking-[0.24em] text-muted">
+                  <p className="text-left font-mono text-[11px] font-bold uppercase leading-relaxed tracking-[0.24em] text-muted">
                     AI-Powered Business Infrastructure
                   </p>
                 </motion.li>
