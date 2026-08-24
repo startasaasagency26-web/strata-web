@@ -93,14 +93,14 @@ export const Pipeline = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 shrink-0">
           <div>
-            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827] mb-2">Sales Pipeline</h1>
+            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text mb-2">Sales Pipeline</h1>
             <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-gray-500 uppercase">Visual deal tracking & stage control</p>
           </div>
           <div className="flex gap-4">
             <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[24px] px-6 py-3 flex items-center gap-4 shadow-sm">
               <div className="text-right">
                 <p className="text-[9px] font-mono font-bold tracking-widest text-gray-500 uppercase">Total Value</p>
-                <p className="text-lg font-display font-bold text-[#111827] uppercase tracking-tight">Unavailable</p>
+                <p className="text-lg font-display font-bold text-text uppercase tracking-tight">Unavailable</p>
                 <p className="text-[8px] font-mono font-bold tracking-widest text-gray-400 uppercase">No exact deal values</p>
               </div>
               <TrendingUp size={24} className="text-emerald-500" />
@@ -143,7 +143,7 @@ export const Pipeline = () => {
                   <div className="flex items-center justify-between px-2 shrink-0">
                     <div className="flex items-center gap-3">
                       <h3 className="text-xs font-mono font-bold tracking-[0.2em] text-gray-500 uppercase">{stage.name}</h3>
-                      <span className="w-6 h-6 rounded-full bg-white border border-white/50 flex items-center justify-center text-[10px] font-mono font-bold text-[#111827] shadow-sm">
+                      <span className="w-6 h-6 rounded-full bg-white border border-white/50 flex items-center justify-center text-[10px] font-mono font-bold text-text shadow-sm">
                         {stageLeads.length}
                       </span>
                     </div>
@@ -152,7 +152,7 @@ export const Pipeline = () => {
                         onClick={() => setOpenStageMenu(openStageMenu === stage.id ? null : stage.id)}
                         aria-label={`Open actions for ${stage.name}`}
                         aria-expanded={openStageMenu === stage.id}
-                        className="text-gray-400 hover:text-[#111827] transition-colors"
+                        className="text-gray-400 hover:text-text transition-colors"
                       >
                         <MoreVertical size={16} />
                       </button>
@@ -194,7 +194,7 @@ export const Pipeline = () => {
                         </div>
                         
                         <div className="mb-6">
-                          <h4 className="text-sm font-bold text-[#111827] mb-1">{lead.fullName}</h4>
+                          <h4 className="text-sm font-bold text-text mb-1">{lead.fullName}</h4>
                           <p className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest truncate">{lead.companyName || 'Independent'}</p>
                         </div>
 
@@ -206,7 +206,7 @@ export const Pipeline = () => {
                           <div className="flex items-center gap-2">
                             {lead.assignedProfile ? (
                               <>
-                                <div className="w-8 h-8 rounded-full bg-white border border-white/50 shadow-sm flex items-center justify-center text-[10px] font-mono font-bold text-[#111827]">
+                                <div className="w-8 h-8 rounded-full bg-white border border-white/50 shadow-sm flex items-center justify-center text-[10px] font-mono font-bold text-text">
                                   {lead.assignedProfile.fullName.charAt(0).toUpperCase()}
                                 </div>
                                 <span className="sr-only">Assigned to {lead.assignedProfile.fullName}</span>

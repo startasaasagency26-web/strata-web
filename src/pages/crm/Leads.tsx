@@ -252,7 +252,7 @@ export const Leads = () => {
       <div className="space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827]">Leads</h1>
+            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text">Leads</h1>
             <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-1">
               {total} total contacts
             </p>
@@ -288,7 +288,7 @@ export const Leads = () => {
               value={statusFilter}
               onChange={(e) => { setStatusFilter(e.target.value as LeadStatus | 'all'); setPage(1); }}
               aria-label="Filter leads by status"
-              className="bg-white/40 border border-white/50 shadow-inner rounded-xl px-4 py-3 text-sm font-semibold text-[#111827] outline-none focus:border-blue-400 focus:bg-white transition-all appearance-none cursor-pointer min-w-[160px]"
+              className="bg-white/40 border border-white/50 shadow-inner rounded-xl px-4 py-3 text-sm font-semibold text-text outline-none focus:border-blue-400 focus:bg-white transition-all appearance-none cursor-pointer min-w-[160px]"
             >
               <option value="all">All Statuses</option>
               <option value="new">New</option>
@@ -305,7 +305,7 @@ export const Leads = () => {
               onClick={() => setShowFilters((value) => !value)}
               aria-label="Open advanced lead filters"
               aria-expanded={showFilters}
-              className="w-12 h-12 rounded-xl bg-white/40 border border-white/50 shadow-inner flex items-center justify-center text-gray-500 hover:text-[#111827] hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 transition-all"
+              className="w-12 h-12 rounded-xl bg-white/40 border border-white/50 shadow-inner flex items-center justify-center text-gray-500 hover:text-text hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 transition-all"
             >
               <Filter size={18} />
             </button>
@@ -391,13 +391,13 @@ export const Leads = () => {
                             {getInitials(lead.fullName)}
                           </div>
                           <div>
-                            <div className="font-bold text-sm text-[#111827]">{lead.fullName}</div>
+                            <div className="font-bold text-sm text-text">{lead.fullName}</div>
                             <div className="text-[10px] font-mono font-bold text-gray-500 tracking-widest uppercase mt-0.5">{lead.companyName || 'Independent'}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-5">
-                        <div className="text-sm font-bold text-[#111827]">{lead.selectedPackage || lead.serviceNeed || 'Not specified'}</div>
+                        <div className="text-sm font-bold text-text">{lead.selectedPackage || lead.serviceNeed || 'Not specified'}</div>
                         <div className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest mt-0.5">{lead.budgetRange || 'Budget unavailable'}</div>
                       </td>
                       <td className="px-5 py-4">
@@ -447,7 +447,7 @@ export const Leads = () => {
                         <div className="flex items-center justify-end gap-3 relative">
                           <Link
                             to={`/crm/leads/${lead.id}`}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/60 border border-white/50 text-[#111827] text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-white hover:shadow-sm transition-all"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/60 border border-white/50 text-text text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-white hover:shadow-sm transition-all"
                           >
                             View <ChevronRight size={14} />
                           </Link>
@@ -455,7 +455,7 @@ export const Leads = () => {
                             onClick={() => setOpenRowMenu(openRowMenu === lead.id ? null : lead.id)}
                             aria-label={`Open actions for ${lead.fullName}`}
                             aria-expanded={openRowMenu === lead.id}
-                            className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-[#111827] transition-colors rounded-xl hover:bg-white border border-transparent hover:border-white/50"
+                            className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-text transition-colors rounded-xl hover:bg-white border border-transparent hover:border-white/50"
                           >
                             <MoreVertical size={18} />
                           </button>
@@ -504,7 +504,7 @@ export const Leads = () => {
               <div className="w-16 h-16 rounded-full bg-white shadow-sm border border-white/50 flex items-center justify-center mx-auto mb-5">
                 <Search size={24} className="text-gray-400" />
               </div>
-              <p className="text-base font-bold text-[#111827] uppercase tracking-tight mb-2">No leads found</p>
+              <p className="text-base font-bold text-text uppercase tracking-tight mb-2">No leads found</p>
               <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">
                 {searchTerm || statusFilter !== 'all' || priorityFilter !== 'all'
                   ? 'Try adjusting your search or filters'
@@ -522,7 +522,7 @@ export const Leads = () => {
                 disabled={page <= 1}
                 title={page <= 1 ? 'Already on the first page' : 'Previous page'}
                 onClick={() => setPage((current) => Math.max(1, current - 1))}
-                className="px-4 py-2 rounded-xl border border-white/50 text-[10px] font-mono font-bold tracking-widest text-[#111827] uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-gray-400 disabled:cursor-not-allowed bg-white hover:shadow-sm transition-all"
+                className="px-4 py-2 rounded-xl border border-white/50 text-[10px] font-mono font-bold tracking-widest text-text uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-gray-400 disabled:cursor-not-allowed bg-white hover:shadow-sm transition-all"
               >
                 Prev
               </button>
@@ -530,7 +530,7 @@ export const Leads = () => {
                 disabled={page >= totalPages}
                 title={page >= totalPages ? 'No more lead pages' : 'Next page'}
                 onClick={() => setPage((current) => Math.min(totalPages, current + 1))}
-                className="px-4 py-2 rounded-xl border border-white/50 text-[10px] font-mono font-bold tracking-widest text-[#111827] uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-gray-400 disabled:cursor-not-allowed bg-white hover:shadow-sm transition-all"
+                className="px-4 py-2 rounded-xl border border-white/50 text-[10px] font-mono font-bold tracking-widest text-text uppercase disabled:opacity-40 disabled:bg-transparent disabled:text-gray-400 disabled:cursor-not-allowed bg-white hover:shadow-sm transition-all"
               >
                 Next
               </button>
@@ -547,7 +547,7 @@ export const Leads = () => {
             className="bg-white/90 backdrop-blur-md border border-white/50 rounded-[24px] p-6 w-full max-w-md shadow-xl flex flex-col gap-6"
           >
             <div className="flex items-center justify-between">
-              <h2 id="add-lead-title" className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Add Lead</h2>
+              <h2 id="add-lead-title" className="text-xl font-display font-bold uppercase tracking-tight text-text">Add Lead</h2>
               <button type="button" onClick={closeAddModal} aria-label="Close add lead modal" className="w-9 h-9 rounded-full hover:bg-gray-100 flex items-center justify-center">
                 <X size={16} />
               </button>
@@ -574,7 +574,7 @@ export const Leads = () => {
               <button
                 type="button"
                 onClick={closeAddModal}
-                className="px-5 py-2.5 rounded-full border border-gray-200 text-[#111827] text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-gray-50 transition-all"
+                className="px-5 py-2.5 rounded-full border border-gray-200 text-text text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-gray-50 transition-all"
                 disabled={isSaving}
               >
                 Cancel

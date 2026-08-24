@@ -179,22 +179,22 @@ export const Outreach = () => {
       <div className="space-y-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827] md:text-4xl">Outreach OS</h1>
+            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text md:text-4xl">Outreach OS</h1>
             <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-gray-600">
               Manual sales motion for service businesses with visible lead leaks. Approve, copy, message, follow up.
             </p>
           </div>
           <div className="grid grid-cols-3 gap-3">
             <div className="rounded-[20px] border border-white/50 bg-white/60 px-5 py-3 text-center shadow-sm">
-              <div className="text-2xl font-display font-bold text-[#111827]">{outreachQueue.length}</div>
+              <div className="text-2xl font-display font-bold text-text">{outreachQueue.length}</div>
               <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500">Queue</div>
             </div>
             <div className="rounded-[20px] border border-white/50 bg-white/60 px-5 py-3 text-center shadow-sm">
-              <div className="text-2xl font-display font-bold text-[#111827]">{leads.filter((lead) => lead.priority === 'hot').length}</div>
+              <div className="text-2xl font-display font-bold text-text">{leads.filter((lead) => lead.priority === 'hot').length}</div>
               <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500">Hot</div>
             </div>
             <div className="rounded-[20px] border border-white/50 bg-white/60 px-5 py-3 text-center shadow-sm">
-              <div className="text-2xl font-display font-bold text-[#111827]">{followUps.filter((task) => ['pending', 'overdue'].includes(task.status)).length}</div>
+              <div className="text-2xl font-display font-bold text-text">{followUps.filter((task) => ['pending', 'overdue'].includes(task.status)).length}</div>
               <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500">Follow-ups</div>
             </div>
           </div>
@@ -211,7 +211,7 @@ export const Outreach = () => {
             <div className="flex items-center justify-between border-b border-white/50 px-6 py-5">
               <div>
                 <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Lead Queue</h2>
-                <p className="mt-1 text-sm font-semibold text-[#111827]">Prioritized by priority, status, and follow-up risk.</p>
+                <p className="mt-1 text-sm font-semibold text-text">Prioritized by priority, status, and follow-up risk.</p>
               </div>
               <Target size={20} className="text-gray-400" />
             </div>
@@ -224,7 +224,7 @@ export const Outreach = () => {
                   <div key={lead.id} className="grid gap-5 px-6 py-5 transition hover:bg-white/50 lg:grid-cols-[1fr_1.1fr_auto] lg:items-center">
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
-                        <Link to={`/crm/leads/${lead.id}`} className="text-base font-bold text-[#111827] hover:underline">
+                        <Link to={`/crm/leads/${lead.id}`} className="text-base font-bold text-text hover:underline">
                           {lead.companyName || lead.fullName}
                         </Link>
                         <StatusBadge status={lead.status} />
@@ -245,7 +245,7 @@ export const Outreach = () => {
 
                     <div className="min-w-0 rounded-[20px] border border-white/60 bg-white/50 p-4">
                       <div className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-400">Visible leak</div>
-                      <p className="mt-1 text-sm font-bold leading-relaxed text-[#111827]">{getVisibleLeak(lead)}</p>
+                      <p className="mt-1 text-sm font-bold leading-relaxed text-text">{getVisibleLeak(lead)}</p>
                       <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">{getOutreachAngle(lead)}</p>
                     </div>
 
@@ -270,14 +270,14 @@ export const Outreach = () => {
                       <button
                         onClick={() => markContacted(lead)}
                         disabled={contactingLeadId === lead.id}
-                        className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111827] transition hover:shadow-sm disabled:opacity-50"
+                        className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-text transition hover:shadow-sm disabled:opacity-50"
                       >
                         {contactingLeadId === lead.id ? <Loader2 size={13} className="animate-spin" /> : <CheckCircle2 size={13} />}
                         Contacted
                       </button>
                       <Link
                         to={`/crm/leads/${lead.id}`}
-                        className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-600 transition hover:text-[#111827] hover:shadow-sm"
+                        className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-600 transition hover:text-text hover:shadow-sm"
                       >
                         Open <ExternalLink size={13} />
                       </Link>
@@ -287,7 +287,7 @@ export const Outreach = () => {
               }) : (
                 <div className="flex flex-col items-center justify-center px-6 py-20 text-center">
                   <Users size={42} className="mb-4 text-gray-300" />
-                  <p className="text-base font-bold text-[#111827]">No outreach-ready leads</p>
+                  <p className="text-base font-bold text-text">No outreach-ready leads</p>
                   <p className="mt-1 text-xs font-mono font-bold uppercase tracking-widest text-gray-500">Add or qualify leads first.</p>
                 </div>
               )}
@@ -299,7 +299,7 @@ export const Outreach = () => {
               <div className="mb-5 flex items-center justify-between">
                 <div>
                   <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Copy Bank</h2>
-                  <p className="mt-1 text-sm font-semibold text-[#111827]">Use one clear angle. Then follow up.</p>
+                  <p className="mt-1 text-sm font-semibold text-text">Use one clear angle. Then follow up.</p>
                 </div>
                 <Clipboard size={19} className="text-gray-400" />
               </div>
@@ -307,11 +307,11 @@ export const Outreach = () => {
                 {templates.map((template, index) => (
                   <div key={template.title} className="rounded-[20px] border border-white/60 bg-white/60 p-4">
                     <div className="mb-2 flex items-center justify-between gap-3">
-                      <h3 className="text-sm font-bold text-[#111827]">{template.title}</h3>
+                      <h3 className="text-sm font-bold text-text">{template.title}</h3>
                       <button
                         onClick={() => copyToClipboard(`template-${index}`, template.body, template.title)}
                         className={cn(
-                          'inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-[#111827]',
+                          'inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-text',
                           copying === `template-${index}` && 'text-blue-600',
                         )}
                         aria-label={`Copy ${template.title}`}
@@ -330,7 +330,7 @@ export const Outreach = () => {
                 <Send size={18} />
                 <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em]">Daily rule</h2>
               </div>
-              <p className="mt-4 text-sm font-bold leading-relaxed text-[#111827]">
+              <p className="mt-4 text-sm font-bold leading-relaxed text-text">
                 Do not let a post sit alone. Every useful post gets sent manually to 5-10 relevant owners with a specific leak angle.
               </p>
             </div>

@@ -169,7 +169,7 @@ export const Dashboard = () => {
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-500">{today}</p>
-            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827] md:text-4xl">
+            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text md:text-4xl">
               Strata HQ
             </h1>
             <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-gray-600">
@@ -185,7 +185,7 @@ export const Dashboard = () => {
             </Link>
             <Link
               to="/crm/leads?add=1"
-              className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#111827] shadow-sm transition-all hover:bg-white"
+              className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-text shadow-sm transition-all hover:bg-white"
             >
               <Users size={14} /> Add Lead
             </Link>
@@ -198,7 +198,7 @@ export const Dashboard = () => {
               <div className={cn('mb-4 inline-flex h-9 w-9 items-center justify-center rounded-2xl', item.tone)}>
                 {item.icon}
               </div>
-              <div className="text-3xl font-display font-bold tracking-tight text-[#111827]">{item.value}</div>
+              <div className="text-3xl font-display font-bold tracking-tight text-text">{item.value}</div>
               <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{item.label}</div>
             </Panel>
           ))}
@@ -209,9 +209,9 @@ export const Dashboard = () => {
             <div className="flex items-center justify-between border-b border-white/50 px-6 py-5">
               <div>
                 <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Today Control Panel</h2>
-                <p className="mt-1 text-sm font-semibold text-[#111827]">The work that protects revenue today.</p>
+                <p className="mt-1 text-sm font-semibold text-text">The work that protects revenue today.</p>
               </div>
-              <Link to="/crm/follow-ups" className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 hover:text-[#111827]">
+              <Link to="/crm/follow-ups" className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 hover:text-text">
                 View tasks
               </Link>
             </div>
@@ -226,7 +226,7 @@ export const Dashboard = () => {
                 <div className="space-y-3">
                   {dueFollowUps.length > 0 ? dueFollowUps.map((task) => (
                     <Link key={task.id} to={`/crm/leads/${task.leadId}`} className="block rounded-2xl bg-white/80 p-4 transition hover:bg-white">
-                      <div className="text-sm font-bold text-[#111827]">{task.title}</div>
+                      <div className="text-sm font-bold text-text">{task.title}</div>
                       <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">
                         {task.leadName || 'Unknown lead'} · {formatDate(task.dueAt)}
                       </div>
@@ -249,7 +249,7 @@ export const Dashboard = () => {
                     <Link key={lead.id} to={`/crm/leads/${lead.id}`} className="block rounded-2xl bg-white/80 p-4 transition hover:bg-white">
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
-                          <div className="truncate text-sm font-bold text-[#111827]">{lead.fullName}</div>
+                          <div className="truncate text-sm font-bold text-text">{lead.fullName}</div>
                           <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{lead.companyName || 'Independent'}</div>
                         </div>
                         <PriorityBadge priority={lead.priority} />
@@ -268,7 +268,7 @@ export const Dashboard = () => {
             <div className="mb-5 flex items-center justify-between">
               <div>
                 <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Clarity Sprint</h2>
-                <p className="mt-1 text-sm font-semibold text-[#111827]">Make Strata obvious before scaling posts.</p>
+                <p className="mt-1 text-sm font-semibold text-text">Make Strata obvious before scaling posts.</p>
               </div>
               <Megaphone size={20} className="text-gray-400" />
             </div>
@@ -277,7 +277,7 @@ export const Dashboard = () => {
                 <div key={item.label} className="rounded-[20px] border border-white/60 bg-white/60 p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <div className="text-sm font-bold text-[#111827]">{item.label}</div>
+                      <div className="text-sm font-bold text-text">{item.label}</div>
                       <p className="mt-1 text-xs font-semibold leading-relaxed text-gray-500">{item.detail}</p>
                     </div>
                     <span className="shrink-0 rounded-full bg-[#111827] px-3 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-white">
@@ -295,9 +295,9 @@ export const Dashboard = () => {
             <div className="flex items-center justify-between border-b border-white/50 px-6 py-5">
               <div>
                 <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Outreach Queue</h2>
-                <p className="mt-1 text-sm font-semibold text-[#111827]">Leads worth a manual message, not another passive post.</p>
+                <p className="mt-1 text-sm font-semibold text-text">Leads worth a manual message, not another passive post.</p>
               </div>
-              <Link to="/crm/outreach" className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 hover:text-[#111827]">
+              <Link to="/crm/outreach" className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 hover:text-text">
                 Open <ArrowUpRight size={13} />
               </Link>
             </div>
@@ -309,7 +309,7 @@ export const Dashboard = () => {
                       {getInitials(lead.fullName)}
                     </div>
                     <div className="min-w-0">
-                      <div className="truncate text-sm font-bold text-[#111827]">{lead.companyName || lead.fullName}</div>
+                      <div className="truncate text-sm font-bold text-text">{lead.companyName || lead.fullName}</div>
                       <div className="mt-1 flex flex-wrap items-center gap-2">
                         <StatusBadge status={lead.status} />
                         <PriorityBadge priority={lead.priority} />
@@ -330,11 +330,11 @@ export const Dashboard = () => {
 
           <Panel className="p-6">
             <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Offer Focus</h2>
-            <p className="mt-1 text-sm font-semibold text-[#111827]">Default wedges to keep the sales story concrete.</p>
+            <p className="mt-1 text-sm font-semibold text-text">Default wedges to keep the sales story concrete.</p>
             <div className="mt-5 space-y-3">
               {offerShortlist.map((offer) => (
                 <div key={offer} className="flex items-center justify-between rounded-[18px] bg-white/60 px-4 py-3">
-                  <span className="text-sm font-bold text-[#111827]">{offer}</span>
+                  <span className="text-sm font-bold text-text">{offer}</span>
                   <ClipboardList size={15} className="text-gray-400" />
                 </div>
               ))}
@@ -348,7 +348,7 @@ export const Dashboard = () => {
               <Search size={18} className="text-gray-400" />
               <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Pipeline Diagnosis</h2>
             </div>
-            <div className="text-4xl font-display font-bold text-[#111827]">{resolvedMetrics.conversionRate.toFixed(1)}%</div>
+            <div className="text-4xl font-display font-bold text-text">{resolvedMetrics.conversionRate.toFixed(1)}%</div>
             <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">Won rate across current CRM records. Improve this by enforcing follow-up, not by adding random content.</p>
           </Panel>
           <Panel className="p-6">
@@ -356,7 +356,7 @@ export const Dashboard = () => {
               <CalendarCheck size={18} className="text-gray-400" />
               <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">This Week</h2>
             </div>
-            <div className="text-4xl font-display font-bold text-[#111827]">{resolvedMetrics.leadsThisWeek}</div>
+            <div className="text-4xl font-display font-bold text-text">{resolvedMetrics.leadsThisWeek}</div>
             <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">New lead records captured in the last 7 days.</p>
           </Panel>
           <Panel className="p-6">
@@ -364,7 +364,7 @@ export const Dashboard = () => {
               <TrendingUp size={18} className="text-gray-400" />
               <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Pipeline Value</h2>
             </div>
-            <div className="text-4xl font-display font-bold text-[#111827]">
+            <div className="text-4xl font-display font-bold text-text">
               {resolvedMetrics.pipelineValue === null ? 'TBD' : `RM ${resolvedMetrics.pipelineValue.toLocaleString()}`}
             </div>
             <p className="mt-2 text-xs font-semibold leading-relaxed text-gray-500">Exact deal values should be added only when the offer is real.</p>
@@ -554,7 +554,7 @@ export const DashboardPreview = () => {
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-500">{today}</p>
-            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827] md:text-4xl">Strata HQ Preview</h1>
+            <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text md:text-4xl">Strata HQ Preview</h1>
             <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-gray-600">
               Control room for turning attention into pipeline, pipeline into follow-up, and follow-up into revenue.
             </p>
@@ -570,7 +570,7 @@ export const DashboardPreview = () => {
           {metricItems.map((item) => (
             <Panel key={item.label} className="p-5">
               <div className={cn('mb-4 inline-flex h-9 w-9 items-center justify-center rounded-2xl', item.tone)}>{item.icon}</div>
-              <div className="text-3xl font-display font-bold tracking-tight text-[#111827]">{item.value}</div>
+              <div className="text-3xl font-display font-bold tracking-tight text-text">{item.value}</div>
               <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{item.label}</div>
             </Panel>
           ))}
@@ -580,7 +580,7 @@ export const DashboardPreview = () => {
           <Panel className="overflow-hidden">
             <div className="border-b border-white/50 px-6 py-5">
               <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Today Control Panel</h2>
-              <p className="mt-1 text-sm font-semibold text-[#111827]">The work that protects revenue today.</p>
+              <p className="mt-1 text-sm font-semibold text-text">The work that protects revenue today.</p>
             </div>
             <div className="grid gap-4 p-5 lg:grid-cols-2">
               <div className="rounded-[24px] border border-orange-100 bg-orange-50/70 p-5">
@@ -591,7 +591,7 @@ export const DashboardPreview = () => {
                 <div className="space-y-3">
                   {demoFollowUps.map((task) => (
                     <div key={task.id} className="rounded-2xl bg-white/80 p-4">
-                      <div className="text-sm font-bold text-[#111827]">{task.title}</div>
+                      <div className="text-sm font-bold text-text">{task.title}</div>
                       <div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{task.leadCompany} · {formatDate(task.dueAt)}</div>
                     </div>
                   ))}
@@ -608,7 +608,7 @@ export const DashboardPreview = () => {
                     <div key={lead.id} className="rounded-2xl bg-white/80 p-4">
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
-                          <div className="truncate text-sm font-bold text-[#111827]">{lead.fullName}</div>
+                          <div className="truncate text-sm font-bold text-text">{lead.fullName}</div>
                           <div className="mt-1 truncate text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">{lead.companyName}</div>
                         </div>
                         <PriorityBadge priority={lead.priority} />
@@ -624,14 +624,14 @@ export const DashboardPreview = () => {
             <div className="mb-5 flex items-center justify-between">
               <div>
                 <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Clarity Sprint</h2>
-                <p className="mt-1 text-sm font-semibold text-[#111827]">Make Strata obvious before scaling posts.</p>
+                <p className="mt-1 text-sm font-semibold text-text">Make Strata obvious before scaling posts.</p>
               </div>
               <Megaphone size={20} className="text-gray-400" />
             </div>
             <div className="space-y-3">
               {claritySprint.map((item) => (
                 <div key={item.label} className="rounded-[20px] border border-white/60 bg-white/60 p-4">
-                  <div className="text-sm font-bold text-[#111827]">{item.label}</div>
+                  <div className="text-sm font-bold text-text">{item.label}</div>
                   <p className="mt-1 text-xs font-semibold leading-relaxed text-gray-500">{item.detail}</p>
                 </div>
               ))}
@@ -642,7 +642,7 @@ export const DashboardPreview = () => {
         <Panel className="overflow-hidden" id="preview-outreach">
           <div className="border-b border-white/50 px-6 py-5">
             <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500">Outreach Queue</h2>
-            <p className="mt-1 text-sm font-semibold text-[#111827]">Leads worth a manual message, not another passive post.</p>
+            <p className="mt-1 text-sm font-semibold text-text">Leads worth a manual message, not another passive post.</p>
           </div>
           <div className="divide-y divide-white/50">
             {outreachQueue.map((lead) => (
@@ -650,7 +650,7 @@ export const DashboardPreview = () => {
                 <div className="flex items-center gap-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#111827] text-xs font-display font-bold text-white shadow-sm">{getInitials(lead.fullName)}</div>
                   <div className="min-w-0">
-                    <div className="truncate text-sm font-bold text-[#111827]">{lead.companyName}</div>
+                    <div className="truncate text-sm font-bold text-text">{lead.companyName}</div>
                     <div className="mt-1 flex flex-wrap items-center gap-2">
                       <StatusBadge status={lead.status} />
                       <PriorityBadge priority={lead.priority} />

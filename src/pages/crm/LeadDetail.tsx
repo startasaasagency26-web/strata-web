@@ -268,7 +268,7 @@ export const LeadDetail = () => {
               </div>
             ) : (
               <div className="rounded-[32px] border border-white/50 bg-white/60 px-8 py-16 text-center shadow-sm">
-                <p className="text-base font-bold text-[#111827] uppercase tracking-tight mb-2">No notes yet</p>
+                <p className="text-base font-bold text-text uppercase tracking-tight mb-2">No notes yet</p>
                 <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">Saved notes will appear here after submission</p>
               </div>
             )}

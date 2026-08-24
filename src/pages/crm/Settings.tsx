@@ -182,7 +182,7 @@ export const Settings = () => {
     <CrmShell>
       <div className="space-y-12">
         <div>
-          <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-[#111827] mb-2">System Settings</h1>
+          <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-text mb-2">System Settings</h1>
           <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-gray-500 uppercase">Internal configuration & backend status</p>
         </div>
 
@@ -202,7 +202,7 @@ export const Settings = () => {
             <section className="space-y-6">
               <div className="flex items-center gap-3">
                 <Database size={24} className="text-gray-400" />
-                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Backend Integration</h2>
+                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-text">Backend Integration</h2>
               </div>
 
               <div className={cn(
@@ -219,7 +219,7 @@ export const Settings = () => {
                     {settings.isConfigured ? <ShieldCheck size={32} /> : <AlertTriangle size={32} />}
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#111827] mb-1">
+                    <h3 className="text-lg font-bold text-text mb-1">
                       {settings.isConfigured ? 'Production Storage Connected' : 'Backend Status Needs Review'}
                     </h3>
                     <p className="text-sm text-gray-600 leading-relaxed max-w-sm">
@@ -241,7 +241,7 @@ export const Settings = () => {
             <section className="space-y-6">
               <div className="flex items-center gap-3">
                 <Users size={24} className="text-gray-400" />
-                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Team Management</h2>
+                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-text">Team Management</h2>
               </div>
 
               <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] overflow-hidden shadow-sm">
@@ -250,12 +250,12 @@ export const Settings = () => {
                     team.map((member) => (
                       <div key={member.id} className="px-8 py-6 flex items-center justify-between group">
                         <div className="flex items-center gap-5">
-                          <div className="w-12 h-12 rounded-[16px] bg-white border border-white/50 shadow-sm flex items-center justify-center font-display text-sm font-bold uppercase text-[#111827]">
+                          <div className="w-12 h-12 rounded-[16px] bg-white border border-white/50 shadow-sm flex items-center justify-center font-display text-sm font-bold uppercase text-text">
                             {member.fullName.charAt(0)}
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <p className="font-bold text-[#111827]">{member.fullName}</p>
+                              <p className="font-bold text-text">{member.fullName}</p>
                               {member.id === profile?.id && (
                                 <span className="text-[8px] font-mono bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded uppercase font-bold tracking-widest">You</span>
                               )}
@@ -266,7 +266,7 @@ export const Settings = () => {
                         {permissions.canChangeRoles && member.id !== profile?.id && (
                           <button
                             onClick={() => openManageMember(member)}
-                            className="text-[10px] font-mono font-bold tracking-widest text-gray-400 hover:text-[#111827] uppercase transition-colors px-4 py-2 rounded-xl hover:bg-white border border-transparent hover:border-white/50 hover:shadow-sm"
+                            className="text-[10px] font-mono font-bold tracking-widest text-gray-400 hover:text-text uppercase transition-colors px-4 py-2 rounded-xl hover:bg-white border border-transparent hover:border-white/50 hover:shadow-sm"
                           >
                             Manage
                           </button>
@@ -300,7 +300,7 @@ export const Settings = () => {
             <section className="space-y-6">
               <div className="flex items-center gap-3">
                 <Webhook size={24} className="text-gray-400" />
-                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Notification Endpoints</h2>
+                <h2 className="text-xl font-display font-bold uppercase tracking-tight text-text">Notification Endpoints</h2>
               </div>
 
               <div className="bg-white/60 backdrop-blur-md border border-white/50 rounded-[32px] p-8 space-y-6 shadow-sm">
@@ -346,7 +346,7 @@ export const Settings = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="integration-status-title">
           <div ref={integrationRef} className="w-full max-w-lg rounded-[24px] border border-white/50 bg-white/95 p-6 shadow-xl backdrop-blur-md space-y-5">
             <div className="flex items-center justify-between">
-              <h2 id="integration-status-title" className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Integration Status</h2>
+              <h2 id="integration-status-title" className="text-xl font-display font-bold uppercase tracking-tight text-text">Integration Status</h2>
               <button onClick={() => setShowIntegrationModal(false)} aria-label="Close integration status" className="w-9 h-9 rounded-full hover:bg-gray-100 flex items-center justify-center">
                 <X size={16} />
               </button>
@@ -380,7 +380,7 @@ export const Settings = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="manage-member-title">
           <form ref={manageRef} onSubmit={handleSaveMember} className="w-full max-w-md rounded-[24px] border border-white/50 bg-white/95 p-6 shadow-xl backdrop-blur-md space-y-5">
             <div className="flex items-center justify-between">
-              <h2 id="manage-member-title" className="text-xl font-display font-bold uppercase tracking-tight text-[#111827]">Manage Member</h2>
+              <h2 id="manage-member-title" className="text-xl font-display font-bold uppercase tracking-tight text-text">Manage Member</h2>
               <button type="button" onClick={() => setSelectedMember(null)} aria-label="Close manage member modal" className="w-9 h-9 rounded-full hover:bg-gray-100 flex items-center justify-center">
                 <X size={16} />
               </button>
@@ -396,7 +396,7 @@ export const Settings = () => {
               <option value="disabled">Disabled</option>
             </CrmSelect>
             <div className="flex justify-end gap-3">
-              <button type="button" onClick={() => setSelectedMember(null)} disabled={isSavingMember} className="rounded-full border border-gray-200 px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111827] hover:bg-gray-50">
+              <button type="button" onClick={() => setSelectedMember(null)} disabled={isSavingMember} className="rounded-full border border-gray-200 px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-text hover:bg-gray-50">
                 Cancel
               </button>
               <button type="submit" disabled={isSavingMember} className="inline-flex items-center gap-2 rounded-full bg-[#111827] px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-white hover:bg-gray-800 disabled:opacity-50">
