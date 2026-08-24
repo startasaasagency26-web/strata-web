@@ -69,7 +69,7 @@ export const Login = () => {
       >
         <div className="bg-[#0A0A0A] border border-white/10 rounded-[32px] p-8 md:p-12 shadow-2xl">
           <div className="flex flex-col items-center mb-10">
-            <Logo className="h-12 w-auto mb-6" />
+            <Logo variant="lockup" tone="gold" className="mb-6 h-12 w-auto" />
             <div className="text-center">
               <h1 className="text-3xl font-display font-bold uppercase tracking-tight text-white mb-2">Internal CRM</h1>
               <p className="text-[10px] font-mono font-bold tracking-[0.3em] text-white/40 uppercase">Authorized Personnel Only</p>

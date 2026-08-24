@@ -111,7 +111,7 @@ export const ResetPassword = () => {
       >
         <div className="rounded-[32px] border border-white/10 bg-[#0A0A0A] p-8 shadow-2xl md:p-12">
           <div className="mb-9 flex flex-col items-center">
-            <Logo className="mb-6 h-12 w-auto" />
+            <Logo variant="lockup" tone="gold" className="mb-6 h-12 w-auto" />
             <div className="text-center">
               <h1 className="mb-2 text-3xl font-display font-bold uppercase tracking-tight text-white">
                 {hasRecoverySession ? 'Set New Password' : 'Reset CRM Access'}

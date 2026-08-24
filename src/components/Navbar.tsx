@@ -53,7 +53,7 @@ export const Navbar = () => {
               aria-label="Strata Growth Technologies Home"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Logo className="transition-transform duration-300 group-hover:scale-105 brightness-0 invert" />
+              <Logo variant="mark" tone="gold" className="h-9 w-auto transition-transform duration-300 group-hover:scale-105 md:h-11" />
             </Link>
           </div>
 

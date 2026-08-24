@@ -160,7 +160,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
           isSidebarOpen ? 'px-6 gap-3' : 'justify-center'
         )}>
           <Link to="/crm" className="flex items-center gap-3 min-w-0">
-            <Logo className="h-7 w-auto shrink-0 brightness-200" />
+            <Logo variant="mark" tone="gold" className="h-7 w-auto shrink-0" />
             <AnimatePresence initial={false}>
               {isSidebarOpen && (
                 <motion.span
@@ -397,7 +397,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
             >
               <div className="px-6 h-20 flex items-center justify-between border-b border-white/5">
                 <Link to="/crm" className="flex items-center gap-3">
-                  <Logo className="h-7 w-auto brightness-200" />
+                  <Logo variant="mark" tone="gold" className="h-7 w-auto" />
                   <span className="font-display font-bold tracking-tight text-sm uppercase text-white">Strata CRM</span>
                 </Link>
                 <button onClick={() => setIsMobileMenuOpen(false)} aria-label="Close CRM navigation" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors">

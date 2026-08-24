@@ -12,7 +12,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-16">
           <div className="md:col-span-1">
             <Link to="/">
-              <Logo className="h-10 origin-left mb-6 justify-start" />
+              <Logo variant="lockup" tone="gold" className="mb-6 h-10 w-auto origin-left" />
             </Link>
             <p className="text-muted text-sm font-sans leading-relaxed mb-6">
               Strata Core connects operating context, business rules, team actions and governed AI in one visible layer.
