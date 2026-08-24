@@ -5,23 +5,23 @@ import { CONTACT } from '../config/contact';
 import { Button } from '../components/ui/liquid-glass-button';
 
 const systemFlowSteps = [
-  'Meta Ads',
-  'Landing Page',
-  'WhatsApp CRM',
-  'AI Qualification',
-  'Automated Follow-Up',
-  'Booking & Reporting',
+  'Audit Revenue Leaks',
+  'Map Customer Journey',
+  'Design Sales Process',
+  'Configure Tools',
+  'Train the Team',
+  'Review Outcomes',
 ];
 
 const coreDeliverables = [
-  'Conversion-focused landing page / offer flow',
-  'Direct WhatsApp & multi-channel lead capture',
-  'Centralized WhatsApp CRM & pipeline management',
-  'AI qualification agents & automated lead scoring',
-  'Automated WhatsApp & email follow-up sequences',
-  'Staff task assignment & team handoff rules',
-  'Booking calendar integration & appointment flow',
-  'Executive reporting dashboard & conversion analytics',
+  'Revenue-process audit and implementation roadmap',
+  'Conversion-focused landing page or offer-flow build',
+  'Lead-capture and CRM configuration for the agreed process',
+  'Approved WhatsApp or email follow-up workflow setup',
+  'Staff ownership, handoff and notification rules',
+  'Booking and appointment-flow configuration where required',
+  'Reporting setup with agreed commercial definitions',
+  'Implementation documentation and team handover',
 ];
 
 const pricingFactors = [
@@ -69,7 +69,7 @@ const quotingSteps = [
   {
     num: '01',
     title: 'QUALIFY THE BUSINESS',
-    desc: 'We verify whether your offer, market, margins, and sales capacity are commercially suitable for Strata Core.',
+    desc: 'We verify whether your offer, market, margins and sales capacity are commercially suitable for a Revenue Systems engagement.',
   },
   {
     num: '02',
@@ -85,24 +85,24 @@ const quotingSteps = [
 
 const faqs = [
   {
-    question: 'What is Strata Core?',
-    answer: 'Strata Core is our standardized AI-powered revenue operating system. It connects Meta advertising, landing pages, WhatsApp CRM, AI qualification, automated follow-up, booking, and reporting into one unified commercial infrastructure.',
+    question: 'What is Strata Revenue Systems?',
+    answer: 'Strata Revenue Systems is a paid service engagement. We diagnose where revenue work is breaking, design the agreed process, configure the required tools and hand the working system over to your team.',
   },
   {
-    question: 'Why does pricing vary if Strata Core is one product?',
-    answer: 'Strata Core uses the same core operating architecture for all clients. However, setup complexity, lead volume, number of locations, custom integrations, and team routing vary depending on your business economics.',
+    question: 'Why does pricing vary?',
+    answer: 'The work changes with lead volume, number of locations, staff roles, existing tools, integrations and the complexity of the revenue process. We quote the implementation and ongoing service around that real delivery scope.',
   },
   {
     question: 'Is ad spend included in the monthly fee?',
-    answer: 'No. Ad spend is billed directly by Meta or TikTok to your business account. Strata\'s monthly fee covers system operation, campaign execution, AI qualification, automation maintenance, and optimization.',
+    answer: 'No. Ad spend is billed directly by Meta or TikTok to your business account. Strata\'s monthly fee covers only the campaign, operations, maintenance and improvement work agreed in your scope.',
   },
   {
     question: 'What is the difference between Standard and Expanded Scope?',
-    answer: 'Standard (from RM 5,000/mo) covers a single business operation with core funnels, CRM, AI, and follow-up. Expanded Scope (from RM 7,500/mo) is designed for multi-location businesses, heavy lead volume, complex sales teams, or custom software integrations.',
+    answer: 'Standard (from RM 5,000/mo) covers one bounded revenue operation. Expanded Scope (from RM 7,500/mo) is for multiple locations, heavier lead volume, larger teams, additional workflows or custom integrations.',
   },
   {
     question: 'What happens during the Revenue Systems Audit?',
-    answer: 'During the audit, we analyze your current lead flow, customer value, margin structure, conversion drop-offs, and software tools to determine if Strata Core is a fit and specify your exact implementation scope.',
+    answer: 'We review how enquiries arrive, who owns each handoff, where follow-up fails, what customers are worth and which tools are already in place. You leave with a recommended service scope, timeline and investment band.',
   },
 ];
 
@@ -118,7 +118,7 @@ export const Pricing = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4"
           >
-            STRATA CORE
+            STRATA REVENUE SYSTEMS
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
@@ -126,8 +126,8 @@ export const Pricing = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-7xl font-display font-bold leading-none tracking-tight text-text mb-8 uppercase"
           >
-            One Operating System. <br />
-            <span className="text-text/70">Priced Around Your Business Economics.</span>
+            Practical revenue operations. <br />
+            <span className="text-text/70">Delivered around your business economics.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -135,7 +135,7 @@ export const Pricing = () => {
             transition={{ delay: 0.18 }}
             className="text-muted font-sans text-base md:text-xl leading-relaxed max-w-3xl mx-auto mb-10"
           >
-            Strata Core connects demand generation, lead capture, WhatsApp CRM, AI qualification, automated follow-up, booking, and reporting into one revenue operating system. Pricing varies based on customer value, sales economics, operational complexity, locations, and required integrations.
+            This is the work customers can buy today. Strata audits the revenue process, designs the required handoffs, configures the agreed tools and supports execution. Pricing varies with customer value, sales economics, complexity, locations and integrations.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -157,16 +157,16 @@ export const Pricing = () => {
         </div>
       </section>
 
-      {/* SECTION 2 — WHAT STRATA CORE INCLUDES */}
+      {/* SECTION 2 — WHAT THE ENGAGEMENT INCLUDES */}
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
         <div className="bg-surface border border-border/60 rounded-[32px] p-8 md:p-14 shadow-sm">
           <div className="max-w-3xl mb-12">
-            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">PRODUCT ARCHITECTURE</p>
+            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">SCOPED SERVICE</p>
             <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase mb-4">
-              What Strata Core Includes
+              What Strata Performs
             </h2>
             <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
-              Strata Core is standardized around the same connected revenue operating system. Scope changes only where your business economics or operational complexity require more infrastructure.
+              Every engagement follows the same disciplined path, but the work is scoped to the gaps, tools and operating realities of your business.
             </p>
           </div>
 
@@ -197,7 +197,7 @@ export const Pricing = () => {
           {/* Standardized Core Deliverables */}
           <div className="border-t border-border/50 pt-10">
             <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-text mb-6">
-              Standardized System Deliverables Across Every Implementation:
+              Typical Work Included in a Standard Engagement:
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-3.5 gap-x-6">
               {coreDeliverables.map((item) => (
@@ -228,7 +228,7 @@ export const Pricing = () => {
                   STANDARD IMPLEMENTATION
                 </span>
                 <h3 className="text-3xl md:text-4xl font-black text-text uppercase tracking-tight">
-                  Strata Core
+                  Strata Revenue Systems
                 </h3>
               </div>
               <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-gold text-void font-mono text-[9px] font-bold uppercase tracking-widest">
@@ -245,7 +245,7 @@ export const Pricing = () => {
               <div className="md:border-l md:border-border/50 md:pl-6">
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">MONTHLY OPERATING FEE</span>
                 <span className="font-mono text-2xl font-bold text-text">FROM RM 5,000 / MO</span>
-                <span className="block text-[10px] font-mono text-muted mt-1">System, AI &amp; media ops</span>
+                <span className="block text-[10px] font-mono text-muted mt-1">Ongoing delivery &amp; improvement</span>
               </div>
               <div className="md:border-l md:border-border/50 md:pl-6">
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">AD SPEND</span>
@@ -351,7 +351,7 @@ export const Pricing = () => {
                 Expanded Scope
               </h2>
               <p className="mb-8 font-sans text-base md:text-lg text-muted leading-relaxed max-w-lg">
-                For growing businesses requiring additional infrastructure beyond the standard Strata Core implementation.
+                For growing businesses requiring more delivery work than the standard Revenue Systems engagement.
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-8 p-5 rounded-2xl bg-surface2 border border-border">
@@ -366,7 +366,7 @@ export const Pricing = () => {
               </div>
 
               <p className="mb-8 font-sans text-xs text-muted leading-relaxed">
-                Expanded Scope uses the same Strata Core system architecture with additional infrastructure, routing logic, and integrations built around operational requirements.
+                Expanded Scope adds the implementation, routing, permissions and integration work required by more complex operations.
               </p>
 
               <Button
@@ -426,10 +426,10 @@ export const Pricing = () => {
         <div className="text-center max-w-3xl mx-auto mb-12">
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">OPTIONAL ADD-ONS</p>
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-text uppercase mb-3">
-            Optional Strata Core Support &amp; SLA Add-ons
+            Optional Support &amp; SLA Add-ons
           </h2>
           <p className="text-sm font-sans text-muted max-w-2xl mx-auto">
-            Optional post-launch add-ons for businesses requiring ongoing uptime monitoring, technical SLA maintenance, and continuous optimization after Strata Core installation.
+            Optional post-launch services for businesses requiring uptime monitoring, technical maintenance and ongoing improvement after implementation.
           </p>
         </div>
 
@@ -476,7 +476,37 @@ export const Pricing = () => {
         </div>
       </section>
 
-      {/* SECTION 8 — FAQ & FINAL CTA */}
+      {/* SECTION 8 — STRATA CORE PLATFORM VISION */}
+      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+        <div className="rounded-[32px] border border-gold/30 bg-surface2 p-8 text-text shadow-xl shadow-gold/5 md:p-14">
+          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div className="max-w-3xl">
+              <p className="mb-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
+                STRATA CORE · IN DEVELOPMENT · UNPRICED
+              </p>
+              <h2 className="text-3xl font-black uppercase tracking-tight text-text md:text-5xl">
+                A separate platform vision for connected business operations.
+              </h2>
+              <p className="mt-6 text-sm leading-relaxed text-muted md:text-base">
+                Strata Core is being designed as a shared platform for company data, rules, permissions and controlled assistance across multiple interfaces. It is not included in the Revenue Systems prices above and is not presented as a finished product.
+              </p>
+            </div>
+            <Button
+              asChild
+              variant="glassOnDark"
+              size="lg"
+              className="h-auto w-full rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em] lg:w-auto"
+            >
+              <a href={`${CONTACT.mailto}?subject=Strata%20Core%20Vision%20Demo`} className="flex items-center justify-center gap-3">
+                <span>Vision Demo</span>
+                <ArrowRight size={15} />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 9 — FAQ & FINAL CTA */}
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
@@ -498,10 +528,10 @@ export const Pricing = () => {
           {/* Final Conversion Block */}
           <div className="bg-surface2 text-text rounded-[32px] border border-gold/30 p-8 md:p-14 text-center shadow-xl shadow-gold/5">
             <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight mb-6 text-text">
-              Ready to price your revenue operating system?
+              Ready to price the work your revenue process needs?
             </h3>
             <p className="text-muted font-sans text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-              Book a Revenue Systems Audit. We'll map your current lead flow, review your customer economics, and specify your exact Strata Core implementation scope.
+              Book a Revenue Systems Audit. We'll map the current process, review your customer economics and specify the implementation work, timeline and ongoing service scope.
             </p>
             <Button
               asChild
