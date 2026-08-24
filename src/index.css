@@ -4,6 +4,49 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light;
+
+  --canvas: 245 245 247;
+  --surface: 255 255 255;
+  --surface2: 250 250 251;
+  --surface3: 229 229 231;
+  --void: 29 29 31;
+  --hairline: 229 229 231;
+  --border: 210 210 215;
+  --border-strong: 174 174 178;
+
+  --text: var(--void);
+  --text2: 55 65 81;
+  --muted: 110 110 115;
+  --faint: 156 163 175;
+
+  --gold: 0 102 204;
+  --gold-hover: 45 91 255;
+  --gold-active: 0 82 163;
+  --champagne: 219 234 254;
+  --bronze: 30 64 175;
+
+  --positive: 29 131 72;
+  --positive-soft: 236 253 245;
+  --caution: 183 121 31;
+  --caution-soft: 255 251 235;
+  --danger: 220 38 38;
+  --danger-soft: 254 242 242;
+  --info: 29 78 216;
+  --info-soft: 239 246 255;
+
+  --focus: var(--gold);
+  --focus-offset: var(--canvas);
+  --glass-tint: 255 255 255;
+  --scrim: var(--void);
+
+  --background: var(--canvas);
+  --primary: var(--text);
+  --accent: var(--gold);
+  --line: var(--hairline);
+}
+
 @layer base {
   body {
     @apply bg-background text-primary font-sans antialiased selection:bg-primary selection:text-white;

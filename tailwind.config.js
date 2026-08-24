@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,16 +8,37 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#F5F5F7',
-        surface: '#FFFFFF',
-        primary: '#1D1D1F',
-        muted: '#6E6E73',
-        border: '#D2D2D7',
-        accent: '#0066CC',
-        line: '#E5E5E7',
-        surface2: '#FAFAFB',
-        positive: '#1D8348',
-        caution: '#B7791F'
+        void: 'rgb(var(--void) / <alpha-value>)',
+        canvas: 'rgb(var(--canvas) / <alpha-value>)',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        surface2: 'rgb(var(--surface2) / <alpha-value>)',
+        surface3: 'rgb(var(--surface3) / <alpha-value>)',
+        hairline: 'rgb(var(--hairline) / <alpha-value>)',
+        border: 'rgb(var(--border) / <alpha-value>)',
+        borderStrong: 'rgb(var(--border-strong) / <alpha-value>)',
+        text: 'rgb(var(--text) / <alpha-value>)',
+        text2: 'rgb(var(--text2) / <alpha-value>)',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        faint: 'rgb(var(--faint) / <alpha-value>)',
+        primary: 'rgb(var(--primary) / <alpha-value>)',
+        gold: 'rgb(var(--gold) / <alpha-value>)',
+        goldHover: 'rgb(var(--gold-hover) / <alpha-value>)',
+        goldActive: 'rgb(var(--gold-active) / <alpha-value>)',
+        champagne: 'rgb(var(--champagne) / <alpha-value>)',
+        bronze: 'rgb(var(--bronze) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        positive: 'rgb(var(--positive) / <alpha-value>)',
+        positiveSoft: 'rgb(var(--positive-soft) / <alpha-value>)',
+        caution: 'rgb(var(--caution) / <alpha-value>)',
+        cautionSoft: 'rgb(var(--caution-soft) / <alpha-value>)',
+        danger: 'rgb(var(--danger) / <alpha-value>)',
+        dangerSoft: 'rgb(var(--danger-soft) / <alpha-value>)',
+        info: 'rgb(var(--info) / <alpha-value>)',
+        infoSoft: 'rgb(var(--info-soft) / <alpha-value>)',
+        focus: 'rgb(var(--focus) / <alpha-value>)',
+        focusOffset: 'rgb(var(--focus-offset) / <alpha-value>)',
+        line: 'rgb(var(--line) / <alpha-value>)',
       },
       fontFamily: {
         sans: [
