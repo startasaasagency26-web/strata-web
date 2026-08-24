@@ -5,41 +5,41 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  --canvas: 245 245 247;
-  --surface: 255 255 255;
-  --surface2: 250 250 251;
-  --surface3: 229 229 231;
-  --void: 29 29 31;
-  --hairline: 229 229 231;
-  --border: 210 210 215;
-  --border-strong: 174 174 178;
+  --void: 5 5 5;
+  --canvas: 11 11 13;
+  --surface: 19 19 22;
+  --surface2: 26 26 30;
+  --surface3: 35 35 40;
+  --hairline: 36 36 40;
+  --border: 46 46 52;
+  --border-strong: 58 58 64;
 
-  --text: var(--void);
-  --text2: 55 65 81;
-  --muted: 110 110 115;
-  --faint: 156 163 175;
+  --text: 245 241 234;
+  --text2: 201 196 187;
+  --muted: 155 150 142;
+  --faint: 124 119 111;
 
-  --gold: 0 102 204;
-  --gold-hover: 45 91 255;
-  --gold-active: 0 82 163;
-  --champagne: 219 234 254;
-  --bronze: 30 64 175;
+  --gold: 195 161 115;
+  --gold-hover: 212 181 136;
+  --gold-active: 173 138 98;
+  --champagne: 235 218 190;
+  --bronze: 115 88 58;
 
-  --positive: 29 131 72;
-  --positive-soft: 236 253 245;
-  --caution: 183 121 31;
-  --caution-soft: 255 251 235;
-  --danger: 220 38 38;
-  --danger-soft: 254 242 242;
-  --info: 29 78 216;
-  --info-soft: 239 246 255;
+  --positive: 63 191 135;
+  --positive-soft: 15 32 25;
+  --caution: 224 182 92;
+  --caution-soft: 34 28 15;
+  --danger: 242 119 122;
+  --danger-soft: 36 19 21;
+  --info: 127 178 229;
+  --info-soft: 17 28 38;
 
-  --focus: var(--gold);
+  --focus: var(--champagne);
   --focus-offset: var(--canvas);
   --glass-tint: 255 255 255;
-  --scrim: var(--void);
+  --scrim: 5 5 5;
 
   --background: var(--canvas);
   --primary: var(--text);
@@ -49,23 +49,38 @@
 
 @layer base {
   body {
-    @apply bg-background text-primary font-sans antialiased selection:bg-primary selection:text-white;
+    @apply bg-background text-text font-sans antialiased selection:bg-gold/25 selection:text-text;
     letter-spacing: -0.01em;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-primary;
+    @apply font-display text-text;
     /* Individual components control uppercase/letter-spacing — not forced globally */
+  }
+
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid rgb(var(--focus));
+    outline-offset: 2px;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-text-fill-color: rgb(var(--text));
+    box-shadow: 0 0 0 1000px rgb(var(--surface2)) inset;
+    caret-color: rgb(var(--text));
   }
 }
 
 @layer utilities {
   .final-cta-blueprint {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      linear-gradient(rgb(var(--gold) / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--gold) / 0.038) 1px, transparent 1px),
+      linear-gradient(rgb(var(--gold) / 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--gold) / 0.015) 1px, transparent 1px);
     background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
     mask-image: radial-gradient(ellipse at 50% 26%, black 0%, rgba(0, 0, 0, 0.78) 42%, rgba(0, 0, 0, 0.24) 66%, transparent 84%);
     transform: translateX(-50%) perspective(1100px) rotateX(62deg) scale(1.08);
@@ -93,5 +108,40 @@
 @media (prefers-reduced-motion: reduce) {
   .final-cta-pulse-ring {
     animation: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--canvas));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border-strong));
+  border: 2px solid rgb(var(--canvas));
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--gold));
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background: rgb(var(--text));
+    color: rgb(var(--void));
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
   }
 }
