@@ -6,7 +6,7 @@ import { CONTACT } from '../../config/contact';
 
 const systems = [
   {
-    icon: <Clapperboard size={26} className="text-primary" />,
+    icon: <Clapperboard size={26} className="text-text" />,
     title: 'Growth Media System',
     subtitle: 'Content & Paid Acquisition',
     description:
@@ -21,7 +21,7 @@ const systems = [
     cta: 'Book a Revenue Audit',
   },
   {
-    icon: <ChartNoAxesCombined size={26} className="text-primary" />,
+    icon: <ChartNoAxesCombined size={26} className="text-text" />,
     title: 'Revenue Infrastructure',
     subtitle: 'Funnel, CRM & Automation Install',
     description:
@@ -44,7 +44,7 @@ export const Services = () => {
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 md:mb-24">
           <div className="max-w-2xl">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">CORE SYSTEMS</p>
-            <h2 className="text-5xl md:text-6xl font-black leading-none tracking-[-0.04em] text-primary uppercase">
+            <h2 className="text-5xl md:text-6xl font-black leading-none tracking-[-0.04em] text-text uppercase">
               Revenue Infrastructure <br /> Powers Growth.
             </h2>
           </div>
@@ -64,15 +64,15 @@ export const Services = () => {
               className="bento-card group flex min-h-[520px] flex-col justify-between p-8 md:p-10"
             >
               <div>
-                <div className="mb-8 w-14 h-14 rounded-2xl border border-border flex items-center justify-center bg-background group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                  <div className="group-hover:text-white transition-colors duration-500">
+                <div className="mb-8 w-14 h-14 rounded-2xl border border-border flex items-center justify-center bg-background group-hover:bg-gold group-hover:text-void transition-all duration-500">
+                  <div className="group-hover:text-void transition-colors duration-500">
                     {system.icon}
                   </div>
                 </div>
                 <p className="mb-3 text-[10px] font-mono font-bold tracking-[0.28em] text-muted uppercase">
                   {system.subtitle}
                 </p>
-                <h3 className="text-3xl md:text-4xl font-black text-primary mb-5 tracking-[-0.04em] uppercase">
+                <h3 className="text-3xl md:text-4xl font-black text-text mb-5 tracking-[-0.04em] uppercase">
                   {system.title}
                 </h3>
                 <p className="text-muted text-sm md:text-base font-sans leading-relaxed mb-8 max-w-xl">
@@ -80,8 +80,8 @@ export const Services = () => {
                 </p>
                 <ul className="grid gap-3 mb-10">
                   {system.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-3 text-sm font-sans text-primary/70">
-                      <Check size={15} className="mt-0.5 shrink-0 text-primary" />
+                    <li key={bullet} className="flex items-start gap-3 text-sm font-sans text-text/70">
+                      <Check size={15} className="mt-0.5 shrink-0 text-text" />
                       <span>{bullet}</span>
                     </li>
                   ))}
@@ -106,7 +106,7 @@ export const Services = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mx-auto mt-14 max-w-3xl text-center text-2xl md:text-4xl font-black tracking-[-0.04em] text-primary uppercase"
+          className="mx-auto mt-14 max-w-3xl text-center text-2xl md:text-4xl font-black tracking-[-0.04em] text-text uppercase"
         >
           Growth Media creates attention. Revenue Infrastructure captures, qualifies, and converts it.
         </motion.p>

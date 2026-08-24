@@ -51,12 +51,12 @@ const industries = [
 
 export const Industries = () => {
   return (
-    <section id="industries" className="py-24 md:py-32 bg-[#fcfbf9] border-b border-border/50 scroll-mt-[100px]">
+    <section id="industries" className="py-24 md:py-32 bg-surface border-b border-border/50 scroll-mt-[100px]">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 md:mb-20">
           <div className="max-w-3xl">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">TARGET PARTNERS</p>
-            <h2 className="text-4xl md:text-6xl font-display font-bold leading-none tracking-tight text-primary uppercase">
+            <h2 className="text-4xl md:text-6xl font-display font-bold leading-none tracking-tight text-text uppercase">
               Who Strata Is Built For.
             </h2>
           </div>
@@ -70,7 +70,7 @@ export const Industries = () => {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 bg-white border border-border/70 rounded-[32px] p-8 md:p-12 shadow-[0_10px_40px_rgba(0,0,0,0.04)] max-w-5xl mx-auto"
+          className="mb-16 bg-surface border border-border/70 rounded-[32px] p-8 md:p-12 shadow-[0_10px_40px_rgb(var(--scrim)/0.04)] max-w-5xl mx-auto"
         >
           <h3 className="font-mono text-xs font-bold tracking-[0.24em] text-muted uppercase mb-8">
             Ideal Client Characteristics (ICP)
@@ -78,8 +78,8 @@ export const Industries = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {icpCriteria.map((item) => (
               <div key={item} className="flex items-start gap-3.5">
-                <CheckCircle2 size={18} className="text-primary mt-0.5 shrink-0" />
-                <span className="font-sans text-sm md:text-base font-medium text-primary/80 leading-snug">
+                <CheckCircle2 size={18} className="text-text mt-0.5 shrink-0" />
+                <span className="font-sans text-sm md:text-base font-medium text-text/80 leading-snug">
                   {item}
                 </span>
               </div>
@@ -100,20 +100,20 @@ export const Industries = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="group border border-primary/5 bg-white p-8 rounded-[28px] hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between"
+                className="group border border-gold/5 bg-surface p-8 rounded-[28px] hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between"
               >
                 <div>
-                  <div className="mb-6 w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <div className="mb-6 w-12 h-12 rounded-2xl bg-gold/5 flex items-center justify-center text-text group-hover:bg-gold group-hover:text-void transition-all duration-300">
                     {industry.icon}
                   </div>
-                  <h4 className="text-xl font-display font-bold text-primary mb-3 tracking-tight uppercase">{industry.title}</h4>
-                  <p className="text-primary/60 font-sans text-sm leading-relaxed mb-6">
+                  <h4 className="text-xl font-display font-bold text-text mb-3 tracking-tight uppercase">{industry.title}</h4>
+                  <p className="text-text/60 font-sans text-sm leading-relaxed mb-6">
                     {industry.desc}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {industry.tags.map((tag) => (
-                    <span key={tag} className="text-[9px] font-mono font-bold tracking-widest uppercase px-3 py-1 bg-primary/[0.03] border border-primary/5 rounded-full text-primary/50">
+                    <span key={tag} className="text-[9px] font-mono font-bold tracking-widest uppercase px-3 py-1 bg-gold/[0.03] border border-gold/5 rounded-full text-text/50">
                       {tag}
                     </span>
                   ))}

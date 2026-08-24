@@ -8,7 +8,7 @@ interface AvailabilityBadgeProps {
 const styles: Record<Availability, string> = {
   live: 'border-positive/20 bg-positive/10 text-positive',
   beta: 'border-caution/20 bg-caution/10 text-caution',
-  planned: 'border-primary/10 bg-primary/[0.04] text-muted',
+  planned: 'border-gold/10 bg-gold/[0.04] text-muted',
 };
 
 export const AvailabilityBadge = ({ status, label }: AvailabilityBadgeProps) => (

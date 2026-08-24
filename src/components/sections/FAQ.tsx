@@ -39,7 +39,7 @@ export const FAQ = () => {
           <div className="lg:col-span-4">
             <div className="sticky top-24">
               <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">Knowledge Base</p>
-              <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary mb-6">SYSTEM <br /> QUERIES</h2>
+              <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-text mb-6">SYSTEM <br /> QUERIES</h2>
               <p className="text-muted font-sans text-sm leading-relaxed">
                 Clear answers about how Strata installs revenue infrastructure, media systems, and follow-up workflows.
               </p>
@@ -66,10 +66,10 @@ export const FAQ = () => {
                       onClick={() => setOpenIdx(isOpen ? null : idx)}
                       className="w-full py-6 md:py-8 flex items-center justify-between text-left rounded-2xl focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     >
-                      <span className={`text-base md:text-lg font-mono font-bold tracking-wide pr-8 transition-colors ${isOpen ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>
+                      <span className={`text-base md:text-lg font-mono font-bold tracking-wide pr-8 transition-colors ${isOpen ? 'text-text' : 'text-text/70 group-hover:text-gold'}`}>
                         {faq.question}
                       </span>
-                      <div className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${isOpen ? 'bg-primary text-white border-primary' : 'bg-transparent text-primary border-border/50 group-hover:border-primary'}`}>
+                      <div className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${isOpen ? 'bg-gold text-void border-gold' : 'bg-transparent text-text border-border/50 group-hover:border-gold'}`}>
                         {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                       </div>
                     </button>

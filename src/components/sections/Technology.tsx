@@ -19,7 +19,7 @@ export const Technology = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
           <div>
             <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">System Stack</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary max-w-lg">
+            <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-text max-w-lg">
               THE STACK BEHIND THE SYSTEM.
             </h2>
           </div>
@@ -36,13 +36,13 @@ export const Technology = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05 }}
-              className="bg-background border border-border/50 p-6 rounded-[16px] flex items-start gap-4 hover:border-primary/30 hover:bg-white transition-all duration-300"
+              className="bg-background border border-border/50 p-6 rounded-[16px] flex items-start gap-4 hover:border-gold/30 hover:bg-surface3 transition-all duration-300"
             >
-              <div className="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center text-primary shrink-0">
+              <div className="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center text-text shrink-0">
                 {tech.icon}
               </div>
               <div>
-                <h3 className="font-mono font-bold tracking-widest text-sm text-primary mb-1 uppercase">{tech.name}</h3>
+                <h3 className="font-mono font-bold tracking-widest text-sm text-text mb-1 uppercase">{tech.name}</h3>
                 <p className="text-muted font-sans text-sm leading-relaxed">{tech.desc}</p>
               </div>
             </motion.div>

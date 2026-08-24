@@ -7,11 +7,11 @@ export const AgentGovernance = () => (
   <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
     <div className="space-y-4">
       {governedAgents.map((agent) => (
-        <article key={agent.name} className="rounded-[24px] border border-line bg-white p-6">
+        <article key={agent.name} className="rounded-[24px] border border-line bg-surface p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-accent">Defined remit</p>
-              <h3 className="mt-2 text-2xl font-bold text-primary">{agent.name}</h3>
+              <h3 className="mt-2 text-2xl font-bold text-text">{agent.name}</h3>
             </div>
             {agent.availability !== 'live' && <AvailabilityBadge status={agent.availability} />}
           </div>

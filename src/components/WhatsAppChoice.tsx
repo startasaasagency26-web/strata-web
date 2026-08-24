@@ -93,7 +93,7 @@ export const WhatsAppChoice = ({
             <motion.button
               type="button"
               aria-label="Close WhatsApp contact chooser"
-              className="absolute inset-0 cursor-default bg-black/55 backdrop-blur-sm"
+              className="absolute inset-0 cursor-default bg-gold/55 backdrop-blur-sm"
               onClick={closeDialog}
               initial={shouldReduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -108,22 +108,22 @@ export const WhatsAppChoice = ({
               aria-modal="true"
               aria-labelledby="whatsapp-choice-title"
               aria-describedby="whatsapp-choice-description"
-              className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-white/10 bg-[#050505] p-6 text-white shadow-2xl"
+              className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-gold/30 bg-surface2 p-6 text-text shadow-2xl shadow-gold/5"
               initial={shouldReduceMotion ? false : { opacity: 0, y: 18, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.98 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.22, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="absolute inset-x-0 top-0 h-px bg-white/20" />
+              <div className="absolute inset-x-0 top-0 h-px bg-gold/40" />
               <div className="mb-6 flex items-start justify-between gap-6">
                 <div>
-                  <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/35">
+                  <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
                     WhatsApp
                   </p>
-                  <h2 id="whatsapp-choice-title" className="text-2xl font-black uppercase tracking-tight text-white">
+                  <h2 id="whatsapp-choice-title" className="text-2xl font-black uppercase tracking-tight text-text">
                     Choose contact
                   </h2>
-                  <p id="whatsapp-choice-description" className="mt-3 text-sm leading-relaxed text-white/50">
+                  <p id="whatsapp-choice-description" className="mt-3 text-sm leading-relaxed text-muted">
                     Select the Strata team member you want to message.
                   </p>
                 </div>
@@ -131,7 +131,7 @@ export const WhatsAppChoice = ({
                 <button
                   type="button"
                   onClick={closeDialog}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-white/60 transition-colors hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/60"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-muted transition-colors hover:bg-surface3 hover:text-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
                   aria-label="Close WhatsApp contact chooser"
                 >
                   <X size={16} />
@@ -147,13 +147,13 @@ export const WhatsAppChoice = ({
                     target="_blank"
                     rel="noreferrer"
                     onClick={closeDialog}
-                    className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 transition-colors hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/60"
+                    className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-surface px-5 py-4 transition-colors hover:border-gold/40 hover:bg-surface3 hover:text-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
                   >
                     <span>
                       <span className="block font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-current">
                         WhatsApp {contact.name}
                       </span>
-                      <span className="mt-1 block text-xs text-white/45 transition-colors group-hover:text-black/50">
+                      <span className="mt-1 block text-xs text-muted transition-colors group-hover:text-text/50">
                         {contact.phoneDisplay}
                       </span>
                     </span>

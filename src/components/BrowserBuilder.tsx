@@ -110,7 +110,7 @@ const BuildPill = ({
 }) => (
   <motion.div
     animate={animate}
-    className={`absolute z-30 whitespace-nowrap rounded-full border border-white/20 bg-white px-4 py-1.5 font-mono text-[9px] font-bold tracking-[0.2em] text-black shadow-xl ${className}`}
+    className={`absolute z-30 whitespace-nowrap rounded-full border border-border bg-surface px-4 py-1.5 font-mono text-[9px] font-bold tracking-[0.2em] text-text shadow-xl ${className}`}
   >
     {label}
   </motion.div>
@@ -181,42 +181,37 @@ export const BrowserBuilder = ({ className = '' }: { className?: string }) => {
         key={`browser-frame-${loopRunId}`}
         animate={frameAnim}
         style={reduceMotion ? undefined : { y: parallaxY, rotateX: parallaxRotateX }}
-        className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/15 bg-[#0A0A0A]/85 shadow-[0_40px_120px_-20px_rgba(0,0,0,1)] backdrop-blur-3xl md:rounded-[32px]"
+        className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-gold/30 bg-surface2 shadow-[0_40px_120px_-20px_rgb(var(--scrim)/0.85),inset_0_1px_0_rgb(var(--gold)/0.08)] backdrop-blur-3xl md:rounded-[32px]"
       >
         {/* Browser Header */}
-        <div className="relative z-40 flex h-10 shrink-0 items-center border-b border-white/10 bg-white/[0.04] px-4 md:h-12 md:px-6">
+        <div className="relative z-40 flex h-10 shrink-0 items-center border-b border-border bg-surface2 px-4 md:h-12 md:px-6">
           <div className="flex gap-2">
             {[0, 0.35, 0.7].map((delay) => (
               <motion.div
                 key={delay}
                 animate={pulseAnim(delay)}
-                className="h-2.5 w-2.5 rounded-full bg-white/20"
+                className="h-2.5 w-2.5 rounded-full bg-surface2"
               />
             ))}
           </div>
-          <div className="absolute left-1/2 flex h-5 w-1/3 -translate-x-1/2 items-center rounded-full border border-white/10 bg-white/5 px-3 md:w-1/4">
-            <motion.div animate={pulseAnim(1.1)} className="mr-2 h-1.5 w-1.5 rounded-full bg-white/10" />
+          <div className="absolute left-1/2 flex h-5 w-1/3 -translate-x-1/2 items-center rounded-full border border-border bg-surface2 px-3 md:w-1/4">
+            <motion.div animate={pulseAnim(1.1)} className="mr-2 h-1.5 w-1.5 rounded-full bg-surface2" />
             <motion.div
               animate={barAnim(0.2)}
               style={{ originX: 0 }}
-              className="h-1 w-full rounded-full bg-white/5"
+              className="h-1 w-full rounded-full bg-surface2"
             />
           </div>
         </div>
 
         {/* Browser Canvas */}
-        <div className="relative flex-1 overflow-hidden bg-[#050505]">
+        <div className="relative flex-1 overflow-hidden border-t border-gold/15 bg-surface">
           {/* Engineering Grid Overlay */}
           <motion.div
             data-browser-grid
             key={`browser-grid-${loopRunId}`}
             animate={gridAnim}
-            className="pointer-events-none absolute inset-0 z-20"
-            style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
-              backgroundSize: '40px 40px',
-              backgroundPosition: 'center top',
-            }}
+            className="pointer-events-none absolute inset-0 z-20 bg-[linear-gradient(rgb(var(--gold)/0.03)_1px,transparent_1px),linear-gradient(90deg,rgb(var(--gold)/0.03)_1px,transparent_1px)] bg-[size:40px_40px] bg-[position:center_top]"
           />
 
           {/* Scrolling Content Wrapper */}
@@ -227,90 +222,90 @@ export const BrowserBuilder = ({ className = '' }: { className?: string }) => {
             className="absolute left-0 right-0 top-0 z-10 flex origin-top flex-col"
           >
             {/* Stage 1: DESIGN */}
-            <section className="relative flex w-full shrink-0 flex-col gap-6 border-b border-white/5 bg-black/20 p-6 md:p-10">
+            <section className="relative flex w-full shrink-0 flex-col gap-6 border-b border-border bg-gold/20 p-6 md:p-10">
               <BuildPill label="DESIGN" animate={buildAnim(0.8)} className="right-6 top-10 md:right-10" />
 
               <motion.div animate={buildAnim(0.5)} className="flex w-full items-center justify-between py-2">
                 <div className="flex items-center gap-2">
-                  <motion.div animate={pulseAnim(0.15)} className="h-5 w-5 rounded-sm bg-white" />
+                  <motion.div animate={pulseAnim(0.15)} className="h-5 w-5 rounded-sm bg-surface" />
                   <motion.div
                     animate={barAnim(0.35)}
                     style={{ originX: 0 }}
-                    className="h-1.5 w-16 rounded-full bg-white/30"
+                    className="h-1.5 w-16 rounded-full bg-surface2"
                   />
                 </div>
-                <motion.div animate={pulseAnim(0.7)} className="h-6 w-20 rounded-full bg-white" />
+                <motion.div animate={pulseAnim(0.7)} className="h-6 w-20 rounded-full bg-surface" />
               </motion.div>
 
               <div className="flex flex-col items-center gap-4 py-8 text-center">
-                <motion.div animate={buildAnim(1.2)} className="h-10 w-3/4 rounded-lg bg-white" />
-                <motion.div animate={buildAnim(1.4)} className="h-10 w-1/2 rounded-lg bg-white/40" />
+                <motion.div animate={buildAnim(1.2)} className="h-10 w-3/4 rounded-lg bg-surface" />
+                <motion.div animate={buildAnim(1.4)} className="h-10 w-1/2 rounded-lg bg-surface2" />
                 <motion.div
                   animate={barAnim(0.9)}
                   style={{ originX: 0 }}
-                  className="mt-2 h-2 w-1/3 rounded-full bg-white/20"
+                  className="mt-2 h-2 w-1/3 rounded-full bg-surface2"
                 />
                 <motion.div
                   animate={buildAnim(1.8)}
-                  className="relative mt-6 aspect-[16/6] w-[85%] overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-transparent"
+                  className="relative mt-6 aspect-[16/6] w-[85%] overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-gold/10 to-transparent"
                 >
                   <motion.div
                     animate={animationActive ? { opacity: [0.18, 0.44, 0.22], scale: [1, 1.03, 1] } : { opacity: 0.28, scale: 1 }}
                     transition={{ duration: 6.5, repeat: animationActive ? Infinity : 0, ease: 'easeInOut' }}
-                    className="absolute left-0 top-0 h-full w-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"
+                    className="absolute left-0 top-0 h-full w-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent"
                   />
                 </motion.div>
               </div>
             </section>
 
             {/* Stage 2: DEVELOP */}
-            <section className="relative flex w-full shrink-0 flex-col gap-8 border-b border-white/5 bg-white/[0.01] p-6 md:p-10">
+            <section className="relative flex w-full shrink-0 flex-col gap-8 border-b border-border bg-surface2 p-6 md:p-10">
               <BuildPill label="DEVELOP" animate={buildAnim(4.0)} className="right-6 top-10 md:right-10" />
 
-              <motion.div animate={buildAnim(4.5)} className="h-6 w-40 rounded bg-white" />
+              <motion.div animate={buildAnim(4.5)} className="h-6 w-40 rounded bg-surface" />
               <div className="grid grid-cols-2 gap-4">
                 {[4.8, 5.0, 5.2, 5.4].map((delay, i) => (
                   <motion.div
                     key={i}
                     animate={buildAnim(delay)}
-                    className="flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-5"
+                    className="flex flex-col gap-3 rounded-xl border border-border bg-surface2 p-5"
                   >
-                    <motion.div animate={pulseAnim(i * 0.25)} className="h-6 w-6 rounded bg-white/10" />
-                    <motion.div animate={barAnim(i * 0.2)} style={{ originX: 0 }} className="h-2 w-3/4 rounded-full bg-white/60" />
-                    <motion.div animate={barAnim(i * 0.3)} style={{ originX: 0 }} className="h-1 w-full rounded-full bg-white/20" />
+                    <motion.div animate={pulseAnim(i * 0.25)} className="h-6 w-6 rounded bg-surface2" />
+                    <motion.div animate={barAnim(i * 0.2)} style={{ originX: 0 }} className="h-2 w-3/4 rounded-full bg-surface2" />
+                    <motion.div animate={barAnim(i * 0.3)} style={{ originX: 0 }} className="h-1 w-full rounded-full bg-surface2" />
                   </motion.div>
                 ))}
               </div>
               <motion.div
                 animate={buildAnim(5.8)}
-                className="space-y-2 rounded-lg border border-white/5 bg-black p-4 font-mono text-[8px] text-white/40"
+                className="space-y-2 rounded-lg border border-border bg-gold p-4 font-mono text-[8px] text-void/40"
               >
-                <motion.div animate={barAnim(0.1)} style={{ originX: 0 }} className="h-1.5 w-1/2 rounded-full bg-white/10" />
-                <motion.div animate={barAnim(0.35)} style={{ originX: 0 }} className="h-1.5 w-3/4 rounded-full bg-white/10" />
-                <motion.div animate={barAnim(0.6)} style={{ originX: 0 }} className="h-1.5 w-2/3 rounded-full bg-white/10" />
+                <motion.div animate={barAnim(0.1)} style={{ originX: 0 }} className="h-1.5 w-1/2 rounded-full bg-surface2" />
+                <motion.div animate={barAnim(0.35)} style={{ originX: 0 }} className="h-1.5 w-3/4 rounded-full bg-surface2" />
+                <motion.div animate={barAnim(0.6)} style={{ originX: 0 }} className="h-1.5 w-2/3 rounded-full bg-surface2" />
               </motion.div>
             </section>
 
             {/* Stage 3: OPTIMIZE */}
-            <section className="relative flex w-full shrink-0 flex-col gap-10 border-b border-white/5 p-6 md:p-10">
+            <section className="relative flex w-full shrink-0 flex-col gap-10 border-b border-border p-6 md:p-10">
               <BuildPill label="OPTIMIZE" animate={buildAnim(9.0)} className="right-6 top-10 md:right-10" />
 
               <div className="flex flex-col gap-4">
-                <motion.div animate={buildAnim(9.5)} className="h-8 w-56 rounded bg-white" />
-                <motion.div animate={barAnim(0.15)} style={{ originX: 0 }} className="h-2.5 w-3/4 rounded-full bg-white/30" />
+                <motion.div animate={buildAnim(9.5)} className="h-8 w-56 rounded bg-surface" />
+                <motion.div animate={barAnim(0.15)} style={{ originX: 0 }} className="h-2.5 w-3/4 rounded-full bg-surface2" />
               </div>
 
               <div className="flex justify-between gap-4 py-4">
                 {[10.0, 10.3, 10.6].map((delay, i) => (
                   <motion.div key={i} animate={buildAnim(delay)} className="flex flex-1 flex-col items-center gap-2">
-                    <div className="flex aspect-square w-full items-center justify-center rounded-full border-2 border-white/10">
+                    <div className="flex aspect-square w-full items-center justify-center rounded-full border-2 border-border">
                       <motion.div
                         animate={animationActive ? { rotate: 360, opacity: [0.45, 0.8, 0.45] } : { rotate: 0, opacity: 0.55 }}
                         transition={{ duration: 8 + i, repeat: animationActive ? Infinity : 0, ease: 'linear' }}
-                        className="h-8 w-8 rounded-full border border-white/40 border-t-white"
+                        className="h-8 w-8 rounded-full border border-border border-t-gold"
                       />
                     </div>
-                    <motion.div animate={barAnim(i * 0.2)} style={{ originX: 0 }} className="h-2 w-12 rounded-full bg-white/40" />
+                    <motion.div animate={barAnim(i * 0.2)} style={{ originX: 0 }} className="h-2 w-12 rounded-full bg-surface2" />
                   </motion.div>
                 ))}
               </div>
@@ -320,10 +315,10 @@ export const BrowserBuilder = ({ className = '' }: { className?: string }) => {
                   <motion.div
                     key={i}
                     animate={buildAnim(delay)}
-                    className="flex h-12 w-full items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4"
+                    className="flex h-12 w-full items-center justify-between rounded-xl border border-border bg-surface2 px-4"
                   >
-                    <motion.div animate={barAnim(i * 0.25)} style={{ originX: 0 }} className="h-2 w-1/3 rounded-full bg-white/40" />
-                    <motion.div animate={pulseAnim(i * 0.35)} className="h-4 w-10 rounded bg-white/80" />
+                    <motion.div animate={barAnim(i * 0.25)} style={{ originX: 0 }} className="h-2 w-1/3 rounded-full bg-surface2" />
+                    <motion.div animate={pulseAnim(i * 0.35)} className="h-4 w-10 rounded bg-surface2" />
                   </motion.div>
                 ))}
               </div>
@@ -334,11 +329,11 @@ export const BrowserBuilder = ({ className = '' }: { className?: string }) => {
               <BuildPill label="SCALE" animate={buildAnim(14.0)} className="right-6 top-10 md:right-10" />
 
               <div className="flex flex-col items-center gap-6 py-10 text-center">
-                <motion.div animate={buildAnim(14.5)} className="h-12 w-3/4 rounded-xl bg-white" />
-                <motion.div animate={barAnim(0.3)} style={{ originX: 0 }} className="h-4 w-1/2 rounded-full bg-white/30" />
+                <motion.div animate={buildAnim(14.5)} className="h-12 w-3/4 rounded-xl bg-surface" />
+                <motion.div animate={barAnim(0.3)} style={{ originX: 0 }} className="h-4 w-1/2 rounded-full bg-surface2" />
                 <motion.div animate={buildAnim(15.2)} className="mt-4 flex gap-4">
-                  <motion.div animate={pulseAnim(0.2)} className="h-10 w-24 rounded-full bg-white" />
-                  <motion.div animate={pulseAnim(0.6)} className="h-10 w-24 rounded-full border border-white/20" />
+                  <motion.div animate={pulseAnim(0.2)} className="h-10 w-24 rounded-full bg-surface" />
+                  <motion.div animate={pulseAnim(0.6)} className="h-10 w-24 rounded-full border border-border" />
                 </motion.div>
               </div>
 
@@ -347,11 +342,11 @@ export const BrowserBuilder = ({ className = '' }: { className?: string }) => {
                   <motion.div
                     key={i}
                     animate={buildAnim(delay)}
-                    className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-6"
+                    className="flex flex-col gap-4 rounded-2xl border border-border bg-surface2 p-6"
                   >
-                    <motion.div animate={barAnim(i * 0.15)} style={{ originX: 0 }} className="h-2 w-1/3 rounded-full bg-white/20" />
-                    <motion.div animate={pulseAnim(i * 0.3)} className="h-6 w-full rounded bg-white/80" />
-                    <motion.div animate={barAnim(i * 0.35)} style={{ originX: 0 }} className="mt-2 h-10 w-full rounded-full bg-white/10" />
+                    <motion.div animate={barAnim(i * 0.15)} style={{ originX: 0 }} className="h-2 w-1/3 rounded-full bg-surface2" />
+                    <motion.div animate={pulseAnim(i * 0.3)} className="h-6 w-full rounded bg-surface2" />
+                    <motion.div animate={barAnim(i * 0.35)} style={{ originX: 0 }} className="mt-2 h-10 w-full rounded-full bg-surface2" />
                   </motion.div>
                 ))}
               </div>
@@ -359,10 +354,10 @@ export const BrowserBuilder = ({ className = '' }: { className?: string }) => {
               {/* Final Bottom Banner */}
               <motion.div
                 animate={buildAnim(16.5)}
-                className="mt-10 flex w-full flex-col items-center gap-4 rounded-[32px] bg-white py-16 text-black"
+                className="mt-10 flex w-full flex-col items-center gap-4 rounded-[32px] bg-surface py-16 text-text"
               >
-                <motion.div animate={pulseAnim(0.2)} className="h-8 w-1/2 rounded bg-black" />
-                <div className="flex h-10 w-28 items-center justify-center rounded-full bg-black text-[10px] font-bold uppercase tracking-widest text-white">
+                <motion.div animate={pulseAnim(0.2)} className="h-8 w-1/2 rounded bg-gold" />
+                <div className="flex h-10 w-28 items-center justify-center rounded-full bg-gold text-[10px] font-bold uppercase tracking-widest text-void">
                   Start Project
                 </div>
               </motion.div>

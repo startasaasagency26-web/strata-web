@@ -18,8 +18,8 @@ export const TheDisconnect = () => (
     <div className="grid gap-4 sm:grid-cols-2">
       {disconnects.map(({ icon: Icon, title, description }) => (
         <article key={title} className="rounded-[24px] border border-line bg-surface2 p-6 md:p-8">
-          <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-primary text-white"><Icon size={20} /></div>
-          <h3 className="mt-8 text-2xl font-bold text-primary">{title}</h3>
+          <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gold text-void"><Icon size={20} /></div>
+          <h3 className="mt-8 text-2xl font-bold text-text">{title}</h3>
           <p className="mt-3 max-w-md text-sm leading-relaxed text-muted md:text-base">{description}</p>
         </article>
       ))}

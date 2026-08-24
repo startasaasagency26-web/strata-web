@@ -16,11 +16,11 @@ export const Process = () => {
         <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-6">
           <div>
             <p className="text-xs font-mono tracking-widest text-muted uppercase mb-4">Implementation Blueprint</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary uppercase">
+            <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-text uppercase">
               How We Build &amp; Integrate
             </h2>
           </div>
-          <div className="font-mono text-xs text-primary max-w-xs uppercase tracking-widest border border-border/50 p-4 bg-background">
+          <div className="font-mono text-xs text-text max-w-xs uppercase tracking-widest border border-border/50 p-4 bg-background">
             <span className="block mb-2 text-muted">Status:</span>
             Audit, Architecture, Build, Integrate, Deploy, Optimize
           </div>
@@ -36,14 +36,14 @@ export const Process = () => {
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               className="bg-surface p-8 md:p-10 group hover:bg-background transition-colors duration-300 relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-[linear-gradient(rgb(var(--scrim)/0.03)_1px,transparent_1px),linear-gradient(90deg,rgb(var(--scrim)/0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
               <div className="relative z-10 flex flex-col h-full">
                 <div className="flex items-center justify-between mb-8">
-                  <span className="text-4xl font-display font-bold text-primary/10 group-hover:text-primary transition-colors duration-300">{step.num}</span>
-                  <div className="w-2 h-2 rounded-full bg-border group-hover:bg-primary transition-colors duration-300" />
+                  <span className="text-4xl font-display font-bold text-text/10 group-hover:text-gold transition-colors duration-300">{step.num}</span>
+                  <div className="w-2 h-2 rounded-full bg-border group-hover:bg-gold transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-mono font-bold tracking-widest text-primary mb-4">{step.title}</h3>
+                <h3 className="text-xl font-mono font-bold tracking-widest text-text mb-4">{step.title}</h3>
                 <p className="text-muted font-sans text-sm leading-relaxed mt-auto">
                   {step.desc}
                 </p>

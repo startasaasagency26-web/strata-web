@@ -124,10 +124,10 @@ export const Pricing = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-7xl font-display font-bold leading-none tracking-tight text-primary mb-8 uppercase"
+            className="text-4xl md:text-7xl font-display font-bold leading-none tracking-tight text-text mb-8 uppercase"
           >
             One Operating System. <br />
-            <span className="text-primary/70">Priced Around Your Business Economics.</span>
+            <span className="text-text/70">Priced Around Your Business Economics.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -162,7 +162,7 @@ export const Pricing = () => {
         <div className="bg-surface border border-border/60 rounded-[32px] p-8 md:p-14 shadow-sm">
           <div className="max-w-3xl mb-12">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">PRODUCT ARCHITECTURE</p>
-            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-primary uppercase mb-4">
+            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase mb-4">
               What Strata Core Includes
             </h2>
             <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
@@ -176,16 +176,16 @@ export const Pricing = () => {
             <div className="grid grid-cols-1 gap-3 lg:grid-cols-6 lg:gap-3">
               {systemFlowSteps.map((step, idx) => (
                 <div key={step} className="relative">
-                  <div className="relative z-10 flex min-h-[76px] items-center justify-between rounded-[18px] border border-border/60 bg-white px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.03)] lg:flex-col lg:items-start lg:justify-between">
+                  <div className="relative z-10 flex min-h-[76px] items-center justify-between rounded-[18px] border border-border/60 bg-surface px-4 py-3 shadow-[0_8px_24px_rgb(var(--scrim)/0.03)] lg:flex-col lg:items-start lg:justify-between">
                     <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-muted">
                       0{idx + 1}
                     </span>
-                    <span className="text-right font-mono text-xs font-bold uppercase tracking-wider text-primary lg:text-left leading-snug">
+                    <span className="text-right font-mono text-xs font-bold uppercase tracking-wider text-text lg:text-left leading-snug">
                       {step}
                     </span>
                   </div>
                   {idx < systemFlowSteps.length - 1 && (
-                    <div className="flex justify-center py-1.5 text-primary/35 lg:absolute lg:right-[-1.0rem] lg:top-1/2 lg:z-20 lg:-translate-y-1/2 lg:bg-surface lg:px-1 lg:py-0">
+                    <div className="flex justify-center py-1.5 text-text/35 lg:absolute lg:right-[-1.0rem] lg:top-1/2 lg:z-20 lg:-translate-y-1/2 lg:bg-surface lg:px-1 lg:py-0">
                       <ArrowRight size={14} />
                     </div>
                   )}
@@ -196,13 +196,13 @@ export const Pricing = () => {
 
           {/* Standardized Core Deliverables */}
           <div className="border-t border-border/50 pt-10">
-            <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-primary mb-6">
+            <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-text mb-6">
               Standardized System Deliverables Across Every Implementation:
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-3.5 gap-x-6">
               {coreDeliverables.map((item) => (
                 <div key={item} className="flex items-start gap-3">
-                  <Check className="mt-0.5 shrink-0 text-primary" size={15} />
+                  <Check className="mt-0.5 shrink-0 text-text" size={15} />
                   <span className="text-sm font-sans text-muted leading-relaxed">{item}</span>
                 </div>
               ))}
@@ -215,23 +215,23 @@ export const Pricing = () => {
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMERCIAL INVESTMENT</p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-primary uppercase">
+          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase">
             Starting Investment
           </h2>
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <article className="relative overflow-hidden rounded-[32px] border-2 border-primary bg-white p-8 md:p-14 shadow-[0_24px_72px_rgba(0,0,0,0.08)]">
+          <article className="relative overflow-hidden rounded-[32px] border-2 border-gold bg-surface p-8 md:p-14 shadow-[0_24px_72px_rgb(var(--scrim)/0.08)]">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-border/60">
               <div>
                 <span className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] text-muted block mb-1">
                   STANDARD IMPLEMENTATION
                 </span>
-                <h3 className="text-3xl md:text-4xl font-black text-primary uppercase tracking-tight">
+                <h3 className="text-3xl md:text-4xl font-black text-text uppercase tracking-tight">
                   Strata Core
                 </h3>
               </div>
-              <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-primary text-white font-mono text-[9px] font-bold uppercase tracking-widest">
+              <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-gold text-void font-mono text-[9px] font-bold uppercase tracking-widest">
                 MOST RECOMMENDED
               </span>
             </div>
@@ -239,17 +239,17 @@ export const Pricing = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 p-6 rounded-2xl bg-surface border border-border/50">
               <div>
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">IMPLEMENTATION</span>
-                <span className="font-mono text-2xl font-bold text-primary">FROM RM 5,000</span>
+                <span className="font-mono text-2xl font-bold text-text">FROM RM 5,000</span>
                 <span className="block text-[10px] font-mono text-muted mt-1">One-time setup &amp; build</span>
               </div>
               <div className="md:border-l md:border-border/50 md:pl-6">
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">MONTHLY OPERATING FEE</span>
-                <span className="font-mono text-2xl font-bold text-primary">FROM RM 5,000 / MO</span>
+                <span className="font-mono text-2xl font-bold text-text">FROM RM 5,000 / MO</span>
                 <span className="block text-[10px] font-mono text-muted mt-1">System, AI &amp; media ops</span>
               </div>
               <div className="md:border-l md:border-border/50 md:pl-6">
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">AD SPEND</span>
-                <span className="font-mono text-2xl font-bold text-primary">SEPARATE</span>
+                <span className="font-mono text-2xl font-bold text-text">SEPARATE</span>
                 <span className="block text-[10px] font-mono text-muted mt-1">Billed directly by ad platforms</span>
               </div>
             </div>
@@ -283,12 +283,12 @@ export const Pricing = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
           <div className="max-w-2xl">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">PRICING LOGIC</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-primary uppercase">
+            <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-text uppercase">
               What Determines Your Investment
             </h2>
           </div>
-          <div className="max-w-md border-l border-primary/20 pl-6">
-            <p className="text-sm font-sans text-primary font-medium leading-relaxed mb-1">
+          <div className="max-w-md border-l border-gold/20 pl-6">
+            <p className="text-sm font-sans text-text font-medium leading-relaxed mb-1">
               "We do not price by niche. We price by value, economics, and delivery complexity."
             </p>
             <p className="text-[10px] font-mono text-muted uppercase tracking-widest">
@@ -305,11 +305,11 @@ export const Pricing = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08 }}
-              className="bg-white border border-border/60 rounded-[28px] p-8 flex flex-col justify-between hover:shadow-lg transition-all duration-300"
+              className="bg-surface border border-border/60 rounded-[28px] p-8 flex flex-col justify-between hover:shadow-lg transition-all duration-300"
             >
               <div>
                 <div className="flex items-center justify-between mb-6 pb-4 border-b border-border/40">
-                  <h3 className="font-mono text-base font-bold uppercase tracking-wider text-primary">{factor.title}</h3>
+                  <h3 className="font-mono text-base font-bold uppercase tracking-wider text-text">{factor.title}</h3>
                   <span className="font-mono text-xs font-bold text-muted">{factor.num}</span>
                 </div>
                 <p className="text-muted font-sans text-sm leading-relaxed">
@@ -320,19 +320,19 @@ export const Pricing = () => {
           ))}
 
           {/* Summary Card */}
-          <div className="bg-primary text-white rounded-[28px] p-8 flex flex-col justify-between">
+          <div className="bg-surface2 text-text rounded-[28px] border border-gold/25 p-8 flex flex-col justify-between shadow-lg shadow-gold/5">
             <div>
-              <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-white/50 block mb-3">
+              <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted block mb-3">
                 NO RANDOM DISCOUNTS
               </span>
-              <h3 className="text-xl font-bold uppercase tracking-tight text-white mb-3">
+              <h3 className="text-xl font-bold uppercase tracking-tight text-text mb-3">
                 Fair &amp; Value-Based
               </h3>
-              <p className="text-white/75 font-sans text-xs md:text-sm leading-relaxed">
+              <p className="text-muted font-sans text-xs md:text-sm leading-relaxed">
                 Your investment is mapped strictly to the required infrastructure scope and commercial value created.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-white/10 font-mono text-[10px] uppercase tracking-widest text-white/50">
+            <div className="mt-6 pt-4 border-t border-border font-mono text-[10px] uppercase tracking-widest text-muted">
               Commercial Integrity
             </div>
           </div>
@@ -341,31 +341,31 @@ export const Pricing = () => {
 
       {/* SECTION 5 — EXPANDED SCOPE */}
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
-        <div className="bg-[#111113] text-white rounded-[32px] p-8 md:p-14 shadow-2xl relative overflow-hidden">
+        <div className="bg-surface2 text-text rounded-[32px] border border-gold/30 p-8 md:p-14 shadow-2xl shadow-gold/5 relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 relative z-10 items-center">
             <div>
-              <span className="mb-3 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
+              <span className="mb-3 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
                 EXPANDED INFRASTRUCTURE
               </span>
-              <h2 className="mb-6 text-4xl md:text-5xl font-black uppercase leading-tight text-white">
+              <h2 className="mb-6 text-4xl md:text-5xl font-black uppercase leading-tight text-text">
                 Expanded Scope
               </h2>
-              <p className="mb-8 font-sans text-base md:text-lg text-white/75 leading-relaxed max-w-lg">
+              <p className="mb-8 font-sans text-base md:text-lg text-muted leading-relaxed max-w-lg">
                 For growing businesses requiring additional infrastructure beyond the standard Strata Core implementation.
               </p>
 
-              <div className="grid grid-cols-2 gap-4 mb-8 p-5 rounded-2xl bg-white/5 border border-white/10">
+              <div className="grid grid-cols-2 gap-4 mb-8 p-5 rounded-2xl bg-surface2 border border-border">
                 <div>
-                  <span className="block font-mono text-[9px] uppercase tracking-widest text-white/50 mb-1">IMPLEMENTATION</span>
-                  <span className="font-mono text-xl font-bold text-white">RM 7,500+</span>
+                  <span className="block font-mono text-[9px] uppercase tracking-widest text-muted mb-1">IMPLEMENTATION</span>
+                  <span className="font-mono text-xl font-bold text-text">RM 7,500+</span>
                 </div>
                 <div>
-                  <span className="block font-mono text-[9px] uppercase tracking-widest text-white/50 mb-1">MONTHLY FEE</span>
-                  <span className="font-mono text-xl font-bold text-white">RM 7,500+ / MO</span>
+                  <span className="block font-mono text-[9px] uppercase tracking-widest text-muted mb-1">MONTHLY FEE</span>
+                  <span className="font-mono text-xl font-bold text-text">RM 7,500+ / MO</span>
                 </div>
               </div>
 
-              <p className="mb-8 font-sans text-xs text-white/60 leading-relaxed">
+              <p className="mb-8 font-sans text-xs text-muted leading-relaxed">
                 Expanded Scope uses the same Strata Core system architecture with additional infrastructure, routing logic, and integrations built around operational requirements.
               </p>
 
@@ -382,15 +382,15 @@ export const Pricing = () => {
               </Button>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-[24px] p-6 md:p-8">
-              <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-white/50 mb-6 border-b border-white/10 pb-3">
+            <div className="bg-surface2 border border-border rounded-[24px] p-6 md:p-8">
+              <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-muted mb-6 border-b border-border pb-3">
                 Common Triggers for Expanded Scope:
               </h4>
               <ul className="grid grid-cols-1 gap-3.5">
                 {expandedScopeReasons.map((reason) => (
                   <li key={reason} className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                    <span className="text-xs md:text-sm font-sans text-white/80">{reason}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-positiveSoft shrink-0" />
+                    <span className="text-xs md:text-sm font-sans text-muted">{reason}</span>
                   </li>
                 ))}
               </ul>
@@ -403,7 +403,7 @@ export const Pricing = () => {
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">TRANSPARENT PROCESS</p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-primary uppercase">
+          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase">
             How Quoting Works
           </h2>
         </div>
@@ -412,8 +412,8 @@ export const Pricing = () => {
           {quotingSteps.map((step) => (
             <div key={step.num} className="bg-surface border border-border/60 rounded-[28px] p-8 flex flex-col justify-between">
               <div>
-                <span className="font-mono text-2xl font-bold text-primary/20 block mb-4">{step.num}</span>
-                <h3 className="font-mono text-base font-bold uppercase tracking-wider text-primary mb-3">{step.title}</h3>
+                <span className="font-mono text-2xl font-bold text-text/20 block mb-4">{step.num}</span>
+                <h3 className="font-mono text-base font-bold uppercase tracking-wider text-text mb-3">{step.title}</h3>
                 <p className="text-muted font-sans text-sm leading-relaxed">{step.desc}</p>
               </div>
             </div>
@@ -425,7 +425,7 @@ export const Pricing = () => {
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">OPTIONAL ADD-ONS</p>
-          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-primary uppercase mb-3">
+          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-text uppercase mb-3">
             Optional Strata Core Support &amp; SLA Add-ons
           </h2>
           <p className="text-sm font-sans text-muted max-w-2xl mx-auto">
@@ -434,42 +434,42 @@ export const Pricing = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="bg-white border border-border/60 rounded-[24px] p-6 shadow-sm flex flex-col justify-between">
+          <div className="bg-surface border border-border/60 rounded-[24px] p-6 shadow-sm flex flex-col justify-between">
             <div>
-              <h3 className="font-display font-bold text-xl text-primary mb-1">Monitor</h3>
-              <p className="font-mono text-lg font-bold text-primary mb-4">RM 299/mo</p>
+              <h3 className="font-display font-bold text-xl text-text mb-1">Monitor</h3>
+              <p className="font-mono text-lg font-bold text-text mb-4">RM 299/mo</p>
               <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> CRM &amp; funnel uptime checks</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Bug fixes &amp; error resolution</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Basic ticket support</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> CRM &amp; funnel uptime checks</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Bug fixes &amp; error resolution</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Basic ticket support</li>
               </ul>
             </div>
           </div>
 
-          <div className="bg-white border-2 border-primary rounded-[24px] p-6 shadow-md flex flex-col justify-between">
+          <div className="bg-surface border-2 border-gold rounded-[24px] p-6 shadow-md flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-1">
-                <h3 className="font-display font-bold text-xl text-primary">Support</h3>
-                <span className="text-[8px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 bg-primary text-white rounded-full">POPULAR</span>
+                <h3 className="font-display font-bold text-xl text-text">Support</h3>
+                <span className="text-[8px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 bg-gold text-void rounded-full">POPULAR</span>
               </div>
-              <p className="font-mono text-lg font-bold text-primary mb-4">RM 599/mo</p>
+              <p className="font-mono text-lg font-bold text-text mb-4">RM 599/mo</p>
               <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Everything in Monitor</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Up to 2 hours of changes/month</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Form &amp; integration health checks</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Minor copy &amp; layout updates</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Everything in Monitor</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Up to 2 hours of changes/month</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Form &amp; integration health checks</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Minor copy &amp; layout updates</li>
               </ul>
             </div>
           </div>
 
-          <div className="bg-white border border-border/60 rounded-[24px] p-6 shadow-sm flex flex-col justify-between">
+          <div className="bg-surface border border-border/60 rounded-[24px] p-6 shadow-sm flex flex-col justify-between">
             <div>
-              <h3 className="font-display font-bold text-xl text-primary mb-1">Growth</h3>
-              <p className="font-mono text-lg font-bold text-primary mb-4">RM 999/mo</p>
+              <h3 className="font-display font-bold text-xl text-text mb-1">Growth</h3>
+              <p className="font-mono text-lg font-bold text-text mb-4">RM 999/mo</p>
               <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Everything in Support</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Monthly pipeline &amp; funnel review</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Priority 24-hour response SLA</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Everything in Support</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Monthly pipeline &amp; funnel review</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Priority 24-hour response SLA</li>
               </ul>
             </div>
           </div>
@@ -481,7 +481,7 @@ export const Pricing = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMON QUESTIONS</p>
-            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-primary uppercase">
+            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase">
               Commercial FAQ
             </h2>
           </div>
@@ -489,18 +489,18 @@ export const Pricing = () => {
           <div className="grid gap-6 mb-16">
             {faqs.map((faq) => (
               <div key={faq.question} className="bg-surface/50 border border-border/50 rounded-2xl p-6 md:p-8">
-                <h4 className="text-lg md:text-xl font-bold font-sans text-primary mb-3">{faq.question}</h4>
+                <h4 className="text-lg md:text-xl font-bold font-sans text-text mb-3">{faq.question}</h4>
                 <p className="text-sm md:text-base font-sans text-muted leading-relaxed">{faq.answer}</p>
               </div>
             ))}
           </div>
 
           {/* Final Conversion Block */}
-          <div className="bg-primary text-white rounded-[32px] p-8 md:p-14 text-center shadow-xl">
-            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight mb-6 text-white">
+          <div className="bg-surface2 text-text rounded-[32px] border border-gold/30 p-8 md:p-14 text-center shadow-xl shadow-gold/5">
+            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight mb-6 text-text">
               Ready to price your revenue operating system?
             </h3>
-            <p className="text-white/80 font-sans text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+            <p className="text-muted font-sans text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
               Book a Revenue Systems Audit. We'll map your current lead flow, review your customer economics, and specify your exact Strata Core implementation scope.
             </p>
             <Button

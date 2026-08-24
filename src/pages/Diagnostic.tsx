@@ -19,17 +19,17 @@ const clientEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="border-b border-primary/10 py-6">
+    <div className="border-b border-gold/10 py-6">
       <button
         type="button"
         aria-expanded={isOpen}
         onClick={() => setIsOpen(!isOpen)}
         className="flex w-full items-center justify-between rounded-2xl text-left focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
-        <h4 className="text-base font-bold uppercase tracking-tight text-primary md:text-lg">
+        <h4 className="text-base font-bold uppercase tracking-tight text-text md:text-lg">
           {question}
         </h4>
-        <div className="ml-4 h-6 w-6 shrink-0 text-primary/40">
+        <div className="ml-4 h-6 w-6 shrink-0 text-text/40">
           {isOpen ? <Minus size={20} /> : <Plus size={20} />}
         </div>
       </button>
@@ -42,7 +42,7 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="mt-4 text-sm leading-relaxed text-primary/60 md:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-text/60 md:text-base">
               {answer}
             </p>
           </motion.div>
@@ -257,23 +257,23 @@ export const Diagnostic = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">
+            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-text/40">
               STRATA REVENUE AUDIT
             </span>
-            <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-tight text-primary md:text-7xl lg:text-8xl">
+            <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-tight text-text md:text-7xl lg:text-8xl">
               Book Your Revenue Systems Audit
             </h1>
-            <p className="mb-10 max-w-xl text-lg leading-relaxed text-primary/60 md:text-xl">
+            <p className="mb-10 max-w-xl text-lg leading-relaxed text-text/60 md:text-xl">
               Tell us how enquiries reach you today and what happens after they arrive. We'll map your lead flow, uncover conversion leaks across capture, CRM, AI, and follow-up — and design your revenue operating system.
             </p>
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}
-                className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95"
+                className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-transform active:scale-95"
               >
                 <span className="relative z-10">Start Revenue Audit</span>
               </button>
-              <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
+              <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-void transition-all hover:bg-gold/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>
               </Link>
             </div>
@@ -285,8 +285,8 @@ export const Diagnostic = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#050505] p-8 shadow-2xl lg:p-12">
-              <div className="mb-8 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
+            <div className="relative overflow-hidden rounded-[32px] border border-gold/30 bg-surface2 p-8 shadow-2xl shadow-gold/5 lg:p-12">
+              <div className="mb-8 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
                 Diagnostic Focus
               </div>
               <div className="space-y-6">
@@ -296,21 +296,21 @@ export const Diagnostic = () => {
                   { id: "03", title: "CRM & Follow-Up" },
                   { id: "04", title: "System Roadmap" },
                 ].map((item) => (
-                  <div key={item.id} className="flex items-center gap-6 border-b border-white/5 pb-6 last:border-0 last:pb-0">
-                    <span className="font-mono text-xs font-bold text-white/20">{item.id}</span>
-                    <span className="text-xl font-bold uppercase tracking-tight text-white md:text-2xl">{item.title}</span>
+                  <div key={item.id} className="flex items-center gap-6 border-b border-border pb-6 last:border-0 last:pb-0">
+                    <span className="font-mono text-xs font-bold text-muted">{item.id}</span>
+                    <span className="text-xl font-bold uppercase tracking-tight text-text md:text-2xl">{item.title}</span>
                   </div>
                 ))}
               </div>
             </div>
             {/* Decorative element */}
-            <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-primary/5 blur-3xl" />
+            <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-gold/5 blur-3xl" />
           </motion.div>
         </div>
       </section>
 
       {/* SECTION 2 — PURPOSE CARDS */}
-      <section className="bg-[#fcfbf9] px-6 py-24 lg:px-20 lg:py-32">
+      <section className="bg-surface px-6 py-24 lg:px-20 lg:py-32">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {[
             {
@@ -336,15 +336,15 @@ export const Diagnostic = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group rounded-[32px] border border-primary/5 bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+              className="group rounded-[32px] border border-gold/5 bg-surface p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
             >
-              <div className="mb-6 h-12 w-12 rounded-2xl bg-primary/5 flex items-center justify-center transition-colors group-hover:bg-primary group-hover:text-white text-primary">
+              <div className="mb-6 h-12 w-12 rounded-2xl bg-gold/5 flex items-center justify-center transition-colors group-hover:bg-gold group-hover:text-void text-void">
                  <div className="h-6 w-6 rounded-md border-2 border-current opacity-30" />
               </div>
-              <h3 className="mb-4 text-xl font-bold uppercase tracking-tight text-primary leading-tight">
+              <h3 className="mb-4 text-xl font-bold uppercase tracking-tight text-text leading-tight">
                 {card.title}
               </h3>
-              <p className="text-sm leading-relaxed text-primary/60">
+              <p className="text-sm leading-relaxed text-text/60">
                 {card.desc}
               </p>
             </motion.div>
@@ -356,19 +356,19 @@ export const Diagnostic = () => {
       <section id="diagnostic-form" ref={formRef} className="px-6 py-24 lg:px-20 lg:py-32">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_0.4fr]">
           {/* Form Side */}
-          <div className="rounded-[40px] border border-primary/5 bg-white p-8 shadow-2xl lg:p-16">
+          <div className="rounded-[40px] border border-gold/5 bg-surface p-8 shadow-2xl lg:p-16">
             <div className="mb-12">
               <div className="mb-4 flex items-center justify-between">
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-text/40">
                   Step {step} of {totalSteps}
                 </span>
-                <span className="font-mono text-[10px] font-bold text-primary/40">
+                <span className="font-mono text-[10px] font-bold text-text/40">
                   {Math.round((step / totalSteps) * 100)}% Complete
                 </span>
               </div>
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-primary/5">
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-gold/5">
                 <motion.div 
-                  className="h-full bg-primary"
+                  className="h-full bg-gold"
                   initial={{ width: 0 }}
                   animate={{ width: `${(step / totalSteps) * 100}%` }}
                   transition={{ duration: 0.5 }}
@@ -391,7 +391,7 @@ export const Diagnostic = () => {
                       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                         {/* Name & Company */}
                         <div className="space-y-2">
-                          <label htmlFor="full-name" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Full Name</label>
+                          <label htmlFor="full-name" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Full Name</label>
                           <input 
                             id="full-name"
                             required
@@ -399,8 +399,8 @@ export const Diagnostic = () => {
                             aria-invalid={Boolean(fieldErrors.fullName)}
                             aria-describedby={fieldErrors.fullName ? "full-name-error" : undefined}
                             className={cn(
-                              "w-full rounded-2xl border bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none transition-colors focus:border-primary",
-                              fieldErrors.fullName ? "border-red-500/50" : "border-primary/10"
+                              "w-full rounded-2xl border bg-surface px-6 py-4 text-sm font-medium text-text outline-none transition-colors focus:border-gold",
+                              fieldErrors.fullName ? "border-danger/30/50" : "border-gold/10"
                             )}
                             placeholder="Ahmad Zulkifli"
                             value={formData.name}
@@ -410,11 +410,11 @@ export const Diagnostic = () => {
                             }}
                           />
                           {fieldErrors.fullName && (
-                            <p id="full-name-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.fullName}</p>
+                            <p id="full-name-error" className="text-[10px] font-bold uppercase tracking-wider text-danger">{fieldErrors.fullName}</p>
                           )}
                         </div>
                         <div className="space-y-2">
-                          <label htmlFor="company-name" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Company Name</label>
+                          <label htmlFor="company-name" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Company Name</label>
                           <input 
                             id="company-name"
                             required
@@ -422,8 +422,8 @@ export const Diagnostic = () => {
                             aria-invalid={Boolean(fieldErrors.companyName)}
                             aria-describedby={fieldErrors.companyName ? "company-name-error" : undefined}
                             className={cn(
-                              "w-full rounded-2xl border bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none transition-colors focus:border-primary",
-                              fieldErrors.companyName ? "border-red-500/50" : "border-primary/10"
+                              "w-full rounded-2xl border bg-surface px-6 py-4 text-sm font-medium text-text outline-none transition-colors focus:border-gold",
+                              fieldErrors.companyName ? "border-danger/30/50" : "border-gold/10"
                             )}
                             placeholder="Zul Trading Sdn Bhd"
                             value={formData.company}
@@ -433,13 +433,13 @@ export const Diagnostic = () => {
                             }}
                           />
                           {fieldErrors.companyName && (
-                            <p id="company-name-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.companyName}</p>
+                            <p id="company-name-error" className="text-[10px] font-bold uppercase tracking-wider text-danger">{fieldErrors.companyName}</p>
                           )}
                         </div>
 
                         {/* Email & Phone */}
                         <div className="space-y-2">
-                          <label htmlFor="work-email" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Work Email</label>
+                          <label htmlFor="work-email" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Work Email</label>
                           <input 
                             id="work-email"
                             required
@@ -447,8 +447,8 @@ export const Diagnostic = () => {
                             aria-invalid={Boolean(fieldErrors.workEmail)}
                             aria-describedby={fieldErrors.workEmail ? "work-email-error" : undefined}
                             className={cn(
-                              "w-full rounded-2xl border bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none transition-colors focus:border-primary",
-                              fieldErrors.workEmail ? "border-red-500/50" : "border-primary/10"
+                              "w-full rounded-2xl border bg-surface px-6 py-4 text-sm font-medium text-text outline-none transition-colors focus:border-gold",
+                              fieldErrors.workEmail ? "border-danger/30/50" : "border-gold/10"
                             )}
                             placeholder="ahmad@company.com"
                             value={formData.email}
@@ -458,16 +458,16 @@ export const Diagnostic = () => {
                             }}
                           />
                           {fieldErrors.workEmail && (
-                            <p id="work-email-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.workEmail}</p>
+                            <p id="work-email-error" className="text-[10px] font-bold uppercase tracking-wider text-danger">{fieldErrors.workEmail}</p>
                           )}
                         </div>
                         <div className="space-y-2">
-                          <label htmlFor="whatsapp-phone" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">WhatsApp / Phone</label>
+                          <label htmlFor="whatsapp-phone" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">WhatsApp / Phone</label>
                           <div className={cn(
-                            "flex items-center rounded-2xl border bg-[#fcfbf9] px-4 transition-all duration-300",
-                            phoneError || fieldErrors.whatsappPhone ? "border-red-500/50" : "border-primary/10 focus-within:border-primary"
+                            "flex items-center rounded-2xl border bg-surface px-4 transition-all duration-300",
+                            phoneError || fieldErrors.whatsappPhone ? "border-danger/30/50" : "border-gold/10 focus-within:border-gold"
                           )}>
-                            <div className="flex h-10 items-center justify-center rounded-lg bg-primary/5 px-3 font-mono text-xs font-bold text-primary/40">
+                            <div className="flex h-10 items-center justify-center rounded-lg bg-gold/5 px-3 font-mono text-xs font-bold text-void/40">
                               +60
                             </div>
                             <input 
@@ -476,28 +476,28 @@ export const Diagnostic = () => {
                               type="tel" 
                               aria-invalid={Boolean(phoneError || fieldErrors.whatsappPhone)}
                               aria-describedby={phoneError || fieldErrors.whatsappPhone ? "whatsapp-phone-error" : undefined}
-                              className="w-full bg-transparent px-4 py-4 text-sm font-medium text-primary outline-none"
+                              className="w-full bg-transparent px-4 py-4 text-sm font-medium text-text outline-none"
                               placeholder="12-345 6789"
                               value={formData.whatsappLocal}
                               onChange={(e) => handlePhoneChange(e.target.value)}
                             />
                           </div>
                           {(phoneError || fieldErrors.whatsappPhone) && (
-                            <p id="whatsapp-phone-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{phoneError || fieldErrors.whatsappPhone}</p>
+                            <p id="whatsapp-phone-error" className="text-[10px] font-bold uppercase tracking-wider text-danger">{phoneError || fieldErrors.whatsappPhone}</p>
                           )}
                         </div>
 
                         {/* Role & Country */}
                         <div className="space-y-2">
-                          <label htmlFor="role" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Role in Business</label>
+                          <label htmlFor="role" className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Role in Business</label>
                           <select 
                             id="role"
                             required
                             aria-invalid={Boolean(fieldErrors.roleInBusiness)}
                             aria-describedby={fieldErrors.roleInBusiness ? "role-error" : undefined}
                             className={cn(
-                              "w-full appearance-none rounded-2xl border bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none transition-colors focus:border-primary",
-                              fieldErrors.roleInBusiness ? "border-red-500/50" : "border-primary/10"
+                              "w-full appearance-none rounded-2xl border bg-surface px-6 py-4 text-sm font-medium text-text outline-none transition-colors focus:border-gold",
+                              fieldErrors.roleInBusiness ? "border-danger/30/50" : "border-gold/10"
                             )}
                             value={formData.role}
                             onChange={(e) => {
@@ -514,28 +514,28 @@ export const Diagnostic = () => {
                             ))}
                           </select>
                           {fieldErrors.roleInBusiness && (
-                            <p id="role-error" className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.roleInBusiness}</p>
+                            <p id="role-error" className="text-[10px] font-bold uppercase tracking-wider text-danger">{fieldErrors.roleInBusiness}</p>
                           )}
                         </div>
                         <div className="space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Country / Timezone</label>
-                          <div className="flex items-center justify-between rounded-2xl border border-primary/5 bg-primary/[0.02] px-6 py-4 opacity-70">
-                            <span className="text-sm font-medium text-primary/60">Malaysia / GMT+8</span>
-                            <div className="text-primary/20">
+                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Country / Timezone</label>
+                          <div className="flex items-center justify-between rounded-2xl border border-gold/5 bg-gold/[0.02] px-6 py-4 opacity-70">
+                            <span className="text-sm font-medium text-text/60">Malaysia / GMT+8</span>
+                            <div className="text-text/20">
                               <div className="h-4 w-4 rounded-md border-2 border-current flex items-center justify-center">
                                  <div className="h-1.5 w-1.5 rounded-full bg-current" />
                               </div>
                             </div>
                           </div>
                           {fieldErrors.countryTimezone && (
-                            <p className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.countryTimezone}</p>
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-danger">{fieldErrors.countryTimezone}</p>
                           )}
                         </div>
                       </div>
 
                       {/* Language */}
                       <div className="space-y-4 pt-4">
-                        <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Preferred Language</label>
+                        <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Preferred Language</label>
                         <div className="flex flex-wrap gap-3">
                           {["English", "Bahasa Melayu", "Mandarin"].map((lang) => (
                             <button
@@ -548,8 +548,8 @@ export const Diagnostic = () => {
                               className={cn(
                                 "rounded-full px-8 py-3 text-[10px] font-bold uppercase tracking-widest transition-all",
                                 formData.language === lang 
-                                  ? "bg-primary text-white shadow-xl" 
-                                  : "bg-[#f4f2ed] text-primary/60 hover:bg-[#eceae4]"
+                                  ? "bg-gold text-void shadow-xl"
+                                  : "bg-surface2 text-text/60 hover:bg-surface3"
                               )}
                             >
                               {lang}
@@ -557,7 +557,7 @@ export const Diagnostic = () => {
                           ))}
                         </div>
                         {fieldErrors.preferredLanguage && (
-                          <p className="text-[10px] font-bold uppercase tracking-wider text-red-500">{fieldErrors.preferredLanguage}</p>
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-danger">{fieldErrors.preferredLanguage}</p>
                         )}
                       </div>
                     </div>
@@ -566,7 +566,7 @@ export const Diagnostic = () => {
                   {/* Step 2: Business Type */}
                   {step === 2 && (
                     <div className="space-y-8">
-                      <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">What kind of business are you building for?</h3>
+                      <h3 className="text-2xl font-bold uppercase tracking-tight text-text">What kind of business are you building for?</h3>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {[
                           "Service business", "Local retail business", "E-commerce brand",
@@ -580,15 +580,15 @@ export const Diagnostic = () => {
                             className={cn(
                               "flex items-center gap-4 rounded-2xl border p-6 text-left transition-all",
                               formData.businessType === type
-                                ? "border-primary bg-primary text-white shadow-xl"
-                                : "border-primary/5 bg-[#fcfbf9] text-primary/60 hover:border-primary/20 hover:bg-white"
+                                ? "border-gold bg-gold text-void shadow-xl"
+                                : "border-gold/5 bg-surface text-text/60 hover:border-gold/20 hover:bg-surface3"
                             )}
                           >
                             <span className={cn(
                               "h-5 w-5 shrink-0 rounded-full border-2 flex items-center justify-center transition-colors",
-                              formData.businessType === type ? "border-white" : "border-primary/10"
+                              formData.businessType === type ? "border-border" : "border-gold/10"
                             )}>
-                              {formData.businessType === type && <div className="h-2 w-2 rounded-full bg-white" />}
+                              {formData.businessType === type && <div className="h-2 w-2 rounded-full bg-surface" />}
                             </span>
                             <span className="text-xs font-bold uppercase tracking-wider">{type}</span>
                           </button>
@@ -600,7 +600,7 @@ export const Diagnostic = () => {
                   {/* Step 3: Build Requirement */}
                   {step === 3 && (
                     <div className="space-y-8">
-                      <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">What is your primary Strata Core focus area?</h3>
+                      <h3 className="text-2xl font-bold uppercase tracking-tight text-text">What is your primary Strata Core focus area?</h3>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {[
                           "Full Strata Core Install", "CRM & Pipeline Setup", "WhatsApp & AI Automation",
@@ -613,15 +613,15 @@ export const Diagnostic = () => {
                             className={cn(
                               "flex items-center gap-4 rounded-2xl border p-6 text-left transition-all",
                               formData.requirement === req
-                                ? "border-primary bg-primary text-white shadow-xl"
-                                : "border-primary/5 bg-[#fcfbf9] text-primary/60 hover:border-primary/20 hover:bg-white"
+                                ? "border-gold bg-gold text-void shadow-xl"
+                                : "border-gold/5 bg-surface text-text/60 hover:border-gold/20 hover:bg-surface3"
                             )}
                           >
                             <span className={cn(
                               "h-5 w-5 shrink-0 rounded-full border-2 flex items-center justify-center transition-colors",
-                              formData.requirement === req ? "border-white" : "border-primary/10"
+                              formData.requirement === req ? "border-border" : "border-gold/10"
                             )}>
-                              {formData.requirement === req && <div className="h-2 w-2 rounded-full bg-white" />}
+                              {formData.requirement === req && <div className="h-2 w-2 rounded-full bg-surface" />}
                             </span>
                             <span className="text-xs font-bold uppercase tracking-wider">{req}</span>
                           </button>
@@ -633,16 +633,16 @@ export const Diagnostic = () => {
                   {/* Step 4: Current Problem */}
                   {step === 4 && (
                     <div className="space-y-8">
-                      <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">What is currently unclear, manual, slow, outdated, or not converting?</h3>
+                      <h3 className="text-2xl font-bold uppercase tracking-tight text-text">What is currently unclear, manual, slow, outdated, or not converting?</h3>
                       <div className="space-y-4">
                         <textarea 
                           required
-                          className="min-h-[200px] w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-6 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                          className="min-h-[200px] w-full rounded-2xl border border-gold/10 bg-surface px-6 py-6 text-sm font-medium text-text outline-none focus:border-gold transition-colors"
                           placeholder="Tell us about your pain points..."
                           value={formData.problem}
                           onChange={(e) => setFormData({...formData, problem: e.target.value})}
                         />
-                        <p className="flex items-center gap-2 text-xs text-primary/40 italic">
+                        <p className="flex items-center gap-2 text-xs text-text/40 italic">
                           <HelpCircle size={14} />
                           Example: weak enquiries, unclear services, poor mobile experience, too much manual follow-up, outdated website, no lead capture, or no proper customer journey.
                         </p>
@@ -653,32 +653,32 @@ export const Diagnostic = () => {
                   {/* Step 5: Current Links */}
                   {step === 5 && (
                     <div className="space-y-8">
-                      <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">Current Links and References</h3>
+                      <h3 className="text-2xl font-bold uppercase tracking-tight text-text">Current Links and References</h3>
                       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                         <div className="space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Current Website URL</label>
+                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Current Website URL</label>
                           <input 
                             type="url" 
-                            className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                            className="w-full rounded-2xl border border-gold/10 bg-surface px-6 py-4 text-sm font-medium text-text outline-none focus:border-gold transition-colors"
                             placeholder="https://..."
                             value={formData.websiteUrl}
                             onChange={(e) => setFormData({...formData, websiteUrl: e.target.value})}
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Social Media Links</label>
+                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Social Media Links</label>
                           <input 
                             type="text" 
-                            className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                            className="w-full rounded-2xl border border-gold/10 bg-surface px-6 py-4 text-sm font-medium text-text outline-none focus:border-gold transition-colors"
                             placeholder="Instagram, TikTok, etc."
                             value={formData.socialLinks}
                             onChange={(e) => setFormData({...formData, socialLinks: e.target.value})}
                           />
                         </div>
                         <div className="col-span-1 md:col-span-2 space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Competitor or Reference Links</label>
+                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Competitor or Reference Links</label>
                           <textarea 
-                            className="min-h-[100px] w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                            className="min-h-[100px] w-full rounded-2xl border border-gold/10 bg-surface px-6 py-4 text-sm font-medium text-text outline-none focus:border-gold transition-colors"
                             placeholder="Websites you like or competitors..."
                             value={formData.references}
                             onChange={(e) => setFormData({...formData, references: e.target.value})}
@@ -692,7 +692,7 @@ export const Diagnostic = () => {
                   {step === 6 && (
                     <div className="space-y-12">
                       <div className="space-y-6">
-                        <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">Intended Timeline</h3>
+                        <h3 className="text-2xl font-bold uppercase tracking-tight text-text">Intended Timeline</h3>
                         <div className="flex flex-wrap gap-3">
                           {["ASAP", "Within 30 days", "1–3 months", "3+ months", "Still exploring"].map((t) => (
                             <button
@@ -702,8 +702,8 @@ export const Diagnostic = () => {
                               className={cn(
                                 "rounded-full px-6 py-3 text-xs font-bold uppercase tracking-widest transition-all",
                                 formData.timeline === t 
-                                  ? "bg-primary text-white shadow-lg" 
-                                  : "bg-[#f4f2ed] text-primary/60 hover:bg-[#eceae4]"
+                                  ? "bg-gold text-void shadow-lg"
+                                  : "bg-surface2 text-text/60 hover:bg-surface3"
                               )}
                             >
                               {t}
@@ -712,7 +712,7 @@ export const Diagnostic = () => {
                         </div>
                       </div>
                       <div className="space-y-6">
-                        <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">Expected Budget</h3>
+                        <h3 className="text-2xl font-bold uppercase tracking-tight text-text">Expected Budget</h3>
                         <div className="flex flex-wrap gap-3">
                           {[
                             "Below RM3,000", "RM3,000–RM5,000", "RM5,000–RM10,000", 
@@ -725,8 +725,8 @@ export const Diagnostic = () => {
                               className={cn(
                                 "rounded-full px-6 py-3 text-xs font-bold uppercase tracking-widest transition-all",
                                 formData.budget === b 
-                                  ? "bg-primary text-white shadow-lg" 
-                                  : "bg-[#f4f2ed] text-primary/60 hover:bg-[#eceae4]"
+                                  ? "bg-gold text-void shadow-lg"
+                                  : "bg-surface2 text-text/60 hover:bg-surface3"
                               )}
                             >
                               {b}
@@ -741,38 +741,38 @@ export const Diagnostic = () => {
                   {step === 7 && (
                     <div className="space-y-12">
                       <div className="space-y-8">
-                        <h3 className="text-2xl font-bold uppercase tracking-tight text-primary">Preferred Diagnosis Call Time</h3>
+                        <h3 className="text-2xl font-bold uppercase tracking-tight text-text">Preferred Diagnosis Call Time</h3>
                         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                           <div className="space-y-2">
-                            <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Preferred Date</label>
+                            <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Preferred Date</label>
                             <input 
                               required
                               type="date" 
-                              className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                              className="w-full rounded-2xl border border-gold/10 bg-surface px-6 py-4 text-sm font-medium text-text outline-none focus:border-gold transition-colors"
                               value={formData.preferredDate}
                               onChange={(e) => setFormData({...formData, preferredDate: e.target.value})}
                             />
                           </div>
                           <div className="space-y-2">
-                            <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Preferred Time</label>
+                            <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Preferred Time</label>
                             <input 
                               type="time" 
-                              className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                              className="w-full rounded-2xl border border-gold/10 bg-surface px-6 py-4 text-sm font-medium text-text outline-none focus:border-gold transition-colors"
                               value={formData.preferredTime}
                               onChange={(e) => setFormData({...formData, preferredTime: e.target.value})}
                             />
                           </div>
                           <div className="space-y-2">
-                            <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Timezone</label>
-                            <div className="flex h-14 items-center rounded-2xl border border-primary/5 bg-primary/[0.02] px-6 py-4 opacity-70">
-                              <span className="text-sm font-medium text-primary/60">GMT+8 (Kuala Lumpur)</span>
+                            <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Timezone</label>
+                            <div className="flex h-14 items-center rounded-2xl border border-gold/5 bg-gold/[0.02] px-6 py-4 opacity-70">
+                              <span className="text-sm font-medium text-text/60">GMT+8 (Kuala Lumpur)</span>
                             </div>
                           </div>
                         </div>
                         <div className="space-y-2">
-                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-primary/60">Additional Notes</label>
+                          <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">Additional Notes</label>
                           <textarea 
-                            className="min-h-[100px] w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
+                            className="min-h-[100px] w-full rounded-2xl border border-gold/10 bg-surface px-6 py-4 text-sm font-medium text-text outline-none focus:border-gold transition-colors"
                             placeholder="Anything else we should know?"
                             value={formData.notes}
                             onChange={(e) => setFormData({...formData, notes: e.target.value})}
@@ -789,12 +789,12 @@ export const Diagnostic = () => {
                           onClick={() => setFormData({...formData, consent: !formData.consent})}
                           className={cn(
                             "mt-1 h-5 w-5 shrink-0 rounded border-2 flex items-center justify-center transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
-                            formData.consent ? "bg-primary border-primary text-white" : "border-primary/10"
+                            formData.consent ? "bg-gold border-gold text-void" : "border-gold/10"
                           )}
                         >
                           {formData.consent && <CheckCircle2 size={12} />}
                         </button>
-                        <span className="text-xs leading-relaxed text-primary/60">
+                        <span className="text-xs leading-relaxed text-text/60">
                           I agree to be contacted by Strata regarding this diagnosis request. My data will be handled according to Strata's privacy policy.
                         </span>
                       </div>
@@ -806,19 +806,19 @@ export const Diagnostic = () => {
               {submitError && (
                 <div
                   role="alert"
-                  className="rounded-2xl border border-red-500/15 bg-red-500/[0.06] px-5 py-4 text-xs font-bold uppercase tracking-wider text-red-600"
+                  className="rounded-2xl border border-danger/30/15 bg-dangerSoft/[0.06] px-5 py-4 text-xs font-bold uppercase tracking-wider text-danger"
                 >
                   {submitError}
                 </div>
               )}
 
               {/* Form Navigation */}
-              <div className="flex flex-wrap items-center justify-between gap-6 pt-12 border-t border-primary/5">
+              <div className="flex flex-wrap items-center justify-between gap-6 pt-12 border-t border-gold/5">
                 {step > 1 ? (
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-primary/40 hover:text-primary transition-colors"
+                    className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-text/40 hover:text-gold transition-colors"
                   >
                     <ChevronLeft size={16} />
                     <span>Back</span>
@@ -833,8 +833,8 @@ export const Diagnostic = () => {
                     className={cn(
                       "group flex h-14 items-center justify-center gap-4 rounded-full px-10 text-sm font-bold uppercase tracking-widest transition-all active:scale-95",
                       isStepValid() 
-                        ? "bg-primary text-white shadow-xl" 
-                        : "bg-[#f4f2ed] text-primary/20 cursor-not-allowed"
+                        ? "bg-gold text-void shadow-xl"
+                        : "bg-surface2 text-text/20 cursor-not-allowed"
                     )}
                   >
                     <span>Next Step</span>
@@ -848,8 +848,8 @@ export const Diagnostic = () => {
                     className={cn(
                       "group flex h-14 items-center justify-center gap-4 rounded-full px-12 text-sm font-bold uppercase tracking-widest transition-all active:scale-95",
                       isStepValid() && !isSubmitting
-                        ? "bg-primary text-white shadow-xl" 
-                        : "bg-[#f4f2ed] text-primary/20 cursor-not-allowed"
+                        ? "bg-gold text-void shadow-xl"
+                        : "bg-surface2 text-text/20 cursor-not-allowed"
                     )}
                   >
                     <span>{isSubmitting ? "Submitting..." : "Submit Diagnostic Request"}</span>
@@ -866,22 +866,22 @@ export const Diagnostic = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="overflow-hidden rounded-[36px] border border-white/10 bg-[#0B0B0B] text-white shadow-2xl"
+              className="overflow-hidden rounded-[36px] border border-gold/25 bg-surface2 text-text shadow-2xl shadow-gold/5"
             >
               <div className="p-8 lg:p-10">
-                <span className="mb-6 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/30">
+                <span className="mb-6 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
                   QUALIFICATION FILTER
                 </span>
-                <h3 className="mb-4 text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
+                <h3 className="mb-4 text-2xl font-bold uppercase tracking-tight text-text md:text-3xl">
                   Built for serious operators.
                 </h3>
-                <p className="mb-10 text-sm leading-relaxed text-white/50">
+                <p className="mb-10 text-sm leading-relaxed text-muted">
                   Strata works best with businesses that need structure, clarity, and a revenue system they can actually see and run.
                 </p>
 
                 {/* Section 1: Good Fit */}
                 <div className="space-y-6">
-                  <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-white/20">
+                  <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-muted">
                     GOOD FIT
                   </span>
                   <ul className="space-y-4">
@@ -894,18 +894,18 @@ export const Diagnostic = () => {
                       "Teams with clear sales capacity and customer value"
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-4">
-                        <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/40" />
-                        <span className="text-xs leading-relaxed text-white/70">{item}</span>
+                        <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-surface2" />
+                        <span className="text-xs leading-relaxed text-muted">{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="my-10 h-px w-full bg-white/5" />
+                <div className="my-10 h-px w-full bg-surface2" />
 
                 {/* Section 2: Not a Fit */}
                 <div className="space-y-6">
-                  <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-white/20">
+                  <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-muted">
                     NOT A FIT
                   </span>
                   <ul className="space-y-4">
@@ -917,8 +917,8 @@ export const Diagnostic = () => {
                       "You expect high-scale system builds at throwaway pricing"
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-4">
-                        <div className="mt-[9px] h-0.5 w-1.5 shrink-0 bg-white/20" />
-                        <span className="text-xs leading-relaxed text-white/40">{item}</span>
+                        <div className="mt-[9px] h-0.5 w-1.5 shrink-0 bg-surface2" />
+                        <span className="text-xs leading-relaxed text-muted">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -926,8 +926,8 @@ export const Diagnostic = () => {
               </div>
 
               {/* Bottom Strip */}
-              <div className="border-t border-white/5 bg-white/[0.02] p-6 text-center">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-white/30">
+              <div className="border-t border-border bg-surface2 p-6 text-center">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-muted">
                   Not sure if you fit? Submit the diagnostic and we'll review honestly.
                 </p>
               </div>
@@ -937,12 +937,12 @@ export const Diagnostic = () => {
       </section>
 
       {/* SECTION 4 — NEXT STEPS */}
-      <section className="bg-[#050505] px-6 py-24 lg:px-20 lg:py-32 text-white">
+      <section className="mx-2 rounded-[32px] border border-gold/30 bg-surface2 px-6 py-24 text-text shadow-2xl shadow-gold/5 md:mx-6 lg:px-20 lg:py-32">
         <div className="mb-20 text-center">
-          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
+          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
             THE PROCESS
           </span>
-          <h2 className="text-4xl font-black tracking-tight text-white md:text-5xl lg:text-6xl">
+          <h2 className="text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
             What happens next
           </h2>
         </div>
@@ -954,21 +954,21 @@ export const Diagnostic = () => {
             { id: "04", title: "System Roadmap", desc: "If there is fit, we outline the exact Strata Core scope, timeline, and commercial investment." }
           ].map((item) => (
             <div key={item.id} className="space-y-6">
-              <span className="font-mono text-xs font-bold text-white/20">{item.id}</span>
-              <h3 className="text-xl font-bold uppercase tracking-tight text-white">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-white/50">{item.desc}</p>
+              <span className="font-mono text-xs font-bold text-muted">{item.id}</span>
+              <h3 className="text-xl font-bold uppercase tracking-tight text-text">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-muted">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* SECTION 5 — PROOF SECTION */}
-      <section className="bg-[#fcfbf9] px-6 py-24 lg:px-20 lg:py-32">
+      <section className="bg-surface px-6 py-24 lg:px-20 lg:py-32">
         <div className="mb-20">
-          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">
+          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-text/40">
             CREDIBILITY
           </span>
-          <h2 className="text-4xl font-black tracking-tight text-primary md:text-5xl lg:text-6xl">
+          <h2 className="text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
             Built Across Service Operations &amp; Conversion Systems
           </h2>
         </div>
@@ -980,15 +980,15 @@ export const Diagnostic = () => {
             "ONESPECIALIST — Local service enquiry routing system",
             "1MOBILE ROS — Operational CRM & repair workflow system"
           ].map((project) => (
-            <div key={project} className="group rounded-2xl border border-primary/5 bg-white p-6 shadow-sm transition-all hover:shadow-md">
-              <p className="font-mono text-[9px] font-bold uppercase leading-relaxed tracking-widest text-primary/60">
+            <div key={project} className="group rounded-2xl border border-gold/5 bg-surface p-6 shadow-sm transition-all hover:shadow-md">
+              <p className="font-mono text-[9px] font-bold uppercase leading-relaxed tracking-widest text-text/60">
                 {project}
               </p>
             </div>
           ))}
         </div>
         <div className="mt-16 text-center">
-          <Link to="/about#selected-work" className="group inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-widest text-primary">
+          <Link to="/about#selected-work" className="group inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-widest text-text">
             <span>View Selected Work</span>
             <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
           </Link>
@@ -996,13 +996,13 @@ export const Diagnostic = () => {
       </section>
 
       {/* SECTION 6 — FAQ */}
-      <section className="px-6 py-24 lg:px-20 lg:py-32 border-t border-primary/5">
+      <section className="px-6 py-24 lg:px-20 lg:py-32 border-t border-gold/5">
         <div className="mx-auto max-w-4xl">
           <div className="mb-20 text-center">
-            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">
+            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-text/40">
               QUESTIONS
             </span>
-            <h2 className="text-4xl font-black tracking-tight text-primary md:text-5xl lg:text-6xl">
+            <h2 className="text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
               Common enquiries
             </h2>
           </div>

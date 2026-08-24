@@ -14,10 +14,10 @@ export const DeploymentPath = () => (
       {deploymentSteps.map((step) => (
         <li key={step.number} className="relative rounded-[22px] border border-line bg-surface p-5">
           <div className="flex items-center justify-between gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary font-mono text-[11px] font-bold text-white">{step.number}</span>
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold font-mono text-[11px] font-bold text-void">{step.number}</span>
             {step.availability !== 'live' && <AvailabilityBadge status={step.availability} />}
           </div>
-          <h3 className="mt-6 text-xl font-bold text-primary">{step.name}</h3>
+          <h3 className="mt-6 text-xl font-bold text-text">{step.name}</h3>
           <p className="mt-3 text-sm leading-relaxed text-muted">{step.description}</p>
         </li>
       ))}

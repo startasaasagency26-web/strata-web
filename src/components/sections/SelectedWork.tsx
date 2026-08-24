@@ -75,21 +75,21 @@ const ProjectPreview = ({ project }: ProjectPreviewProps) => {
   return (
     /* Outer card: owns the aspect-ratio + shadow */
     <div
-      className="relative w-full overflow-hidden rounded-[24px] border border-black/[0.09] shadow-[0_24px_72px_-16px_rgba(0,0,0,0.22)]"
+      className="relative w-full overflow-hidden rounded-[24px] border border-border shadow-[0_24px_72px_-16px_rgb(var(--scrim)/0.22)]"
       style={{ aspectRatio: "16 / 10" }}
     >
       {/* ── Browser chrome ── fixed at top, does NOT take space from aspect-ratio */}
       <div
-        className="absolute inset-x-0 top-0 z-10 flex items-center gap-3 border-b border-black/[0.07] bg-[#F2F2F4] px-5"
+        className="absolute inset-x-0 top-0 z-10 flex items-center gap-3 border-b border-border bg-surface2 px-5"
         style={{ height: CHROME_H }}
       >
         <div className="flex items-center gap-1.5 flex-shrink-0">
-          <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-          <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-          <span className="h-3 w-3 rounded-full bg-[#28C840]" />
+          <span className="h-3 w-3 rounded-full bg-danger" />
+          <span className="h-3 w-3 rounded-full bg-caution" />
+          <span className="h-3 w-3 rounded-full bg-positive" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="bg-white/80 border border-black/[0.07] rounded-md px-3 py-0.5 max-w-[200px] w-full flex items-center justify-center">
+          <div className="bg-surface2 border border-border rounded-md px-3 py-0.5 max-w-[200px] w-full flex items-center justify-center">
             <span className="text-[10px] font-mono text-muted/80 truncate">
               {project.urlLabel}
             </span>
@@ -100,15 +100,15 @@ const ProjectPreview = ({ project }: ProjectPreviewProps) => {
 
       {/* ── Browser viewport ── fills everything below the chrome ── */}
       <div
-        className="absolute inset-x-0 bottom-0 overflow-hidden bg-[#f5f5f7]"
+        className="absolute inset-x-0 bottom-0 overflow-hidden bg-canvas"
         style={{ top: CHROME_H }}
       >
         {error ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#f0f0f0] p-6 text-center">
-            <div className="mb-2 h-10 w-10 rounded-full bg-black/5 flex items-center justify-center">
-              <div className="h-5 w-5 rounded-sm border-2 border-black/10" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-surface2 p-6 text-center">
+            <div className="mb-2 h-10 w-10 rounded-full bg-gold/5 flex items-center justify-center">
+              <div className="h-5 w-5 rounded-sm border-2 border-border" />
             </div>
-            <p className="font-mono text-[9px] font-bold uppercase tracking-widest text-black/25">
+            <p className="font-mono text-[9px] font-bold uppercase tracking-widest text-text/25">
               Preview unavailable
             </p>
           </div>
@@ -145,7 +145,7 @@ export const SelectedWork = () => {
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">
               SYSTEM CASE STUDIES
             </p>
-            <h2 className="mb-5 font-black text-5xl md:text-6xl uppercase leading-none tracking-[-0.04em] text-primary">
+            <h2 className="mb-5 font-black text-5xl md:text-6xl uppercase leading-none tracking-[-0.04em] text-text">
               SELECTED WORK
             </h2>
             <p className="max-w-lg font-sans text-sm leading-relaxed text-muted md:text-base">
@@ -154,7 +154,7 @@ export const SelectedWork = () => {
           </div>
           <a
             href="#"
-            className="group inline-flex w-fit items-center gap-2 border-b border-primary pb-1 font-mono text-[10px] font-bold uppercase tracking-widest text-primary transition-all duration-300 hover:gap-4"
+            className="group inline-flex w-fit items-center gap-2 border-b border-gold pb-1 font-mono text-[10px] font-bold uppercase tracking-widest text-text transition-all duration-300 hover:gap-4"
           >
             <span>View Project Work</span>
             <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -173,7 +173,7 @@ export const SelectedWork = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.7, delay: index * 0.06, ease: EASE }}
-                className="group relative bg-white/80 backdrop-blur-xl border border-border/60 rounded-[36px] p-6 md:p-10 lg:p-12 shadow-[0_8px_40px_rgba(0,0,0,0.05)] hover:-translate-y-1 hover:shadow-[0_20px_64px_rgba(0,0,0,0.09)] transition-all duration-500 overflow-hidden"
+                className="group relative bg-surface2 backdrop-blur-xl border border-border/60 rounded-[36px] p-6 md:p-10 lg:p-12 shadow-[0_8px_40px_rgb(var(--scrim)/0.05)] hover:-translate-y-1 hover:shadow-[0_20px_64px_rgb(var(--scrim)/0.09)] transition-all duration-500 overflow-hidden"
               >
                 {/* Inner grid: text + preview */}
                 <div
@@ -186,7 +186,7 @@ export const SelectedWork = () => {
                     <p className="mb-4 font-mono text-[9px] font-bold uppercase tracking-[0.28em] text-muted/70">
                       {project.category}
                     </p>
-                    <h3 className="mb-4 font-black text-2xl md:text-3xl uppercase leading-tight tracking-[-0.03em] text-primary">
+                    <h3 className="mb-4 font-black text-2xl md:text-3xl uppercase leading-tight tracking-[-0.03em] text-text">
                       {project.title}
                     </h3>
                     <p className="mb-6 font-sans text-sm md:text-base leading-relaxed text-muted max-w-sm">
@@ -196,7 +196,7 @@ export const SelectedWork = () => {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-primary/[0.07] bg-background px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-primary/60"
+                          className="rounded-full border border-gold/[0.07] bg-background px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-text/60"
                         >
                           {tag}
                         </span>

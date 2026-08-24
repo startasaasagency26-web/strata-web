@@ -22,7 +22,7 @@ export const Hero = () => {
       aria-labelledby="hero-heading"
       className="relative overflow-hidden px-5 pb-20 pt-32 sm:px-8 md:px-12 md:pb-28 md:pt-40"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(0,102,204,0.12),transparent_40%)]" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgb(var(--gold)/0.12),transparent_40%)]" aria-hidden="true" />
       <div className="relative mx-auto max-w-6xl">
         <div className="mx-auto max-w-4xl text-center">
           <motion.p {...fadeUp()} className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-accent">

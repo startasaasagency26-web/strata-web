@@ -10,7 +10,7 @@ export const BuildWithUs = () => {
         <motion.span
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-6 block font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-primary/40"
+          className="mb-6 block font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-text/40"
         >
           BUILD WITH STRATA
         </motion.span>
@@ -19,7 +19,7 @@ export const BuildWithUs = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-8 text-5xl font-black tracking-tight text-primary md:text-7xl lg:text-8xl"
+          className="mb-8 text-5xl font-black tracking-tight text-text md:text-7xl lg:text-8xl"
         >
           Opportunities Coming Soon
         </motion.h1>
@@ -28,7 +28,7 @@ export const BuildWithUs = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mb-16 max-w-2xl text-lg leading-relaxed text-primary/60 md:text-xl"
+          className="mx-auto mb-16 max-w-2xl text-lg leading-relaxed text-text/60 md:text-xl"
         >
           We’re building a space for future collaborators, creatives, developers, strategists, and operators who want to work with Strata. This page is not open yet.
         </motion.p>
@@ -41,14 +41,14 @@ export const BuildWithUs = () => {
         >
           <Link 
             to="/" 
-            className="group flex h-14 items-center justify-center gap-3 rounded-full border border-primary/10 bg-white px-8 text-[11px] font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95"
+            className="group flex h-14 items-center justify-center gap-3 rounded-full border border-gold/10 bg-surface px-8 text-[11px] font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95"
           >
             <ArrowLeft size={16} />
             Back to Home
           </Link>
           <Link 
             to={CONTACT.requestDemoPath} 
-            className="group flex h-14 items-center justify-center gap-3 rounded-full bg-primary px-8 text-[11px] font-bold uppercase tracking-widest text-white transition-all active:scale-95"
+            className="group flex h-14 items-center justify-center gap-3 rounded-full bg-gold px-8 text-[11px] font-bold uppercase tracking-widest text-void transition-all hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
           >
             Request Diagnosis
             <ArrowRight size={16} />
@@ -57,7 +57,7 @@ export const BuildWithUs = () => {
       </div>
       
       {/* Decorative element */}
-      <div className="fixed top-1/2 left-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.02] blur-[120px]" />
+      <div className="fixed top-1/2 left-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.02] blur-[120px]" />
     </div>
   );
 };
