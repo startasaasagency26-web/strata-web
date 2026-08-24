@@ -12,7 +12,7 @@ export const StrataMark = ({ className = '', gradient = false, title = 'Strata' 
 
   return (
     <svg
-      viewBox="-12 -8 206 158"
+      viewBox="-12 -8 206 178"
       role="img"
       aria-label={title}
       className={className}
@@ -29,14 +29,14 @@ export const StrataMark = ({ className = '', gradient = false, title = 'Strata' 
         </defs>
       )}
       <path
-        d="M122 12H51C23 12 8 27 8 50s17 38 43 38h38c20 0 31 11 31 27s-12 27-31 27H18l9-16h62c10 0 15-4 15-11s-5-11-15-11H51C15 104-8 83-8 50S15-4 51-4h80"
+        d="M137 4H54C20 4 4 22 4 50s20 44 50 44h38c24 0 38 14 38 32s-15 32-38 32H18l10-16"
         stroke={stroke}
         strokeWidth="8"
         strokeLinecap="butt"
         strokeLinejoin="miter"
       />
       <path
-        d="M94 101L143 4l43 138"
+        d="M96 98L143 4l43 154"
         stroke={stroke}
         strokeWidth="8"
         strokeLinecap="butt"
