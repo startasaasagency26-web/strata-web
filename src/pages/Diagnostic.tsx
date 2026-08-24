@@ -273,7 +273,7 @@ export const Diagnostic = () => {
               >
                 <span className="relative z-10">Start Revenue Audit</span>
               </button>
-              <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-void transition-all hover:bg-gold/5 active:scale-95">
+              <Link to="/about#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-void transition-all hover:bg-gold/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>
               </Link>
             </div>
@@ -795,7 +795,7 @@ export const Diagnostic = () => {
                           {formData.consent && <CheckCircle2 size={12} />}
                         </button>
                         <span className="text-xs leading-relaxed text-text/60">
-                          I agree to be contacted by Strata regarding this diagnosis request. My data will be handled according to Strata's privacy policy.
+                          I agree to be contacted by Strata regarding this diagnosis request.
                         </span>
                       </div>
                     </div>

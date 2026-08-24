@@ -357,7 +357,7 @@ export const Dashboard = () => {
               <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted">This Week</h2>
             </div>
             <div className="text-4xl font-display font-bold text-text">{resolvedMetrics.leadsThisWeek}</div>
-            <p className="mt-2 text-xs font-semibold leading-relaxed text-muted">New lead records captured in the last 7 days.</p>
+            <p className="mt-2 text-xs font-semibold leading-relaxed text-muted">New enquiries captured in the last 7 days.</p>
           </Panel>
           <Panel className="p-6">
             <div className="mb-4 flex items-center gap-3">

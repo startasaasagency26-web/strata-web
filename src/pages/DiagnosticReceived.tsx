@@ -84,7 +84,7 @@ export const DiagnosticReceived = () => {
               <ArrowUpRight size={16} />
             </span>
           </Link>
-          <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95">
+          <Link to="/about#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95">
             <span className="relative z-10 flex items-center gap-2">
               <ArrowLeft size={16} />
               View Selected Work

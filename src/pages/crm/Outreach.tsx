@@ -38,7 +38,7 @@ The content may be creating attention, but from the outside it does not look lik
 
 That means views can happen while buyers still fall through the gap.
 
-We connect content to a revenue system: funnel, CRM, follow-up, and pipeline visibility.
+We connect content to a revenue system: funnel, CRM, follow-up, and sales-stage visibility.
 
 Want me to map where attention is going now versus where it could convert?`,
   },

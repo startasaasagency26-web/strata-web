@@ -28,7 +28,7 @@ export const About = () => {
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Book Revenue Audit</span>
               </Link>
-              <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95">
+              <Link to="/about#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>
               </Link>
             </div>
@@ -339,7 +339,7 @@ export const About = () => {
       </section>
 
       {/* SECTION 5 — PORTFOLIO PROOF */}
-      <section className="px-6 py-24 lg:px-20 lg:py-32">
+      <section id="selected-work" className="scroll-mt-[var(--section-scroll-offset)] px-6 py-24 lg:px-20 lg:py-32">
         <div className="mb-16 text-center">
           <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-text/40">
             SELECTED WORK
@@ -572,7 +572,7 @@ export const About = () => {
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-surface px-10 text-sm font-bold uppercase tracking-widest text-text transition-transform active:scale-95 sm:w-auto">
                 <span className="relative z-10">Request Diagnosis</span>
               </Link>
-              <Link to="/#selected-work" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-border px-10 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-surface3 active:scale-95 sm:w-auto">
+              <Link to="/about#selected-work" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-border px-10 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-surface3 active:scale-95 sm:w-auto">
                 <span className="relative z-10">View Selected Work</span>
               </Link>
             </div>
