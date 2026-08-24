@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Navbar } from "./components/Navbar";
@@ -11,19 +11,20 @@ import { Pricing } from "./pages/Pricing";
 import { Footer } from "./components/Footer";
 import { CONTACT } from "./config/contact";
 
-// CRM Pages
 // CRM Auth & Protection
 import { CrmAuthProvider } from "./contexts/CrmAuthContext";
 import { ProtectedCrmRoute } from "./components/crm/ProtectedCrmRoute";
-import { Login as CrmLogin } from "./pages/crm/Login";
-import { ResetPassword as CrmResetPassword } from "./pages/crm/ResetPassword";
-import { Dashboard as CrmDashboard, DashboardPreview as CrmDashboardPreview } from "./pages/crm/Dashboard";
-import { Leads as CrmLeads } from "./pages/crm/Leads";
-import { LeadDetail as CrmLeadDetail } from "./pages/crm/LeadDetail";
-import { Pipeline as CrmPipeline } from "./pages/crm/Pipeline";
-import { FollowUps as CrmFollowUps } from "./pages/crm/FollowUps";
-import { Outreach as CrmOutreach } from "./pages/crm/Outreach";
-import { Settings as CrmSettings } from "./pages/crm/Settings";
+
+const CrmLogin = lazy(() => import("./pages/crm/Login").then((module) => ({ default: module.Login })));
+const CrmResetPassword = lazy(() => import("./pages/crm/ResetPassword").then((module) => ({ default: module.ResetPassword })));
+const CrmDashboard = lazy(() => import("./pages/crm/Dashboard").then((module) => ({ default: module.Dashboard })));
+const CrmDashboardPreview = lazy(() => import("./pages/crm/Dashboard").then((module) => ({ default: module.DashboardPreview })));
+const CrmLeads = lazy(() => import("./pages/crm/Leads").then((module) => ({ default: module.Leads })));
+const CrmLeadDetail = lazy(() => import("./pages/crm/LeadDetail").then((module) => ({ default: module.LeadDetail })));
+const CrmPipeline = lazy(() => import("./pages/crm/Pipeline").then((module) => ({ default: module.Pipeline })));
+const CrmFollowUps = lazy(() => import("./pages/crm/FollowUps").then((module) => ({ default: module.FollowUps })));
+const CrmOutreach = lazy(() => import("./pages/crm/Outreach").then((module) => ({ default: module.Outreach })));
+const CrmSettings = lazy(() => import("./pages/crm/Settings").then((module) => ({ default: module.Settings })));
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -62,9 +63,9 @@ function NoIndex() {
 
 function PublicShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-background text-text relative overflow-hidden font-sans p-3 md:p-6 lg:p-8">
+    <div className="min-h-screen bg-background text-text relative overflow-clip font-sans p-3 md:p-6 lg:p-8">
       {/* Massive rounded page shell */}
-      <div className="bg-surface w-full h-full min-h-[calc(100vh-1.5rem)] md:min-h-[calc(100vh-3rem)] rounded-[32px] md:rounded-[48px] overflow-hidden shadow-[0_20px_80px_rgb(var(--scrim)/0.05)] border border-border relative flex flex-col transition-all duration-700">
+      <div className="bg-surface w-full h-full min-h-[calc(100vh-1.5rem)] md:min-h-[calc(100vh-3rem)] rounded-[32px] md:rounded-[48px] overflow-clip shadow-[0_20px_80px_rgb(var(--scrim)/0.05)] border border-border relative flex flex-col transition-all duration-700">
         <Navbar />
         <main className="relative z-10 flex-grow">
           {children}
@@ -83,7 +84,8 @@ function App() {
       <Router>
         <ScrollToTop />
         <NoIndex />
-        <Routes>
+        <Suspense fallback={<div className="min-h-screen bg-void" aria-label="Loading" />}>
+          <Routes>
           {/* CRM Routes - No Shell */}
           <Route path="/crm-preview" element={<CrmDashboardPreview />} />
           <Route path="/crm/login" element={<CrmLogin />} />
@@ -104,7 +106,8 @@ function App() {
           <Route path={CONTACT.requestDemoPath} element={<PublicShell><Diagnostic /></PublicShell>} />
           <Route path={`${CONTACT.requestDemoPath}/received`} element={<PublicShell><DiagnosticReceived /></PublicShell>} />
           <Route path="/build-with-us" element={<PublicShell><BuildWithUs /></PublicShell>} />
-        </Routes>
+          </Routes>
+        </Suspense>
         <SpeedInsights />
       </Router>
     </CrmAuthProvider>
