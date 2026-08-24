@@ -21,20 +21,20 @@ export const Footer = () => {
               <a
                 href={CONTACT.mailto}
                 aria-label={`Email Strata at ${CONTACT.email}`}
-                className="text-primary hover:text-primary/70 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/40"
+                className="text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
               >
                 <Mail size={20} />
               </a>
               <WhatsAppChoice
                 ariaLabel="Choose a Strata WhatsApp contact"
-                className="text-primary hover:text-primary/70 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/40"
+                className="text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
               >
                 <Phone size={20} />
               </WhatsAppChoice>
               <Link
                 to="/about"
                 aria-label="View Strata details"
-                className="text-primary hover:text-primary/70 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/40"
+                className="text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
               >
                 <MapPin size={20} />
               </Link>
@@ -42,28 +42,28 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">QUICK LINKS</h4>
+            <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">QUICK LINKS</h4>
             <ul className="space-y-4">
-              <li><Link to="/#operating-layer" className="text-muted hover:text-primary font-sans transition-colors text-sm">Platform</Link></li>
-              <li><Link to="/#operating-memory" className="text-muted hover:text-primary font-sans transition-colors text-sm">Operating Memory</Link></li>
-              <li><Link to="/#governed-ai" className="text-muted hover:text-primary font-sans transition-colors text-sm">AI Employees</Link></li>
-              <li><Link to="/pricing" className="text-muted hover:text-primary font-sans transition-colors text-sm">Pricing</Link></li>
-              <li><Link to="/about" className="text-muted hover:text-primary font-sans transition-colors text-sm">About Strata</Link></li>
+              <li><Link to="/#operating-layer" className="text-muted hover:text-gold font-sans transition-colors text-sm">Platform</Link></li>
+              <li><Link to="/#operating-memory" className="text-muted hover:text-gold font-sans transition-colors text-sm">Operating Memory</Link></li>
+              <li><Link to="/#governed-ai" className="text-muted hover:text-gold font-sans transition-colors text-sm">AI Employees</Link></li>
+              <li><Link to="/pricing" className="text-muted hover:text-gold font-sans transition-colors text-sm">Pricing</Link></li>
+              <li><Link to="/about" className="text-muted hover:text-gold font-sans transition-colors text-sm">About Strata</Link></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">STRATA CORE</h4>
+            <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">STRATA CORE</h4>
             <ul className="space-y-4">
-              <li><Link to="/#operating-layer" className="text-muted hover:text-primary font-sans transition-colors text-sm">Operating Layer</Link></li>
-              <li><Link to="/#operating-memory" className="text-muted hover:text-primary font-sans transition-colors text-sm">Operating Memory</Link></li>
-              <li><Link to="/#governed-ai" className="text-muted hover:text-primary font-sans transition-colors text-sm">Governed AI</Link></li>
-              <li><Link to={CONTACT.requestDemoPath} className="text-muted hover:text-primary font-sans transition-colors text-sm">Book a Demo</Link></li>
+              <li><Link to="/#operating-layer" className="text-muted hover:text-gold font-sans transition-colors text-sm">Operating Layer</Link></li>
+              <li><Link to="/#operating-memory" className="text-muted hover:text-gold font-sans transition-colors text-sm">Operating Memory</Link></li>
+              <li><Link to="/#governed-ai" className="text-muted hover:text-gold font-sans transition-colors text-sm">Governed AI</Link></li>
+              <li><Link to={CONTACT.requestDemoPath} className="text-muted hover:text-gold font-sans transition-colors text-sm">Book a Demo</Link></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-primary font-mono font-bold text-sm tracking-widest mb-6">READY TO SCALE?</h4>
+            <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">READY TO SCALE?</h4>
             <p className="text-muted font-sans text-sm mb-4">Choose one critical operating loop and map how Strata Core can support it.</p>
             <Button
               asChild
@@ -74,7 +74,7 @@ export const Footer = () => {
                 BOOK A DEMO <ArrowRight size={16} />
               </Link>
             </Button>
-            <a href={CONTACT.mailto} className="mt-4 block break-all font-mono text-xs font-bold tracking-widest text-muted transition-colors hover:text-primary">
+            <a href={CONTACT.mailto} className="mt-4 block break-all font-mono text-xs font-bold tracking-widest text-muted transition-colors hover:text-gold">
               {CONTACT.email}
             </a>
           </div>
@@ -85,8 +85,8 @@ export const Footer = () => {
             &copy; {new Date().getFullYear()} Strata Growth Technologies. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link to="/about" className="text-muted hover:text-primary transition-colors font-mono tracking-widest uppercase text-xs">Privacy &amp; Terms</Link>
-            <Link to="/pricing" className="text-muted hover:text-primary transition-colors font-mono tracking-widest uppercase text-xs">Commercial Terms</Link>
+            <Link to="/about" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">Privacy &amp; Terms</Link>
+            <Link to="/pricing" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">Commercial Terms</Link>
           </div>
         </div>
       </div>

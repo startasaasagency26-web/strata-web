@@ -37,19 +37,19 @@ export const Navbar = () => {
       >
         <div
           className={cn(
-            // Solid dark graphite — NOT liquid glass
+            // Raised navigation surface with a restrained gold rim.
             "relative mx-auto flex items-center justify-between w-full max-w-[1800px] rounded-full px-4 md:px-5 transition-all duration-500",
-            "bg-[#1D1D1F]",
-            "border border-white/10",
-            "shadow-[0_18px_60px_rgba(0,0,0,0.20)]",
+            "bg-surface2",
+            "border border-gold/30",
+            "shadow-[0_18px_60px_rgb(var(--scrim)/0.36),inset_0_1px_0_rgb(var(--gold)/0.08)]",
             isScrolled ? "py-2" : "py-3",
           )}
         >
-          {/* Logo — inverted white on dark bg */}
+          {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link
               to="/"
-              className="flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              className="flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
               aria-label="Strata Growth Technologies Home"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -59,7 +59,7 @@ export const Navbar = () => {
 
           {/* Mobile-only centered brand text — hidden on desktop where nav links show */}
           <div className="absolute left-1/2 -translate-x-1/2 xl:hidden pointer-events-none">
-            <span className="font-mono text-[11px] font-bold tracking-[0.28em] text-white/75 uppercase whitespace-nowrap">
+            <span className="font-mono text-[11px] font-bold tracking-[0.28em] text-text2 uppercase whitespace-nowrap">
               STRATA
             </span>
           </div>
@@ -74,7 +74,7 @@ export const Navbar = () => {
                 <li key={link.name} className="relative">
                   <Link
                     to={link.href}
-                    className="relative z-10 block px-4 py-3 font-mono text-[11px] font-bold tracking-[0.2em] text-white/55 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:text-white whitespace-nowrap"
+                    className="relative z-10 block px-4 py-3 font-mono text-[11px] font-bold tracking-[0.2em] text-muted transition-colors duration-200 hover:text-text focus-visible:outline-none focus-visible:text-gold whitespace-nowrap"
                     onMouseEnter={() => setHoveredLink(link.name)}
                     onMouseLeave={() => setHoveredLink(null)}
                   >
@@ -82,7 +82,7 @@ export const Navbar = () => {
                   </Link>
                   {hoveredLink === link.name && (
                     <div
-                      className="absolute inset-0 rounded-full bg-white/[0.08] pointer-events-none z-0"
+                      className="absolute inset-0 rounded-full bg-gold/10 pointer-events-none z-0"
                     />
                   )}
                 </li>
@@ -106,7 +106,7 @@ export const Navbar = () => {
               whileTap={shouldReduceMotion ? undefined : { scale: 0.88 }}
               transition={{ type: 'spring', stiffness: 280, damping: 20 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-11 h-11 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/[0.18] transition-colors duration-200 shrink-0 ml-1"
+              className="w-11 h-11 rounded-full bg-surface3 border border-borderStrong text-text flex items-center justify-center hover:bg-gold/15 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset transition-colors duration-200 shrink-0 ml-1"
               aria-label="Toggle Menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -124,7 +124,7 @@ export const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.25 }}
-            className="fixed inset-0 z-40 bg-[#111113] flex flex-col justify-center items-center px-6"
+            className="fixed inset-0 z-40 bg-void flex flex-col justify-center items-center px-6"
           >
             <nav aria-label="Mobile navigation">
               <ul className="flex flex-col items-center gap-6 w-full">
@@ -138,7 +138,7 @@ export const Navbar = () => {
                     <Link
                       to={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-4xl font-black uppercase tracking-tight text-white hover:text-white/70 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40"
+                      className="text-4xl font-black uppercase tracking-tight text-text hover:text-goldHover transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
                     >
                       {link.name}
                     </Link>
@@ -166,7 +166,7 @@ export const Navbar = () => {
                   transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.4 }}
                   className="mt-2 w-full max-w-xs"
                 >
-                  <p className="text-center font-mono text-[11px] font-bold uppercase leading-relaxed tracking-[0.24em] text-white/35">
+                  <p className="text-center font-mono text-[11px] font-bold uppercase leading-relaxed tracking-[0.24em] text-muted">
                     AI-Powered Business Infrastructure
                   </p>
                 </motion.li>

@@ -30,7 +30,7 @@ export const ProtectedCrmRoute: React.FC<ProtectedCrmRouteProps> = ({
   // Still initialising or waiting for profile
   if (isLoading || (user && !profileWaitExpired && !profile)) {
     return (
-      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+      <div className="min-h-screen bg-void flex items-center justify-center">
         <LoadingState message="Verifying session..." />
       </div>
     );
@@ -50,14 +50,14 @@ export const ProtectedCrmRoute: React.FC<ProtectedCrmRouteProps> = ({
       message = 'Your role does not have sufficient permissions to access the CRM dashboard.';
     }
     return (
-      <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center p-6 text-center">
-        <h1 className="text-2xl font-display font-bold text-white mb-4 uppercase">Access Denied</h1>
-        <p className="text-white/60 font-mono text-xs uppercase tracking-widest max-w-md leading-loose">
+      <div className="min-h-screen bg-void flex flex-col items-center justify-center p-6 text-center">
+        <h1 className="text-2xl font-display font-bold text-text mb-4 uppercase">Access Denied</h1>
+        <p className="text-muted font-mono text-xs uppercase tracking-widest max-w-md leading-loose">
           {message}
         </p>
         <button
           onClick={() => window.location.href = '/'}
-          className="mt-8 text-white/40 hover:text-white font-mono text-[10px] uppercase tracking-widest"
+          className="mt-8 text-muted hover:text-gold font-mono text-[10px] uppercase tracking-widest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
         >
           Return to Home
         </button>

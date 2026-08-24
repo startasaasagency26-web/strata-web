@@ -63,7 +63,7 @@ const QuickActions = () => {
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-label="Quick Actions"
-        className="w-[60px] h-[60px] rounded-full bg-[#111827] text-white flex items-center justify-center shadow-xl hover:bg-gray-800 transition-all focus:outline-none focus:ring-4 focus:ring-blue-500/30 z-50 relative border-2 border-white/10"
+        className="w-[60px] h-[60px] rounded-full bg-gold text-void flex items-center justify-center shadow-xl shadow-gold/10 hover:bg-goldHover transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset z-50 relative border-2 border-goldHover/40"
       >
         <Plus size={24} className={cn("transition-transform duration-300", isOpen && "rotate-45")} />
       </button>
@@ -75,10 +75,10 @@ const QuickActions = () => {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-[80px] top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-xl border border-white/50 shadow-2xl rounded-[32px] p-4 w-[280px]"
+            className="absolute right-[80px] top-1/2 -translate-y-1/2 bg-surface2 backdrop-blur-xl border border-border shadow-2xl rounded-[32px] p-4 w-[280px]"
           >
-            <div className="px-3 pb-3 pt-2 border-b border-gray-200/50 mb-3">
-              <h3 className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-[0.2em]">Quick Actions</h3>
+            <div className="px-3 pb-3 pt-2 border-b border-border mb-3">
+              <h3 className="text-[10px] font-mono font-bold text-muted uppercase tracking-[0.2em]">Quick Actions</h3>
             </div>
             <div className="space-y-1.5">
               {[
@@ -91,9 +91,9 @@ const QuickActions = () => {
                   key={i}
                   onClick={() => { action.onClick(); setIsOpen(false); }}
                   aria-label={action.label}
-                  className="w-full flex items-center gap-4 px-3 py-3 rounded-2xl text-sm font-bold text-gray-700 hover:bg-white hover:text-gray-900 hover:shadow-sm transition-all border border-transparent hover:border-gray-200/50"
+                  className="w-full flex items-center gap-4 px-3 py-3 rounded-2xl text-sm font-bold text-text2 hover:bg-surface3 hover:text-text hover:shadow-sm transition-all border border-transparent hover:border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
                 >
-                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-surface3 flex items-center justify-center text-muted shrink-0">
                     {action.icon}
                   </div>
                   {action.label}
@@ -141,9 +141,9 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
   };
 
   return (
-    <div className="flex h-screen bg-[#F5F6FA] text-gray-900 overflow-hidden font-sans relative">
+    <div className="flex h-screen bg-canvas text-text overflow-hidden font-sans relative">
       {/* Global Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#E2F0F9] via-[#F0F4EC] to-[#E9F3D8] z-0" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgb(var(--gold)/0.05),transparent_42%)] z-0" />
       
       <QuickActions />
 
@@ -152,11 +152,11 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
         initial={false}
         animate={{ width: isSidebarOpen ? 240 : 80 }}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
-        className="hidden md:flex flex-col bg-[#111827] relative z-30 shrink-0 my-4 ml-4 rounded-[32px] overflow-visible shadow-2xl border border-white/10"
+        className="hidden md:flex flex-col bg-surface relative z-30 shrink-0 my-4 ml-4 rounded-[32px] overflow-visible shadow-2xl shadow-gold/5 border border-gold/25"
       >
         {/* Logo */}
         <div className={cn(
-          'flex items-center h-20 shrink-0 border-b border-white/5',
+          'flex items-center h-20 shrink-0 border-b border-border',
           isSidebarOpen ? 'px-6 gap-3' : 'justify-center'
         )}>
           <Link to="/crm" className="flex items-center gap-3 min-w-0">
@@ -169,7 +169,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
                   animate={{ opacity: 1, width: 'auto' }}
                   exit={{ opacity: 0, width: 0 }}
                   transition={{ duration: 0.15 }}
-                  className="font-display font-bold tracking-tight text-sm uppercase text-white overflow-hidden whitespace-nowrap"
+                  className="font-display font-bold tracking-tight text-sm uppercase text-text overflow-hidden whitespace-nowrap"
                 >
                   Strata CRM
                 </motion.span>
@@ -191,8 +191,8 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
                     'flex items-center rounded-2xl transition-all duration-200 relative w-full',
                     isSidebarOpen ? 'gap-3 px-4 py-3' : 'justify-center py-3.5',
                     active
-                      ? 'bg-white text-[#111827] shadow-sm'
-                      : 'text-white/40 hover:text-white hover:bg-white/10'
+                      ? 'bg-gold text-void shadow-sm shadow-gold/10'
+                      : 'text-muted hover:text-text hover:bg-surface3'
                   )}
                 >
                   <span className="shrink-0 relative z-10">{item.icon}</span>
@@ -214,8 +214,8 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
 
                 {/* Tooltip when collapsed */}
                 {!isSidebarOpen && (
-                  <div className="pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-4 px-4 py-2 bg-white rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-150 whitespace-nowrap z-50 shadow-xl border border-gray-100">
-                    <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-[#111827]">{item.name}</span>
+                  <div className="pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-4 px-4 py-2 bg-surface2 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-150 whitespace-nowrap z-50 shadow-xl border border-border">
+                    <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-text">{item.name}</span>
                   </div>
                 )}
               </div>
@@ -224,14 +224,14 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
         </nav>
 
         {/* Footer */}
-        <div className="border-t border-white/5 py-4 space-y-1 shrink-0 px-3">
+        <div className="border-t border-border py-4 space-y-1 shrink-0 px-3">
           {/* User */}
           <div className={cn('flex items-center')}>
             <div className={cn(
-              'flex items-center rounded-2xl w-full bg-white/5',
+              'flex items-center rounded-2xl w-full bg-surface2',
               isSidebarOpen ? 'gap-3 px-3 py-3' : 'justify-center py-3'
             )}>
-              <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-mono text-xs font-bold uppercase shrink-0 text-white">
+              <div className="w-8 h-8 rounded-full bg-surface3 border border-borderStrong flex items-center justify-center font-mono text-xs font-bold uppercase shrink-0 text-text">
                 {profile?.fullName?.charAt(0) || profile?.email?.charAt(0) || '?'}
               </div>
               <AnimatePresence initial={false}>
@@ -244,10 +244,10 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
                     transition={{ duration: 0.15 }}
                     className="overflow-hidden min-w-0"
                   >
-                    <p className="text-[11px] font-bold tracking-widest uppercase text-white whitespace-nowrap truncate">
+                    <p className="text-[11px] font-bold tracking-widest uppercase text-text whitespace-nowrap truncate">
                       {profile?.fullName || 'User'}
                     </p>
-                    <p className="text-[9px] font-mono text-white/40 uppercase tracking-widest whitespace-nowrap mt-0.5">
+                    <p className="text-[9px] font-mono text-muted uppercase tracking-widest whitespace-nowrap mt-0.5">
                       {profile?.role || 'Guest'}
                     </p>
                   </motion.div>
@@ -262,7 +262,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
               onClick={handleLogout}
               aria-label="Log out"
               className={cn(
-                'flex items-center w-full rounded-2xl text-white/30 hover:text-white hover:bg-white/10 transition-all duration-200 mt-1',
+                'flex items-center w-full rounded-2xl text-muted hover:text-text hover:bg-surface3 transition-all duration-200 mt-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus',
                 isSidebarOpen ? 'gap-3 px-4 py-3' : 'justify-center py-3.5'
               )}
             >
@@ -283,19 +283,19 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
               </AnimatePresence>
             </button>
             {!isSidebarOpen && (
-              <div className="pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-4 px-4 py-2 bg-[#111827] border border-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-150 whitespace-nowrap z-50 shadow-xl">
-                <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-white">Logout</span>
+              <div className="pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-4 px-4 py-2 bg-surface2 border border-border rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-150 whitespace-nowrap z-50 shadow-xl">
+                <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-text">Logout</span>
               </div>
             )}
           </div>
 
           {/* Toggle */}
-          <div className="pt-2 border-t border-white/5 mt-2">
+          <div className="pt-2 border-t border-border mt-2">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               aria-label={isSidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
               className={cn(
-                'flex items-center w-full rounded-2xl text-white/20 hover:text-white hover:bg-white/10 transition-all duration-200',
+                'flex items-center w-full rounded-2xl text-muted hover:text-text hover:bg-surface3 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus',
                 isSidebarOpen ? 'gap-3 px-4 py-2.5' : 'justify-center py-2.5'
               )}
             >
@@ -323,27 +323,27 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative z-10">
 
         {/* Topbar */}
-        <header className="h-20 bg-white/40 backdrop-blur-md border-b border-white/50 flex items-center justify-between px-8 shrink-0 z-20 mx-4 mt-4 rounded-t-[32px] shadow-sm">
+        <header className="h-20 bg-surface2 backdrop-blur-md border-b border-border flex items-center justify-between px-8 shrink-0 z-20 mx-4 mt-4 rounded-t-[32px] shadow-sm">
           <div className="flex items-center gap-4 flex-1">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open CRM navigation"
-              className="md:hidden text-gray-500 hover:text-gray-900"
+              className="md:hidden text-muted hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
             >
               <Menu size={24} />
             </button>
             <form
               onSubmit={handleGlobalSearch}
-              className="hidden sm:flex items-center gap-3 bg-white/60 border border-white/50 shadow-sm rounded-full px-5 py-2.5 w-full max-w-md focus-within:bg-white focus-within:shadow-md transition-all"
+              className="hidden sm:flex items-center gap-3 bg-surface2 border border-border shadow-sm rounded-full px-5 py-2.5 w-full max-w-md focus-within:bg-surface3 focus-within:border-focus focus-within:ring-2 focus-within:ring-focus transition-all"
             >
-              <Search size={16} className="text-gray-400 shrink-0" />
+              <Search size={16} className="text-muted shrink-0" />
               <input
                 type="text"
                 placeholder="Search leads, companies..."
                 value={globalSearchTerm}
                 onChange={(event) => setGlobalSearchTerm(event.target.value)}
                 aria-label="Search CRM leads"
-                className="bg-transparent border-none outline-none text-sm font-semibold text-gray-900 w-full placeholder:text-gray-400"
+                className="bg-transparent border-none outline-none text-sm font-semibold text-text w-full placeholder:text-muted"
               />
             </form>
           </div>
@@ -352,17 +352,17 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
             <button
               onClick={() => navigate('/crm/follow-ups')}
               aria-label="Open follow-ups"
-              className="relative w-10 h-10 rounded-full bg-white/60 border border-white/50 flex items-center justify-center text-gray-500 hover:bg-white hover:text-gray-900 transition-colors shadow-sm"
+              className="relative w-10 h-10 rounded-full bg-surface2 border border-border flex items-center justify-center text-muted hover:bg-surface3 hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus transition-colors shadow-sm"
             >
               <Bell size={18} />
-              <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#2D5BFF] rounded-full border border-white" />
+              <span className="absolute top-2 right-2.5 w-2 h-2 bg-gold rounded-full border border-surface2" />
             </button>
-            <div className="flex items-center gap-3 pl-6 border-l border-white/50">
+            <div className="flex items-center gap-3 pl-6 border-l border-border">
               <div className="text-right hidden sm:block">
-                <p className="text-xs font-bold text-gray-900">{profile?.fullName || 'User'}</p>
-                <p className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500">{profile?.role || 'Guest'}</p>
+                <p className="text-xs font-bold text-text">{profile?.fullName || 'User'}</p>
+                <p className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted">{profile?.role || 'Guest'}</p>
               </div>
-              <div className="w-10 h-10 rounded-full border-2 border-white bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center font-display text-sm font-bold text-white shadow-sm">
+              <div className="w-10 h-10 rounded-full border-2 border-gold/40 bg-gradient-to-br from-goldHover to-goldActive flex items-center justify-center font-display text-sm font-bold text-void shadow-sm">
                 {profile?.fullName?.charAt(0) || profile?.email?.charAt(0) || '?'}
               </div>
             </div>
@@ -371,7 +371,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
 
         {/* Page Content */}
         <main className="flex-1 overflow-y-auto px-4 pb-4">
-          <div className="bg-white/40 backdrop-blur-sm border border-white/50 rounded-b-[32px] p-6 md:p-8 shadow-sm min-h-full relative">
+          <div className="bg-surface2 backdrop-blur-sm border border-border rounded-b-[32px] p-6 md:p-8 shadow-sm min-h-full relative">
             {children}
           </div>
         </main>
@@ -386,21 +386,21 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-[#111827]/40 backdrop-blur-md z-40 md:hidden"
+              className="fixed inset-0 bg-[rgb(var(--scrim)/0.70)] backdrop-blur-md z-40 md:hidden"
             />
             <motion.aside
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 left-0 w-[280px] bg-[#111827] z-50 md:hidden flex flex-col shadow-2xl"
+              className="fixed inset-y-0 left-0 w-[280px] bg-surface z-50 md:hidden flex flex-col shadow-2xl border-r border-gold/25"
             >
-              <div className="px-6 h-20 flex items-center justify-between border-b border-white/5">
+              <div className="px-6 h-20 flex items-center justify-between border-b border-border">
                 <Link to="/crm" className="flex items-center gap-3">
                   <Logo variant="mark" tone="gold" className="h-7 w-auto" />
-                  <span className="font-display font-bold tracking-tight text-sm uppercase text-white">Strata CRM</span>
+                  <span className="font-display font-bold tracking-tight text-sm uppercase text-text">Strata CRM</span>
                 </Link>
-                <button onClick={() => setIsMobileMenuOpen(false)} aria-label="Close CRM navigation" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors">
+                <button onClick={() => setIsMobileMenuOpen(false)} aria-label="Close CRM navigation" className="w-10 h-10 rounded-full bg-surface3 flex items-center justify-center text-muted hover:text-text hover:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus transition-colors">
                   <X size={20} />
                 </button>
               </div>
@@ -412,7 +412,7 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       'flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-200 font-bold text-sm tracking-wide',
-                      isActive(item.href) ? 'bg-white text-[#111827]' : 'text-white/50 hover:text-white hover:bg-white/10'
+                      isActive(item.href) ? 'bg-gold text-void' : 'text-muted hover:text-text hover:bg-surface3'
                     )}
                   >
                     {item.icon}
@@ -420,11 +420,11 @@ export const CrmShell: React.FC<CrmShellProps> = ({ children }) => {
                   </Link>
                 ))}
               </nav>
-              <div className="p-4 border-t border-white/5">
+              <div className="p-4 border-t border-border">
                 <button
                   onClick={handleLogout}
                   aria-label="Log out"
-                  className="flex items-center gap-4 w-full px-4 py-3.5 rounded-2xl text-white/40 hover:text-white hover:bg-white/10 transition-all duration-200 font-bold text-sm tracking-wide"
+                  className="flex items-center gap-4 w-full px-4 py-3.5 rounded-2xl text-muted hover:text-text hover:bg-surface3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus transition-all duration-200 font-bold text-sm tracking-wide"
                 >
                   <LogOut size={18} />
                   Logout
