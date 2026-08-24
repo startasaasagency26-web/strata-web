@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  html {
+    position: relative;
+  }
+
   body {
     @apply bg-background text-primary font-sans antialiased selection:bg-primary selection:text-white;
     letter-spacing: -0.01em;

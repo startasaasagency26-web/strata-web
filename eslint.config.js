@@ -6,7 +6,14 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist', 'ui-ux-skill/**']),
+  globalIgnores([
+    'Strata Ai CRM/**',
+    'Strata Marketing/**',
+    'Strata Argentic OS/**',
+    'stratahr-attendance-pwa-main/**',
+    'dist/**',
+    'ui-ux-skill/**',
+  ]),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

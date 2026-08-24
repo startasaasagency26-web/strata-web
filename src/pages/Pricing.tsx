@@ -5,63 +5,63 @@ import { CONTACT } from '../config/contact';
 import { Button } from '../components/ui/liquid-glass-button';
 
 const systemFlowSteps = [
-  'Meta Ads',
-  'Landing Page',
-  'WhatsApp CRM',
-  'AI Qualification',
-  'Automated Follow-Up',
-  'Booking & Reporting',
+  'Customers',
+  'Sales',
+  'Jobs',
+  'Inventory',
+  'Purchasing',
+  'Finance',
 ];
 
 const coreDeliverables = [
-  'Conversion-focused landing page / offer flow',
-  'Direct WhatsApp & multi-channel lead capture',
-  'Centralized WhatsApp CRM & pipeline management',
-  'AI qualification agents & automated lead scoring',
-  'Automated WhatsApp & email follow-up sequences',
-  'Staff task assignment & team handoff rules',
-  'Booking calendar integration & appointment flow',
-  'Executive reporting dashboard & conversion analytics',
+  'Unified customer records and communication history',
+  'Sales pipeline, ownership, and next-action controls',
+  'Job tracking from intake through completion',
+  'Inventory levels, movements, and reorder visibility',
+  'Purchasing workflows and supplier records',
+  'Finance handoffs and operational reporting',
+  'Role-based rules, approvals, and team permissions',
+  'Governed AI Employees with complete audit trails',
 ];
 
 const pricingFactors = [
   {
     num: '01',
-    title: 'Average Customer Value',
-    desc: 'Higher-value customers generate greater commercial return, supporting higher acquisition and infrastructure investment.',
+    title: 'Locations',
+    desc: 'Additional branches require location-aware records, permissions, workflows, and reporting.',
   },
   {
     num: '02',
-    title: 'Gross Margin',
-    desc: 'The system architecture and acquisition strategy must make clean commercial sense relative to your margins.',
+    title: 'Operational Complexity',
+    desc: 'More services, handoffs, approval paths, and exceptions require a broader operating configuration.',
   },
   {
     num: '03',
-    title: 'Lead Volume',
-    desc: 'Higher enquiry volume requires expanded automation, lead routing rules, database capacity, and tracking infrastructure.',
+    title: 'Data Migration',
+    desc: 'The volume, quality, and structure of existing customer and operational data affect migration scope.',
   },
   {
     num: '04',
-    title: 'Sales Capacity',
-    desc: 'System scope depends on your team\'s current bandwidth to receive, respond to, and convert active inbound demand.',
+    title: 'Integrations',
+    desc: 'Connections to existing finance, messaging, inventory, and specialist systems increase implementation scope.',
   },
   {
     num: '05',
-    title: 'Complexity & Integrations',
-    desc: 'Multiple locations, custom CRM workflows, staff roles, third-party software, or legacy integrations increase setup scope.',
+    title: 'Team Size',
+    desc: 'Larger teams require more roles, access controls, approval levels, onboarding, and operating rules.',
   },
 ];
 
 const expandedScopeReasons = [
   'Multiple branch or office locations',
-  'Multiple offer funnels & audience segments',
-  'High lead volume requiring custom routing',
-  'Custom CRM architecture & team permissions',
+  'Multiple departments or service lines',
+  'Complex job routing and approval chains',
+  'Custom operating roles and team permissions',
   'Advanced third-party API integrations',
   'Complex multi-stage automation workflows',
-  'Multiple sales or customer service teams',
-  'High-ticket multi-step sales processes',
-  'Custom executive reporting & dashboards',
+  'Multiple sales, service, or operations teams',
+  'Multi-stage job and purchasing workflows',
+  'Custom operational and finance reporting',
   'Heavy legacy database & software integrations',
 ];
 
@@ -69,40 +69,36 @@ const quotingSteps = [
   {
     num: '01',
     title: 'QUALIFY THE BUSINESS',
-    desc: 'We verify whether your offer, market, margins, and sales capacity are commercially suitable for Strata Core.',
+    desc: 'We verify your operating model, team structure, locations, and current systems to confirm whether Strata Core fits.',
   },
   {
     num: '02',
-    title: 'ASSESS ECONOMICS & COMPLEXITY',
-    desc: 'We review customer value, lead volume, operational workflows, branch locations, and required integrations.',
+    title: 'ASSESS SCOPE & COMPLEXITY',
+    desc: 'We review workflow complexity, migration requirements, branch locations, team size, and required integrations.',
   },
   {
     num: '03',
     title: 'QUOTE WITHIN APPROVED BAND',
-    desc: 'Final implementation and monthly investment are proposed based on the required infrastructure and commercial opportunity.',
+    desc: 'Final implementation and monthly investment are proposed from the operating scope, migration work, and integration requirements.',
   },
 ];
 
 const faqs = [
   {
     question: 'What is Strata Core?',
-    answer: 'Strata Core is our standardized AI-powered revenue operating system. It connects Meta advertising, landing pages, WhatsApp CRM, AI qualification, automated follow-up, booking, and reporting into one unified commercial infrastructure.',
+    answer: 'Strata Core is an AI operating layer for service businesses. It connects customers, sales, jobs, inventory, purchasing, and finance, while governed AI Employees act inside company rules, approvals, and audit trails.',
   },
   {
     question: 'Why does pricing vary if Strata Core is one product?',
-    answer: 'Strata Core uses the same core operating architecture for all clients. However, setup complexity, lead volume, number of locations, custom integrations, and team routing vary depending on your business economics.',
-  },
-  {
-    question: 'Is ad spend included in the monthly fee?',
-    answer: 'No. Ad spend is billed directly by Meta or TikTok to your business account. Strata\'s monthly fee covers system operation, campaign execution, AI qualification, automation maintenance, and optimization.',
+    answer: 'Strata Core uses the same core operating architecture for every business. Pricing varies with the number of locations, operational complexity, data migration, integrations, and team size.',
   },
   {
     question: 'What is the difference between Standard and Expanded Scope?',
-    answer: 'Standard (from RM 5,000/mo) covers a single business operation with core funnels, CRM, AI, and follow-up. Expanded Scope (from RM 7,500/mo) is designed for multi-location businesses, heavy lead volume, complex sales teams, or custom software integrations.',
+    answer: 'Standard (from RM 5,000/mo) covers one operating structure with core customer, sales, job, inventory, purchasing, finance, and AI controls. Expanded Scope (from RM 7,500/mo) covers additional locations, departments, migration work, approval layers, or custom integrations.',
   },
   {
-    question: 'What happens during the Revenue Systems Audit?',
-    answer: 'During the audit, we analyze your current lead flow, customer value, margin structure, conversion drop-offs, and software tools to determine if Strata Core is a fit and specify your exact implementation scope.',
+    question: 'What happens during the Strata Core audit?',
+    answer: 'We map your current workflows, operating rules, approvals, roles, and connected systems. The result defines whether Strata Core fits and what must be configured, migrated, or integrated.',
   },
 ];
 
@@ -127,7 +123,7 @@ export const Pricing = () => {
             className="text-4xl md:text-7xl font-display font-bold leading-none tracking-tight text-primary mb-8 uppercase"
           >
             One Operating System. <br />
-            <span className="text-primary/70">Priced Around Your Business Economics.</span>
+            <span className="text-primary/70">Priced Around Your Operating Scope.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -135,7 +131,7 @@ export const Pricing = () => {
             transition={{ delay: 0.18 }}
             className="text-muted font-sans text-base md:text-xl leading-relaxed max-w-3xl mx-auto mb-10"
           >
-            Strata Core connects demand generation, lead capture, WhatsApp CRM, AI qualification, automated follow-up, booking, and reporting into one revenue operating system. Pricing varies based on customer value, sales economics, operational complexity, locations, and required integrations.
+            Strata Core connects customers, sales, jobs, inventory, purchasing, finance, and governed AI Employees in one operating layer. Pricing varies with locations, operational complexity, data migration, integrations, and team size.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -149,7 +145,7 @@ export const Pricing = () => {
               className="w-full sm:w-auto h-auto rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
               <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
-                Book a Revenue Systems Audit
+                Book a Strata Core Audit
                 <ArrowRight size={14} />
               </Link>
             </Button>
@@ -166,7 +162,7 @@ export const Pricing = () => {
               What Strata Core Includes
             </h2>
             <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
-              Strata Core is standardized around the same connected revenue operating system. Scope changes only where your business economics or operational complexity require more infrastructure.
+              Strata Core uses one connected operating architecture. Scope changes only where locations, workflows, data, integrations, or team controls require more configuration.
             </p>
           </div>
 
@@ -245,17 +241,17 @@ export const Pricing = () => {
               <div className="md:border-l md:border-border/50 md:pl-6">
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">MONTHLY OPERATING FEE</span>
                 <span className="font-mono text-2xl font-bold text-primary">FROM RM 5,000 / MO</span>
-                <span className="block text-[10px] font-mono text-muted mt-1">System, AI &amp; media ops</span>
+                <span className="block text-[10px] font-mono text-muted mt-1">System, governance &amp; support</span>
               </div>
               <div className="md:border-l md:border-border/50 md:pl-6">
-                <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">AD SPEND</span>
-                <span className="font-mono text-2xl font-bold text-primary">SEPARATE</span>
-                <span className="block text-[10px] font-mono text-muted mt-1">Billed directly by ad platforms</span>
+                <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">CONNECTED AREAS</span>
+                <span className="font-mono text-2xl font-bold text-primary">SIX CORE</span>
+                <span className="block text-[10px] font-mono text-muted mt-1">Customers through finance</span>
               </div>
             </div>
 
             <p className="text-sm font-sans text-muted leading-relaxed mb-8">
-              Final investment depends on your customer value, gross margin, monthly lead volume, sales team capacity, locations, operational complexity, and required software integrations.
+              Final investment depends on locations, operational complexity, data migration, required integrations, and team size.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-border/50">
@@ -269,7 +265,7 @@ export const Pricing = () => {
                 className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
               >
                 <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
-                  Book a Revenue Systems Audit
+                  Book a Strata Core Audit
                   <ArrowRight size={14} />
                 </Link>
               </Button>
@@ -289,7 +285,7 @@ export const Pricing = () => {
           </div>
           <div className="max-w-md border-l border-primary/20 pl-6">
             <p className="text-sm font-sans text-primary font-medium leading-relaxed mb-1">
-              "We do not price by niche. We price by value, economics, and delivery complexity."
+              "We do not price by niche. We price by operating scope, migration work, and delivery complexity."
             </p>
             <p className="text-[10px] font-mono text-muted uppercase tracking-widest">
               Commercial Pricing Principles
@@ -376,7 +372,7 @@ export const Pricing = () => {
                 className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
               >
                 <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
-                  Book a Revenue Systems Audit
+                  Book a Strata Core Audit
                   <ArrowRight size={14} />
                 </Link>
               </Button>
@@ -439,7 +435,7 @@ export const Pricing = () => {
               <h3 className="font-display font-bold text-xl text-primary mb-1">Monitor</h3>
               <p className="font-mono text-lg font-bold text-primary mb-4">RM 299/mo</p>
               <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> CRM &amp; funnel uptime checks</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Core system uptime checks</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Bug fixes &amp; error resolution</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Basic ticket support</li>
               </ul>
@@ -468,7 +464,7 @@ export const Pricing = () => {
               <p className="font-mono text-lg font-bold text-primary mb-4">RM 999/mo</p>
               <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
                 <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Everything in Support</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Monthly pipeline &amp; funnel review</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Monthly operating-system review</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-primary shrink-0" /> Priority 24-hour response SLA</li>
               </ul>
             </div>
@@ -498,10 +494,10 @@ export const Pricing = () => {
           {/* Final Conversion Block */}
           <div className="bg-primary text-white rounded-[32px] p-8 md:p-14 text-center shadow-xl">
             <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight mb-6 text-white">
-              Ready to price your revenue operating system?
+              Ready to scope your operating layer?
             </h3>
             <p className="text-white/80 font-sans text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-              Book a Revenue Systems Audit. We'll map your current lead flow, review your customer economics, and specify your exact Strata Core implementation scope.
+              Book a Strata Core audit. We’ll map your workflows, rules, approvals, and systems, then specify the implementation scope.
             </p>
             <Button
               asChild
@@ -510,7 +506,7 @@ export const Pricing = () => {
               className="w-full sm:w-auto h-auto py-5 px-10 rounded-full font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
               <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-3">
-                <span>Book a Revenue Systems Audit</span>
+                <span>Book a Strata Core Audit</span>
                 <ArrowRight size={15} />
               </Link>
             </Button>

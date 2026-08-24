@@ -137,7 +137,7 @@ export const Login = () => {
 
           <div className="mt-12 pt-8 border-t border-white/5 text-center">
             <p className="text-[8px] font-mono text-white/20 uppercase tracking-[0.1em] leading-relaxed">
-              Proprietary software property of Strata Agency.<br />
+              Proprietary software property of Strata Growth Technologies.<br />
               Unauthorized access attempt is logged.
             </p>
           </div>

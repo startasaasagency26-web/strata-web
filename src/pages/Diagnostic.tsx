@@ -69,8 +69,8 @@ export const Diagnostic = () => {
       document.head.appendChild(activeDescription);
     }
 
-    document.title = "Book a Revenue Systems Audit | Strata Agency";
-    activeDescription.content = "Tell Strata where your lead flow is breaking. Book a revenue systems audit to see where enquiries are lost across capture, CRM, AI qualification, follow-up, and demand.";
+    document.title = "Book a Demo | Strata Growth Technologies";
+    activeDescription.content = "Tell Strata where your lead flow is breaking. Book a demo to see where enquiries are lost across capture, CRM, AI qualification, follow-up, and demand.";
 
     return () => {
       document.title = previousTitle;
@@ -258,23 +258,23 @@ export const Diagnostic = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">
-              STRATA REVENUE AUDIT
+              BOOK A DEMO
             </span>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-tight text-primary md:text-7xl lg:text-8xl">
-              Book Your Revenue Systems Audit
+              Book Your Demo
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-primary/60 md:text-xl">
-              Tell us how enquiries reach you today and what happens after they arrive. We'll map your lead flow, uncover conversion leaks across capture, CRM, AI, and follow-up — and design your revenue operating system.
+              Tell us how customers, work, inventory, purchasing, and finance move through your business today. We’ll map the workflows, controls, integrations, and AI actions your Strata Core setup requires.
             </p>
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}
                 className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95"
               >
-                <span className="relative z-10">Start Revenue Audit</span>
+                <span className="relative z-10">Start Booking</span>
               </button>
-              <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
-                <span className="relative z-10">View Selected Work</span>
+              <Link to="/#operating-loop" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
+                <span className="relative z-10">See the operating loop</span>
               </Link>
             </div>
           </motion.div>
@@ -323,7 +323,7 @@ export const Diagnostic = () => {
             },
             {
               title: "Pick the Right System",
-              desc: "We decide whether you need Revenue Infrastructure, the Growth Media System, or both."
+              desc: "We determine which Strata Core workflows, rules, approvals, integrations, and AI controls your operation needs."
             },
             {
               title: "Shape the Roadmap",
@@ -670,7 +670,7 @@ export const Diagnostic = () => {
                           <input 
                             type="text" 
                             className="w-full rounded-2xl border border-primary/10 bg-[#fcfbf9] px-6 py-4 text-sm font-medium text-primary outline-none focus:border-primary transition-colors"
-                            placeholder="Instagram, TikTok, etc."
+                            placeholder="Website, WhatsApp, referral sources, etc."
                             value={formData.socialLinks}
                             onChange={(e) => setFormData({...formData, socialLinks: e.target.value})}
                           />
@@ -988,8 +988,8 @@ export const Diagnostic = () => {
           ))}
         </div>
         <div className="mt-16 text-center">
-          <Link to="/about#selected-work" className="group inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-widest text-primary">
-            <span>View Selected Work</span>
+          <Link to="/#operating-loop" className="group inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-widest text-primary">
+            <span>See the operating loop</span>
             <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
@@ -1018,11 +1018,11 @@ export const Diagnostic = () => {
               },
               {
                 q: "What does a Strata Core implementation include?",
-                a: "Strata Core is a complete revenue operating system including lead capture funnels, Meta/TikTok campaign management, WhatsApp CRM, AI qualification agents, automated follow-up sequences, staff workflow tools, and executive reporting dashboards."
+                a: "Strata Core connects customers, sales, jobs, inventory, purchasing, finance, and governed AI Employees inside company rules, approvals, and audit trails."
               },
               {
                 q: "What should I prepare before the call?",
-                a: "Be ready to discuss how enquiries reach you today, what happens after they arrive, who follows up, and where you think leads are being lost. Existing links and campaign details help."
+                a: "Be ready to discuss how work moves through your business today, who owns each handoff, which approvals matter, and where information gets lost. Existing system details help."
               },
               {
                 q: "What happens after the call?",

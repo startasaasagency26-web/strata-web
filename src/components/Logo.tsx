@@ -3,7 +3,7 @@ export const Logo: React.FC<{ className?: string }> = ({ className = '' }) => {
     <div className={`flex items-center justify-center ${className}`}>
       <img 
         src="/strata-sa-mark.png" 
-        alt="Strata Agency" 
+        alt="Strata Growth Technologies"
         className="w-[36px] md:w-[46px] h-auto object-contain select-none pointer-events-none brightness-0" 
       />
     </div>

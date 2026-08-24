@@ -19,17 +19,17 @@ export const About = () => {
               ABOUT STRATA
             </span>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-[-0.04em] text-primary md:text-7xl lg:text-8xl">
-              AI-Powered Revenue Systems &amp; Infrastructure
+              The AI Operating Layer for Service Businesses
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
-              Founded in mid-2025, Strata is a founder-led implementation partner that builds AI-powered revenue operating systems for growing businesses: connecting marketing, lead capture, CRM, AI qualification, follow-up, and sales operations.
+              Founded in mid-2025, Strata is the product company behind Strata Core—an operating layer that connects customers, sales, jobs, inventory, purchasing, finance, and governed AI Employees.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
-                <span className="relative z-10">Book Revenue Audit</span>
+                <span className="relative z-10">Book a Demo</span>
               </Link>
-              <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
-                <span className="relative z-10">View Selected Work</span>
+              <Link to="/#operating-loop" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
+                <span className="relative z-10">See the operating loop</span>
               </Link>
             </div>
           </motion.div>
@@ -53,7 +53,7 @@ export const About = () => {
                   Amirul Afiz / Nick
                 </span>
                 <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-primary/40">
-                  Founder, Strata Agency
+                  Founder, Strata Growth Technologies
                 </span>
               </div>
             </div>
@@ -115,14 +115,14 @@ export const About = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">
-              FOUNDER-LED
+              PRODUCT LEADERSHIP
             </span>
             <h2 className="mb-8 text-4xl font-black tracking-tight text-primary md:text-5xl lg:text-6xl">
               Led by Amirul Afiz, Built for Practical Execution
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-primary/60">
               <p>
-                Amirul Afiz, also known as Nick, is the founder of Strata. His work combines lead capture, CRM structure, follow-up automation, media execution, and practical business operations.
+                Amirul Afiz, also known as Nick, is the founder of Strata. His work combines customer operations, CRM structure, workflow automation, governed AI, and practical business systems.
               </p>
               <p>
                 Strata’s approach is shaped by hands-on experience building for service businesses, local brands, e-commerce, and internal systems — not just designing pages that look good.
@@ -152,7 +152,7 @@ export const About = () => {
                 "Landing pages and sales pages",
                 "Mobile responsive build standards",
                 "Technical SEO foundations",
-                "Short-form content and paid media systems",
+                "Inventory, purchasing, and finance workflows",
                 "AI-assisted content and workflow systems",
                 "Business operations and customer journey systems",
               ].map((highlight) => (
@@ -266,7 +266,7 @@ export const About = () => {
                 "Speak with a team that understands both revenue systems and real customer conversations."
               </p>
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white transition-transform active:scale-95">
-                <span className="relative z-10">Request Diagnosis</span>
+                <span className="relative z-10">Book a Demo</span>
               </Link>
             </div>
           </motion.div>
@@ -280,7 +280,7 @@ export const About = () => {
             CAPABILITIES
           </span>
           <h2 className="mb-4 text-4xl font-black tracking-[-0.03em] text-primary text-center md:text-5xl lg:text-6xl lg:text-left">
-            Revenue Infrastructure and Growth Media Systems
+            One Connected Operating Layer
           </h2>
         </div>
 
@@ -305,8 +305,8 @@ export const About = () => {
               icon: <div className="h-6 w-6 rotate-45 border-2 border-primary/20" />
             },
             {
-              title: "Growth Media System",
-              desc: "Content and paid media that create the demand the infrastructure captures, plus reporting owners can read.",
+              title: "Governed AI Employees",
+              desc: "AI Employees that work inside defined rules, approvals, permissions, and visible audit trails.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-lg bg-primary/5 flex items-center justify-center"><div className="h-2 w-2 rounded-full bg-primary/20" /></div>
             },
@@ -446,11 +446,11 @@ export const About = () => {
               OUR PROCESS
             </p>
             <h2 className="text-4xl font-black uppercase tracking-tight text-white md:text-5xl lg:text-6xl">
-              HOW WE BUILD YOUR INFRASTRUCTURE.
+              HOW WE CONFIGURE STRATA CORE.
             </h2>
           </div>
           <p className="max-w-md text-xs font-mono uppercase text-white/50">
-            A structured execution flow designed to eliminate revenue leakage and build scalable sales operations.
+            A structured implementation flow for connecting workflows, controls, data, and teams.
           </p>
         </div>
 
@@ -458,23 +458,23 @@ export const About = () => {
           {[
             {
               step: "Step 1",
-              title: "System Diagnosis",
-              desc: "We audit lead intake, enquiry handling, WhatsApp response times, and follow-up leakage to identify revenue bottlenecks.",
+              title: "Operating Audit",
+              desc: "We map how customers, sales, jobs, inventory, purchasing, and finance move through the business today.",
             },
             {
               step: "Step 2",
-              title: "Infrastructure Design",
-              desc: "We architect the lead capture funnel, CRM deal stages, AI qualification rules, and staff notification triggers.",
+              title: "Operating Design",
+              desc: "We define workflows, roles, approval points, system connections, and the rules each team must follow.",
             },
             {
               step: "Step 3",
-              title: "Core System Install",
-              desc: "We install and integrate your CRM, WhatsApp automation, email sequences, and lead capture assets into one operating system.",
+              title: "Core Configuration",
+              desc: "We configure Strata Core, migrate agreed data, connect required systems, and apply team permissions.",
             },
             {
               step: "Step 4",
-              title: "Revenue Optimization",
-              desc: "We refine content angles, paid ad campaigns, conversion flows, and team execution to maximize deal throughput.",
+              title: "Governed Activation",
+              desc: "We test rules, approvals, audit trails, and AI Employee actions before the operating layer goes live.",
             },
           ].map((step, idx) => (
             <motion.div
@@ -577,10 +577,10 @@ export const About = () => {
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link to={CONTACT.requestDemoPath} className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-white px-10 text-sm font-bold uppercase tracking-widest text-primary transition-transform active:scale-95 sm:w-auto">
-                <span className="relative z-10">Request Diagnosis</span>
+                <span className="relative z-10">Book a Demo</span>
               </Link>
-              <Link to="/#selected-work" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-white/20 px-10 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white/10 active:scale-95 sm:w-auto">
-                <span className="relative z-10">View Selected Work</span>
+              <Link to="/#operating-loop" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-white/20 px-10 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white/10 active:scale-95 sm:w-auto">
+                <span className="relative z-10">See the operating loop</span>
               </Link>
             </div>
           </div>

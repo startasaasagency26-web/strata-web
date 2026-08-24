@@ -32,10 +32,8 @@ export default {
           'sans-serif',
         ],
         mono: [
-          'SF Mono',
           'Space Mono',
           'ui-monospace',
-          'SFMono-Regular',
           'Menlo',
           'Monaco',
           'Consolas',

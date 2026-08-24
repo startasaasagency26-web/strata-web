@@ -84,10 +84,10 @@ export const DiagnosticReceived = () => {
               <ArrowUpRight size={16} />
             </span>
           </Link>
-          <Link to="/#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
+          <Link to="/#operating-loop" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white px-8 text-sm font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary/5 active:scale-95">
             <span className="relative z-10 flex items-center gap-2">
               <ArrowLeft size={16} />
-              View Selected Work
+              See the operating loop
             </span>
           </Link>
         </motion.div>

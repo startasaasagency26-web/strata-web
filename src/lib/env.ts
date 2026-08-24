@@ -26,7 +26,7 @@ export const env = {
   // Private keys (server only)
   admin: {
     serviceRoleKey: runtimeProcess?.env?.SUPABASE_SERVICE_ROLE_KEY,
-    adminEmails: (runtimeProcess?.env?.CRM_ADMIN_EMAILS || 'admin@strata.agency').split(',').map((e: string) => e.trim().toLowerCase()),
+    adminEmails: (runtimeProcess?.env?.CRM_ADMIN_EMAILS || 'admin@strataagency.tech').split(',').map((e: string) => e.trim().toLowerCase()),
   },
   isProd: Boolean(importMetaEnv.PROD) || runtimeProcess?.env?.NODE_ENV === 'production',
 };
