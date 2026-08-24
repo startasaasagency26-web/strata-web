@@ -252,7 +252,7 @@ export const Outreach = () => {
                     <div className="flex flex-wrap gap-2 lg:justify-end">
                       <button
                         onClick={() => copyToClipboard(`lead-${lead.id}`, copiedMessageFor(lead), 'Lead message')}
-                        className="inline-flex items-center gap-2 rounded-full bg-[#111827] px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-white transition hover:bg-gray-800"
+                        className="inline-flex items-center gap-2 rounded-full bg-gold px-4 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-void transition hover:bg-goldHover active:bg-goldActive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
                       >
                         {copying === `lead-${lead.id}` ? <Loader2 size={13} className="animate-spin" /> : <Copy size={13} />}
                         Copy DM

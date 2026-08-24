@@ -108,7 +108,7 @@ export const Pipeline = () => {
             <button
               onClick={() => navigate('/crm/leads?add=1')}
               aria-label="Add lead to pipeline"
-              className="w-14 h-14 rounded-full bg-[#111827] text-white flex items-center justify-center hover:-translate-y-1 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 transition-all"
+              className="w-14 h-14 rounded-full bg-gold text-void flex items-center justify-center hover:-translate-y-1 hover:bg-goldHover hover:shadow-lg active:bg-goldActive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset transition-all"
             >
               <Plus size={20} />
             </button>

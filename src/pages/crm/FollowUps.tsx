@@ -204,7 +204,7 @@ export const FollowUps = () => {
             </div>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#111827] px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-white hover:bg-gray-800 hover:shadow-lg"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-widest text-void hover:bg-goldHover hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
             >
               <Plus size={14} /> Create Follow-up
             </button>
@@ -271,7 +271,7 @@ export const FollowUps = () => {
                   <button
                     onClick={() => handleMarkDone(task.id)}
                     disabled={loadingTaskId === task.id}
-                    className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#111827] text-white font-mono text-[10px] font-bold tracking-widest uppercase hover:-translate-y-0.5 hover:shadow-lg active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-2 px-6 py-3 rounded-full bg-gold text-void font-mono text-[10px] font-bold tracking-widest uppercase hover:-translate-y-0.5 hover:bg-goldHover hover:shadow-lg active:scale-95 active:bg-goldActive transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
                   >
                     {loadingTaskId === task.id && <Loader2 size={14} className="animate-spin" />}
                     {loadingTaskId === task.id ? 'Saving...' : 'Mark Done'}
@@ -348,7 +348,7 @@ export const FollowUps = () => {
               <button
                 type="submit"
                 disabled={isCreating || leads.length === 0}
-                className="inline-flex items-center gap-2 rounded-full bg-[#111827] px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-void hover:bg-goldHover active:bg-goldActive disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
               >
                 {isCreating && <Loader2 size={14} className="animate-spin" />}
                 {isCreating ? 'Creating...' : 'Create'}

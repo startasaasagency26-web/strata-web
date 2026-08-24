@@ -259,7 +259,7 @@ export const Leads = () => {
           </div>
           <button
             onClick={() => setShowAddForm(true)}
-            className="inline-flex items-center gap-2 bg-[#111827] text-white px-5 py-2.5 rounded-full font-mono text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 transition-all shadow-lg hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-gold text-void px-5 py-2.5 rounded-full font-mono text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-goldHover active:bg-goldActive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset transition-all shadow-lg hover:-translate-y-0.5"
           >
             <Plus size={14} /> Add Lead
           </button>
@@ -582,7 +582,7 @@ export const Leads = () => {
               <button
                 type="submit"
                 disabled={isSaving}
-                className="inline-flex items-center gap-2 bg-[#111827] text-white px-5 py-2.5 rounded-full font-mono text-[10px] font-bold tracking-widest uppercase hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-2 bg-gold text-void px-5 py-2.5 rounded-full font-mono text-[10px] font-bold tracking-widest uppercase hover:bg-goldHover active:bg-goldActive transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
               >
                 {isSaving && <Loader2 size={14} className="animate-spin" />}
                 {isSaving ? 'Saving...' : 'Save Lead'}

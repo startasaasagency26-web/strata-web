@@ -179,7 +179,7 @@ export const Dashboard = () => {
           <div className="flex flex-wrap gap-3">
             <Link
               to="/crm/outreach"
-              className="inline-flex items-center gap-2 rounded-full bg-[#111827] px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
+              className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-void shadow-lg transition-all hover:-translate-y-0.5 hover:bg-goldHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
             >
               <Send size={14} /> Outreach Queue
             </Link>
@@ -280,7 +280,7 @@ export const Dashboard = () => {
                       <div className="text-sm font-bold text-text">{item.label}</div>
                       <p className="mt-1 text-xs font-semibold leading-relaxed text-gray-500">{item.detail}</p>
                     </div>
-                    <span className="shrink-0 rounded-full bg-[#111827] px-3 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-white">
+                    <span className="shrink-0 rounded-full bg-gold px-3 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-void">
                       {item.action}
                     </span>
                   </div>
@@ -305,7 +305,7 @@ export const Dashboard = () => {
               {outreachQueue.length > 0 ? outreachQueue.map((lead) => (
                 <Link key={lead.id} to={`/crm/leads/${lead.id}`} className="grid gap-4 px-6 py-5 transition hover:bg-white/50 md:grid-cols-[1fr_1.2fr_auto] md:items-center">
                   <div className="flex items-center gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#111827] text-xs font-display font-bold text-white shadow-sm">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gold text-xs font-display font-bold text-void shadow-sm">
                       {getInitials(lead.fullName)}
                     </div>
                     <div className="min-w-0">
@@ -560,7 +560,7 @@ export const DashboardPreview = () => {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href="#preview-outreach" className="inline-flex items-center gap-2 rounded-full bg-[#111827] px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-white shadow-lg transition-all hover:bg-gray-800">
+            <a href="#preview-outreach" className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-void shadow-lg transition-all hover:bg-goldHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
               <Send size={14} /> Preview Outreach
             </a>
           </div>
@@ -648,7 +648,7 @@ export const DashboardPreview = () => {
             {outreachQueue.map((lead) => (
               <div key={lead.id} className="grid gap-4 px-6 py-5 md:grid-cols-[1fr_1.2fr_auto] md:items-center">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#111827] text-xs font-display font-bold text-white shadow-sm">{getInitials(lead.fullName)}</div>
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gold text-xs font-display font-bold text-void shadow-sm">{getInitials(lead.fullName)}</div>
                   <div className="min-w-0">
                     <div className="truncate text-sm font-bold text-text">{lead.companyName}</div>
                     <div className="mt-1 flex flex-wrap items-center gap-2">

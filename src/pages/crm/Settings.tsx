@@ -231,7 +231,7 @@ export const Settings = () => {
                 </div>
                 <button
                   onClick={openIntegrationStatus}
-                  className="px-6 py-3 rounded-xl bg-[#111827] text-white font-mono text-[10px] font-bold tracking-widest uppercase hover:-translate-y-0.5 hover:shadow-lg active:scale-95 transition-all"
+                  className="px-6 py-3 rounded-xl bg-gold text-void font-mono text-[10px] font-bold tracking-widest uppercase hover:-translate-y-0.5 hover:bg-goldHover hover:shadow-lg active:scale-95 active:bg-goldActive transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
                 >
                   Configure Integration
                 </button>
@@ -316,7 +316,7 @@ export const Settings = () => {
                 <button
                   onClick={handleUpdateEndpoints}
                   disabled={!permissions.canEditSettings || isSaving}
-                  className="w-full py-4 rounded-xl bg-[#111827] text-white text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-gray-800 hover:shadow-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="w-full py-4 rounded-xl bg-gold text-void text-[10px] font-mono font-bold tracking-widest uppercase hover:bg-goldHover active:bg-goldActive hover:shadow-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
                 >
                   {isSaving ? 'Saving...' : permissions.canEditSettings ? 'Update Endpoints' : 'Admin access required'}
                 </button>
@@ -399,7 +399,7 @@ export const Settings = () => {
               <button type="button" onClick={() => setSelectedMember(null)} disabled={isSavingMember} className="rounded-full border border-gray-200 px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-text hover:bg-gray-50">
                 Cancel
               </button>
-              <button type="submit" disabled={isSavingMember} className="inline-flex items-center gap-2 rounded-full bg-[#111827] px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-white hover:bg-gray-800 disabled:opacity-50">
+              <button type="submit" disabled={isSavingMember} className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-[10px] font-mono font-bold uppercase tracking-widest text-void hover:bg-goldHover active:bg-goldActive disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 {isSavingMember && <Loader2 size={14} className="animate-spin" />}
                 {isSavingMember ? 'Saving...' : 'Save'}
               </button>
