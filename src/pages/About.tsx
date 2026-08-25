@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { CONTACT } from "../config/contact";
+import { WhatsAppChoice } from "../components/WhatsAppChoice";
 import { cn } from "../lib/utils";
 
 export const About = () => {
@@ -25,9 +25,9 @@ export const About = () => {
               Founded in mid-2025, Strata delivers Revenue Systems engagements for growing businesses today while shaping the in-development Strata Core platform with design partners.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
+              <WhatsAppChoice className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Book Revenue Audit</span>
-              </Link>
+              </WhatsAppChoice>
               <Link to="/about#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>
               </Link>
@@ -265,9 +265,9 @@ export const About = () => {
               <p className="mb-8 text-sm font-medium italic text-text/70">
                 "Speak with a team that understands both revenue systems and real customer conversations."
               </p>
-              <Link to={CONTACT.requestDemoPath} className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
+              <WhatsAppChoice className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Request Diagnosis</span>
-              </Link>
+              </WhatsAppChoice>
             </div>
           </motion.div>
         </div>
@@ -569,9 +569,9 @@ export const About = () => {
             </p>
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link to={CONTACT.requestDemoPath} className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-surface px-10 text-sm font-bold uppercase tracking-widest text-text transition-transform active:scale-95 sm:w-auto">
+              <WhatsAppChoice className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-surface px-10 text-sm font-bold uppercase tracking-widest text-text transition-transform active:scale-95 sm:w-auto">
                 <span className="relative z-10">Request Diagnosis</span>
-              </Link>
+              </WhatsAppChoice>
               <Link to="/about#selected-work" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-border px-10 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-surface3 active:scale-95 sm:w-auto">
                 <span className="relative z-10">View Selected Work</span>
               </Link>

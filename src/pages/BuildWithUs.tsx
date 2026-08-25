@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { CONTACT } from "../config/contact";
+import { WhatsAppChoice } from "../components/WhatsAppChoice";
 
 export const BuildWithUs = () => {
   return (
@@ -46,13 +46,12 @@ export const BuildWithUs = () => {
             <ArrowLeft size={16} />
             Back to Home
           </Link>
-          <Link 
-            to={CONTACT.requestDemoPath} 
+          <WhatsAppChoice
             className="group flex h-14 items-center justify-center gap-3 rounded-full bg-gold px-8 text-[11px] font-bold uppercase tracking-widest text-void transition-all hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
           >
             Request Diagnosis
             <ArrowRight size={16} />
-          </Link>
+          </WhatsAppChoice>
         </motion.div>
       </div>
       

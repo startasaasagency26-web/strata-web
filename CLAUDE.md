@@ -64,15 +64,12 @@ Codex prompt must include:
 Validation commands to include when relevant:
 - npm run build
 - npm run lint
-- npm run test:lead-schema
 
 Hard rules:
 - Do not code unless explicitly asked.
 - Do not apply fixes unless explicitly asked.
 - Do not create files unless explicitly asked.
 - Do not hardcode secrets.
-- Do not bypass lead validation.
-- Do not remove CRM route protection.
-- Do not make CRM routes public.
+- The website is a static marketing site with no backend, auth, or database; reintroducing one is a product decision, not an implementation detail.
 - Do not overengineer.
 - Your job is planning and prompting. Codex does the coding.

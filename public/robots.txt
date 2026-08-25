@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /crm
 
 Sitemap: https://strataagency.tech/sitemap.xml

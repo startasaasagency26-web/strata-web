@@ -1,30 +1,13 @@
 import { lazy, Suspense, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Routes, Route, useLocation } from "react-router-dom";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Navbar } from "./components/Navbar";
-import { Home } from "./pages/Home";
-import { About } from "./pages/About";
-import { Diagnostic } from "./pages/Diagnostic";
-import { DiagnosticReceived } from "./pages/DiagnosticReceived";
-import { BuildWithUs } from "./pages/BuildWithUs";
-import { Pricing } from "./pages/Pricing";
 import { Footer } from "./components/Footer";
-import { CONTACT } from "./config/contact";
 
-// CRM Auth & Protection
-import { CrmAuthProvider } from "./contexts/CrmAuthContext";
-import { ProtectedCrmRoute } from "./components/crm/ProtectedCrmRoute";
-
-const CrmLogin = lazy(() => import("./pages/crm/Login").then((module) => ({ default: module.Login })));
-const CrmResetPassword = lazy(() => import("./pages/crm/ResetPassword").then((module) => ({ default: module.ResetPassword })));
-const CrmDashboard = lazy(() => import("./pages/crm/Dashboard").then((module) => ({ default: module.Dashboard })));
-const CrmDashboardPreview = lazy(() => import("./pages/crm/Dashboard").then((module) => ({ default: module.DashboardPreview })));
-const CrmLeads = lazy(() => import("./pages/crm/Leads").then((module) => ({ default: module.Leads })));
-const CrmLeadDetail = lazy(() => import("./pages/crm/LeadDetail").then((module) => ({ default: module.LeadDetail })));
-const CrmPipeline = lazy(() => import("./pages/crm/Pipeline").then((module) => ({ default: module.Pipeline })));
-const CrmFollowUps = lazy(() => import("./pages/crm/FollowUps").then((module) => ({ default: module.FollowUps })));
-const CrmOutreach = lazy(() => import("./pages/crm/Outreach").then((module) => ({ default: module.Outreach })));
-const CrmSettings = lazy(() => import("./pages/crm/Settings").then((module) => ({ default: module.Settings })));
+const Home = lazy(() => import("./pages/Home").then((module) => ({ default: module.Home })));
+const About = lazy(() => import("./pages/About").then((module) => ({ default: module.About })));
+const Pricing = lazy(() => import("./pages/Pricing").then((module) => ({ default: module.Pricing })));
+const BuildWithUs = lazy(() => import("./pages/BuildWithUs").then((module) => ({ default: module.BuildWithUs })));
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -41,23 +24,6 @@ function ScrollToTop() {
     }
   }, [pathname, hash]);
 
-  return null;
-}
-
-// SEO Helper for CRM
-function NoIndex() {
-  const location = useLocation();
-  useEffect(() => {
-    if (location.pathname.startsWith('/crm')) {
-      let meta = document.querySelector('meta[name="robots"]');
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('name', 'robots');
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', 'noindex, nofollow');
-    }
-  }, [location.pathname]);
   return null;
 }
 
@@ -80,37 +46,19 @@ function PublicShell({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
-    <CrmAuthProvider>
-      <Router>
-        <ScrollToTop />
-        <NoIndex />
-        <Suspense fallback={<div className="min-h-screen bg-void" aria-label="Loading" />}>
-          <Routes>
-          {/* CRM Routes - No Shell */}
-          <Route path="/crm-preview" element={<CrmDashboardPreview />} />
-          <Route path="/crm/login" element={<CrmLogin />} />
-          <Route path="/crm/reset-password" element={<CrmResetPassword />} />
-          
-          <Route path="/crm" element={<ProtectedCrmRoute><CrmDashboard /></ProtectedCrmRoute>} />
-          <Route path="/crm/leads" element={<ProtectedCrmRoute><CrmLeads /></ProtectedCrmRoute>} />
-          <Route path="/crm/leads/:id" element={<ProtectedCrmRoute><CrmLeadDetail /></ProtectedCrmRoute>} />
-          <Route path="/crm/pipeline" element={<ProtectedCrmRoute><CrmPipeline /></ProtectedCrmRoute>} />
-          <Route path="/crm/follow-ups" element={<ProtectedCrmRoute><CrmFollowUps /></ProtectedCrmRoute>} />
-          <Route path="/crm/outreach" element={<ProtectedCrmRoute><CrmOutreach /></ProtectedCrmRoute>} />
-          <Route path="/crm/settings" element={<ProtectedCrmRoute><CrmSettings /></ProtectedCrmRoute>} />
-
-          {/* Public Routes - With Shell */}
+    <Router>
+      <ScrollToTop />
+      <Suspense fallback={<div className="min-h-screen bg-void" aria-label="Loading" />}>
+        <Routes>
           <Route path="/" element={<PublicShell><Home /></PublicShell>} />
           <Route path="/about" element={<PublicShell><About /></PublicShell>} />
           <Route path="/pricing" element={<PublicShell><Pricing /></PublicShell>} />
-          <Route path={CONTACT.requestDemoPath} element={<PublicShell><Diagnostic /></PublicShell>} />
-          <Route path={`${CONTACT.requestDemoPath}/received`} element={<PublicShell><DiagnosticReceived /></PublicShell>} />
           <Route path="/build-with-us" element={<PublicShell><BuildWithUs /></PublicShell>} />
-          </Routes>
-        </Suspense>
-        <SpeedInsights />
-      </Router>
-    </CrmAuthProvider>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
+      <SpeedInsights />
+    </Router>
   );
 }
 

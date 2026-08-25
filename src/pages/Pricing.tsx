@@ -1,7 +1,7 @@
 import { ArrowRight, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { CONTACT } from '../config/contact';
+import { WhatsAppChoice } from '../components/WhatsAppChoice';
 import { Button } from '../components/ui/liquid-glass-button';
 
 const systemFlowSteps = [
@@ -148,10 +148,10 @@ export const Pricing = () => {
               variant="glassStrong"
               className="w-full sm:w-auto h-auto rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
-              <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
+              <WhatsAppChoice className="flex items-center justify-center gap-2">
                 Book a Revenue Systems Audit
                 <ArrowRight size={14} />
-              </Link>
+              </WhatsAppChoice>
             </Button>
           </motion.div>
         </div>
@@ -268,10 +268,10 @@ export const Pricing = () => {
                 size="lg"
                 className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
               >
-                <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
+                <WhatsAppChoice className="flex items-center justify-center gap-2">
                   Book a Revenue Systems Audit
                   <ArrowRight size={14} />
-                </Link>
+                </WhatsAppChoice>
               </Button>
             </div>
           </article>
@@ -375,10 +375,10 @@ export const Pricing = () => {
                 size="lg"
                 className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
               >
-                <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-2">
+                <WhatsAppChoice className="flex items-center justify-center gap-2">
                   Book a Revenue Systems Audit
                   <ArrowRight size={14} />
-                </Link>
+                </WhatsAppChoice>
               </Button>
             </div>
 
@@ -464,7 +464,7 @@ export const Pricing = () => {
 
           <div className="bg-surface border border-border/60 rounded-[24px] p-6 shadow-sm flex flex-col justify-between">
             <div>
-              <h3 className="font-display font-bold text-xl text-text mb-1">Growth</h3>
+              <h3 className="font-display font-bold text-xl text-text mb-1">Optimize</h3>
               <p className="font-mono text-lg font-bold text-text mb-4">RM 999/mo</p>
               <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
                 <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Everything in Support</li>
@@ -539,10 +539,10 @@ export const Pricing = () => {
               size="lg"
               className="w-full sm:w-auto h-auto py-5 px-10 rounded-full font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
-              <Link to={CONTACT.requestDemoPath} className="flex items-center justify-center gap-3">
+              <WhatsAppChoice className="flex items-center justify-center gap-3">
                 <span>Book a Revenue Systems Audit</span>
                 <ArrowRight size={15} />
-              </Link>
+              </WhatsAppChoice>
             </Button>
           </div>
         </div>

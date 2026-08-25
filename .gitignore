@@ -33,3 +33,7 @@ Strata Marketing/
 ui-ux-pro-max-skill-main.zip
 build_log.txt
 .tmp-lead-schema-test/
+
+# Agent tooling (local, not site code)
+.agents/
+AGENTS.md
