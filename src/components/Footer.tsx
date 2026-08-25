@@ -25,7 +25,7 @@ export const Footer = () => {
               >
                 <Mail size={20} />
               </a>
-              <WhatsAppChoice
+              <WhatsAppChoice source="footer"
                 ariaLabel="Choose a Strata WhatsApp contact"
                 className="text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
               >

@@ -2,13 +2,14 @@ import { ArrowRight, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { CONTACT } from '../config/contact';
 import { WhatsAppChoice } from '../components/WhatsAppChoice';
+import { cn } from '../lib/utils';
 import { Button } from '../components/ui/liquid-glass-button';
 
 const systemFlowSteps = [
   'Audit Revenue Leaks',
   'Map Customer Journey',
   'Design Sales Process',
-  'Configure Tools',
+  'Deploy AI Employees',
   'Train the Team',
   'Review Outcomes',
 ];
@@ -65,11 +66,74 @@ const expandedScopeReasons = [
   'Heavy legacy database & software integrations',
 ];
 
+const packages = [
+  {
+    name: 'Foundation',
+    tagline: 'One repetitive role, taken off your team.',
+    setup: 'From RM 3,500',
+    monthly: 'From RM 3,500 / mo',
+    summary: 'For simpler or lower-volume operations with one clearly repetitive job function worth removing first.',
+    includes: [
+      'One AI Employee covering a single job function',
+      'One department or workflow in scope',
+      'Core channel and workflow configuration',
+      'Your operating rules, limits and escalation points',
+      'Reporting on the agreed outcome',
+    ],
+    featured: false,
+  },
+  {
+    name: 'Growth',
+    tagline: 'A complete AI Revenue Workforce.',
+    setup: 'From RM 5,000',
+    monthly: 'RM 5,000 / mo',
+    summary: 'The primary engagement. One end-to-end revenue operation owned from first enquiry through to handoff to your closer.',
+    includes: [
+      'A complete department or end-to-end workflow',
+      'Specialised AI Employees working together with defined handoffs',
+      'Integrations across your existing tools where required',
+      'Shared operating rules, approvals and permissions',
+      'Owner dashboard, reporting and continuous optimisation',
+    ],
+    featured: true,
+  },
+  {
+    name: 'Scale',
+    tagline: 'Multiple workflows, multiple departments.',
+    setup: 'From RM 7,500',
+    monthly: 'From RM 7,500 / mo',
+    summary: 'For operations spanning several departments, locations or teams, where breadth and governance drive the work.',
+    includes: [
+      'Several workflows or departments in scope',
+      'A broader workforce coordinated across functions',
+      'Higher-complexity integrations and routing',
+      'Role-based permissions and approval limits',
+      'Expanded reporting and operational support',
+    ],
+    featured: false,
+  },
+  {
+    name: 'Enterprise',
+    tagline: 'A workforce designed around your business.',
+    setup: 'Custom',
+    monthly: 'From RM 10,000 / mo',
+    summary: 'For businesses whose scope, governance or rollout requirements exceed a standard engagement.',
+    includes: [
+      'Custom workforce size and design',
+      'Bespoke integrations and data requirements',
+      'Governance, permissions and audit requirements',
+      'Agreed SLA and support model',
+      'Phased rollout across teams or locations',
+    ],
+    featured: false,
+  },
+];
+
 const quotingSteps = [
   {
     num: '01',
     title: 'QUALIFY THE BUSINESS',
-    desc: 'We verify whether your offer, market, margins and sales capacity are commercially suitable for a Revenue Systems engagement.',
+    desc: 'We verify whether your offer, market, margins and sales capacity are commercially suitable for an AI workforce deployment.',
   },
   {
     num: '02',
@@ -85,8 +149,12 @@ const quotingSteps = [
 
 const faqs = [
   {
-    question: 'What is Strata Revenue Systems?',
-    answer: 'Strata Revenue Systems is a paid service engagement. We diagnose where revenue work is breaking, design the agreed process, configure the required tools and hand the working system over to your team.',
+    question: 'Is this a product I log into today?',
+    answer: 'No. Strata Core, the platform this is built towards, is still in development and is not sold here. What you are buying is a scoped deployment: we configure and run the agreed workflow for your business, with reporting you can see. Some of that delivery is handled by our team behind the scenes while the platform matures. We would rather tell you that up front than oversell a dashboard.',
+  },
+  {
+    question: 'What exactly is an AI workforce?',
+    answer: 'AI Employees are configured to own specific, repetitive parts of a job - handling enquiries, qualifying, chasing follow-ups, keeping records straight. They run against your rules, limits and approval points, and a human stays in control of anything consequential. Strata scopes the work, configures the employees, integrates them with the tools you already use, and reports on the outcome.'
   },
   {
     question: 'Why does pricing vary?',
@@ -97,12 +165,12 @@ const faqs = [
     answer: 'No. Ad spend is billed directly by Meta or TikTok to your business account. Strata\'s monthly fee covers only the campaign, operations, maintenance and improvement work agreed in your scope.',
   },
   {
-    question: 'What is the difference between Standard and Expanded Scope?',
-    answer: 'Standard (from RM 5,000/mo) covers one bounded revenue operation. Expanded Scope (from RM 7,500/mo) is for multiple locations, heavier lead volume, larger teams, additional workflows or custom integrations.',
+    question: 'What is the difference between Growth and Scale?',
+    answer: 'Growth (RM 5,000/mo) covers one complete workflow or department end to end - for most businesses that is the revenue operation. Scale (from RM 7,500/mo) is for several workflows or departments at once, multiple locations, larger teams, or heavier integration and governance requirements.',
   },
   {
-    question: 'What happens during the Revenue Systems Audit?',
-    answer: 'We review how enquiries arrive, who owns each handoff, where follow-up fails, what customers are worth and which tools are already in place. You leave with a recommended service scope, timeline and investment band.',
+    question: 'What happens during the AI Workforce Audit?',
+    answer: 'We review how enquiries arrive, who owns each handoff, where follow-up fails, what customers are worth and which tools are already in place. You leave with a recommended scope, timeline and investment band - whether or not you go ahead.',
   },
 ];
 
@@ -118,7 +186,7 @@ export const Pricing = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4"
           >
-            STRATA REVENUE SYSTEMS
+            AI WORKFORCE MANAGEMENT
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
@@ -126,8 +194,8 @@ export const Pricing = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-7xl font-display font-bold leading-none tracking-tight text-text mb-8 uppercase"
           >
-            Practical revenue operations. <br />
-            <span className="text-text/70">Delivered around your business economics.</span>
+            Put the repetitive work <br />
+            <span className="text-text/70">on an AI workforce.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -135,7 +203,7 @@ export const Pricing = () => {
             transition={{ delay: 0.18 }}
             className="text-muted font-sans text-base md:text-xl leading-relaxed max-w-3xl mx-auto mb-10"
           >
-            This is the work customers can buy today. Strata audits the revenue process, designs the required handoffs, configures the agreed tools and supports execution. Pricing varies with customer value, sales economics, complexity, locations and integrations.
+            This is the work you can buy today. Strata audits where the work repeats, designs the handoffs, deploys and governs the AI Employees that own it, and reports on the result. Pricing moves with customer value, volume, complexity, locations and integrations.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -148,8 +216,8 @@ export const Pricing = () => {
               variant="glassStrong"
               className="w-full sm:w-auto h-auto rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
-              <WhatsAppChoice className="flex items-center justify-center gap-2">
-                Book a Revenue Systems Audit
+              <WhatsAppChoice source="pricing / hero" className="flex items-center justify-center gap-2">
+                Book an AI Workforce Audit
                 <ArrowRight size={14} />
               </WhatsAppChoice>
             </Button>
@@ -211,70 +279,91 @@ export const Pricing = () => {
         </div>
       </section>
 
-      {/* SECTION 3 — PUBLIC INVESTMENT (MAIN COMMERCIAL ANCHOR) */}
+      {/* SECTION 3 - THE WORKFORCE LADDER (MAIN COMMERCIAL ANCHOR) */}
       <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMERCIAL INVESTMENT</p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase">
-            Starting Investment
+          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase mb-4">
+            Scope &amp; Investment
           </h2>
+          <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
+            Every engagement is scoped to the work being removed. Implementation is quoted separately from the monthly fee, and both move with the complexity of your operation.
+          </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
-          <article className="relative overflow-hidden rounded-[32px] border-2 border-gold bg-surface p-8 md:p-14 shadow-[0_24px_72px_rgb(var(--scrim)/0.08)]">
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-border/60">
-              <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] text-muted block mb-1">
-                  STANDARD IMPLEMENTATION
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+          {packages.map((pkg, idx) => (
+            <motion.article
+              key={pkg.name}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.07 }}
+              className={cn(
+                'relative flex flex-col rounded-[32px] bg-surface p-7 md:p-8',
+                pkg.featured
+                  ? 'border-2 border-gold shadow-[0_24px_72px_rgb(var(--scrim)/0.08)]'
+                  : 'border border-border/60 shadow-sm',
+              )}
+            >
+              {pkg.featured && (
+                <span className="absolute -top-3 left-7 inline-flex items-center rounded-full bg-gold px-4 py-1.5 font-mono text-[9px] font-bold uppercase tracking-widest text-void">
+                  MOST DEPLOYED
                 </span>
-                <h3 className="text-3xl md:text-4xl font-black text-text uppercase tracking-tight">
-                  Strata Revenue Systems
+              )}
+
+              <div className="mb-6 pb-6 border-b border-border/60">
+                <h3 className="text-2xl font-display font-bold uppercase tracking-tight text-text mb-2">
+                  {pkg.name}
                 </h3>
+                <p className="font-sans text-sm text-text/70 leading-relaxed">{pkg.tagline}</p>
               </div>
-              <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-gold text-void font-mono text-[9px] font-bold uppercase tracking-widest">
-                MOST RECOMMENDED
-              </span>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 p-6 rounded-2xl bg-surface border border-border/50">
-              <div>
-                <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">IMPLEMENTATION</span>
-                <span className="font-mono text-2xl font-bold text-text">FROM RM 5,000</span>
-                <span className="block text-[10px] font-mono text-muted mt-1">One-time setup &amp; build</span>
+              <div className="mb-6 space-y-4">
+                <div>
+                  <span className="block font-mono text-[9px] uppercase tracking-widest text-muted mb-1">MONTHLY</span>
+                  <span className="font-mono text-xl font-bold text-text">{pkg.monthly}</span>
+                </div>
+                <div className="pt-3 border-t border-border/40">
+                  <span className="block font-mono text-[9px] uppercase tracking-widest text-muted mb-1">IMPLEMENTATION</span>
+                  <span className="font-mono text-base font-bold text-text">{pkg.setup}</span>
+                  <span className="block text-[10px] font-mono text-muted mt-1">One-time, billed separately</span>
+                </div>
               </div>
-              <div className="md:border-l md:border-border/50 md:pl-6">
-                <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">MONTHLY OPERATING FEE</span>
-                <span className="font-mono text-2xl font-bold text-text">FROM RM 5,000 / MO</span>
-                <span className="block text-[10px] font-mono text-muted mt-1">Ongoing delivery &amp; improvement</span>
-              </div>
-              <div className="md:border-l md:border-border/50 md:pl-6">
-                <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">AD SPEND</span>
-                <span className="font-mono text-2xl font-bold text-text">SEPARATE</span>
-                <span className="block text-[10px] font-mono text-muted mt-1">Billed directly by ad platforms</span>
-              </div>
-            </div>
 
-            <p className="text-sm font-sans text-muted leading-relaxed mb-8">
-              Final investment depends on your customer value, gross margin, monthly lead volume, sales team capacity, locations, operational complexity, and required software integrations.
-            </p>
+              <p className="mb-6 font-sans text-xs text-muted leading-relaxed">{pkg.summary}</p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-border/50">
-              <span className="font-mono text-xs text-muted uppercase tracking-widest">
-                Recommended for qualified service operations
-              </span>
-              <Button
-                asChild
-                variant="glassStrong"
-                size="lg"
-                className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
+              <ul className="mb-8 grid gap-3 border-t border-border/40 pt-5">
+                {pkg.includes.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <Check className="mt-0.5 shrink-0 text-text" size={14} />
+                    <span className="font-sans text-xs text-muted leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <WhatsAppChoice
+                source={'pricing / ' + pkg.name}
+                ariaLabel={'Discuss the ' + pkg.name + ' scope on WhatsApp'}
+                className={cn(
+                  'mt-auto flex h-12 w-full items-center justify-center gap-2 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset',
+                  pkg.featured
+                    ? 'bg-gold text-void hover:bg-goldHover active:bg-goldActive'
+                    : 'border border-border text-text hover:bg-surface3',
+                )}
               >
-                <WhatsAppChoice className="flex items-center justify-center gap-2">
-                  Book a Revenue Systems Audit
-                  <ArrowRight size={14} />
-                </WhatsAppChoice>
-              </Button>
-            </div>
-          </article>
+                Discuss {pkg.name}
+                <ArrowRight size={13} />
+              </WhatsAppChoice>
+            </motion.article>
+          ))}
+        </div>
+
+        <div className="mt-8 mx-auto max-w-3xl rounded-[24px] border border-border/60 bg-surface px-6 py-5 text-center">
+          <p className="font-sans text-xs text-muted leading-relaxed">
+            <span className="font-mono font-bold uppercase tracking-widest text-text">Ad spend is separate.</span>
+            {' '}Media budget is billed directly to your business by Meta or TikTok. Third-party usage such as WhatsApp Business messaging, premium data or unusually high AI consumption is passed through at cost.
+          </p>
         </div>
       </section>
 
@@ -345,28 +434,17 @@ export const Pricing = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 relative z-10 items-center">
             <div>
               <span className="mb-3 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
-                EXPANDED INFRASTRUCTURE
+                SCOPE DRIVERS
               </span>
               <h2 className="mb-6 text-4xl md:text-5xl font-black uppercase leading-tight text-text">
-                Expanded Scope
+                What Moves You Up
               </h2>
               <p className="mb-8 font-sans text-base md:text-lg text-muted leading-relaxed max-w-lg">
-                For growing businesses requiring more delivery work than the standard Revenue Systems engagement.
+                Most businesses land on Growth. These are the conditions that push a deployment into Scale or Enterprise - and the honest reasons a quote comes back higher.
               </p>
 
-              <div className="grid grid-cols-2 gap-4 mb-8 p-5 rounded-2xl bg-surface2 border border-border">
-                <div>
-                  <span className="block font-mono text-[9px] uppercase tracking-widest text-muted mb-1">IMPLEMENTATION</span>
-                  <span className="font-mono text-xl font-bold text-text">RM 7,500+</span>
-                </div>
-                <div>
-                  <span className="block font-mono text-[9px] uppercase tracking-widest text-muted mb-1">MONTHLY FEE</span>
-                  <span className="font-mono text-xl font-bold text-text">RM 7,500+ / MO</span>
-                </div>
-              </div>
-
               <p className="mb-8 font-sans text-xs text-muted leading-relaxed">
-                Expanded Scope adds the implementation, routing, permissions and integration work required by more complex operations.
+                None of these change the method. They change how much implementation, routing, permission and integration work sits underneath it - which is what the Scale and Enterprise bands pay for.
               </p>
 
               <Button
@@ -375,8 +453,8 @@ export const Pricing = () => {
                 size="lg"
                 className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
               >
-                <WhatsAppChoice className="flex items-center justify-center gap-2">
-                  Book a Revenue Systems Audit
+                <WhatsAppChoice source="pricing / scope-drivers" className="flex items-center justify-center gap-2">
+                  Book an AI Workforce Audit
                   <ArrowRight size={14} />
                 </WhatsAppChoice>
               </Button>
@@ -384,7 +462,7 @@ export const Pricing = () => {
 
             <div className="bg-surface2 border border-border rounded-[24px] p-6 md:p-8">
               <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-muted mb-6 border-b border-border pb-3">
-                Common Triggers for Expanded Scope:
+                Common Triggers For A Larger Scope:
               </h4>
               <ul className="grid grid-cols-1 gap-3.5">
                 {expandedScopeReasons.map((reason) => (
@@ -488,7 +566,7 @@ export const Pricing = () => {
                 A separate platform vision for connected business operations.
               </h2>
               <p className="mt-6 text-sm leading-relaxed text-muted md:text-base">
-                Strata Core is being designed as a shared platform for company data, rules, permissions and controlled assistance across multiple interfaces. It is not included in the Revenue Systems prices above and is not presented as a finished product.
+                Strata Core is being designed as a shared platform for company data, rules, permissions and controlled assistance across multiple interfaces. It is not included in the prices above and is not presented as a finished product.
               </p>
             </div>
             <Button
@@ -531,7 +609,7 @@ export const Pricing = () => {
               Ready to price the work your revenue process needs?
             </h3>
             <p className="text-muted font-sans text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-              Book a Revenue Systems Audit. We'll map the current process, review your customer economics and specify the implementation work, timeline and ongoing service scope.
+              Book an AI Workforce Audit. We'll map the current process, review your customer economics and specify the deployment scope, timeline and ongoing service.
             </p>
             <Button
               asChild
@@ -539,8 +617,8 @@ export const Pricing = () => {
               size="lg"
               className="w-full sm:w-auto h-auto py-5 px-10 rounded-full font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
-              <WhatsAppChoice className="flex items-center justify-center gap-3">
-                <span>Book a Revenue Systems Audit</span>
+              <WhatsAppChoice source="pricing / final-cta" className="flex items-center justify-center gap-3">
+                <span>Book an AI Workforce Audit</span>
                 <ArrowRight size={15} />
               </WhatsAppChoice>
             </Button>

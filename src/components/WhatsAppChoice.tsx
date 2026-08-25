@@ -2,11 +2,14 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
 import { CONTACT } from "../config/contact";
+import { trackWhatsAppContact } from "../lib/analytics";
 
 type WhatsAppChoiceProps = {
   children: ReactNode;
   className?: string;
   ariaLabel?: string;
+  /** Labels which CTA drove the contact, so packages are comparable in Ads Manager. */
+  source?: string;
 };
 
 const contacts = [CONTACT.whatsapp.nick, CONTACT.whatsapp.khairul] as const;
@@ -15,6 +18,7 @@ export const WhatsAppChoice = ({
   children,
   className,
   ariaLabel = "Choose a WhatsApp contact",
+  source = "unspecified",
 }: WhatsAppChoiceProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -146,7 +150,10 @@ export const WhatsAppChoice = ({
                     href={contact.url}
                     target="_blank"
                     rel="noreferrer"
-                    onClick={closeDialog}
+                    onClick={() => {
+                      trackWhatsAppContact(`${source} / ${contact.name}`);
+                      closeDialog();
+                    }}
                     className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-surface px-5 py-4 transition-colors hover:border-gold/40 hover:bg-surface3 hover:text-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
                   >
                     <span>

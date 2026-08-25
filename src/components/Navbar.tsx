@@ -23,7 +23,7 @@ export const Navbar = () => {
     { name: 'PLATFORM', href: '/#platform' },
     { name: 'COMPANY RULES', href: '/#business-rules' },
     { name: 'CONTROLLED ASSISTANCE', href: '/#controlled-assistance' },
-    { name: 'REVENUE SYSTEMS', href: '/pricing' },
+    { name: 'PRICING', href: '/pricing' },
     { name: 'ABOUT', href: '/about' },
   ];
 

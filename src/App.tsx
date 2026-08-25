@@ -1,8 +1,9 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Navigate, Routes, Route, useLocation } from "react-router-dom";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { initPixel, trackPageView } from "./lib/analytics";
 
 const Home = lazy(() => import("./pages/Home").then((module) => ({ default: module.Home })));
 const About = lazy(() => import("./pages/About").then((module) => ({ default: module.About })));
@@ -23,6 +24,24 @@ function ScrollToTop() {
       }
     }
   }, [pathname, hash]);
+
+  return null;
+}
+
+// Meta Pixel: init once, then fire PageView on every client-side route change.
+// The base pixel code only ever sees the first load in an SPA.
+function PixelTracker() {
+  const { pathname } = useLocation();
+  const initialised = useRef(false);
+
+  useEffect(() => {
+    if (!initialised.current) {
+      initPixel();
+      initialised.current = true;
+      return;
+    }
+    trackPageView();
+  }, [pathname]);
 
   return null;
 }
@@ -48,6 +67,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <PixelTracker />
       <Suspense fallback={<div className="min-h-screen bg-void" aria-label="Loading" />}>
         <Routes>
           <Route path="/" element={<PublicShell><Home /></PublicShell>} />

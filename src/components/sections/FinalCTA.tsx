@@ -184,7 +184,7 @@ export const FinalCTA = () => {
               </a>
             </Button>
 
-            <WhatsAppChoice className="group inline-flex w-full items-center justify-center gap-4 rounded-full border border-border px-10 py-6 font-mono font-bold uppercase tracking-widest text-text transition-colors duration-300 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus sm:w-auto">
+            <WhatsAppChoice source="home / final-cta" className="group inline-flex w-full items-center justify-center gap-4 rounded-full border border-border px-10 py-6 font-mono font-bold uppercase tracking-widest text-text transition-colors duration-300 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus sm:w-auto">
               <MessageSquare size={20} className="text-muted" />
               <span>WhatsApp Us</span>
             </WhatsAppChoice>
