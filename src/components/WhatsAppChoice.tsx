@@ -17,7 +17,7 @@ const contacts = [CONTACT.whatsapp.nick, CONTACT.whatsapp.khairul] as const;
 export const WhatsAppChoice = ({
   children,
   className,
-  ariaLabel = "Choose a WhatsApp contact",
+  ariaLabel,
   source = "unspecified",
 }: WhatsAppChoiceProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,7 +97,7 @@ export const WhatsAppChoice = ({
             <motion.button
               type="button"
               aria-label="Close WhatsApp contact chooser"
-              className="absolute inset-0 cursor-default bg-gold/55 backdrop-blur-sm"
+              className="absolute inset-0 cursor-default bg-void/80 backdrop-blur-sm"
               onClick={closeDialog}
               initial={shouldReduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}

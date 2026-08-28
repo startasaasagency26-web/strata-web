@@ -1,9 +1,10 @@
 import { ArrowRight, Check } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { CONTACT } from '../config/contact';
 import { WhatsAppChoice } from '../components/WhatsAppChoice';
 import { cn } from '../lib/utils';
 import { Button } from '../components/ui/liquid-glass-button';
+import { Seo } from '../components/Seo';
 
 const systemFlowSteps = [
   'Audit Revenue Leaks',
@@ -175,40 +176,47 @@ const faqs = [
 ];
 
 export const Pricing = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div className="relative pt-32 pb-24 md:pt-40 md:pb-32 bg-background min-h-screen">
+      <Seo
+        title="AI Workforce Management | Strata Pricing"
+        description="Strata audits where work repeats, designs the handoffs, deploys and governs the AI Employees that own it, and reports on the result. Pricing moves with customer value, volume, complexity, locations and integrations."
+        path="/pricing"
+      />
       
       {/* SECTION 1 — HERO */}
-      <section className="container mx-auto px-6 md:px-12 mb-20 md:mb-28">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-20 md:mb-28">
         <div className="text-center max-w-4xl mx-auto">
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4"
           >
             AI WORKFORCE MANAGEMENT
           </motion.p>
           <motion.h1
-            initial={{ opacity: 0, y: 16 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: shouldReduceMotion ? 0 : undefined, delay: shouldReduceMotion ? 0 : 0.1 }}
             className="text-4xl md:text-7xl font-display font-bold leading-none tracking-tight text-text mb-8 uppercase"
           >
             Put the repetitive work <br />
             <span className="text-text/70">on an AI workforce.</span>
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.18 }}
+            transition={{ duration: shouldReduceMotion ? 0 : undefined, delay: shouldReduceMotion ? 0 : 0.18 }}
             className="text-muted font-sans text-base md:text-xl leading-relaxed max-w-3xl mx-auto mb-10"
           >
             This is the work you can buy today. Strata audits where the work repeats, designs the handoffs, deploys and governs the AI Employees that own it, and reports on the result. Pricing moves with customer value, volume, complexity, locations and integrations.
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.24 }}
+            transition={{ duration: shouldReduceMotion ? 0 : undefined, delay: shouldReduceMotion ? 0 : 0.24 }}
             className="flex justify-center"
           >
             <Button
@@ -226,7 +234,7 @@ export const Pricing = () => {
       </section>
 
       {/* SECTION 2 — WHAT THE ENGAGEMENT INCLUDES */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="bg-surface border border-border/60 rounded-[32px] p-8 md:p-14 shadow-sm">
           <div className="max-w-3xl mb-12">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">SCOPED SERVICE</p>
@@ -280,7 +288,7 @@ export const Pricing = () => {
       </section>
 
       {/* SECTION 3 - THE WORKFORCE LADDER (MAIN COMMERCIAL ANCHOR) */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMERCIAL INVESTMENT</p>
           <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase mb-4">
@@ -295,10 +303,10 @@ export const Pricing = () => {
           {packages.map((pkg, idx) => (
             <motion.article
               key={pkg.name}
-              initial={{ opacity: 0, y: 16 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.07 }}
+              transition={{ duration: shouldReduceMotion ? 0 : undefined, delay: shouldReduceMotion ? 0 : idx * 0.07 }}
               className={cn(
                 'relative flex flex-col rounded-[32px] bg-surface p-7 md:p-8',
                 pkg.featured
@@ -368,7 +376,7 @@ export const Pricing = () => {
       </section>
 
       {/* SECTION 4 — HOW WE PRICE (DETERMINATION FACTORS) */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
           <div className="max-w-2xl">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">PRICING LOGIC</p>
@@ -390,10 +398,10 @@ export const Pricing = () => {
           {pricingFactors.map((factor, idx) => (
             <motion.div
               key={factor.title}
-              initial={{ opacity: 0, y: 16 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
+              transition={{ duration: shouldReduceMotion ? 0 : undefined, delay: shouldReduceMotion ? 0 : idx * 0.08 }}
               className="bg-surface border border-border/60 rounded-[28px] p-8 flex flex-col justify-between hover:shadow-lg transition-all duration-300"
             >
               <div>
@@ -429,7 +437,7 @@ export const Pricing = () => {
       </section>
 
       {/* SECTION 5 — EXPANDED SCOPE */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="bg-surface2 text-text rounded-[32px] border border-gold/30 p-8 md:p-14 shadow-2xl shadow-gold/5 relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 relative z-10 items-center">
             <div>
@@ -460,14 +468,14 @@ export const Pricing = () => {
               </Button>
             </div>
 
-            <div className="bg-surface2 border border-border rounded-[24px] p-6 md:p-8">
+            <div className="bg-surface border border-border rounded-[24px] p-6 md:p-8">
               <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-muted mb-6 border-b border-border pb-3">
                 Common Triggers For A Larger Scope:
               </h4>
               <ul className="grid grid-cols-1 gap-3.5">
                 {expandedScopeReasons.map((reason) => (
                   <li key={reason} className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-positiveSoft shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
                     <span className="text-xs md:text-sm font-sans text-muted">{reason}</span>
                   </li>
                 ))}
@@ -478,7 +486,7 @@ export const Pricing = () => {
       </section>
 
       {/* SECTION 6 — HOW QUOTING WORKS */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">TRANSPARENT PROCESS</p>
           <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase">
@@ -500,7 +508,7 @@ export const Pricing = () => {
       </section>
 
       {/* SECTION 7 — POST-LAUNCH SUPPORT (SYSTEM CARE) */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">OPTIONAL ADD-ONS</p>
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-text uppercase mb-3">
@@ -555,7 +563,7 @@ export const Pricing = () => {
       </section>
 
       {/* SECTION 8 — STRATA CORE PLATFORM VISION */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="rounded-[32px] border border-gold/30 bg-surface2 p-8 text-text shadow-xl shadow-gold/5 md:p-14">
           <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
             <div className="max-w-3xl">
@@ -585,7 +593,7 @@ export const Pricing = () => {
       </section>
 
       {/* SECTION 9 — FAQ & FINAL CTA */}
-      <section className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMON QUESTIONS</p>

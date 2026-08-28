@@ -1,14 +1,22 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { WhatsAppChoice } from "../components/WhatsAppChoice";
+import { Seo } from "../components/Seo";
 
 export const BuildWithUs = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <div className="flex min-h-[80vh] flex-col items-center justify-center px-6 py-20 lg:px-20 lg:py-32">
+    <div className="flex min-h-[80vh] flex-col items-center justify-center px-5 pb-20 pt-32 sm:px-8 md:px-12 md:pt-40 lg:pb-32">
+      <Seo
+        title="Build With Strata | Opportunities Coming Soon"
+        description="We’re building a space for future collaborators, creatives, developers, strategists, and operators who want to work with Strata. This page is not open yet."
+        path="/build-with-us"
+      />
       <div className="mx-auto max-w-4xl text-center">
         <motion.span
-          initial={{ opacity: 0, y: 10 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-6 block font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-text/40"
         >
@@ -16,27 +24,27 @@ export const BuildWithUs = () => {
         </motion.span>
         
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.1 }}
           className="mb-8 text-5xl font-black tracking-tight text-text md:text-7xl lg:text-8xl"
         >
           Opportunities Coming Soon
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.2 }}
           className="mx-auto mb-16 max-w-2xl text-lg leading-relaxed text-text/60 md:text-xl"
         >
           We’re building a space for future collaborators, creatives, developers, strategists, and operators who want to work with Strata. This page is not open yet.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.3 }}
           className="flex flex-wrap justify-center gap-6"
         >
           <Link 

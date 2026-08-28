@@ -1,21 +1,29 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { WhatsAppChoice } from "../components/WhatsAppChoice";
 import { cn } from "../lib/utils";
+import { Seo } from "../components/Seo";
 
 export const About = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col pt-32 md:pt-40">
+      <Seo
+        title="About Strata | Business Systems Built Around Real Work"
+        description="Founded in mid-2025, Strata delivers Revenue Systems engagements for growing businesses today while shaping the in-development Strata Core platform with design partners."
+        path="/about"
+      />
       {/* SECTION 1 — HERO */}
-      <section className="relative px-6 py-20 lg:px-20 lg:py-32">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+      <section className="relative px-5 pb-20 sm:px-8 md:px-12 lg:pb-32">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
           >
-            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-text/40">
+            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
               ABOUT STRATA
             </span>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-[-0.04em] text-text md:text-7xl lg:text-8xl">
@@ -25,7 +33,7 @@ export const About = () => {
               Founded in mid-2025, Strata delivers Revenue Systems engagements for growing businesses today while shaping the in-development Strata Core platform with design partners.
             </p>
             <div className="flex flex-wrap gap-4">
-              <WhatsAppChoice source="about" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
+              <WhatsAppChoice source="about / hero" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Book Revenue Audit</span>
               </WhatsAppChoice>
               <Link to="/about#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95">
@@ -35,9 +43,9 @@ export const About = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.8, delay: shouldReduceMotion ? 0 : 0.2 }}
             className="relative"
           >
             <div className="relative overflow-hidden rounded-[32px] border border-gold/5 bg-surface2 p-4 shadow-2xl">
@@ -52,7 +60,7 @@ export const About = () => {
                 <span className="text-sm font-bold uppercase tracking-widest text-text">
                   Amirul Afiz / Nick
                 </span>
-                <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-text/40">
+                <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
                   Founder, Strata Agency
                 </span>
               </div>
@@ -71,13 +79,14 @@ export const About = () => {
       </section>
 
       {/* SECTION 2 — ORIGIN STORY */}
-      <section className="bg-surface px-6 py-24 lg:px-20 lg:py-32">
-        <div className="mx-auto max-w-4xl">
+      <section className="bg-surface px-5 py-24 sm:px-8 md:px-12 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto max-w-4xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
           >
             <div className="mb-8 flex items-center gap-4">
               <span className="rounded-full bg-gold/5 px-4 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">
@@ -102,19 +111,20 @@ export const About = () => {
               </p>
             </div>
           </motion.div>
+          </div>
         </div>
       </section>
 
       {/* SECTION 3 — FOUNDER SECTION */}
-      <section className="px-6 py-24 lg:px-20 lg:py-32">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-start">
+      <section className="px-5 py-24 sm:px-8 md:px-12 lg:py-32">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-2 lg:items-start">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
           >
-            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-text/40">
+            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
               FOUNDER-LED
             </span>
             <h2 className="mb-8 text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
@@ -134,10 +144,10 @@ export const About = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.2 }}
             className="rounded-[32px] border border-gold/10 bg-surface p-8 shadow-xl lg:p-12"
           >
             <h3 className="mb-8 text-xl font-bold uppercase tracking-widest text-text">
@@ -169,13 +179,13 @@ export const About = () => {
       </section>
 
       {/* SECTION 3.5 — SALES SPECIALIST SECTION */}
-      <section className="bg-surface px-6 py-24 lg:px-20 lg:py-32">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+      <section className="bg-surface px-5 py-24 sm:px-8 md:px-12 lg:py-32">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.8 }}
             className="order-1 lg:order-1 relative"
           >
             <div className="relative overflow-hidden rounded-[32px] border border-gold/5 bg-surface p-4 shadow-2xl">
@@ -190,7 +200,7 @@ export const About = () => {
                 <span className="text-sm font-bold uppercase tracking-widest text-text">
                   Khairul Azril
                 </span>
-                <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-text/40">
+                <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
                   Sales Specialist & Manager
                 </span>
                 <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -214,13 +224,13 @@ export const About = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.2 }}
             className="order-2 lg:order-2"
           >
-            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-text/40">
+            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
               CLIENT RELATIONSHIPS
             </span>
             <h2 className="mb-8 text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
@@ -265,7 +275,7 @@ export const About = () => {
               <p className="mb-8 text-sm font-medium italic text-text/70">
                 "Speak with a team that understands both revenue systems and real customer conversations."
               </p>
-              <WhatsAppChoice source="about" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
+              <WhatsAppChoice source="about / sales" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Request Diagnosis</span>
               </WhatsAppChoice>
             </div>
@@ -274,7 +284,8 @@ export const About = () => {
       </section>
 
       {/* SECTION 4 — WHAT STRATA BUILDS */}
-      <section className="px-6 py-24 lg:px-20 lg:py-32">
+      <section className="px-5 py-24 sm:px-8 md:px-12 lg:py-32">
+        <div className="mx-auto max-w-7xl">
         <div className="mb-16">
           <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted text-center lg:text-left">
             CAPABILITIES
@@ -313,12 +324,12 @@ export const About = () => {
           ].map((card, idx) => (
             <motion.div
               key={card.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : idx * 0.1 }}
               className={cn(
-                "bento-card group flex flex-col justify-between",
+                "group flex flex-col justify-between rounded-[28px] border border-border/60 bg-surface p-8",
                 card.className
               )}
             >
@@ -336,12 +347,14 @@ export const About = () => {
             </motion.div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* SECTION 5 — PORTFOLIO PROOF */}
-      <section id="selected-work" className="scroll-mt-[var(--section-scroll-offset)] px-6 py-24 lg:px-20 lg:py-32">
+      <section id="selected-work" className="scroll-mt-[var(--section-scroll-offset)] px-5 py-24 sm:px-8 md:px-12 lg:py-32">
+        <div className="mx-auto max-w-7xl">
         <div className="mb-16 text-center">
-          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-text/40">
+          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
             SELECTED WORK
           </span>
           <h2 className="text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
@@ -394,7 +407,7 @@ export const About = () => {
                 {isLinked ? (
                   <ArrowUpRight className="h-5 w-5 text-text/20 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-gold group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1" />
                 ) : (
-                  <span className="rounded-full bg-gold/5 px-3 py-1 font-mono text-[8px] font-bold uppercase tracking-widest text-text/40">
+                  <span className="rounded-full bg-gold/5 px-3 py-1 font-mono text-[8px] font-bold uppercase tracking-widest text-muted">
                     {project.badge}
                   </span>
                 )}
@@ -409,13 +422,13 @@ export const About = () => {
                 href={project.href!}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -20 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : idx * 0.1 }}
                 className={cn(
                   commonClasses,
-                  "group block hover:bg-surface3 hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-gold/20"
+                  "group block hover:bg-surface3 hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-focus focus-visible:border-gold/20"
                 )}
                 aria-label={`Open ${project.name} website in a new tab`}
               >
@@ -424,10 +437,10 @@ export const About = () => {
             ) : (
               <motion.article
                 key={project.name}
-                initial={{ opacity: 0, x: -20 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : idx * 0.1 }}
                 className={commonClasses}
                 aria-label={`${project.name} is an internal system project`}
               >
@@ -436,10 +449,12 @@ export const About = () => {
             );
           })}
         </div>
+        </div>
       </section>
 
       {/* SECTION 6 — PROCESS OVERVIEW */}
-      <section className="mx-2 rounded-[32px] border border-gold/30 bg-surface2 px-6 py-24 text-text shadow-2xl shadow-gold/5 md:mx-6 lg:px-20 lg:py-32">
+      <section className="mx-2 rounded-[32px] border border-gold/30 bg-surface2 px-5 py-24 text-text shadow-2xl shadow-gold/5 sm:px-8 md:mx-6 md:px-12 lg:py-32">
+        <div className="mx-auto max-w-7xl">
         <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="mb-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
@@ -479,10 +494,10 @@ export const About = () => {
           ].map((step, idx) => (
             <motion.div
               key={step.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : idx * 0.1 }}
               className="relative flex flex-col pt-8"
             >
               <div className="mb-6 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
@@ -495,20 +510,22 @@ export const About = () => {
                 {step.desc}
               </p>
               {idx < 3 && (
-                <div className="absolute right-0 top-10 hidden h-px w-full bg-surface2 lg:block" />
+                <div className="absolute right-0 top-10 hidden h-px w-full bg-border lg:block" />
               )}
             </motion.div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* SECTION 7 — BELIEF SECTION */}
-      <section className="px-6 py-24 text-center lg:px-20 lg:py-32">
+      <section className="px-5 py-24 text-center sm:px-8 md:px-12 lg:py-32">
+        <div className="mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.8 }}
           className="mx-auto max-w-4xl"
         >
           <h2 className="mb-10 text-4xl font-black tracking-tight text-text md:text-5xl lg:text-7xl">
@@ -526,15 +543,17 @@ export const About = () => {
             </p>
           </div>
         </motion.div>
+        </div>
       </section>
 
       {/* SECTION 8 — FINAL CTA */}
-      <section className="px-6 pb-24 lg:px-20 lg:pb-32">
+      <section className="px-5 pb-24 sm:px-8 md:px-12 lg:pb-32">
+        <div className="mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.8 }}
           className="relative overflow-hidden rounded-[48px] border border-gold/30 bg-surface2 px-8 py-20 text-center text-text shadow-[0_0_80px_rgb(var(--gold)/0.08)] lg:py-32"
         >
           {/* Subtle ambient radial glow behind text */}
@@ -552,11 +571,11 @@ export const About = () => {
 
               {/* Main Headline with text-shadow */}
               <motion.h2 
-                animate={{ opacity: [0.9, 1, 0.9] }}
-                transition={{ 
-                  duration: 5, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
+                animate={shouldReduceMotion ? undefined : { opacity: [0.9, 1, 0.9] }}
+                transition={shouldReduceMotion ? undefined : {
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
                 }}
                 className="relative z-10 font-display text-4xl font-black uppercase leading-[1.1] tracking-tight text-text drop-shadow-[0_0_18px_rgb(var(--gold)/0.25)] md:text-5xl lg:text-7xl"
               >
@@ -569,7 +588,7 @@ export const About = () => {
             </p>
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <WhatsAppChoice source="about" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-surface px-10 text-sm font-bold uppercase tracking-widest text-text transition-transform active:scale-95 sm:w-auto">
+              <WhatsAppChoice source="about / final-cta" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-surface px-10 text-sm font-bold uppercase tracking-widest text-text transition-transform active:scale-95 sm:w-auto">
                 <span className="relative z-10">Request Diagnosis</span>
               </WhatsAppChoice>
               <Link to="/about#selected-work" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-border px-10 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-surface3 active:scale-95 sm:w-auto">
@@ -582,6 +601,7 @@ export const About = () => {
           <div className="absolute -left-1/4 -top-1/4 h-[600px] w-[600px] rounded-full bg-gold/5 blur-[120px]" />
           <div className="absolute -right-1/4 -bottom-1/4 h-[600px] w-[600px] rounded-full bg-gold/5 blur-[120px]" />
         </motion.div>
+        </div>
       </section>
     </div>
   );

@@ -12,18 +12,41 @@ const BuildWithUs = lazy(() => import("./pages/BuildWithUs").then((module) => ({
 
 // Scroll to top on route change
 function ScrollToTop() {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
 
   useEffect(() => {
     if (!hash) {
       window.scrollTo(0, 0);
-    } else {
+      return;
+    }
+
+    let animationFrameId: number | undefined;
+    let frameCount = 0;
+
+    const scrollToHash = () => {
       const element = document.getElementById(hash.replace("#", ""));
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        element.scrollIntoView({ behavior: "auto" });
+        return;
       }
-    }
-  }, [pathname, hash]);
+
+      if (frameCount >= 20) {
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      frameCount += 1;
+      animationFrameId = window.requestAnimationFrame(scrollToHash);
+    };
+
+    scrollToHash();
+
+    return () => {
+      if (animationFrameId !== undefined) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [pathname, hash, key]);
 
   return null;
 }
@@ -68,7 +91,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <PixelTracker />
-      <Suspense fallback={<div className="min-h-screen bg-void" aria-label="Loading" />}>
+      <Suspense fallback={<PublicShell><div className="min-h-[60vh]" aria-label="Loading" /></PublicShell>}>
         <Routes>
           <Route path="/" element={<PublicShell><Home /></PublicShell>} />
           <Route path="/about" element={<PublicShell><About /></PublicShell>} />
