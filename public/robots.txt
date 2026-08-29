@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://strataagency.tech/sitemap.xml
+Sitemap: https://www.strataagency.tech/sitemap.xml

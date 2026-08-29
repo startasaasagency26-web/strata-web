@@ -5,6 +5,7 @@ import { WhatsAppChoice } from '../components/WhatsAppChoice';
 import { cn } from '../lib/utils';
 import { Button } from '../components/ui/liquid-glass-button';
 import { Seo } from '../components/Seo';
+import { routeMetadata } from '../config/routeMetadata';
 
 const systemFlowSteps = [
   'Audit Revenue Leaks',
@@ -179,11 +180,7 @@ export const Pricing = () => {
 
   return (
     <div className="relative pt-32 pb-24 md:pt-40 md:pb-32 bg-background min-h-screen">
-      <Seo
-        title="AI Workforce Management | Strata Pricing"
-        description="Strata audits where work repeats, designs the handoffs, deploys and governs the AI Employees that own it, and reports on the result. Pricing moves with customer value, volume, complexity, locations and integrations."
-        path="/pricing"
-      />
+      <Seo {...routeMetadata.pricing} />
       
       {/* SECTION 1 — HERO */}
       <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-20 md:mb-28">

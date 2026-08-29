@@ -4,17 +4,14 @@ import { Link } from "react-router-dom";
 import { WhatsAppChoice } from "../components/WhatsAppChoice";
 import { cn } from "../lib/utils";
 import { Seo } from "../components/Seo";
+import { routeMetadata } from "../config/routeMetadata";
 
 export const About = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
     <div className="flex flex-col pt-32 md:pt-40">
-      <Seo
-        title="About Strata | Business Systems Built Around Real Work"
-        description="Founded in mid-2025, Strata delivers Revenue Systems engagements for growing businesses today while shaping the in-development Strata Core platform with design partners."
-        path="/about"
-      />
+      <Seo {...routeMetadata.about} />
       {/* SECTION 1 — HERO */}
       <section className="relative px-5 pb-20 sm:px-8 md:px-12 lg:pb-32">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">

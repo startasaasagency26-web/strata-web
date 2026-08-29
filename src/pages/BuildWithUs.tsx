@@ -3,17 +3,14 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { WhatsAppChoice } from "../components/WhatsAppChoice";
 import { Seo } from "../components/Seo";
+import { routeMetadata } from "../config/routeMetadata";
 
 export const BuildWithUs = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
     <div className="flex min-h-[80vh] flex-col items-center justify-center px-5 pb-20 pt-32 sm:px-8 md:px-12 md:pt-40 lg:pb-32">
-      <Seo
-        title="Build With Strata | Opportunities Coming Soon"
-        description="We’re building a space for future collaborators, creatives, developers, strategists, and operators who want to work with Strata. This page is not open yet."
-        path="/build-with-us"
-      />
+      <Seo {...routeMetadata.buildWithUs} />
       <div className="mx-auto max-w-4xl text-center">
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}

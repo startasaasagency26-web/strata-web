@@ -7,14 +7,11 @@ import { TheDisconnect } from '../components/sections/BusinessProblem';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import { Hero } from '../components/sections/Hero';
 import { Seo } from '../components/Seo';
+import { routeMetadata } from '../config/routeMetadata';
 
 export const Home = () => (
   <>
-    <Seo
-      title="Strata Core | One Controlled Business Flow"
-      description="Strata Core is being designed to connect the facts, rules, owners and approvals behind everyday operations—so teams can move from customer conversation to revenue without losing context."
-      path="/"
-    />
+    <Seo {...routeMetadata.home} />
     <Hero />
     <TheDisconnect />
     <OperatingLayer />
