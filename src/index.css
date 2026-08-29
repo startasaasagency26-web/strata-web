@@ -76,6 +76,71 @@
   }
 }
 
+@layer components {
+  /* Markdown output from src/content/blog-parse.ts. Tailwind classes cannot
+     reach generated HTML, so article typography is defined once here. */
+  .article-body {
+    @apply text-base leading-relaxed text-text2 md:text-lg;
+  }
+
+  .article-body > * + * {
+    @apply mt-6;
+  }
+
+  .article-body h2 {
+    @apply mt-14 text-2xl font-black uppercase tracking-[-0.03em] text-primary md:text-3xl;
+  }
+
+  .article-body h3 {
+    @apply mt-10 text-xl font-bold text-text md:text-2xl;
+  }
+
+  .article-body a {
+    @apply text-gold underline underline-offset-4 transition-colors hover:text-goldHover;
+  }
+
+  .article-body strong {
+    @apply font-bold text-text;
+  }
+
+  .article-body ul,
+  .article-body ol {
+    @apply space-y-2 pl-6;
+  }
+
+  .article-body ul {
+    @apply list-disc marker:text-gold;
+  }
+
+  .article-body ol {
+    @apply list-decimal marker:text-gold;
+  }
+
+  .article-body blockquote {
+    @apply border-l-2 border-gold/40 pl-6 italic text-text;
+  }
+
+  .article-body code {
+    @apply rounded bg-surface2 px-1.5 py-0.5 font-mono text-[0.85em] text-text;
+  }
+
+  .article-body pre {
+    @apply overflow-x-auto rounded-[18px] border border-border bg-surface2 p-5;
+  }
+
+  .article-body pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .article-body hr {
+    @apply border-border/60;
+  }
+
+  .article-body img {
+    @apply rounded-[18px] border border-border;
+  }
+}
+
 @layer utilities {
   .final-cta-blueprint {
     background-image:

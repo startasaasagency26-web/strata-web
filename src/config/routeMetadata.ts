@@ -28,6 +28,11 @@ export const routeMetadata = {
     title: "AI Workforce Management | Strata Pricing",
     description: "Strata audits where work repeats, designs the handoffs, deploys and governs the AI Employees that own it, and reports on the result. Pricing moves with customer value, volume, complexity, locations and integrations.",
   },
+  blog: {
+    path: "/blog",
+    title: "Notes on Revenue Operations | Strata",
+    description: "Field notes on where revenue leaks in small and medium businesses, what an AI workforce actually does, and what we are learning while building Strata Core.",
+  },
   buildWithUs: {
     path: "/build-with-us",
     title: "Build With Strata | Opportunities Coming Soon",

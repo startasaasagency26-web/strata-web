@@ -1,7 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { cwd } from "node:process";
-import { routes, SITE_URL, type RouteMetadata } from "../src/config/routeMetadata.ts";
+import { routes as staticRoutes, SITE_URL, type RouteMetadata } from "../src/config/routeMetadata.ts";
+import { loadArticleRoutes } from "./blog-fs.ts";
 
 type TagIdentity = {
   attribute: string;
@@ -50,7 +51,9 @@ const routeHeadTags = (route: RouteMetadata): ManagedHeadTag[] => {
     metaTag("name", "twitter:description", route.description),
   ];
 
-  if (route.ogType) tags.push(metaTag("property", "og:type", route.ogType));
+  // Always emitted, so the static og:type in index.html is replaced rather than
+  // left alongside the one Helmet renders on mount.
+  tags.push(metaTag("property", "og:type", route.ogType ?? "website"));
 
   if (route.ogImage) {
     const imageUrl = absoluteUrl(route.ogImage);
@@ -111,13 +114,22 @@ const outputPathForRoute = (path: string) => path === "/"
   ? join(distDirectory, "index.html")
   : join(distDirectory, path.slice(1), "index.html");
 
-const renderSitemap = () => {
-  const urls = routes
-    .map((route) => `  <url>\n    <loc>${escapeHtml(absoluteUrl(route.path))}</loc>\n  </url>`)
+/** Articles carry their own dates; static pages fall back to the build date. */
+const buildDate = new Date().toISOString().slice(0, 10);
+
+const renderSitemap = (allRoutes: RouteMetadata[]) => {
+  const urls = allRoutes
+    .map((route) => {
+      const lastmod = route.modifiedTime ?? route.publishedTime ?? buildDate;
+      return `  <url>\n    <loc>${escapeHtml(absoluteUrl(route.path))}</loc>\n    <lastmod>${escapeHtml(lastmod)}</lastmod>\n  </url>`;
+    })
     .join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 };
+
+const articleRoutes = await loadArticleRoutes();
+const routes = [...staticRoutes, ...articleRoutes];
 
 const template = await readFile(join(distDirectory, "index.html"), "utf8");
 
@@ -127,6 +139,8 @@ for (const route of routes) {
   await writeFile(outputPath, renderRouteHtml(template, route), "utf8");
 }
 
-await writeFile(join(distDirectory, "sitemap.xml"), renderSitemap(), "utf8");
+await writeFile(join(distDirectory, "sitemap.xml"), renderSitemap(routes), "utf8");
 
-console.log(`Prerendered ${routes.length} routes and generated dist/sitemap.xml.`);
+console.log(
+  `Prerendered ${routes.length} routes (${articleRoutes.length} article${articleRoutes.length === 1 ? "" : "s"}) and generated dist/sitemap.xml.`,
+);
