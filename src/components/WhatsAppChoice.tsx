@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
 import { CONTACT } from "../config/contact";
@@ -8,6 +9,9 @@ type WhatsAppChoiceProps = {
   children: ReactNode;
   className?: string;
   ariaLabel?: string;
+  message?: string;
+  onClick?: () => void;
+  onOpenChange?: (isOpen: boolean) => void;
   /** Labels which CTA drove the contact, so packages are comparable in Ads Manager. */
   source?: string;
 };
@@ -18,6 +22,9 @@ export const WhatsAppChoice = ({
   children,
   className,
   ariaLabel,
+  message = CONTACT.whatsappDefaultMessage,
+  onClick,
+  onOpenChange,
   source = "unspecified",
 }: WhatsAppChoiceProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,8 +35,9 @@ export const WhatsAppChoice = ({
 
   const closeDialog = useCallback(() => {
     setIsOpen(false);
+    onOpenChange?.(false);
     window.setTimeout(() => triggerRef.current?.focus(), 0);
-  }, []);
+  }, [onOpenChange]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -85,15 +93,20 @@ export const WhatsAppChoice = ({
         aria-expanded={isOpen}
         aria-controls="whatsapp-choice-dialog"
         aria-label={ariaLabel}
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          onClick?.();
+          setIsOpen(true);
+          onOpenChange?.(true);
+        }}
         className={className}
       >
         {children}
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <div className="fixed inset-0 z-[90] flex items-end justify-center p-4 sm:items-center">
+      {createPortal(
+        <AnimatePresence>
+          {isOpen && (
+            <div className="fixed inset-0 z-[90] flex items-end justify-center p-4 sm:items-center">
             <motion.button
               type="button"
               aria-label="Close WhatsApp contact chooser"
@@ -147,7 +160,7 @@ export const WhatsAppChoice = ({
                   <a
                     key={contact.name}
                     ref={index === 0 ? firstLinkRef : undefined}
-                    href={contact.url}
+                    href={`${contact.url}?text=${encodeURIComponent(message)}`}
                     target="_blank"
                     rel="noreferrer"
                     onClick={() => {
@@ -169,9 +182,11 @@ export const WhatsAppChoice = ({
                 ))}
               </div>
             </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </>
   );
 };

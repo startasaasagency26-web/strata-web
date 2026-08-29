@@ -1,7 +1,7 @@
 import { motion, useReducedMotion, useTransform, type MotionValue } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { CONTACT } from '../../config/contact';
+import { WhatsAppChoice } from '../WhatsAppChoice';
 import { HeroShift } from '../motion/HeroShift';
 import { ScrollStage } from '../motion/ScrollStage';
 import { useMediaQuery } from '../motion/useMediaQuery';
@@ -24,10 +24,10 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative min-h-screen w-full scroll-mt-[var(--section-scroll-offset)] overflow-hidden py-24 lg:pb-0 lg:pt-48"
+      className="relative min-h-screen w-full scroll-mt-[var(--section-scroll-offset)] overflow-hidden py-24 lg:h-full lg:min-h-0 lg:py-0"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgb(var(--gold)/0.12),transparent_40%)]" aria-hidden="true" />
-      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-7xl flex-col justify-center px-5 sm:px-8 md:px-12 lg:min-h-[calc(100vh-12rem)]">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-7xl flex-col justify-center px-5 sm:px-8 md:px-12 lg:h-full lg:min-h-0 lg:justify-start">
         <motion.div style={animateStage ? { opacity: contentOpacity } : undefined}>
           <div className="max-w-5xl">
           <motion.p {...fadeUp()} className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-accent">
@@ -36,7 +36,7 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
           <motion.h1
             {...fadeUp(0.05)}
             id="hero-heading"
-            className="text-[clamp(3rem,8vw,7.5rem)] font-black uppercase leading-[0.88] tracking-[-0.055em] text-primary"
+            className="text-[clamp(3rem,8vw,7.5rem)] font-black uppercase leading-[0.88] tracking-[-0.055em] text-primary lg:text-[clamp(3rem,min(8vw,11vh),7.5rem)]"
           >
             Turn scattered work into one controlled business flow.
           </motion.h1>
@@ -45,9 +45,13 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
           </motion.p>
           <motion.div {...fadeUp(0.15)} className="mt-9 flex flex-col items-start gap-3 sm:flex-row">
             <Button asChild variant="glassStrong" size="lg" className="h-12 rounded-full px-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
-              <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`} className="flex items-center gap-2">
+              <WhatsAppChoice
+                message="Hi Strata — I'd like to book a Business Operations Audit."
+                source="home / hero-cta"
+                className="flex items-center gap-2"
+              >
                 Business operations audit <ArrowRight size={14} />
-              </a>
+              </WhatsAppChoice>
             </Button>
             <Button asChild variant="glass" size="lg" className="h-12 rounded-full px-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
               <Link to="/#platform">See the platform vision</Link>
@@ -56,7 +60,7 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
           </div>
         </motion.div>
 
-        <div className="mt-4 h-[300px] w-full sm:h-[320px] lg:mt-2 lg:h-[min(42vh,340px)]">
+        <div className="mt-4 h-[300px] w-full sm:h-[320px] lg:mt-2 lg:h-[clamp(160px,24vh,300px)] lg:min-h-0">
           <HeroShift progress={progress} />
         </div>
       </div>

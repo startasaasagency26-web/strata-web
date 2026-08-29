@@ -123,7 +123,6 @@ const packages = [
       'Custom workforce size and design',
       'Bespoke integrations and data requirements',
       'Governance, permissions and audit requirements',
-      'Agreed SLA and support model',
       'Phased rollout across teams or locations',
     ],
     featured: false,
@@ -504,61 +503,6 @@ export const Pricing = () => {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* SECTION 7 — POST-LAUNCH SUPPORT (SYSTEM CARE) */}
-      <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">OPTIONAL ADD-ONS</p>
-          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-text uppercase mb-3">
-            Optional Support &amp; SLA Add-ons
-          </h2>
-          <p className="text-sm font-sans text-muted max-w-2xl mx-auto">
-            Optional post-launch services for businesses requiring uptime monitoring, technical maintenance and ongoing improvement after implementation.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="bg-surface border border-border/60 rounded-[24px] p-6 shadow-sm flex flex-col justify-between">
-            <div>
-              <h3 className="font-display font-bold text-xl text-text mb-1">Monitor</h3>
-              <p className="font-mono text-lg font-bold text-text mb-4">RM 299/mo</p>
-              <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> CRM &amp; funnel uptime checks</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Bug fixes &amp; error resolution</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Basic ticket support</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="bg-surface border-2 border-gold rounded-[24px] p-6 shadow-md flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <h3 className="font-display font-bold text-xl text-text">Support</h3>
-                <span className="text-[8px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 bg-gold text-void rounded-full">POPULAR</span>
-              </div>
-              <p className="font-mono text-lg font-bold text-text mb-4">RM 599/mo</p>
-              <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Everything in Monitor</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Up to 2 hours of changes/month</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Form &amp; integration health checks</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Minor copy &amp; layout updates</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="bg-surface border border-border/60 rounded-[24px] p-6 shadow-sm flex flex-col justify-between">
-            <div>
-              <h3 className="font-display font-bold text-xl text-text mb-1">Optimize</h3>
-              <p className="font-mono text-lg font-bold text-text mb-4">RM 999/mo</p>
-              <ul className="grid gap-2.5 text-xs text-muted font-sans border-t border-border/40 pt-4">
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Everything in Support</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Monthly pipeline &amp; funnel review</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-text shrink-0" /> Priority 24-hour response SLA</li>
-              </ul>
-            </div>
-          </div>
         </div>
       </section>
 

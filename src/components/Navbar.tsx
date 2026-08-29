@@ -4,13 +4,14 @@ import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
 import { cn } from '../lib/utils';
-import { CONTACT } from '../config/contact';
+import { WhatsAppChoice } from './WhatsAppChoice';
 import { Button } from './ui/liquid-glass-button';
 
 export const Navbar = () => {
   const shouldReduceMotion = useReducedMotion();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileAuditOpen, setMobileAuditOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const mobileOverlayRef = useRef<HTMLDivElement>(null);
@@ -165,7 +166,12 @@ export const Navbar = () => {
               size="sm"
               className="hidden h-10 rounded-full px-6 font-mono text-[11px] font-bold tracking-[0.2em] whitespace-nowrap xl:inline-flex"
             >
-              <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`}>BUSINESS OPS AUDIT</a>
+              <WhatsAppChoice
+                message="Hi Strata — I'd like to book a Business Operations Audit."
+                source="navbar / desktop-cta"
+              >
+                BUSINESS OPS AUDIT
+              </WhatsAppChoice>
             </Button>
 
             <motion.button
@@ -187,10 +193,12 @@ export const Navbar = () => {
 
       {/* Mobile overlay — solid dark */}
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {(mobileMenuOpen || mobileAuditOpen) && (
           <motion.div
             ref={mobileOverlayRef}
             id="mobile-navigation-overlay"
+            hidden={!mobileMenuOpen}
+            aria-hidden={!mobileMenuOpen}
             initial={shouldReduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -232,9 +240,14 @@ export const Navbar = () => {
                     variant="glass"
                     className="w-full h-14 rounded-full text-[11px] font-mono font-bold tracking-[0.2em] uppercase"
                   >
-                    <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`} onClick={closeMobileMenu}>
+                    <WhatsAppChoice
+                      message="Hi Strata — I'd like to book a Business Operations Audit."
+                      onClick={closeMobileMenu}
+                      onOpenChange={setMobileAuditOpen}
+                      source="navbar / mobile-cta"
+                    >
                       BUSINESS OPERATIONS AUDIT
-                    </a>
+                    </WhatsAppChoice>
                   </Button>
                 </motion.li>
                 <motion.li

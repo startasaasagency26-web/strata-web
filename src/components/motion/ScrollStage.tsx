@@ -46,7 +46,7 @@ const ActiveStage = ({ children, heightVh, id, className }: Required<Pick<Scroll
 
   return (
     <div ref={outerRef} id={id} className={`relative ${className}`} style={{ ...outerStyles, height: `${heightVh}vh` }} data-scroll-stage="active">
-      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
+      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden pt-[calc(var(--nav-height)+0.25rem)]">
         {children(scrollYProgress)}
       </div>
     </div>
