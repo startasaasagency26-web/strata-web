@@ -132,7 +132,7 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile-only centered brand text — hidden on desktop where nav links show */}
-          <div className="absolute left-1/2 -translate-x-1/2 xl:hidden pointer-events-none">
+          <div className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 sm:block xl:hidden">
             <span className="font-mono text-[11px] font-bold tracking-[0.28em] text-text2 uppercase whitespace-nowrap">
               STRATA
             </span>

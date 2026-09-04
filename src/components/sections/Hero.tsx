@@ -60,8 +60,11 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
           </div>
         </motion.div>
 
-        <div className="mt-4 h-[300px] w-full sm:h-[320px] lg:mt-2 lg:h-[clamp(160px,24vh,300px)] lg:min-h-0">
+        <div className="relative mt-4 h-[300px] w-full pb-8 sm:h-[320px] lg:mt-2 lg:h-[clamp(180px,25vh,310px)] lg:min-h-0">
           <HeroShift progress={progress} />
+          <p className="absolute inset-x-0 bottom-0 text-center font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-muted sm:text-[10px] sm:tracking-[0.22em]">
+            Signal → context → owner → approval → evidence
+          </p>
         </div>
       </div>
     </section>

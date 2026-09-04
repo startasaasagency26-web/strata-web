@@ -50,6 +50,10 @@
 }
 
 @layer base {
+  html {
+    position: relative;
+  }
+
   body {
     @apply bg-background text-text font-sans antialiased selection:bg-gold/25 selection:text-text;
     letter-spacing: -0.01em;
