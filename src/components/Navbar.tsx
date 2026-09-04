@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
 import { cn } from '../lib/utils';
 import { WhatsAppChoice } from './WhatsAppChoice';
 import { Button } from './ui/liquid-glass-button';
 
 export const Navbar = () => {
+  const { pathname, hash } = useLocation();
   const shouldReduceMotion = useReducedMotion();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -88,12 +89,17 @@ export const Navbar = () => {
   }, [closeMobileMenu, mobileMenuOpen]);
 
   const navLinks = [
-    { name: 'PLATFORM', href: '/#platform' },
-    { name: 'COMPANY RULES', href: '/#business-rules' },
-    { name: 'CONTROLLED ASSISTANCE', href: '/#controlled-assistance' },
+    { name: 'WORKFLOWS', href: '/#workflows' },
+    { name: 'AUDIT', href: '/#audit-outcome' },
+    { name: 'PLATFORM VISION', href: '/#platform' },
     { name: 'PRICING', href: '/pricing' },
     { name: 'ABOUT', href: '/about' },
   ];
+
+  const isActive = (href: string) => {
+    if (href.startsWith('/#')) return pathname === '/' && hash === href.slice(1);
+    return pathname === href;
+  };
 
   return (
     <>
@@ -138,23 +144,26 @@ export const Navbar = () => {
             aria-label="Main navigation"
           >
             <ul className="flex items-center gap-1 p-1">
-              {navLinks.map((link) => (
+              {navLinks.map((link) => {
+                const active = isActive(link.href);
+                return (
                 <li key={link.name} className="relative">
                   <Link
                     to={link.href}
-                    className="relative z-10 block px-4 py-3 font-mono text-[11px] font-bold tracking-[0.2em] text-muted transition-colors duration-200 hover:text-text focus-visible:outline-none focus-visible:text-gold whitespace-nowrap"
+                    aria-current={active ? 'page' : undefined}
+                    className={cn("relative z-10 block whitespace-nowrap px-4 py-3 font-mono text-[11px] font-bold tracking-[0.2em] transition-colors duration-200 hover:text-text focus-visible:outline-none focus-visible:text-gold", active ? "text-gold" : "text-muted")}
                     onMouseEnter={() => setHoveredLink(link.name)}
                     onMouseLeave={() => setHoveredLink(null)}
                   >
                     {link.name}
                   </Link>
-                  {hoveredLink === link.name && (
+                  {(active || hoveredLink === link.name) && (
                     <div
                       className="absolute inset-0 rounded-full bg-gold/10 pointer-events-none z-0"
                     />
                   )}
                 </li>
-              ))}
+              )})}
             </ul>
           </nav>
 
@@ -212,7 +221,9 @@ export const Navbar = () => {
           >
             <nav className="mx-auto w-full max-w-7xl px-5 sm:px-8 md:px-12" aria-label="Mobile navigation">
               <ul className="flex w-full flex-col items-start gap-6">
-                {navLinks.map((link, idx) => (
+                {navLinks.map((link, idx) => {
+                  const active = isActive(link.href);
+                  return (
                   <motion.li
                     key={link.name}
                     initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
@@ -223,12 +234,13 @@ export const Navbar = () => {
                       ref={idx === 0 ? firstMobileLinkRef : undefined}
                       to={link.href}
                       onClick={closeMobileMenu}
-                      className="text-4xl font-black uppercase tracking-tight text-text hover:text-goldHover transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+                      aria-current={active ? 'page' : undefined}
+                      className={cn("text-4xl font-black uppercase tracking-tight transition-colors hover:text-goldHover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus", active ? "text-gold" : "text-text")}
                     >
                       {link.name}
                     </Link>
                   </motion.li>
-                ))}
+                )})}
                 <motion.li
                   initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}

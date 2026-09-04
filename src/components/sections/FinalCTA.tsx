@@ -1,6 +1,6 @@
-import { ArrowRight, MessageSquare } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { CONTACT } from '../../config/contact';
+import { Link } from 'react-router-dom';
 import { WhatsAppChoice } from '../WhatsAppChoice';
 import { Button } from '../ui/liquid-glass-button';
 
@@ -136,12 +136,12 @@ export const FinalCTA = () => {
             </div>
           </div>
 
-          <h2 id="final-cta-heading" className="mb-8 text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-text md:text-7xl lg:text-8xl">
-            Make your operating <br /> system explicit.
+          <h2 id="final-cta-heading" className="mb-8 text-balance text-4xl font-black leading-[0.9] tracking-[-0.05em] text-text md:text-7xl lg:text-8xl">
+            Make one critical workflow visible.
           </h2>
 
           <p className="mx-auto mb-10 max-w-2xl font-sans text-lg leading-relaxed text-muted md:text-xl">
-            Bring one critical workflow. We'll map where context breaks, ownership blurs and decisions depend on memory.
+            Bring the workflow that keeps slipping. We’ll map the break, the controls and the next decision.
           </p>
 
           {/* What happens during audit box */}
@@ -176,18 +176,17 @@ export const FinalCTA = () => {
               size="lg"
               className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
             >
-              <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`} className="flex items-center justify-center gap-4">
+              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="home / final-cta" className="flex items-center justify-center gap-4">
                 <span>Book a business operations audit</span>
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-surface2 transition-colors duration-300">
                   <ArrowRight size={16} />
                 </div>
-              </a>
+              </WhatsAppChoice>
             </Button>
 
-            <WhatsAppChoice source="home / final-cta" className="group inline-flex w-full items-center justify-center gap-4 rounded-full border border-border px-10 py-6 font-mono font-bold uppercase tracking-widest text-text transition-colors duration-300 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus sm:w-auto">
-              <MessageSquare size={20} className="text-muted" />
-              <span>WhatsApp Us</span>
-            </WhatsAppChoice>
+            <Link to="/#audit-outcome" className="group inline-flex w-full items-center justify-center gap-4 rounded-full border border-border px-10 py-6 font-mono font-bold uppercase tracking-widest text-text transition-colors duration-300 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus sm:w-auto">
+              <span>See what you leave with</span>
+            </Link>
           </div>
         </motion.div>
       </div>

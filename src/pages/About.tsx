@@ -27,11 +27,11 @@ export const About = () => {
               Business systems built around how work really happens
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
-              Founded in mid-2025, Strata delivers Revenue Systems engagements for growing businesses today while shaping the in-development Strata Core platform with design partners.
+              Founded in mid-2025, Strata helps established businesses diagnose and improve critical workflows while developing Strata Core as an AI Workforce Management platform.
             </p>
             <div className="flex flex-wrap gap-4">
               <WhatsAppChoice source="about / hero" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
-                <span className="relative z-10">Book Revenue Audit</span>
+                <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
               <Link to="/about#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95">
                 <span className="relative z-10">View Selected Work</span>
@@ -58,7 +58,7 @@ export const About = () => {
                   Amirul Afiz / Nick
                 </span>
                 <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
-                  Founder, Strata Agency
+                  Founder, Strata Growth Technologies
                 </span>
               </div>
             </div>
@@ -68,7 +68,7 @@ export const About = () => {
                 Founder Role
               </div>
               <div className="mt-1 text-xs font-bold uppercase tracking-wider">
-                Revenue Systems Architect
+                Operations Strategist
               </div>
             </div>
           </motion.div>
@@ -95,16 +95,16 @@ export const About = () => {
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-text/60 md:text-xl">
               <p>
-                Strata was founded in mid-2025 after seeing the same problem across too many small and medium businesses: they were generating attention, but had no system to capture it, follow up on it, or convert it.
+                Strata was founded in mid-2025 after seeing the same problem across too many small and medium businesses: critical work moved between people and tools, but ownership and the next step were difficult to see.
               </p>
               <p>
-                The pieces existed in isolation — a website, a WhatsApp inbox, some content, sometimes ads — but nothing connected them. Enquiries arrived and quietly disappeared, and nobody could see where.
+                The pieces existed in isolation — an inbox, spreadsheets, documents, business software and private conversations — but the workflow connecting them remained implicit.
               </p>
               <p className="font-bold text-text">
                 Strata was built to solve that gap.
               </p>
               <p>
-                We build the revenue infrastructure behind the business: lead capture, CRM structure, automated follow-up, and reporting owners can actually see and run.
+                We start by mapping the workflow as it really runs, then define the context, ownership, approvals and evidence needed to improve it.
               </p>
             </div>
           </motion.div>
@@ -129,13 +129,13 @@ export const About = () => {
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-text/60">
               <p>
-                Amirul Afiz, also known as Nick, is the founder of Strata. His work combines lead capture, CRM structure, follow-up automation, media execution, and practical business operations.
+                Amirul Afiz, also known as Nick, is the founder of Strata. His work combines workflow design, systems integration, practical business operations and clear customer communication.
               </p>
               <p>
                 Strata’s approach is shaped by hands-on experience building for service businesses, local brands, e-commerce, and internal systems — not just designing pages that look good.
               </p>
               <p>
-                The goal is simple: build a system that makes the business easier to trust, easier to understand, and easier to buy from — and that stops losing leads on the way there.
+                The goal is simple: make critical work visible, owned and easier to follow through without adding unnecessary complexity.
               </p>
             </div>
           </motion.div>
@@ -270,10 +270,10 @@ export const About = () => {
 
             <div className="rounded-[32px] border border-gold/5 bg-surface2 p-8 lg:p-10">
               <p className="mb-8 text-sm font-medium italic text-text/70">
-                "Speak with a team that understands both revenue systems and real customer conversations."
+                "Speak with a team that understands both operating workflows and real customer conversations."
               </p>
               <WhatsAppChoice source="about / sales" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
-                <span className="relative z-10">Request Diagnosis</span>
+                <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
             </div>
           </motion.div>
@@ -288,33 +288,33 @@ export const About = () => {
             CAPABILITIES
           </span>
           <h2 className="mb-4 text-4xl font-black tracking-[-0.03em] text-text text-center md:text-5xl lg:text-6xl lg:text-left">
-            Revenue Infrastructure and Growth Media Systems
+            Operational workflows designed for control
           </h2>
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-2 lg:gap-6">
           {[
             {
-              title: "Revenue System Design",
+              title: "Workflow Diagnosis",
               desc: "We map the customer journey, commercial handoffs, owners and controls before tools are configured.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-md border-2 border-gold/20" />
             },
             {
-              title: "Lead Capture Infrastructure",
-              desc: "We build pages and forms that turn attention into structured enquiries with a clear next destination.",
+              title: "Context and Intake Design",
+              desc: "We define the records, inputs and required context that move work into a clear next step.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-full border-2 border-gold/20" />
             },
             {
-              title: "Follow-Up Operations",
+              title: "Ownership and Follow-Through",
               desc: "We configure ownership, reminders and approved communication flows so next actions do not depend on memory.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rotate-45 border-2 border-gold/20" />
             },
             {
-              title: "Growth Media Execution",
-              desc: "We create and manage the content and paid-media work that feeds the revenue system, with reporting owners can read.",
+              title: "Controlled Workflow Implementation",
+              desc: "We configure the agreed workflow with explicit rules, approvals, handoffs and reporting owners can review.",
               className: "md:col-span-2 md:row-span-1",
               icon: <div className="h-6 w-6 rounded-lg bg-gold/5 flex items-center justify-center"><div className="h-2 w-2 rounded-full bg-gold/20" /></div>
             },
@@ -526,14 +526,14 @@ export const About = () => {
           className="mx-auto max-w-4xl"
         >
           <h2 className="mb-10 text-4xl font-black tracking-tight text-text md:text-5xl lg:text-7xl">
-            A Business System Should Produce Revenue, Not Administrative Drag.
+            A Business System Should Create Control, Not Administrative Drag.
           </h2>
           <div className="space-y-6 text-lg leading-relaxed text-text/60 md:text-xl">
             <p>
-              Strata believes digital systems should not be isolated brochures or static websites. They must function as active revenue infrastructure.
+              Strata believes digital systems should make important work visible, connected and reviewable.
             </p>
             <p>
-              A complete system ensures every inbound enquiry is captured, qualified, assigned, and followed up without relying on manual memory.
+              A controlled workflow keeps the trigger, context, owner, approval and outcome together without relying on individual memory.
             </p>
             <p className="font-bold text-text">
               That is the execution standard behind every Strata install.
@@ -563,7 +563,7 @@ export const About = () => {
                 aria-hidden="true"
                 className="absolute inset-0 flex items-center justify-center text-center font-display text-4xl font-black uppercase leading-[1.1] tracking-tight text-muted blur-2xl md:text-5xl lg:text-7xl"
               >
-                Ready to Stop Leaking Revenue?
+                Ready to Make One Workflow Visible?
               </div>
 
               {/* Main Headline with text-shadow */}
@@ -576,17 +576,17 @@ export const About = () => {
                 }}
                 className="relative z-10 font-display text-4xl font-black uppercase leading-[1.1] tracking-tight text-text drop-shadow-[0_0_18px_rgb(var(--gold)/0.25)] md:text-5xl lg:text-7xl"
               >
-                Ready to Stop Leaking Revenue?
+                Ready to Make One Workflow Visible?
               </motion.h2>
             </div>
 
             <p className="mb-12 text-lg text-muted md:text-xl">
-              Request a Strata diagnosis and we’ll show you where leads are being lost between attention, capture, and follow-up.
+              Bring one recurring workflow. We’ll map where context, ownership and follow-through break down, then define the next decision.
             </p>
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <WhatsAppChoice source="about / final-cta" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-surface px-10 text-sm font-bold uppercase tracking-widest text-text transition-transform active:scale-95 sm:w-auto">
-                <span className="relative z-10">Request Diagnosis</span>
+                <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
               <Link to="/about#selected-work" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-border px-10 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-surface3 active:scale-95 sm:w-auto">
                 <span className="relative z-10">View Selected Work</span>

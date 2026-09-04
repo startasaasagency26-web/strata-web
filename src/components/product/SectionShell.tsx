@@ -27,10 +27,10 @@ export const SectionShell = ({ eyebrow, headline, support, id, tone = 'surface',
       >
         <div className="mb-12 max-w-3xl md:mb-16">
           <p className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-accent">{eyebrow}</p>
-          <h2 id={headingId} className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] text-primary md:text-6xl">
+          <h2 id={headingId} className="text-balance text-4xl font-black leading-[0.95] tracking-[-0.045em] text-primary md:text-6xl">
             {headline}
           </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">{support}</p>
+          <p className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted md:text-lg">{support}</p>
         </div>
         {children}
       </motion.div>

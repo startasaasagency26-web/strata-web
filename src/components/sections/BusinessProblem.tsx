@@ -1,28 +1,63 @@
-import { Database, EyeOff, GitBranch, ShieldAlert } from 'lucide-react';
 import { SectionShell } from '../product/SectionShell';
 
-const disconnects = [
-  { icon: Database, title: 'Context is scattered', description: 'Customer facts, team notes and decisions live across separate tools and private conversations.' },
-  { icon: GitBranch, title: 'Rules stay implicit', description: 'The real operating logic lives in memory, making handoffs inconsistent and difficult to inspect.' },
-  { icon: EyeOff, title: 'Work loses visibility', description: 'Owners can see outputs, but not the context, decision and responsibility behind each action.' },
-  { icon: ShieldAlert, title: 'AI lacks boundaries', description: 'Without explicit permissions and approval gates, automation creates risk instead of control.' },
+const workflows = [
+  {
+    number: '01',
+    title: 'Tender and quotation',
+    break: 'Requirements, approvals and follow-up sit across inboxes, documents and individual memory.',
+    control: 'One visible path from request and scope to approved quotation and next action.',
+  },
+  {
+    number: '02',
+    title: 'Quotation and order intake',
+    break: 'Enquiries are re-keyed, ownership changes silently and customers ask for status.',
+    control: 'A named owner, required context and an explicit handoff into fulfilment.',
+  },
+  {
+    number: '03',
+    title: 'Field service dispatch',
+    break: 'Requests, schedules and completion evidence are separated from the original need.',
+    control: 'A traceable flow from triage and assignment to completion and review.',
+  },
 ];
 
 export const TheDisconnect = () => (
   <SectionShell
-    id="the-disconnect"
-    eyebrow="02 · THE DISCONNECT"
-    headline="Your business has tools. It still has no shared context."
-    support="A CRM can hold records. A chat can hold conversations. A spreadsheet can hold status. But when decisions and handoffs stay split across them, owners still cannot see what is stuck, who owns it or what should happen next."
+    id="workflows"
+    eyebrow="02 · RECOGNISABLE WORKFLOWS"
+    headline="Start with the work that already repeats."
+    support="Strata looks for a workflow with a clear trigger, recurring handoffs and a measurable outcome. These are common starting points—not claims about your business before the Audit."
   >
-    <div className="grid gap-4 sm:grid-cols-2">
-      {disconnects.map(({ icon: Icon, title, description }) => (
-        <article key={title} className="rounded-[24px] border border-line bg-surface2 p-6 md:p-8">
-          <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gold text-void"><Icon size={20} /></div>
-          <h3 className="mt-8 text-2xl font-bold text-text">{title}</h3>
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-muted md:text-base">{description}</p>
-        </article>
-      ))}
+    <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+      <div className="lg:sticky lg:top-32 lg:self-start">
+        <p className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-accent">THE PATTERN</p>
+        <p className="mt-5 max-w-md text-2xl font-semibold leading-snug text-text md:text-3xl">
+          The work crosses people and tools, but responsibility for the next step becomes unclear.
+        </p>
+        <p className="mt-5 max-w-md text-base leading-relaxed text-muted">
+          The Audit makes the current path visible before recommending technology or implementation.
+        </p>
+      </div>
+      <ol className="border-t border-line">
+        {workflows.map((workflow) => (
+          <li key={workflow.number} className="grid gap-5 border-b border-line py-7 sm:grid-cols-[4rem_1fr] md:py-9">
+            <span className="font-mono text-xs font-bold tracking-[0.2em] text-accent">{workflow.number}</span>
+            <article>
+              <h3 className="text-2xl font-bold text-text md:text-3xl">{workflow.title}</h3>
+              <dl className="mt-6 grid gap-5 md:grid-cols-2">
+                <div>
+                  <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">Where it breaks</dt>
+                  <dd className="mt-2 text-sm leading-relaxed text-muted md:text-base">{workflow.break}</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-accent">What control looks like</dt>
+                  <dd className="mt-2 text-sm leading-relaxed text-text md:text-base">{workflow.control}</dd>
+                </div>
+              </dl>
+            </article>
+          </li>
+        ))}
+      </ol>
     </div>
   </SectionShell>
 );

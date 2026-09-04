@@ -15,7 +15,7 @@ export const Blog = () => (
           FIELD NOTES
         </p>
         <h1 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] text-primary md:text-6xl">
-          Notes on revenue operations
+          Notes on business operations
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
           Where revenue leaks in small and medium businesses, what an AI workforce actually does, and

@@ -105,9 +105,9 @@ $wordmarkFont = [System.Drawing.Font]::new('Inter', 54, [System.Drawing.FontStyl
 $titleFont = [System.Drawing.Font]::new('Inter', 48, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
 $subtitleFont = [System.Drawing.Font]::new('Inter', 24, [System.Drawing.FontStyle]::Regular, [System.Drawing.GraphicsUnit]::Pixel)
 Draw-SpacedText $ogGraphics 'STRATA' $wordmarkFont $goldBrush 420 172 14
-$ogGraphics.DrawString('THE AI OPERATING LAYER', $titleFont, $textBrush, 420, 276)
-$ogGraphics.DrawString('FOR BUSINESS', $titleFont, $textBrush, 420, 334)
-$ogGraphics.DrawString('Shared context. Governed action. Visible operations.', $subtitleFont, $mutedBrush, 424, 430)
+  $ogGraphics.DrawString('BUSINESS OPERATIONS', $titleFont, $textBrush, 420, 276)
+  $ogGraphics.DrawString('AUDIT', $titleFont, $textBrush, 420, 334)
+  $ogGraphics.DrawString('Find the workflow worth improving first.', $subtitleFont, $mutedBrush, 424, 430)
 $og.Save((Join-Path $publicDir 'og.png'), [System.Drawing.Imaging.ImageFormat]::Png)
 $subtitleFont.Dispose()
 $titleFont.Dispose()

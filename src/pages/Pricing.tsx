@@ -1,6 +1,6 @@
 import { ArrowRight, Check } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { CONTACT } from '../config/contact';
+import { Link } from 'react-router-dom';
 import { WhatsAppChoice } from '../components/WhatsAppChoice';
 import { cn } from '../lib/utils';
 import { Button } from '../components/ui/liquid-glass-button';
@@ -8,22 +8,22 @@ import { Seo } from '../components/Seo';
 import { routeMetadata } from '../config/routeMetadata';
 
 const systemFlowSteps = [
-  'Audit Revenue Leaks',
-  'Map Customer Journey',
-  'Design Sales Process',
-  'Deploy AI Employees',
+  'Audit Operational Friction',
+  'Map the Critical Workflow',
+  'Define Ownership & Controls',
+  'Implement the Workflow',
   'Train the Team',
   'Review Outcomes',
 ];
 
 const coreDeliverables = [
-  'Revenue-process audit and implementation roadmap',
-  'Conversion-focused landing page or offer-flow build',
-  'Lead-capture and CRM configuration for the agreed process',
-  'Approved WhatsApp or email follow-up workflow setup',
+  'Business Operations Audit and implementation roadmap',
+  'One-page current-state and future-state workflow',
+  'Implementation for the agreed high-value workflow',
+  'Approved channel and integration setup where required',
   'Staff ownership, handoff and notification rules',
-  'Booking and appointment-flow configuration where required',
-  'Reporting setup with agreed commercial definitions',
+  'Approval and escalation configuration where required',
+  'Reporting setup with agreed operating definitions',
   'Implementation documentation and team handover',
 ];
 
@@ -86,10 +86,10 @@ const packages = [
   },
   {
     name: 'Growth',
-    tagline: 'A complete AI Revenue Workforce.',
+    tagline: 'One complete operational workflow.',
     setup: 'From RM 5,000',
     monthly: 'RM 5,000 / mo',
-    summary: 'The primary engagement. One end-to-end revenue operation owned from first enquiry through to handoff to your closer.',
+    summary: 'The primary engagement. One end-to-end operating workflow with explicit ownership, controls and reporting.',
     includes: [
       'A complete department or end-to-end workflow',
       'Specialised AI Employees working together with defined handoffs',
@@ -159,19 +159,15 @@ const faqs = [
   },
   {
     question: 'Why does pricing vary?',
-    answer: 'The work changes with lead volume, number of locations, staff roles, existing tools, integrations and the complexity of the revenue process. We quote the implementation and ongoing service around that real delivery scope.',
-  },
-  {
-    question: 'Is ad spend included in the monthly fee?',
-    answer: 'No. Ad spend is billed directly by Meta or TikTok to your business account. Strata\'s monthly fee covers only the campaign, operations, maintenance and improvement work agreed in your scope.',
+    answer: 'The work changes with volume, number of locations, staff roles, existing tools, integrations and the complexity of the operating workflow. We quote the implementation and ongoing service around that real delivery scope.',
   },
   {
     question: 'What is the difference between Growth and Scale?',
-    answer: 'Growth (RM 5,000/mo) covers one complete workflow or department end to end - for most businesses that is the revenue operation. Scale (from RM 7,500/mo) is for several workflows or departments at once, multiple locations, larger teams, or heavier integration and governance requirements.',
+    answer: 'Growth (RM 5,000/mo) covers one complete workflow or department end to end. Scale (from RM 7,500/mo) is for several workflows or departments at once, multiple locations, larger teams, or heavier integration and governance requirements.',
   },
   {
-    question: 'What happens during the AI Workforce Audit?',
-    answer: 'We review how enquiries arrive, who owns each handoff, where follow-up fails, what customers are worth and which tools are already in place. You leave with a recommended scope, timeline and investment band - whether or not you go ahead.',
+    question: 'What happens during the Business Operations Audit?',
+    answer: 'We map one critical workflow from trigger to outcome, including its people, systems, handoffs, approvals and priority gap. You leave with a current-state map, a practical future state and a clear next-step decision - whether or not you go ahead.',
   },
 ];
 
@@ -190,16 +186,16 @@ export const Pricing = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4"
           >
-            AI WORKFORCE MANAGEMENT
+            SCOPED WORKFLOW IMPLEMENTATION
           </motion.p>
           <motion.h1
             initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : undefined, delay: shouldReduceMotion ? 0 : 0.1 }}
-            className="text-4xl md:text-7xl font-display font-bold leading-none tracking-tight text-text mb-8 uppercase"
+            className="text-balance text-4xl md:text-7xl font-display font-bold leading-none tracking-tight text-text mb-8"
           >
-            Put the repetitive work <br />
-            <span className="text-text/70">on an AI workforce.</span>
+            Start with one workflow. <br />
+            <span className="text-text/70">Expand after it proves value.</span>
           </motion.h1>
           <motion.p
             initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -207,7 +203,7 @@ export const Pricing = () => {
             transition={{ duration: shouldReduceMotion ? 0 : undefined, delay: shouldReduceMotion ? 0 : 0.18 }}
             className="text-muted font-sans text-base md:text-xl leading-relaxed max-w-3xl mx-auto mb-10"
           >
-            This is the work you can buy today. Strata audits where the work repeats, designs the handoffs, deploys and governs the AI Employees that own it, and reports on the result. Pricing moves with customer value, volume, complexity, locations and integrations.
+            Strata begins with a Business Operations Audit, then scopes implementation around the workflow, business value, volume, complexity, locations and integrations. Strata Core remains a separate platform in development.
           </motion.p>
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -221,7 +217,7 @@ export const Pricing = () => {
               className="w-full sm:w-auto h-auto rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
               <WhatsAppChoice source="pricing / hero" className="flex items-center justify-center gap-2">
-                Book an AI Workforce Audit
+                Book a Business Operations Audit
                 <ArrowRight size={14} />
               </WhatsAppChoice>
             </Button>
@@ -365,8 +361,8 @@ export const Pricing = () => {
 
         <div className="mt-8 mx-auto max-w-3xl rounded-[24px] border border-border/60 bg-surface px-6 py-5 text-center">
           <p className="font-sans text-xs text-muted leading-relaxed">
-            <span className="font-mono font-bold uppercase tracking-widest text-text">Ad spend is separate.</span>
-            {' '}Media budget is billed directly to your business by Meta or TikTok. Third-party usage such as WhatsApp Business messaging, premium data or unusually high AI consumption is passed through at cost.
+            <span className="font-mono font-bold uppercase tracking-widest text-text">External usage is scoped separately.</span>
+            {' '}Approved WhatsApp Business messaging, premium data, external APIs or unusually high AI consumption is passed through at cost or governed by agreed limits.
           </p>
         </div>
       </section>
@@ -458,7 +454,7 @@ export const Pricing = () => {
                 className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
               >
                 <WhatsAppChoice source="pricing / scope-drivers" className="flex items-center justify-center gap-2">
-                  Book an AI Workforce Audit
+                  Book a Business Operations Audit
                   <ArrowRight size={14} />
                 </WhatsAppChoice>
               </Button>
@@ -524,10 +520,10 @@ export const Pricing = () => {
               size="lg"
               className="h-auto w-full rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em] lg:w-auto"
             >
-              <a href={`${CONTACT.mailto}?subject=Strata%20Core%20Vision%20Demo`} className="flex items-center justify-center gap-3">
-                <span>Vision Demo</span>
+              <Link to="/#platform" className="flex items-center justify-center gap-3">
+                <span>View Platform Direction</span>
                 <ArrowRight size={15} />
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
@@ -555,10 +551,10 @@ export const Pricing = () => {
           {/* Final Conversion Block */}
           <div className="bg-surface2 text-text rounded-[32px] border border-gold/30 p-8 md:p-14 text-center shadow-xl shadow-gold/5">
             <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight mb-6 text-text">
-              Ready to price the work your revenue process needs?
+              Ready to scope the workflow that needs control?
             </h3>
             <p className="text-muted font-sans text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-              Book an AI Workforce Audit. We'll map the current process, review your customer economics and specify the deployment scope, timeline and ongoing service.
+              Book a Business Operations Audit. We’ll map the current workflow, identify its priority gap and define the implementation scope, timeline and ongoing service where there is a clear fit.
             </p>
             <Button
               asChild
@@ -567,7 +563,7 @@ export const Pricing = () => {
               className="w-full sm:w-auto h-auto py-5 px-10 rounded-full font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
               <WhatsAppChoice source="pricing / final-cta" className="flex items-center justify-center gap-3">
-                <span>Book an AI Workforce Audit</span>
+                <span>Book a Business Operations Audit</span>
                 <ArrowRight size={15} />
               </WhatsAppChoice>
             </Button>

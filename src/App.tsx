@@ -74,10 +74,13 @@ function PixelTracker() {
 function PublicShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-text relative overflow-clip font-sans p-3 md:p-6 lg:p-8">
+      <a href="#main-content" className="sr-only fixed left-6 top-4 z-[100] rounded-full bg-gold px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-void focus:not-sr-only">
+        Skip to content
+      </a>
       {/* Massive rounded page shell */}
       <div className="bg-surface w-full h-full min-h-[calc(100vh-1.5rem)] md:min-h-[calc(100vh-3rem)] rounded-[32px] md:rounded-[48px] overflow-clip shadow-[0_20px_80px_rgb(var(--scrim)/0.05)] border border-border relative flex flex-col transition-all duration-700">
         <Navbar />
-        <main className="relative z-10 flex-grow">
+        <main id="main-content" tabIndex={-1} className="relative z-10 flex-grow outline-none">
           {children}
         </main>
         <div className="relative z-10">

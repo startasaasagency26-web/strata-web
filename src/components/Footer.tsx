@@ -15,7 +15,7 @@ export const Footer = () => {
               <Logo variant="lockup" tone="gold" className="mb-6 h-10 w-auto origin-left" />
             </Link>
             <p className="text-muted text-sm font-sans leading-relaxed mb-6">
-              Strata delivers Revenue Systems today while developing Strata Core for connected, controlled business operations.
+              Strata helps established businesses diagnose and improve critical workflows while developing Strata Core as a governed AI Workforce Management platform.
             </p>
             <div className="flex gap-4">
               <a
@@ -44,9 +44,9 @@ export const Footer = () => {
           <div>
             <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">QUICK LINKS</h4>
             <ul className="space-y-4">
-              <li><Link to="/#platform" className="text-muted hover:text-gold font-sans transition-colors text-sm">Platform Vision</Link></li>
-              <li><Link to="/#business-rules" className="text-muted hover:text-gold font-sans transition-colors text-sm">Company Rules</Link></li>
-              <li><Link to="/#revenue-flow" className="text-muted hover:text-gold font-sans transition-colors text-sm">Revenue Flow</Link></li>
+              <li><Link to="/#workflows" className="text-muted hover:text-gold font-sans transition-colors text-sm">Workflow Examples</Link></li>
+              <li><Link to="/#audit-outcome" className="text-muted hover:text-gold font-sans transition-colors text-sm">Business Operations Audit</Link></li>
+              <li><Link to="/#operating-loop" className="text-muted hover:text-gold font-sans transition-colors text-sm">Controlled Workflow</Link></li>
               <li><Link to="/pricing" className="text-muted hover:text-gold font-sans transition-colors text-sm">Pricing &amp; Packages</Link></li>
               <li><Link to="/about" className="text-muted hover:text-gold font-sans transition-colors text-sm">About Strata</Link></li>
               <li><Link to="/blog" className="text-muted hover:text-gold font-sans transition-colors text-sm">Field Notes</Link></li>
@@ -57,10 +57,10 @@ export const Footer = () => {
           <div>
             <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">STRATA CORE</h4>
             <ul className="space-y-4">
-              <li><Link to="/#platform" className="text-muted hover:text-gold font-sans transition-colors text-sm">Platform Architecture</Link></li>
-              <li><Link to="/#business-rules" className="text-muted hover:text-gold font-sans transition-colors text-sm">Company Rules</Link></li>
-              <li><Link to="/#controlled-assistance" className="text-muted hover:text-gold font-sans transition-colors text-sm">Controlled Assistance</Link></li>
-              <li><a href={`${CONTACT.mailto}?subject=Strata%20Core%20Vision%20Demo`} className="text-muted hover:text-gold font-sans transition-colors text-sm">Vision Demo</a></li>
+              <li><Link to="/#platform" className="text-muted hover:text-gold font-sans transition-colors text-sm">Platform Direction</Link></li>
+              <li><span className="text-muted font-sans text-sm">Business Context</span></li>
+              <li><span className="text-muted font-sans text-sm">Human Control</span></li>
+              <li><span className="text-muted font-sans text-sm">Reviewable Execution</span></li>
             </ul>
           </div>
           
@@ -72,9 +72,9 @@ export const Footer = () => {
               variant="glassStrong"
               className="mt-2 w-full sm:w-auto rounded-full font-mono tracking-widest text-[11px] font-bold uppercase h-auto py-3 px-6"
             >
-              <a href={`${CONTACT.mailto}?subject=Business%20Operations%20Audit`} className="flex items-center gap-2">
+              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="footer / audit-cta" className="flex items-center gap-2">
                 BUSINESS OPS AUDIT <ArrowRight size={16} />
-              </a>
+              </WhatsAppChoice>
             </Button>
             <a href={CONTACT.mailto} className="mt-4 block break-all font-mono text-xs font-bold tracking-widest text-muted transition-colors hover:text-gold">
               {CONTACT.email}

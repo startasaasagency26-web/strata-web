@@ -24,24 +24,24 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative min-h-screen w-full scroll-mt-[var(--section-scroll-offset)] overflow-hidden py-24 lg:h-full lg:min-h-0 lg:py-0"
+      className="relative min-h-[100dvh] w-full scroll-mt-[var(--section-scroll-offset)] overflow-hidden py-24 lg:h-full lg:min-h-0 lg:py-0"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgb(var(--gold)/0.12),transparent_40%)]" aria-hidden="true" />
       <div className="relative z-10 mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-7xl flex-col justify-center px-5 sm:px-8 md:px-12 lg:h-full lg:min-h-0 lg:justify-start">
         <motion.div style={animateStage ? { opacity: contentOpacity } : undefined}>
           <div className="max-w-5xl">
           <motion.p {...fadeUp()} className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-accent">
-            STRATA CORE · IN DEVELOPMENT
+            BUSINESS OPERATIONS AUDIT · FOR ESTABLISHED SMEs
           </motion.p>
           <motion.h1
             {...fadeUp(0.05)}
             id="hero-heading"
-            className="text-[clamp(3rem,8vw,7.5rem)] font-black uppercase leading-[0.88] tracking-[-0.055em] text-primary lg:text-[clamp(3rem,min(8vw,11vh),7.5rem)]"
+            className="max-w-6xl text-balance text-[clamp(3rem,7.5vw,7rem)] font-black leading-[0.9] tracking-[-0.055em] text-primary lg:text-[clamp(3rem,min(7.5vw,10vh),7rem)]"
           >
-            Turn scattered work into one controlled business flow.
+            Find the workflow costing your business time, visibility and follow-through.
           </motion.h1>
-          <motion.p {...fadeUp(0.1)} className="mt-7 max-w-2xl text-base leading-relaxed text-muted md:text-xl">
-            Strata Core is being designed to connect the facts, rules, owners and approvals behind everyday operations—so teams can move from customer conversation to revenue without losing context.
+          <motion.p {...fadeUp(0.1)} className="mt-7 max-w-3xl text-pretty text-base leading-relaxed text-muted md:text-xl">
+            Strata helps established Malaysian businesses map where quotations, orders, service requests and approvals stall—then defines the first controlled workflow worth improving.
           </motion.p>
           <motion.div {...fadeUp(0.15)} className="mt-9 flex flex-col items-start gap-3 sm:flex-row">
             <Button asChild variant="glassStrong" size="lg" className="h-12 rounded-full px-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
@@ -54,7 +54,7 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
               </WhatsAppChoice>
             </Button>
             <Button asChild variant="glass" size="lg" className="h-12 rounded-full px-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
-              <Link to="/#platform">See the platform vision</Link>
+              <Link to="/#audit-outcome">See what the audit maps</Link>
             </Button>
           </motion.div>
           </div>
@@ -69,7 +69,7 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
 };
 
 export const Hero = () => (
-  <ScrollStage id="hero-scroll-stage" heightVh={250}>
+  <ScrollStage id="hero-scroll-stage" heightVh={180}>
     {(progress) => <HeroStageContent progress={progress} />}
   </ScrollStage>
 );

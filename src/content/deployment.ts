@@ -1,16 +1,13 @@
-import type { Availability } from './operating-layer';
-
 export interface DeploymentStep {
   number: string;
   name: string;
   description: string;
-  availability: Availability;
 }
 
 export const deploymentSteps: DeploymentStep[] = [
-  { number: '01', name: 'Choose the loop', description: 'Select one business workflow with a clear owner and outcome.', availability: 'planned' },
-  { number: '02', name: 'Map the context', description: 'Define the records, decisions and exceptions the loop needs.', availability: 'planned' },
-  { number: '03', name: 'Set the rules', description: 'Make permissions, approvals and handoffs explicit.', availability: 'planned' },
-  { number: '04', name: 'Run with people', description: 'Launch the workflow with human control at every decision boundary.', availability: 'planned' },
-  { number: '05', name: 'Extend carefully', description: 'Add new loops only after the operating record is reliable.', availability: 'planned' },
+  { number: '01', name: 'Current workflow', description: 'The real path from trigger to outcome, including workarounds and exceptions.' },
+  { number: '02', name: 'People and systems', description: 'The owners, tools, records, handoffs and approvals involved at every stage.' },
+  { number: '03', name: 'Priority gap', description: 'The highest-cost break in visibility, ownership or follow-through.' },
+  { number: '04', name: 'Baseline and intervention', description: 'A practical way to measure the gap and the first improvement worth testing.' },
+  { number: '05', name: 'Future state and fit', description: 'A one-page controlled workflow and a clear decision on what should happen next.' },
 ];

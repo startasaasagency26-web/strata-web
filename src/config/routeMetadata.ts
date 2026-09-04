@@ -15,23 +15,23 @@ export type RouteMetadata = {
 export const routeMetadata = {
   home: {
     path: "/",
-    title: "Strata Core | One Controlled Business Flow",
-    description: "Strata Core is being designed to connect the facts, rules, owners and approvals behind everyday operations—so teams can move from customer conversation to revenue without losing context.",
+    title: "Business Operations Audit | Strata Growth Technologies",
+    description: "Strata helps established Malaysian businesses find where quotations, orders, service requests and approvals stall, then defines the first controlled workflow worth improving.",
   },
   about: {
     path: "/about",
     title: "About Strata | Business Systems Built Around Real Work",
-    description: "Founded in mid-2025, Strata delivers Revenue Systems engagements for growing businesses today while shaping the in-development Strata Core platform with design partners.",
+    description: "Founded in mid-2025, Strata helps established businesses diagnose and improve critical workflows while developing Strata Core as an AI Workforce Management platform.",
   },
   pricing: {
     path: "/pricing",
     title: "AI Workforce Management | Strata Pricing",
-    description: "Strata audits where work repeats, designs the handoffs, deploys and governs the AI Employees that own it, and reports on the result. Pricing moves with customer value, volume, complexity, locations and integrations.",
+    description: "Explore scoped implementation packages for one controlled workflow or a broader AI workforce. Strata Core remains in development and unpriced.",
   },
   blog: {
     path: "/blog",
-    title: "Notes on Revenue Operations | Strata",
-    description: "Field notes on where revenue leaks in small and medium businesses, what an AI workforce actually does, and what we are learning while building Strata Core.",
+    title: "Notes on Business Operations | Strata",
+    description: "Field notes on recurring workflow problems, what a governed AI workforce should do, and what we are learning while developing Strata Core.",
   },
   buildWithUs: {
     path: "/build-with-us",
