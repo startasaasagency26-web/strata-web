@@ -74,7 +74,16 @@ function PixelTracker() {
 function PublicShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-text relative overflow-clip font-sans p-3 md:p-6 lg:p-8">
-      <a href="#main-content" className="sr-only fixed left-6 top-4 z-[100] rounded-full bg-gold px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-void focus:not-sr-only">
+      <a
+        href="#main-content"
+        onClick={(event) => {
+          event.preventDefault();
+          const main = document.getElementById("main-content");
+          main?.focus();
+          main?.scrollIntoView();
+        }}
+        className="sr-only fixed left-6 top-4 z-[100] rounded-full bg-gold px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-void focus:not-sr-only"
+      >
         Skip to content
       </a>
       {/* Massive rounded page shell */}

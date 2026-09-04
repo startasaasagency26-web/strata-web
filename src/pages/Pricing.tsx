@@ -51,7 +51,7 @@ const pricingFactors = [
   {
     num: '05',
     title: 'Complexity & Integrations',
-    desc: 'Multiple locations, custom CRM workflows, staff roles, third-party software, or legacy integrations increase setup scope.',
+    desc: 'Multiple locations, custom workflows, staff roles, third-party software, or legacy integrations increase setup scope.',
   },
 ];
 
@@ -59,7 +59,7 @@ const expandedScopeReasons = [
   'Multiple branch or office locations',
   'Multiple offer funnels & audience segments',
   'High lead volume requiring custom routing',
-  'Custom CRM architecture & team permissions',
+  'Custom system architecture & team permissions',
   'Advanced third-party API integrations',
   'Complex multi-stage automation workflows',
   'Multiple sales or customer service teams',

@@ -152,14 +152,14 @@ export const About = () => {
             </h3>
             <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {[
-                "Lead capture pages and enquiry forms",
-                "CRM pipeline setup and lead stages",
+                "Workflow intake and structured requests",
+                "Operational records and stage visibility",
                 "WhatsApp and email follow-up automation",
                 "Reporting and lead-flow visibility",
                 "Landing pages and sales pages",
                 "Mobile responsive build standards",
                 "Technical SEO foundations",
-                "Short-form content and paid media systems",
+                "Workflow briefs and execution standards",
                 "AI-assisted content and workflow systems",
                 "Business operations and customer journey systems",
               ].map((highlight) => (
@@ -373,7 +373,7 @@ export const About = () => {
             },
             {
               name: "THUNDERFIX",
-              description: "Service business lead capture and conversion infrastructure.",
+              description: "Service business workflow and conversion systems.",
               href: "https://www.thunderfix.online",
             },
             {
@@ -383,7 +383,7 @@ export const About = () => {
             },
             {
               name: "1MOBILE ROS",
-              description: "Internal repair operations and CRM workflow system.",
+              description: "Internal repair operations and workflow system.",
               href: null,
               badge: "INTERNAL INFRASTRUCTURE",
             },
@@ -486,7 +486,7 @@ export const About = () => {
             {
               step: "Step 4",
               title: "Revenue Optimization",
-              desc: "We refine content angles, paid ad campaigns, conversion flows, and team execution to maximize deal throughput.",
+              desc: "We refine workflow rules, handoffs, approval points and team execution to improve visible outcomes.",
             },
           ].map((step, idx) => (
             <motion.div

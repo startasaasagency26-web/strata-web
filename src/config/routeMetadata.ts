@@ -25,7 +25,7 @@ export const routeMetadata = {
   },
   pricing: {
     path: "/pricing",
-    title: "AI Workforce Management | Strata Pricing",
+    title: "Workflow Implementation Pricing | Strata",
     description: "Explore scoped implementation packages for one controlled workflow or a broader AI workforce. Strata Core remains in development and unpriced.",
   },
   blog: {
