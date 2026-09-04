@@ -29,14 +29,14 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgb(var(--gold)/0.12),transparent_40%)]" aria-hidden="true" />
       <div className="relative z-10 mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-7xl flex-col justify-center px-5 sm:px-8 md:px-12 lg:h-full lg:min-h-0 lg:justify-start">
         <motion.div style={animateStage ? { opacity: contentOpacity } : undefined}>
-          <div className="max-w-5xl">
+          <div className="max-w-5xl lg:max-w-none">
           <motion.p {...fadeUp()} className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-accent">
             BUSINESS OPERATIONS AUDIT · FOR ESTABLISHED SMEs
           </motion.p>
           <motion.h1
             {...fadeUp(0.05)}
             id="hero-heading"
-            className="max-w-6xl text-balance text-[clamp(3rem,7.5vw,7rem)] font-black leading-[0.9] tracking-[-0.055em] text-primary lg:text-[clamp(3rem,min(7.5vw,10vh),7rem)]"
+            className="max-w-6xl text-balance text-[clamp(3rem,7.5vw,7rem)] font-black leading-[0.9] tracking-[-0.055em] text-primary lg:text-[clamp(3rem,min(7.5vw,8vh),7rem)]"
           >
             Find the workflow costing your business time, visibility and follow-through.
           </motion.h1>
@@ -60,8 +60,10 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
           </div>
         </motion.div>
 
-        <div className="relative mt-4 h-[300px] w-full pb-8 sm:h-[320px] lg:mt-2 lg:h-[clamp(180px,25vh,310px)] lg:min-h-0">
-          <HeroShift progress={progress} />
+        <div className="relative mt-4 w-full pb-10 sm:mt-6 sm:pb-12 lg:mt-1 lg:flex lg:min-h-0 lg:flex-1 lg:justify-center lg:pb-10">
+          <div className="mx-auto aspect-[68/45] w-full max-w-xl sm:max-w-2xl lg:h-full lg:max-h-[520px] lg:min-h-[220px] lg:w-auto lg:max-w-none">
+            <HeroShift progress={progress} />
+          </div>
           <p className="absolute inset-x-0 bottom-0 text-center font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-muted sm:text-[10px] sm:tracking-[0.22em]">
             Signal → context → owner → approval → evidence
           </p>

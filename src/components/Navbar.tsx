@@ -120,7 +120,7 @@ export const Navbar = () => {
           )}
         >
           {/* Logo */}
-          <div className="flex min-w-0 items-center justify-self-start">
+          <div className="col-start-1 flex min-w-0 items-center justify-self-start">
             <Link
               to="/"
               className="flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
@@ -140,7 +140,7 @@ export const Navbar = () => {
 
           {/* Desktop Nav */}
           <nav
-            className="hidden min-w-0 items-center justify-center px-4 xl:flex"
+            className="col-start-2 hidden min-w-0 items-center justify-center px-4 xl:flex"
             aria-label="Main navigation"
           >
             <ul className="flex items-center gap-1 p-1">
@@ -168,7 +168,7 @@ export const Navbar = () => {
           </nav>
 
           {/* Right — CTA + hamburger */}
-          <div className="flex min-w-0 items-center justify-end gap-2 justify-self-end md:gap-3">
+          <div className="col-start-3 flex min-w-0 items-center justify-end gap-2 justify-self-end md:gap-3">
             <Button
               asChild
               variant="glass"
