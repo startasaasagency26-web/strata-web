@@ -1,0 +1,65 @@
+name: CI
+
+# Runs on every branch and every pull request, deliberately.
+#
+# The reason this exists: the retired offers (Growth Media, ads management,
+# Revenue Infrastructure) were removed by hand across 39 commits, while
+# `master` sat 39 commits behind still carrying them. Anyone branching from
+# main in the normal way would have reintroduced them, and shipping them is a
+# documented Gate 4 stop condition. The local `npm run build` now runs the
+# positioning guard first, but a local script can be skipped — this cannot.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  verify:
+    name: Positioning guard, typecheck, lint, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out the branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # First, and on its own, so a failure here is unmistakable in the log
+      # rather than buried inside a build step.
+      - name: Positioning guard - retired offer language must not ship
+        run: npm run check:positioning
+
+      - name: Typecheck
+        run: npx tsc -b
+
+      - name: Lint
+        run: npx eslint .
+
+      # `build` re-runs the guard as its first step by design. Keeping both is
+      # intentional: the standalone step above gives the clear signal, and the
+      # in-build run means a local build cannot skip it either.
+      - name: Build and prerender
+        run: npm run build
+
+      - name: Confirm prerendered output exists
+        run: |
+          set -e
+          for route in "" "pricing" "about" "build-with-us" "blog"; do
+            path="dist/${route:+$route/}index.html"
+            if [ ! -f "$path" ]; then
+              echo "Missing prerendered route: $path"
+              exit 1
+            fi
+          done
+          test -f dist/sitemap.xml || { echo "Missing dist/sitemap.xml"; exit 1; }
+          echo "All 5 routes prerendered and sitemap present."

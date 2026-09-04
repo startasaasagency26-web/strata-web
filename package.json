@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && npm run prerender",
+    "build": "npm run check:positioning && tsc -b && vite build && npm run prerender",
     "lint": "eslint .",
     "prerender": "tsx scripts/prerender.ts",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:positioning": "node scripts/check-positioning.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
