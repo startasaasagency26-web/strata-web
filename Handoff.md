@@ -5,6 +5,86 @@
 **Written:** 2026-09-04
 **By:** Claude (boss)
 
+## Session update — 2026-09-04 (UI fixes + retirement enforcement)
+
+**This section is the current state. Everything below it still stands except where corrected
+here.**
+
+### Fixed — measured, not eyeballed
+
+- **The hamburger rendered in the horizontal centre of the nav bar at every width below
+  1280px, phones included.** Cause: the bar is a three-column grid with four children and no
+  explicit column placement. Below `xl` the desktop `nav` is `display:none` (generates no box)
+  and the mobile STRATA wordmark is `absolute` (out of flow), so grid auto-placement skipped
+  both and put the CTA+hamburger group in the **middle** track. `justify-self-end` then aligned
+  it to the end of a content-sized centre column, i.e. dead centre of the bar. At 1280px and up
+  the nav re-enters the flow and it landed correctly, which is why it only broke below that.
+  Fix: `col-start-1` / `col-start-2` / `col-start-3` on the logo wrapper (line 123), the desktop
+  nav (line 143) and the CTA+hamburger wrapper (line 171).
+  Measured before to after: at 1279px the hamburger centre moved 635 to 1168 (the bar centre is
+  635), leaving 48px to the bar edge and 454px of clearance from the wordmark. At 375px its
+  centre moved 188 to 322, 20px off the edge. At 320px, 21px off the edge. At 1920px nothing
+  changed, as required.
+
+- **The hero diagram was starved of height, not broken.** The SVG viewBox is 680x450
+  (1.5111:1) with `xMidYMid meet` inside a box roughly 1200px wide but only 180-320px tall, so
+  it rendered height-bound and adrift in a very wide band.
+  Fix in two parts. (1) The headline block became `max-w-5xl lg:max-w-none`, widening the
+  measure from 1024 to 1108px and dropping the h1 from **four rendered lines to three at the
+  same 80px font size** — 72px freed with no type change. (2) The diagram band became
+  `lg:flex-1` inside the existing two-child flex column so it takes whatever the headline
+  leaves, with an aspect-locked inner frame `aspect-[68/45]` (the viewBox ratio, so no
+  letterboxing) clamped `lg:min-h-[220px] lg:max-h-[520px]`.
+  Measured after: **1279x800 gives 362x240** (was 302x200, computed from the old
+  `clamp(180px,25vh,310px)`); **1920x1080 gives 524x347** (was 408x270). 375px and 320px are
+  unchanged at 310x205 and 255x169 — both were already width-bound, so there was nothing to win.
+
+- **No clipping and no horizontal overflow at 320, 375, 1279 or 1920.** This also closes the
+  previously unverified "hero clamp untested at 320-375px" item: at 320px the h1 renders 255x389
+  and does not overflow.
+
+### An intermediate state clipped. Not in the final code, but note the trap.
+
+A 220px floor combined with the *old* four-line headline made the section overflow — and the
+hero section is `overflow-hidden`, so it **clipped in silence** rather than scrolling. Any
+future change to the diagram floor must be proven against `scrollHeight > clientHeight`, never
+by looking at the page.
+
+### Retirement enforcement
+
+`scripts/check-positioning.mjs` carries two more banned phrases, `care plan` and
+`install bundle`, because Nick retired the System Care Plan and the Full System Install Bundle
+on 2026-09-04. Guard reports **16 phrases, 53 files, 0 violations**, and was verified in both
+directions: injecting "care plan" into `src/config/contact.ts` made it exit 1, and the probe was
+reverted byte-clean. Neither phrase had ever appeared in site copy, so no page changed.
+
+### Correction to the record below
+
+The NOT-done list below says `origin/master` is 40 commits behind and still carries Growth Media
+and Revenue Infrastructure. **No longer true.** Verified 2026-09-04: master is at `d6c009f`, one
+commit behind this branch, and the only files matching the retired phrases are the guard and its
+CI workflow, which list them in order to block them.
+
+### NOT done this session
+
+- **The mobile menu overlay has not been reopened and re-checked** since the grid change. The
+  overlay is a fixed-position sibling of the header rather than a grid child, so column
+  placement cannot affect it structurally — but that is reasoning, not observation. One click.
+- Option B is **specified, not built.** Nick chose to step the desktop headline down one size
+  (the `lg` clamp cap from `10vh` to `8vh`) and give the freed height to the diagram. A full
+  Codex brief carrying the baseline numbers to beat was handed to him. As it stands the diagram
+  is *bigger*, not yet *big*.
+- Untracked backups on disk: `src/components/Navbar.tsx.bak-preuifix-20260904`,
+  `src/components/sections/Hero.tsx.bak-preuifix-20260904`,
+  `scripts/check-positioning.mjs.bak-preretire-20260904`.
+
+### Verification run this session
+
+`npx tsc -b` clean, `npx eslint .` clean, `npm run build` exit 0, ending
+`Prerendered 5 routes (0 articles) and generated dist/sitemap.xml.` Nothing deployed.
+
+---
+
 ## Current state
 
 **The repositioned site is live in production and verified.** Deployed from this repo root via

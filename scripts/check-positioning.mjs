@@ -62,6 +62,8 @@ const BANNED = [
   ["revenue optimisation", "Retired revenue-ops voice."],
   ["scalable sales operations", "Retired revenue-ops voice."],
   ["lead leakage", "Retired revenue-ops voice."],
+  ["care plan", "System Care Plan is retired (Nick, 2026-09-04). No longer delivered."],
+  ["install bundle", "Full System Install Bundle is retired (Nick, 2026-09-04). No longer delivered."],
 ];
 
 function walk(target) {
