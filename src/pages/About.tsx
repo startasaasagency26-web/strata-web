@@ -64,7 +64,7 @@ export const About = () => {
             </div>
             {/* Subtle credential label */}
             <div className="absolute -bottom-4 -right-4 rounded-2xl bg-gold p-4 text-void shadow-xl lg:right-4">
-              <div className="font-mono text-[8px] font-bold uppercase tracking-widest opacity-60">
+              <div className="font-mono text-[8px] font-bold uppercase tracking-widest">
                 Founder Role
               </div>
               <div className="mt-1 text-xs font-bold uppercase tracking-wider">
@@ -211,7 +211,7 @@ export const About = () => {
             </div>
             {/* Credibility Badge */}
             <div className="absolute -top-4 -left-4 rounded-2xl bg-gold p-4 text-void shadow-xl lg:left-4">
-              <div className="font-mono text-[8px] font-bold uppercase tracking-widest opacity-60">
+              <div className="font-mono text-[8px] font-bold uppercase tracking-widest">
                 Credibility
               </div>
               <div className="mt-1 text-xs font-bold uppercase tracking-wider">

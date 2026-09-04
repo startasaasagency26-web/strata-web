@@ -15,7 +15,7 @@ export const BuildWithUs = () => {
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-6 block font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-text/40"
+          className="mb-6 block font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-muted"
         >
           BUILD WITH STRATA
         </motion.span>

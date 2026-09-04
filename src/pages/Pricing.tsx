@@ -74,7 +74,7 @@ const packages = [
     tagline: 'One repetitive role, taken off your team.',
     setup: 'From RM 3,500',
     monthly: 'From RM 3,500 / mo',
-    summary: 'For simpler or lower-volume operations with one clearly repetitive job function worth removing first.',
+    summary: 'For genuinely simpler or earlier-stage operations - one clearly repetitive job function worth removing first. This is not a lighter version of Growth; businesses that fit here stay here because the role is that contained.',
     includes: [
       'One AI Employee covering a single job function',
       'One department or workflow in scope',
@@ -155,7 +155,7 @@ const faqs = [
   },
   {
     question: 'What exactly is an AI workforce?',
-    answer: 'AI Employees are configured to own specific, repetitive parts of a job - handling enquiries, qualifying, chasing follow-ups, keeping records straight. They run against your rules, limits and approval points, and a human stays in control of anything consequential. Strata scopes the work, configures the employees, integrates them with the tools you already use, and reports on the outcome.'
+    answer: 'An AI Employee is the name for one scoped, repetitive part of a job - handling enquiries, qualifying, chasing follow-ups, keeping records straight. At this delivery stage some of that work runs on configured automation and some is delivered by our team behind the scenes, so you are never sold something that is not actually running for you. Either way it operates against your rules, limits and approval points, and a human stays in control of anything consequential. Strata scopes the work, configures the delivery, integrates with the tools you already use, and reports on the outcome.'
   },
   {
     question: 'Why does pricing vary?',
@@ -287,7 +287,7 @@ export const Pricing = () => {
             Scope &amp; Investment
           </h2>
           <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
-            Every engagement is scoped to the work being removed. Implementation is quoted separately from the monthly fee, and both move with the complexity of your operation.
+            Growth is where most engagements start - one complete workflow, owned end to end. Foundation, Scale and Enterprise exist for businesses whose starting point or complexity genuinely differs. Implementation is quoted separately from the monthly fee, and both move with the complexity of your operation.
           </p>
         </div>
 
@@ -308,7 +308,7 @@ export const Pricing = () => {
             >
               {pkg.featured && (
                 <span className="absolute -top-3 left-7 inline-flex items-center rounded-full bg-gold px-4 py-1.5 font-mono text-[9px] font-bold uppercase tracking-widest text-void">
-                  MOST DEPLOYED
+                  RECOMMENDED START
                 </span>
               )}
 
@@ -344,7 +344,8 @@ export const Pricing = () => {
 
               <WhatsAppChoice
                 source={'pricing / ' + pkg.name}
-                ariaLabel={'Discuss the ' + pkg.name + ' scope on WhatsApp'}
+                ariaLabel={'Ask whether the ' + pkg.name + ' scope fits your business, via WhatsApp'}
+                message={'Hi Strata - I would like to check if ' + pkg.name + ' fits my business, starting with the Business Operations Audit.'}
                 className={cn(
                   'mt-auto flex h-12 w-full items-center justify-center gap-2 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset',
                   pkg.featured
@@ -352,7 +353,7 @@ export const Pricing = () => {
                     : 'border border-border text-text hover:bg-surface3',
                 )}
               >
-                Discuss {pkg.name}
+                Check {pkg.name} fit
                 <ArrowRight size={13} />
               </WhatsAppChoice>
             </motion.article>
