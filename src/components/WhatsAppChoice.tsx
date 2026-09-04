@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
 import { CONTACT } from "../config/contact";
-import { trackWhatsAppContact } from "../lib/analytics";
+import { trackContactIntent, trackWhatsAppContact } from "../lib/analytics";
 
 type WhatsAppChoiceProps = {
   children: ReactNode;
@@ -95,6 +95,7 @@ export const WhatsAppChoice = ({
         aria-label={ariaLabel}
         onClick={() => {
           onClick?.();
+          trackContactIntent(source);
           setIsOpen(true);
           onOpenChange?.(true);
         }}

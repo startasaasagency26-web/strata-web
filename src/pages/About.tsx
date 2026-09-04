@@ -352,11 +352,11 @@ export const About = () => {
               OUR PROCESS
             </p>
             <h2 className="text-4xl font-black uppercase tracking-tight text-text md:text-5xl lg:text-6xl">
-              HOW WE BUILD YOUR INFRASTRUCTURE.
+              HOW WE MAP AND CONTROL YOUR WORKFLOW.
             </h2>
           </div>
           <p className="max-w-md text-xs font-mono uppercase text-muted">
-            A structured execution flow designed to eliminate revenue leakage and build scalable sales operations.
+            A structured path from diagnosis to a workflow your team can see, own and follow through on.
           </p>
         </div>
 
@@ -364,12 +364,12 @@ export const About = () => {
           {[
             {
               step: "Step 1",
-              title: "System Diagnosis",
-              desc: "We audit lead intake, enquiry handling, WhatsApp response times, and follow-up leakage to identify revenue bottlenecks.",
+              title: "Workflow Diagnosis",
+              desc: "We audit the current workflow end to end - intake, handoffs, approvals and where follow-through actually breaks.",
             },
             {
               step: "Step 2",
-              title: "Infrastructure Design",
+              title: "Workflow Design",
               desc: "We design intake, ownership, handoffs, approval rules and staff notification points around the real workflow.",
             },
             {
@@ -379,8 +379,8 @@ export const About = () => {
             },
             {
               step: "Step 4",
-              title: "Revenue Optimization",
-              desc: "We refine workflow rules, handoffs, approval points and team execution to improve visible outcomes.",
+              title: "Ownership & Follow-Through",
+              desc: "We refine ownership, handoffs and approval points so the outcome stays visible without adding headcount.",
             },
           ].map((step, idx) => (
             <motion.div
