@@ -1,6 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { CheckCircle2 } from "lucide-react";
 import { WhatsAppChoice } from "../components/WhatsAppChoice";
 import { cn } from "../lib/utils";
 import { Seo } from "../components/Seo";
@@ -33,9 +32,6 @@ export const About = () => {
               <WhatsAppChoice source="about / hero" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
-              <Link to="/about#selected-work" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full border border-gold/10 bg-surface px-8 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95">
-                <span className="relative z-10">View Selected Work</span>
-              </Link>
             </div>
           </motion.div>
 
@@ -347,108 +343,6 @@ export const About = () => {
         </div>
       </section>
 
-      {/* SECTION 5 — PORTFOLIO PROOF */}
-      <section id="selected-work" className="scroll-mt-[var(--section-scroll-offset)] px-5 py-24 sm:px-8 md:px-12 lg:py-32">
-        <div className="mx-auto max-w-7xl">
-        <div className="mb-16 text-center">
-          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
-            SELECTED WORK
-          </span>
-          <h2 className="text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
-            Real Projects Across Brand, Service, and Operations
-          </h2>
-        </div>
-
-        <div className="mx-auto max-w-6xl space-y-4">
-          {[
-            {
-              name: "J-ARMOR",
-              description: "Product positioning and digital conversion funnel.",
-              href: "https://www.j-armor.net",
-            },
-            {
-              name: "J-ARMOR SHOP",
-              description: "E-commerce revenue engine and product sales system.",
-              href: "https://www.j-armor.shop",
-            },
-            {
-              name: "THUNDERFIX",
-              description: "Service business workflow and conversion systems.",
-              href: "https://www.thunderfix.online",
-            },
-            {
-              name: "ONESPECIALIST",
-              description: "Local service lead generation and enquiry routing system.",
-              href: "https://www.onespecialist.my",
-            },
-            {
-              name: "1MOBILE ROS",
-              description: "Internal repair operations and workflow system.",
-              href: null,
-              badge: "INTERNAL INFRASTRUCTURE",
-            },
-          ].map((project, idx) => {
-            const isLinked = Boolean(project.href);
-            
-            const content = (
-              <div className="flex w-full items-center justify-between px-8 py-6">
-                <div>
-                  <h4 className="text-sm font-bold tracking-widest text-text">
-                    {project.name}
-                  </h4>
-                  <p className="mt-1 text-xs text-text/50">
-                    {project.description}
-                  </p>
-                </div>
-                
-                {isLinked ? (
-                  <ArrowUpRight className="h-5 w-5 text-text/20 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-gold group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1" />
-                ) : (
-                  <span className="rounded-full bg-gold/5 px-3 py-1 font-mono text-[8px] font-bold uppercase tracking-widest text-muted">
-                    {project.badge}
-                  </span>
-                )}
-              </div>
-            );
-
-            const commonClasses = "flex items-center justify-between rounded-2xl border border-gold/5 bg-surface transition-all duration-300 outline-none";
-
-            return isLinked ? (
-              <motion.a
-                key={project.name}
-                href={project.href!}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : idx * 0.1 }}
-                className={cn(
-                  commonClasses,
-                  "group block hover:bg-surface3 hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-focus focus-visible:border-gold/20"
-                )}
-                aria-label={`Open ${project.name} website in a new tab`}
-              >
-                {content}
-              </motion.a>
-            ) : (
-              <motion.article
-                key={project.name}
-                initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : idx * 0.1 }}
-                className={commonClasses}
-                aria-label={`${project.name} is an internal system project`}
-              >
-                {content}
-              </motion.article>
-            );
-          })}
-        </div>
-        </div>
-      </section>
-
       {/* SECTION 6 — PROCESS OVERVIEW */}
       <section className="mx-2 rounded-[32px] border border-gold/30 bg-surface2 px-5 py-24 text-text shadow-2xl shadow-gold/5 sm:px-8 md:mx-6 md:px-12 lg:py-32">
         <div className="mx-auto max-w-7xl">
@@ -588,9 +482,6 @@ export const About = () => {
               <WhatsAppChoice source="about / final-cta" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-surface px-10 text-sm font-bold uppercase tracking-widest text-text transition-transform active:scale-95 sm:w-auto">
                 <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
-              <Link to="/about#selected-work" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full border border-border px-10 text-sm font-bold uppercase tracking-widest text-text transition-all hover:bg-surface3 active:scale-95 sm:w-auto">
-                <span className="relative z-10">View Selected Work</span>
-              </Link>
             </div>
           </div>
 
