@@ -32,7 +32,7 @@ export const TheDisconnect = () => (
       <div className="lg:sticky lg:top-32 lg:self-start">
         <p className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-accent">THE PATTERN</p>
         <p className="mt-5 max-w-md text-2xl font-semibold leading-snug text-text md:text-3xl">
-          The work crosses people and tools, but responsibility for the next step becomes unclear.
+          The work moves through WhatsApp, spreadsheets, inboxes and staff — but nobody owns what happens next.
         </p>
         <p className="mt-5 max-w-md text-base leading-relaxed text-muted">
           The Audit makes the current path visible before recommending technology or implementation.

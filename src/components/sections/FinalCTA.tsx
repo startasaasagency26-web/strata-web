@@ -169,12 +169,12 @@ export const FinalCTA = () => {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
+          <div className="flex flex-col items-center justify-center gap-6 lg:flex-row">
             <Button 
               asChild 
               variant="glassOnDark"
               size="lg"
-              className="w-full sm:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
+              className="w-full lg:w-auto h-auto py-6 px-10 rounded-full font-mono font-bold uppercase tracking-widest"
             >
               <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="home / final-cta" className="flex items-center justify-center gap-4">
                 <span>Book a business operations audit</span>
@@ -184,7 +184,7 @@ export const FinalCTA = () => {
               </WhatsAppChoice>
             </Button>
 
-            <Link to="/#audit-outcome" className="group inline-flex w-full items-center justify-center gap-4 rounded-full border border-border px-10 py-6 font-mono font-bold uppercase tracking-widest text-text transition-colors duration-300 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus sm:w-auto">
+            <Link to="/#audit-outcome" className="group inline-flex w-full items-center justify-center gap-4 rounded-full border border-border px-10 py-6 font-mono font-bold uppercase tracking-widest text-text transition-colors duration-300 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus lg:w-auto">
               <span>See what you leave with</span>
             </Link>
           </div>

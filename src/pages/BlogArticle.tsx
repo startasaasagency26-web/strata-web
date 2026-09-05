@@ -82,7 +82,7 @@ export const BlogArticle = () => {
           </div>
 
           {article.updatedAt !== article.publishedAt && (
-            <p className="mt-6 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-faint">
+            <p className="mt-6 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
               Updated {formatArticleDate(article.updatedAt)}
             </p>
           )}
@@ -105,6 +105,7 @@ export const BlogArticle = () => {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <WhatsAppChoice
+              message="Hi Strata — I'd like to book a Business Operations Audit."
               source={`blog / ${article.slug}`}
               className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gold px-8 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-void transition-colors duration-200 hover:bg-goldHover active:bg-goldActive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
             >

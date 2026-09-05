@@ -9,7 +9,7 @@ type WhatsAppChoiceProps = {
   children: ReactNode;
   className?: string;
   ariaLabel?: string;
-  message?: string;
+  message: string;
   onClick?: () => void;
   onOpenChange?: (isOpen: boolean) => void;
   /** Labels which CTA drove the contact, so packages are comparable in Ads Manager. */
@@ -22,7 +22,7 @@ export const WhatsAppChoice = ({
   children,
   className,
   ariaLabel,
-  message = CONTACT.whatsappDefaultMessage,
+  message,
   onClick,
   onOpenChange,
   source = "unspecified",

@@ -1,7 +1,6 @@
 export const CONTACT = {
   email: "nick@strataagency.tech",
   mailto: "mailto:nick@strataagency.tech",
-  whatsappDefaultMessage: "Hi Strata — I'd like to talk about my business operations.",
   whatsapp: {
     nick: {
       name: "Nick",

@@ -9,7 +9,7 @@ import { cn } from "../../lib/utils"
 
 // ─── Shared base ─────────────────────────────────────────────────────────────
 const BASE = [
-  "inline-flex items-center cursor-pointer justify-center gap-2 whitespace-nowrap rounded-full",
+  "inline-flex items-center cursor-pointer justify-center gap-2 whitespace-normal text-center sm:whitespace-nowrap rounded-full",
   "text-sm font-medium select-none",
   "relative isolate overflow-hidden transform-gpu will-change-transform",
   "transition-all duration-200 ease-out",

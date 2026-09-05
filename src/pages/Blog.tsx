@@ -18,8 +18,8 @@ export const Blog = () => (
           Notes on business operations
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-          Where revenue leaks in small and medium businesses, what an AI workforce actually does, and
-          what we are learning while building Strata Core.
+          Where revenue leaks in small and medium businesses, what a governed AI workforce should do,
+          and what we are learning while building Strata Core.
         </p>
       </div>
 

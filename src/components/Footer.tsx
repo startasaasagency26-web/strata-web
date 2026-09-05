@@ -26,6 +26,7 @@ export const Footer = () => {
                 <Mail size={20} />
               </a>
               <WhatsAppChoice source="footer"
+                message="Hi Strata — I'd like to book a Business Operations Audit."
                 ariaLabel="Choose a Strata WhatsApp contact"
                 className="text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
               >
@@ -42,7 +43,7 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">QUICK LINKS</h4>
+            <h3 className="text-text font-mono font-bold text-sm tracking-widest mb-6">QUICK LINKS</h3>
             <ul className="space-y-4">
               <li><Link to="/#workflows" className="text-muted hover:text-gold font-sans transition-colors text-sm">Workflow Examples</Link></li>
               <li><Link to="/#audit-outcome" className="text-muted hover:text-gold font-sans transition-colors text-sm">Business Operations Audit</Link></li>
@@ -55,7 +56,7 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">STRATA CORE</h4>
+            <h3 className="text-text font-mono font-bold text-sm tracking-widest mb-6">STRATA CORE</h3>
             <ul className="space-y-4">
               <li><Link to="/#platform" className="text-muted hover:text-gold font-sans transition-colors text-sm">Platform Direction</Link></li>
               <li><span className="text-muted font-sans text-sm">Business Context</span></li>
@@ -65,7 +66,7 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-text font-mono font-bold text-sm tracking-widest mb-6">MAP THE GAPS</h4>
+            <h3 className="text-text font-mono font-bold text-sm tracking-widest mb-6">MAP THE GAPS</h3>
             <p className="text-muted font-sans text-sm mb-4">Bring one recurring workflow. We’ll map the missing context, ownership and controls with you.</p>
             <Button
               asChild
@@ -87,8 +88,8 @@ export const Footer = () => {
             &copy; {new Date().getFullYear()} Strata Growth Technologies. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link to="/about" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">Privacy &amp; Terms</Link>
-            <Link to="/pricing" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">Commercial Terms</Link>
+            <Link to="/about" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">About Strata</Link>
+            <Link to="/pricing" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">How Pricing Works</Link>
           </div>
         </div>
       </div>

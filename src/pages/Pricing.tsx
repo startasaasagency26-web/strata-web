@@ -216,7 +216,7 @@ export const Pricing = () => {
               variant="glassStrong"
               className="w-full sm:w-auto h-auto rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
-              <WhatsAppChoice source="pricing / hero" className="flex items-center justify-center gap-2">
+              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="pricing / hero" className="flex items-center justify-center gap-2">
                 Book a Business Operations Audit
                 <ArrowRight size={14} />
               </WhatsAppChoice>
@@ -264,9 +264,9 @@ export const Pricing = () => {
 
           {/* Standardized Core Deliverables */}
           <div className="border-t border-border/50 pt-10">
-            <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-text mb-6">
+            <h3 className="font-mono text-xs font-bold uppercase tracking-widest text-text mb-6">
               Typical Work Included in a Standard Engagement:
-            </h4>
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-3.5 gap-x-6">
               {coreDeliverables.map((item) => (
                 <div key={item} className="flex items-start gap-3">
@@ -454,7 +454,7 @@ export const Pricing = () => {
                 size="lg"
                 className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
               >
-                <WhatsAppChoice source="pricing / scope-drivers" className="flex items-center justify-center gap-2">
+                <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="pricing / scope-drivers" className="flex items-center justify-center gap-2">
                   Book a Business Operations Audit
                   <ArrowRight size={14} />
                 </WhatsAppChoice>
@@ -462,9 +462,9 @@ export const Pricing = () => {
             </div>
 
             <div className="bg-surface border border-border rounded-[24px] p-6 md:p-8">
-              <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-muted mb-6 border-b border-border pb-3">
+              <h3 className="font-mono text-xs font-bold uppercase tracking-widest text-muted mb-6 border-b border-border pb-3">
                 Common Triggers For A Larger Scope:
-              </h4>
+              </h3>
               <ul className="grid grid-cols-1 gap-3.5">
                 {expandedScopeReasons.map((reason) => (
                   <li key={reason} className="flex items-center gap-3">
@@ -543,7 +543,7 @@ export const Pricing = () => {
           <div className="grid gap-6 mb-16">
             {faqs.map((faq) => (
               <div key={faq.question} className="bg-surface/50 border border-border/50 rounded-2xl p-6 md:p-8">
-                <h4 className="text-lg md:text-xl font-bold font-sans text-text mb-3">{faq.question}</h4>
+                <h3 className="text-lg md:text-xl font-bold font-sans text-text mb-3">{faq.question}</h3>
                 <p className="text-sm md:text-base font-sans text-muted leading-relaxed">{faq.answer}</p>
               </div>
             ))}
@@ -563,7 +563,7 @@ export const Pricing = () => {
               size="lg"
               className="w-full sm:w-auto h-auto py-5 px-10 rounded-full font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
-              <WhatsAppChoice source="pricing / final-cta" className="flex items-center justify-center gap-3">
+              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="pricing / final-cta" className="flex items-center justify-center gap-3">
                 <span>Book a Business Operations Audit</span>
                 <ArrowRight size={15} />
               </WhatsAppChoice>

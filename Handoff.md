@@ -5,6 +5,177 @@
 **Written:** 2026-09-04
 **By:** Claude (boss)
 
+## Session update — 2026-09-04, latest (full audit + fix pass, verified by Claude)
+
+**This is the newest current state.** Three audits ran (copy, design, technical); every finding
+was re-verified by Claude directly before acting. Uncommitted — everything sits in the working
+tree on `codex/video-insights-homepage`. Nothing committed, pushed, merged or deployed.
+
+### Two corrections to the record
+
+1. **Production is CURRENT with this branch. The earlier "Nothing deployed" note is wrong.**
+   Proof: the live CSS `index-DqQfqUhT.css` byte-matches the local `dist` build and contains
+   `aspect-[68/45]`, a class that exists only in the post-fix `Hero.tsx`; live
+   `index-DYw7MDt9.js` and `Home-DxLPn6wr.js` match too. The hero and navbar fixes ARE live.
+2. **`preview_start` now works end to end.** The parent-folder launch config was used for real
+   this session and brought the dev server up on 5173 and served pages. The previously open
+   "real button press unconfirmed" item is closed.
+
+### Fixed and measured this session
+
+Beyond the seven-defect pass recorded below, three more were found and fixed:
+
+- **The homepage closing CTA was still clipped on tablets** — 71px at 640px and 67px at 768px,
+  which the seven-defect pass had correctly identified and deliberately left. Root cause was
+  not `whitespace`: `FinalCTA.tsx:172` put two long CTAs side by side from the `sm` breakpoint,
+  so flex shrank the pill below its content width. Fixed by moving the row switch from `sm` to
+  `lg` (line 172), with the two children's width classes moved to match (lines 177, 187). An
+  intermediate `md` attempt still clipped 67px at exactly 768px, because `md` IS 768px — worth
+  remembering as a trap.
+  **Now measured clean at 320, 360, 375, 414, 640, 768, 900, 1024, 1440 and 1920px** on both
+  `/` and `/pricing`: every `overflow-hidden` control reports `scrollWidth - clientWidth === 0`
+  and `scrollHeight - clientHeight === 0`, and page horizontal overflow is 0. Desktop still
+  renders the two CTAs side by side (`flex-direction: row` at 1024 and 1920) — no regression.
+
+- **Eight more audit CTAs were sending the vague opener.** The seven-defect pass fixed the
+  footer icon and reported eight others; Claude verified by parsing every `<WhatsAppChoice>`
+  opening tag rather than grepping lines, and confirms it — About hero / sales / final-cta,
+  BuildWithUs, Pricing hero / scope-drivers / final-cta, and BlogArticle. Every one of those
+  buttons says "Book an audit" in some form while opening WhatsApp with "I'd like to talk about
+  my business operations." All eight now pass the audit message.
+  **This also corrects the copy audit**, which stated that every button other than the footer
+  icon already sent the audit message. It did not.
+
+- **The defect class is now structurally impossible.** `message` on `WhatsAppChoice` is a
+  required prop and `whatsappDefaultMessage` is deleted from the contact config, so TypeScript
+  refuses to build any WhatsApp CTA that does not declare what it is asking for. Verified: the
+  string "talk about my business operations" no longer appears anywhere in `src`.
+
+### Verification run
+
+`npx tsc -b` exit 0 · `npx eslint .` exit 0 · `node scripts/check-positioning.mjs` OK, 53 files,
+16 phrases, 0 violations · `npm run build` exit 0, ending
+`Prerendered 5 routes (0 articles) and generated dist/sitemap.xml.`
+WhatsApp messages confirmed in the live DOM: every `wa.me` href on `/pricing` carries
+`Hi Strata — I'd like to book a Business Operations Audit.`
+
+### Decision — AI-search visibility is PARKED, deliberately
+
+Nick was shown that the site serves ~6 KB shells with zero `<h1>` and no body copy on all five
+routes, so ChatGPT, Claude and Perplexity read only the ~150-word static JSON-LD graph and
+leave, while Google still renders and indexes normally. Estimated 3-4 hours to fix by
+prerendering body HTML (`entry-server.tsx` + `renderToString`, keeping `createRoot` — do NOT
+switch to `hydrateRoot`, which is where the regression risk lives). **Nick parked it on
+2026-09-04.** Reason: leverage, not urgency — get paying clients before optimising a channel
+with no traffic yet. This is a decision, not an oversight. Do not reopen it unprompted.
+
+Parked with it, same reason: per-route JSON-LD (1 h, zero risk, mechanism already exists —
+`routeMetadata.ts` declares `jsonLd` and `prerender.ts` emits it, but not one route sets it);
+a `headers` block in `vercel.json` (hashed assets currently serve `max-age=0, must-revalidate`,
+and only `Strict-Transport-Security` is set — no `X-Frame-Options`, `X-Content-Type-Options` or
+`Referrer-Policy`); and a real 404 route (every unknown URL returns HTTP 200 with the homepage
+shell).
+
+### NOT done / still open
+
+- **NOTHING IS COMMITTED.** All of the above is working-tree only.
+- **The hero/navbar fix still lives only on a `codex/*` branch and in production.**
+  `origin/master` is at `d6c009f`; the branch is ahead. There is no Git-to-production trigger
+  (no deployment carries commit metadata), so master cannot revert the live site — but a
+  deleted Codex branch would lose the fix. Master is a strict ancestor, so this is a plain
+  fast-forward, no `--force`:
+  `git push origin codex/video-insights-homepage:master`
+  Claude has been blocked by the sandbox on default-branch writes before; left to Nick.
+- **No Privacy Policy or Terms pages exist.** The two footer links that claimed to be them were
+  relabelled to stop them lying ("About Strata", "How Pricing Works"), which is a mitigation,
+  not a fix. Real pages are needed before any Meta or Google Ads account, and it is a Malaysian
+  PDPA gap. Needs Nick's decision plus actual legal content — do not invent policy text.
+- **`/build-with-us` still skips h1 to h3.** That page has no `h2` at all, so the footer
+  headings follow the page title directly. A complete fix needs a section heading on the page,
+  which is content, not code.
+- **`/pricing` final CTA reports 5px of scroll overflow at 320px only**, with `clipX = 0` —
+  nothing visibly cut; the label eats 4px of the pill's 40px padding. Was 100px.
+- **Blog article date contrast could not be verified in a live DOM** — zero articles are
+  published, so `BlogArticle` never renders. Fixed at source (`text-faint` to `text-muted`) and
+  verified by computing the tokens: `--faint` = 4.425:1 (fails AA at 10px), `--muted` = 6.692:1.
+- No test suite. Judged acceptable debt for a five-page marketing site — the two real
+  regression classes this quarter were retired-offer language (caught by the positioning guard
+  in CI) and a starved hero grid (caught by opening the page). One worthwhile extension, ~1 h:
+  assert each prerendered route has a DISTINCT title and a canonical matching its own path,
+  which is this architecture's one plausible silent failure.
+- Eight dead components (`SystemSpine`, `GovernedAI`, `BrowserBuilder`, `ProductFrame` have zero
+  references; `AgentGovernance`, `AuditLog`, `OperatingMemory`, `RuleGrid` are reachable only
+  from those). All fully tree-shaken out of `dist` — hygiene, not risk.
+- Untracked backups on disk, deliberately preserved: `Navbar.tsx.bak-preuifix-20260904`,
+  `Hero.tsx.bak-preuifix-20260904`, `check-positioning.mjs.bak-preretire-20260904`.
+
+**Not a bug — do not chase it.** Scroll-reveal sections render blank in a hidden browser pane,
+so screenshots of them are worthless. Measure through the DOM
+(`scrollWidth` / `clientWidth` / `getBoundingClientRect`), never by eye.
+
+## Session update — 2026-09-04, later (Forge: seven-defect fix pass)
+
+**This is the newest current state. The section below it still stands except where corrected
+here.** Written by Forge. Uncommitted — the changes sit in the working tree on
+`codex/video-insights-homepage`; nothing was committed, pushed, merged or deployed.
+
+### Current state — all seven observed working
+
+Seven defects fixed, 17 lines across 7 files. Verified against two real builds served side by
+side (HEAD baseline in a throwaway git worktree vs the fixed tree) and measured through the DOM
+in headless Chromium at 320 / 360 / 375 / 414 / 640 / 768 / 1024 / 1440 px on `/`, `/pricing`,
+`/about`, `/blog`, `/build-with-us`, plus the mobile nav overlay.
+
+1. **Shared button no longer clips its label on phones.**
+   `src/components/ui/liquid-glass-button.tsx:12` — `whitespace-nowrap` →
+   `whitespace-normal text-center sm:whitespace-nowrap`. One component-level change, no call
+   sites touched. `overflow-hidden` kept (the gloss layers need it). Wording unchanged.
+   Clipped pixels on the homepage closing CTA: 320px 123→0, 360px 83→0, 375px 68→0,
+   414px 29→0. `/pricing` hero 48.8→0, scope-drivers 63.8→0, final CTA 118.8→0,
+   "View platform direction" 27.3→0. Mobile nav CTA 6→0. No page-level horizontal
+   overflow at any width, before or after (`documentElement.scrollWidth - clientWidth === 0`).
+2. **Footer WhatsApp icon sends the right opener.** `src/components/Footer.tsx:29` — added the
+   Business Operations Audit message. Live-checked: the icon's `wa.me` links now carry the same
+   text as the footer button.
+3. **Two footer links stopped claiming to be legal pages.** `Footer.tsx:90-91` —
+   "Privacy & Terms" → "About Strata", "Commercial Terms" → "How Pricing Works". Targets
+   unchanged. No policy page or policy text was invented.
+4. **Homepage problem statement replaced.** `src/components/sections/BusinessProblem.tsx:35`.
+5. **Blog intro no longer contradicts its own meta description.** `src/pages/Blog.tsx:21-22`.
+6. **Heading-level skips gone.** `About.tsx:260`, `Pricing.tsx:267/465/546`, `Footer.tsx:45/58/68`
+   — seven `h4` retagged to `h3`. Heading-order skips across the site: 7 → 1. Proven visually
+   inert: 52 retagged headings compared before/after on computed `font-size`, `font-weight`,
+   `line-height`, `font-family`, `letter-spacing`, `text-transform`, `color`, `margin-bottom`
+   and box geometry — zero differences. The only deltas anywhere are `y` offsets caused by
+   fix 1's taller wrapped buttons at 375px.
+7. **Blog article update date meets AA.** `src/pages/BlogArticle.tsx:85` — `text-faint`
+   (4.425:1, fails) → `text-muted` (6.692:1). The `--faint` token was not changed.
+
+Gates: `npx tsc -b` 0 · `npx eslint .` 0 · `node scripts/check-positioning.mjs` 0 violations
+· `npm run build` 0.
+
+### NOT done — found, deliberately left
+
+- **The homepage closing CTA is still clipped 59px at 640px and 44.9px at 768px.** Identical
+  before and after — pre-existing, not caused by this pass, clean again at 1024px. Cause is
+  not whitespace: `FinalCTA.tsx:172` flips to `sm:flex-row`, putting two long CTAs side by side
+  in 548px. The fix is a breakpoint change (`sm:flex-row` → `md:flex-row`), which is a layout
+  decision and was outside the seven-item brief.
+- **`/pricing` final CTA still reports 5px of scroll overflow at 320px only.** No visible
+  clipping (`clipX` = 0); the label sits inside the pill and eats 4px of its 40px padding.
+  Removing it means either breaking a word mid-label or reducing `px-10` at the call site.
+- **`/build-with-us` still skips h1 → h3** because that page has no `h2` at all. The footer
+  retag improved it from h1 → h4. A complete fix needs a section heading on that page.
+- **Eight other WhatsApp CTAs still send the generic opener** — `About.tsx:32/271/482`,
+  `Pricing.tsx:219/457/566`, `BuildWithUs.tsx:54`, `BlogArticle.tsx:107` pass no `message`, so
+  they fall back to "...talk about my business operations" while their visible labels say
+  "Book an audit". Same defect as fix 2, eight more places.
+- **Fix 7 was not verified in a live DOM** because zero articles are published, so
+  `BlogArticle` never renders. Verified by contrast computation from the CSS tokens and by the
+  source diff.
+- Nothing committed, pushed, merged or deployed. No `*.bak-*` file touched. `vercel.json`,
+  prerendering, JSON-LD and dead components untouched by design.
+
 ## Session update — 2026-09-04 (UI fixes + retirement enforcement)
 
 **This section is the current state. Everything below it still stands except where corrected

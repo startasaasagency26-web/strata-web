@@ -29,7 +29,7 @@ export const About = () => {
               Founded in mid-2025, Strata helps established businesses diagnose and improve critical workflows while developing Strata Core as an AI Workforce Management platform.
             </p>
             <div className="flex flex-wrap gap-4">
-              <WhatsAppChoice source="about / hero" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
+              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="about / hero" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
             </div>
@@ -257,7 +257,7 @@ export const About = () => {
                     <CheckCircle2 size={14} />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-tight text-text">{item.title}</h4>
+                    <h3 className="text-sm font-bold uppercase tracking-tight text-text">{item.title}</h3>
                     <p className="mt-1 text-xs leading-relaxed text-text/50">{item.desc}</p>
                   </div>
                 </div>
@@ -268,7 +268,7 @@ export const About = () => {
               <p className="mb-8 text-sm font-medium italic text-text/70">
                 "Speak with a team that understands both operating workflows and real customer conversations."
               </p>
-              <WhatsAppChoice source="about / sales" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
+              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="about / sales" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
             </div>
@@ -479,7 +479,7 @@ export const About = () => {
             </p>
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <WhatsAppChoice source="about / final-cta" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-surface px-10 text-sm font-bold uppercase tracking-widest text-text transition-transform active:scale-95 sm:w-auto">
+              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="about / final-cta" className="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-full bg-surface px-10 text-sm font-bold uppercase tracking-widest text-text transition-transform active:scale-95 sm:w-auto">
                 <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
             </div>
