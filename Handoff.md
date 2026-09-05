@@ -8,8 +8,15 @@
 ## Session update — 2026-09-04, latest (full audit + fix pass, verified by Claude)
 
 **This is the newest current state.** Three audits ran (copy, design, technical); every finding
-was re-verified by Claude directly before acting. Uncommitted — everything sits in the working
-tree on `codex/video-insights-homepage`. Nothing committed, pushed, merged or deployed.
+was re-verified by Claude directly before acting.
+
+**SHIPPED 2026-09-05.** All of it is committed as `163ea78`, pushed to `master` and to
+`codex/video-insights-homepage` (both refs now point at the same commit), and live in
+production. Verified after the deploy, not assumed: the production build reports READY for
+`163ea78`; `/`, `/pricing`, `/about`, `/blog` and `/build-with-us` all return 200; the live
+`Pricing` chunk is byte-identical to the local `dist` build that carries the retagged headings;
+and the live main chunk contains the new footer labels and the pre-filled audit message while
+the old `Commercial Terms` / `Privacy & Terms` labels are gone from it.
 
 ### Two corrections to the record
 
