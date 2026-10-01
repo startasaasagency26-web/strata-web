@@ -138,7 +138,7 @@ export const WhatsAppChoice = ({
               <div className="absolute inset-x-0 top-0 h-px bg-gold/40" />
               <div className="mb-6 flex items-start justify-between gap-6">
                 <div>
-                  <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
+                  <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-muted">
                     WhatsApp
                   </p>
                   <h2 id="whatsapp-choice-title" className="text-2xl font-black uppercase tracking-tight text-text">
@@ -174,7 +174,7 @@ export const WhatsAppChoice = ({
                     className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-surface px-5 py-4 transition-colors hover:border-gold/40 hover:bg-surface3 hover:text-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
                   >
                     <span>
-                      <span className="block font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-current">
+                      <span className="block font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-current">
                         WhatsApp {contact.name}
                       </span>
                       <span className="mt-1 block text-xs text-muted transition-colors group-hover:text-text/50">

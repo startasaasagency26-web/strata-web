@@ -1,57 +1,28 @@
-import { motion, useMotionValue, useReducedMotion, useTransform, type MotionValue } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useTransform, type MotionValue } from 'framer-motion';
+import { FLOOR, Volume, facePoint, line, makeBox, makeIso, poly, type BoxShape, type Pt } from './iso';
 
 /**
  * "The Shift" — the Strata hero scene.
  *
  * An isometric service-business floor. Four carrier units move one job
  * through it: counter -> bench -> shelf -> the dock row. Scroll progress is
- * the only clock; nothing here is time-based.
+ * the only clock for the story; the one exception is the idle light pulse,
+ * which runs only while the page sits at the top (progress ~0).
+ *
+ * Story beat: a job card rides the route, stalls at the bench handoff in an
+ * unowned gap (it dims, a dashed gap marker shows), an "Owner" tag slides on,
+ * and the card carries on with its owner attached.
  *
  * Geometry note: the signal route is an OPEN path with two free ends. It
  * must never close into a ring — that is the whole point of the scene.
  */
 
 // ── Isometric projection ─────────────────────────────────────────────────
+const iso = makeIso(830, 140);
+const box = makeBox(iso);
 const OX = 830;
 const OY = 140;
-const KX = 0.6755;
-const KY = 0.39;
-const FLOOR = 12; // slab thickness — everything rests on this plane
-
-type Pt = [number, number];
-
-const iso = (px: number, py: number, lift = 0): Pt => [
-  OX + KX * (px - py),
-  OY + KY * (px + py) - lift,
-];
-
-const poly = (list: Pt[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
-const line = (list: Pt[]) =>
-  list.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ');
-
-/** An isometric volume: top face plus the two faces turned toward the viewer. */
-const box = (px: number, py: number, w: number, d: number, h: number, base = FLOOR) => {
-  const A = iso(px, py, base + h);
-  const B = iso(px + w, py, base + h);
-  const C = iso(px + w, py + d, base + h);
-  const D = iso(px, py + d, base + h);
-  return {
-    top: [A, B, C, D] as Pt[],
-    right: [C, B, iso(px + w, py, base), iso(px + w, py + d, base)] as Pt[],
-    left: [D, C, iso(px + w, py + d, base), iso(px, py + d, base)] as Pt[],
-    corners: { B, C, D },
-  };
-};
-
-/** Bilinear point on a quad given as [topA, topB, baseB, baseA]. */
-const facePoint = (q: Pt[], u: number, v: number): Pt => {
-  const [tA, tB, bB, bA] = q;
-  const tx = tA[0] + (tB[0] - tA[0]) * u;
-  const ty = tA[1] + (tB[1] - tA[1]) * u;
-  const bx = bA[0] + (bB[0] - bA[0]) * u;
-  const by = bA[1] + (bB[1] - bA[1]) * u;
-  return [tx + (bx - tx) * v, ty + (by - ty) * v];
-};
 
 // ── The floor plan ───────────────────────────────────────────────────────
 const PLATE = box(-14, -14, 488, 408, FLOOR, 0);
@@ -81,6 +52,10 @@ const R_DOCK = (px: number) => iso(px, 270, FLOOR);
 const R_END = iso(55, 300, FLOOR);
 
 const PROC = R_DOCK(152);
+
+/** The whole route as one open path — the idle pulse's track. */
+const ROUTE_POINTS: Pt[] = [R_COUNTER, R_CORNER, R_BENCH, R_APPROACH, R_SHELF, R_TURN, R_DOCK(346), R_DOCK(249), PROC, R_DOCK(55), R_END];
+const ROUTE_D = line(ROUTE_POINTS);
 
 /** Eight independently revealed segments, ordered along the route. */
 const SEGMENTS: { d: string; from: number; to: number }[] = [
@@ -156,24 +131,34 @@ const EMPTIED: [number, number][] = [[2, 1], [1, 2]];
 
 const AUDIT_ROWS = [0.9, 0.93, 0.96];
 
-// ── Pieces ───────────────────────────────────────────────────────────────
-const Volume = ({
-  shape,
-  topClass = 'fill-surface',
-  sideClass = 'fill-surface2',
-}: {
-  shape: ReturnType<typeof box>;
-  topClass?: string;
-  sideClass?: string;
-}) => (
-  <g className="stroke-primary" strokeWidth={1.1} strokeLinejoin="round">
-    <polygon points={poly(shape.left)} className={sideClass} opacity={0.92} />
-    <polygon points={poly(shape.right)} className={sideClass} opacity={0.76} />
-    <polygon points={poly(shape.top)} className={topClass} />
-  </g>
-);
+// ── The job card's ride ─────────────────────────────────────────────────
+// It follows the drawn route, floating just above it. It reaches the bench
+// as the route arrives there, waits in the gap, then moves on with the route.
+const CARD_LIFT = 40;
+const STALL: [number, number] = [0.27, 0.4];
+const CARD: Track = (() => {
+  const pts: [number, Pt][] = [
+    [0, R_COUNTER],
+    [0.06, R_COUNTER],
+    [0.14, R_CORNER],
+    [STALL[0], R_BENCH],
+    [STALL[1], R_BENCH],
+    [0.45, R_APPROACH],
+    [0.5, R_SHELF],
+    [0.58, R_TURN],
+    [0.6, R_DOCK(346)],
+    [0.62, R_DOCK(249)],
+    [0.64, PROC],
+    [0.72, PROC],
+    [0.78, R_DOCK(55)],
+    [0.82, R_END],
+    [1, R_END],
+  ];
+  return { stops: pts.map(([s]) => s), x: pts.map(([, p]) => p[0]), y: pts.map(([, p]) => p[1] - CARD_LIFT) };
+})();
 
-const Legs = ({ shape, drop }: { shape: ReturnType<typeof box>; drop: number }) => (
+// ── Pieces ───────────────────────────────────────────────────────────────
+const Legs = ({ shape, drop }: { shape: BoxShape; drop: number }) => (
   <g className="stroke-primary" strokeWidth={1.5} strokeLinecap="round">
     {[shape.corners.B, shape.corners.C, shape.corners.D].map(([x, y], i) => (
       <line key={i} x1={x} y1={y} x2={x} y2={y + drop} />
@@ -323,8 +308,91 @@ const AuditRow = ({ p, from, index }: { p: MotionValue<number>; from: number; in
   return <motion.path d={d} style={{ pathLength }} />;
 };
 
+/** The unowned gap at the bench: a dashed marker that shows only while the card waits. */
+const OwnershipGap = ({ p }: { p: MotionValue<number> }) => {
+  const opacity = useTransform(p, [STALL[0] + 0.01, STALL[0] + 0.03, STALL[1] - 0.04, STALL[1] - 0.01], [0, 0.9, 0.9, 0]);
+  const cx = R_BENCH[0];
+  const cy = R_BENCH[1] - CARD_LIFT;
+  return (
+    <motion.rect
+      x={cx - 24}
+      y={cy - 17}
+      width={48}
+      height={34}
+      rx={6}
+      className="stroke-caution"
+      fill="none"
+      strokeWidth={1.2}
+      strokeDasharray="3 3"
+      style={{ opacity }}
+    />
+  );
+};
+
+const JobCard = ({ p }: { p: MotionValue<number> }) => {
+  const x = useTransform(p, CARD.stops, CARD.x);
+  const y = useTransform(p, CARD.stops, CARD.y);
+  // Dims while it sits in the unowned gap, recovers once it has an owner.
+  const opacity = useTransform(p, [STALL[0] - 0.01, STALL[0] + 0.02, STALL[1] - 0.03, STALL[1]], [1, 0.38, 0.38, 1]);
+  // The owner tag slides on from the right partway through the stall, then stays attached.
+  const tagX = useTransform(p, [STALL[1] - 0.07, STALL[1] - 0.03], [18, 0]);
+  const tagOpacity = useTransform(p, [STALL[1] - 0.07, STALL[1] - 0.04], [0, 1]);
+
+  return (
+    <motion.g style={{ x, y }}>
+      <motion.g style={{ opacity }}>
+        <rect x={-15} y={-10} width={30} height={20} rx={2.5} className="fill-surface stroke-primary" strokeWidth={1.1} />
+        <g className="stroke-primary" strokeWidth={1} strokeLinecap="round" opacity={0.55}>
+          <line x1={-10} y1={-4} x2={8} y2={-4} />
+          <line x1={-10} y1={1} x2={4} y2={1} />
+          <line x1={-10} y1={5.5} x2={6} y2={5.5} />
+        </g>
+      </motion.g>
+      <motion.g style={{ x: tagX, opacity: tagOpacity }}>
+        <rect x={18} y={-8} width={44} height={16} rx={8} className="fill-accent" />
+        <text
+          x={40}
+          y={0}
+          textAnchor="middle"
+          dominantBaseline="central"
+          className="fill-void font-sans"
+          fontSize={10.5}
+          fontWeight={700}
+          letterSpacing={0.2}
+        >
+          Owner
+        </text>
+      </motion.g>
+    </motion.g>
+  );
+};
+
+/**
+ * Idle light pulse: a short bright dash travelling the whole route on a faint
+ * track. stroke-dashoffset only (CSS keyframes), paused when off screen or once
+ * the visitor starts scrolling the story.
+ */
+const IdlePulse = ({ p, running }: { p: MotionValue<number>; running: boolean }) => {
+  const opacity = useTransform(p, [0, 0.03], [1, 0]);
+  return (
+    <motion.g style={{ opacity }} className="hero-pulse" data-running={running ? 'true' : 'false'} aria-hidden="true">
+      <path d={ROUTE_D} className="stroke-accent" fill="none" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" opacity={0.16} />
+      <path
+        d={ROUTE_D}
+        pathLength={1}
+        className="hero-pulse-dash stroke-champagne"
+        fill="none"
+        strokeWidth={3}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeDasharray="0.06 1.2"
+      />
+    </motion.g>
+  );
+};
+
 // ── Scene ────────────────────────────────────────────────────────────────
-const Scene = ({ p }: { p: MotionValue<number> }) => {
+const Scene = ({ p, idle }: { p: MotionValue<number>; idle: { running: boolean } | null }) => {
   const shelfFace = SHELF.left;
 
   return (
@@ -376,6 +444,8 @@ const Scene = ({ p }: { p: MotionValue<number> }) => {
         <Dock key={dock.key} p={p} plan={dock.plan} index={i} />
       ))}
 
+      {idle && <IdlePulse p={p} running={idle.running} />}
+
       <g className="stroke-accent" fill="none" strokeLinecap="round" strokeLinejoin="round">
         {SEGMENTS.map((seg, i) => (
           <RouteSegment key={i} p={p} seg={seg} width={2.2} />
@@ -392,6 +462,9 @@ const Scene = ({ p }: { p: MotionValue<number> }) => {
         <Carrier key={i} p={p} track={track} active={ACTIVE[i]} />
       ))}
 
+      <OwnershipGap p={p} />
+      <JobCard p={p} />
+
       <g className="stroke-accent" fill="none" strokeWidth={1.3} strokeLinecap="round" opacity={0.5}>
         {AUDIT_ROWS.map((from, i) => (
           <AuditRow key={from} p={p} from={from} index={i} />
@@ -401,13 +474,34 @@ const Scene = ({ p }: { p: MotionValue<number> }) => {
   );
 };
 
-export const HeroShift = ({ progress }: { progress: MotionValue<number> }) => {
+/**
+ * @param idle  Render the idle light pulse (desktop scroll stage only). It runs
+ *              while progress is ~0 and the scene is on screen.
+ */
+export const HeroShift = ({ progress, idle = false }: { progress: MotionValue<number>; idle?: boolean }) => {
   const shouldReduceMotion = useReducedMotion();
   const settled = useMotionValue(1);
   const p = shouldReduceMotion ? settled : progress;
+  const svgRef = useRef<SVGSVGElement>(null);
+  const [onScreen, setOnScreen] = useState(true);
+  const [atTop, setAtTop] = useState(() => progress.get() < 0.03);
+  const showIdle = idle && !shouldReduceMotion;
+
+  useMotionValueEvent(progress, 'change', (v) => {
+    const next = v < 0.03;
+    setAtTop((prev) => (prev === next ? prev : next));
+  });
+
+  useEffect(() => {
+    if (!showIdle || !svgRef.current || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(([entry]) => setOnScreen(entry.isIntersecting), { threshold: 0.05 });
+    io.observe(svgRef.current);
+    return () => io.disconnect();
+  }, [showIdle]);
 
   return (
     <svg
+      ref={svgRef}
       viewBox="490 -10 680 450"
       className="h-full w-full"
       preserveAspectRatio="xMidYMid meet"
@@ -418,11 +512,12 @@ export const HeroShift = ({ progress }: { progress: MotionValue<number> }) => {
       <desc id="hero-shift-desc">
         An isometric view of a service-business floor. A request arrives at the front counter and
         moves to the job bench, a part is pulled from the parts shelf, and four carrier units move
-        the work between four agent workstations. Procurement stops and waits for a human approval
+        the work between four agent workstations. The job card waits at the bench handoff until an
+        owner tag is attached, then continues. Procurement stops and waits for a human approval
         before continuing. Every route the work travelled stays lit, and an audit trail is written
         along the front edge.
       </desc>
-      <Scene p={p} />
+      <Scene p={p} idle={showIdle ? { running: onScreen && atTop } : null} />
     </svg>
   );
 };

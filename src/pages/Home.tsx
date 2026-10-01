@@ -5,6 +5,7 @@ import { TheDisconnect } from '../components/sections/BusinessProblem';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import { Hero } from '../components/sections/Hero';
 import { Seo } from '../components/Seo';
+import { StickyAuditCTA } from '../components/StickyAuditCTA';
 import { routeMetadata } from '../config/routeMetadata';
 
 export const Home = () => (
@@ -16,5 +17,6 @@ export const Home = () => (
     <OperatingLoop />
     <OperatingLayer />
     <FinalCTA />
+    <StickyAuditCTA />
   </>
 );

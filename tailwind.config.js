@@ -27,6 +27,8 @@ export default {
         goldActive: 'rgb(var(--gold-active) / <alpha-value>)',
         champagne: 'rgb(var(--champagne) / <alpha-value>)',
         bronze: 'rgb(var(--bronze) / <alpha-value>)',
+        paper: 'rgb(var(--paper) / <alpha-value>)',
+        ink: 'rgb(var(--ink) / <alpha-value>)',
         accent: 'rgb(var(--accent) / <alpha-value>)',
         positive: 'rgb(var(--positive) / <alpha-value>)',
         positiveSoft: 'rgb(var(--positive-soft) / <alpha-value>)',

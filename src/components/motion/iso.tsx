@@ -39,6 +39,16 @@ export const makeBox = (iso: ReturnType<typeof makeIso>) =>
 
 export type BoxShape = ReturnType<ReturnType<typeof makeBox>>;
 
+/** Bilinear point on a quad given as [topA, topB, baseB, baseA]. */
+export const facePoint = (q: Pt[], u: number, v: number): Pt => {
+  const [tA, tB, bB, bA] = q;
+  const tx = tA[0] + (tB[0] - tA[0]) * u;
+  const ty = tA[1] + (tB[1] - tA[1]) * u;
+  const bx = bA[0] + (bB[0] - bA[0]) * u;
+  const by = bA[1] + (bB[1] - bA[1]) * u;
+  return [tx + (bx - tx) * v, ty + (by - ty) * v];
+};
+
 export const Volume = ({
   shape,
   topClass = 'fill-surface',

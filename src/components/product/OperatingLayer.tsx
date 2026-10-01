@@ -22,7 +22,7 @@ export const OperatingLayer = () => (
       <div className="bg-surface2 p-7 md:p-10">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-muted">WHAT THE PLATFORM IS DESIGNED TO SUPPORT</p>
-          <span className="rounded-full border border-line px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-accent">PLANNED</span>
+          <span className="rounded-full border border-line px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-accent">PLANNED</span>
         </div>
         <ol className="mt-7 border-t border-line">
           {platformLayers.map((layer, index) => (

@@ -14,6 +14,8 @@ const BASE = [
   "relative isolate overflow-hidden transform-gpu will-change-transform",
   "transition-all duration-200 ease-out",
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset",
+  // Border brightens on hover/focus (variants without a border are unaffected).
+  "hover:border-gold/50 focus-visible:border-gold/50",
   "disabled:pointer-events-none disabled:opacity-40",
   "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 ].join(" ")

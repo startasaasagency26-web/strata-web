@@ -132,7 +132,6 @@ export const FinalCTA = () => {
               <div className="absolute inset-0 overflow-hidden rounded-full">
                 <span className="absolute left-1/2 top-1/2 h-px w-1/2 origin-left bg-gradient-to-r from-gold/35 to-transparent" />
               </div>
-              <div className="final-cta-pulse-ring absolute h-4 w-4 rounded-full border border-border" />
               <div className="relative h-2 w-2 rounded-full bg-surface shadow-[0_0_22px_rgb(var(--gold)/0.7)]" />
             </div>
           </div>

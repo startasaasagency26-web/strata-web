@@ -23,7 +23,7 @@ const NotFound = () => (
       </p>
       <Link
         to="/blog"
-        className="mt-10 inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-text transition-colors duration-200 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+        className="mt-10 inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-text transition-colors duration-200 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
       >
         <ArrowLeft size={14} />
         All notes
@@ -48,14 +48,14 @@ export const BlogArticle = () => {
       <article className="mx-auto max-w-3xl px-5 sm:px-8 md:px-12">
         <Link
           to="/blog"
-          className="mb-10 inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted transition-colors duration-200 hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+          className="mb-10 inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted transition-colors duration-200 hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
         >
           <ArrowLeft size={14} />
           All notes
         </Link>
 
         <header>
-          <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
+          <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
             <span className="text-accent">{article.category}</span>
             <time dateTime={article.publishedAt}>{formatArticleDate(article.publishedAt)}</time>
             <span>{article.readingTime} min read</span>
@@ -75,14 +75,14 @@ export const BlogArticle = () => {
             />
             <div>
               <span className="block text-sm font-bold text-text">Amirul Afiz</span>
-              <span className="block font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
+              <span className="block font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
                 Founder, Strata
               </span>
             </div>
           </div>
 
           {article.updatedAt !== article.publishedAt && (
-            <p className="mt-6 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
+            <p className="mt-6 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
               Updated {formatArticleDate(article.updatedAt)}
             </p>
           )}
@@ -107,7 +107,7 @@ export const BlogArticle = () => {
             <WhatsAppChoice
               message="Hi Strata — I'd like to book a Business Operations Audit."
               source={`blog / ${article.slug}`}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gold px-8 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-void transition-colors duration-200 hover:bg-goldHover active:bg-goldActive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gold px-8 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-void transition-colors duration-200 hover:bg-goldHover active:bg-goldActive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
             >
               Book an audit
               <ArrowRight size={14} />
@@ -117,7 +117,7 @@ export const BlogArticle = () => {
               href={shareUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-border px-8 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-text transition-colors duration-200 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-border px-8 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-text transition-colors duration-200 hover:bg-surface3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
             >
               Share on Facebook
             </a>

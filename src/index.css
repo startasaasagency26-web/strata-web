@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Self-hosted fonts (Latin subsets, OFL — see public/fonts/README.md).
+   Same files and unicode-range Google Fonts served; local, so no render-blocking
+   third-party stylesheet. Inter is variable: one file covers every weight. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin-var.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/space-mono-latin-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/space-mono-latin-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   color-scheme: dark;
 
@@ -28,6 +58,11 @@
   --gold-active: 173 138 98;
   --champagne: 235 218 190;
   --bronze: 115 88 58;
+
+  /* "Paper" = a real deliverable. Used ONLY for the deliverable sheets in the
+     home "What you leave with" card. Ink on paper measures ~15:1. */
+  --paper: 244 236 222;
+  --ink: 28 24 20;
 
   --positive: 63 191 135;
   --positive-soft: 15 32 25;
@@ -171,27 +206,53 @@
       radial-gradient(ellipse 78% 62% at 50% 40%, transparent 30%, rgb(var(--surface) / 0.72) 100%),
       linear-gradient(rgb(var(--champagne) / 0.14), rgb(var(--champagne) / 0.14));
   }
+}
 
-  .final-cta-pulse-ring {
-    animation: final-cta-pulse-ring 4.8s ease-in-out infinite;
+/* CTA arrows nudge forward on hover/focus — every button or link that carries
+   a right arrow, inside or outside the Button component. Transform only. */
+:where(a, button) .lucide-arrow-right {
+  transition: transform 150ms ease-out;
+}
+
+:where(a, button):is(:hover, :focus-visible) .lucide-arrow-right {
+  transform: translateX(3px);
+}
+
+/* While the mobile sticky audit bar is showing, keyboard focus / anchor
+   scrolling keeps targets clear of it. */
+@media (max-width: 1279.98px) {
+  html:has([data-sticky-cta][data-visible='true']) {
+    scroll-padding-bottom: calc(5rem + env(safe-area-inset-bottom));
   }
 }
 
-@keyframes final-cta-pulse-ring {
-  0%,
-  100% {
-    opacity: 0.22;
-    transform: scale(0.75);
-  }
-
-  48% {
-    opacity: 0.58;
-    transform: scale(1.8);
-  }
+/* Hero idle pulse: one short dash travelling the open route (stroke-dashoffset only). */
+@keyframes hero-pulse-travel {
+  from { stroke-dashoffset: 0.06; }
+  to { stroke-dashoffset: -1.2; }
 }
 
+.hero-pulse-dash {
+  animation: hero-pulse-travel 6s linear infinite;
+}
+
+.hero-pulse[data-running='false'] .hero-pulse-dash {
+  animation-play-state: paused;
+}
+
+/* Global reduced-motion rule: every CSS animation/transition resolves to its
+   final state. JS motion (framer-motion) checks useReducedMotion separately. */
 @media (prefers-reduced-motion: reduce) {
-  .final-cta-pulse-ring {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-pulse-dash {
     animation: none;
   }
 }

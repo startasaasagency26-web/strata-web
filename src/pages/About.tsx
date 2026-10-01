@@ -19,7 +19,7 @@ export const About = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
           >
-            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
+            <span className="mb-4 block font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-muted">
               ABOUT STRATA
             </span>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] tracking-[-0.04em] text-text md:text-7xl lg:text-8xl">
@@ -60,14 +60,14 @@ export const About = () => {
                 <span className="text-sm font-bold uppercase tracking-widest text-text">
                   Amirul Afiz / Nick
                 </span>
-                <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
+                <span className="mt-1 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
                   Founder, Strata Growth Technologies
                 </span>
               </div>
             </div>
             {/* Subtle credential label */}
             <div className="absolute -top-4 -right-4 rounded-2xl bg-gold p-4 text-void shadow-xl lg:right-4">
-              <div className="font-mono text-[8px] font-bold uppercase tracking-widest">
+              <div className="font-mono text-[11px] font-bold uppercase tracking-widest">
                 Founder Role
               </div>
               <div className="mt-1 text-xs font-bold uppercase tracking-wider">
@@ -89,7 +89,7 @@ export const About = () => {
             transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
           >
             <div className="mb-8 flex items-center gap-4">
-              <span className="rounded-full bg-gold/5 px-4 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-text/60">
+              <span className="rounded-full bg-gold/5 px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-widest text-text/60">
                 Founded in Mid-2025
               </span>
             </div>
@@ -124,7 +124,7 @@ export const About = () => {
             viewport={{ once: true }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
           >
-            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
+            <span className="mb-4 block font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-muted">
               FOUNDER-LED
             </span>
             <h2 className="mb-8 text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
@@ -208,7 +208,7 @@ export const About = () => {
                 <span className="text-sm font-bold uppercase tracking-widest text-text">
                   Khairul Azril
                 </span>
-                <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
+                <span className="mt-1 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
                   Sales Specialist & Manager
                 </span>
                 <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -222,7 +222,7 @@ export const About = () => {
             </div>
             {/* Credibility Badge */}
             <div className="absolute -top-4 -left-4 rounded-2xl bg-gold p-4 text-void shadow-xl lg:left-4">
-              <div className="font-mono text-[8px] font-bold uppercase tracking-widest">
+              <div className="font-mono text-[11px] font-bold uppercase tracking-widest">
                 Credibility
               </div>
               <div className="mt-1 text-xs font-bold uppercase tracking-wider">
@@ -238,7 +238,7 @@ export const About = () => {
             transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.2 }}
             className="order-2 lg:order-2"
           >
-            <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
+            <span className="mb-4 block font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-muted">
               CLIENT RELATIONSHIPS
             </span>
             <h2 className="mb-8 text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
@@ -295,7 +295,7 @@ export const About = () => {
       <section className="px-5 py-24 sm:px-8 md:px-12 lg:py-32">
         <div className="mx-auto max-w-7xl">
         <div className="mb-16">
-          <span className="mb-4 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted text-center lg:text-left">
+          <span className="mb-4 block font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-muted text-center lg:text-left">
             CAPABILITIES
           </span>
           <h2 className="mb-4 text-4xl font-black tracking-[-0.03em] text-text text-center md:text-5xl lg:text-6xl lg:text-left">
@@ -363,7 +363,7 @@ export const About = () => {
         <div className="mx-auto max-w-7xl">
         <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <p className="mb-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
+            <p className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-muted">
               OUR PROCESS
             </p>
             <h2 className="text-4xl font-black uppercase tracking-tight text-text md:text-5xl lg:text-6xl">
@@ -406,7 +406,7 @@ export const About = () => {
               transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : idx * 0.1 }}
               className="relative flex flex-col pt-8"
             >
-              <div className="mb-6 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
+              <div className="mb-6 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
                 {step.step}
               </div>
               <h3 className="mb-4 text-xl font-bold uppercase tracking-tight">

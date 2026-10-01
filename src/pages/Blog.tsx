@@ -38,7 +38,7 @@ export const Blog = () => (
               key={article.slug}
               className="group flex flex-col rounded-[28px] border border-border/60 bg-surface p-8 transition-colors duration-300 hover:border-gold/40"
             >
-              <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
+              <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
                 <span className="text-accent">{article.category}</span>
                 <span>{formatArticleDate(article.publishedAt)}</span>
                 <span>{article.readingTime} min read</span>
@@ -60,7 +60,7 @@ export const Blog = () => (
               <Link
                 to={articlePath(article.slug)}
                 aria-label={`Read ${article.title}`}
-                className="mt-8 inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-text transition-colors duration-200 hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+                className="mt-8 inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-text transition-colors duration-200 hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
               >
                 Read the note
                 <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
