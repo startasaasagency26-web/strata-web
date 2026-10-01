@@ -17,11 +17,16 @@ export const StickyAuditCTA = () => {
     const hero = document.getElementById('hero-scroll-stage');
     const final = document.getElementById('final-cta');
     if (!hero || !final || typeof IntersectionObserver === 'undefined') return;
-    const heroObserver = new IntersectionObserver(([entry]) => {
-      setPastHero(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+    // Half-infinite root margins turn "has the hero's bottom passed the top of the
+    // screen" and "has the closing CTA's top reached the bottom of the screen" into
+    // plain intersection states, so they stay correct even when a jump (End key,
+    // anchor link, fling) skips straight past either element.
+    const FAR = '100000px';
+    const heroObserver = new IntersectionObserver(([entry]) => setPastHero(!entry.isIntersecting), {
+      rootMargin: `0px 0px ${FAR} 0px`,
     });
-    const finalObserver = new IntersectionObserver(([entry]) => {
-      setReachedFinal(entry.isIntersecting || entry.boundingClientRect.top < 0);
+    const finalObserver = new IntersectionObserver(([entry]) => setReachedFinal(entry.isIntersecting), {
+      rootMargin: `${FAR} 0px 0px 0px`,
     });
     heroObserver.observe(hero);
     finalObserver.observe(final);

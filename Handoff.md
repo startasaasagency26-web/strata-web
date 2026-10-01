@@ -5,6 +5,40 @@
 **Written:** 2026-09-04
 **By:** Claude (boss)
 
+## Session update — 2026-10-02 (Forge: homepage revamp + audit defect fixes — LOCAL BRANCH ONLY)
+
+**Branch:** `feat/homepage-revamp-2026-10` (from `codex/video-insights-homepage` f8042bb). Brief:
+`vault/brain/forge-brief-homepage-revamp-2026-10-01.md`. **Not deployed, not merged, nothing on
+master.** The sync hook pushes this branch by itself and has swept work into its own
+`chore(sync)` commits (fdfa73d, 46b8d3b) between the stage commits.
+
+Current state (observed on a local production build served with brotli, not on the live site):
+- Stage 1: "established" wording swapped to the approved "growing businesses" line (hero eyebrow +
+  subcopy, home/about meta, default meta, footer, About). Positioning guard passes.
+- Stage 2: every audit defect row D1–D14 and F1–F3 measured PASS (script
+  `scratchpad/forge-audit/revamp/measure.mjs`). Overflow sweep 5 routes × 320–1920: 0 page
+  overflow, 0 clipped controls.
+- Stage 3: two-column hero with a larger scene, idle light pulse, job-card/"Owner" story beat in
+  the scroll scrub (scrub shortened to 120vh), mobile draw-on-view; section 02 sticky vignette with
+  active-row route draw; section 03 cream "paper" deliverable sheets (only use of the paper tokens);
+  section 04 connector draw + active step; FinalCTA pulse ring removed; button arrow nudge + border
+  brighten; mono labels ≥ 11px site-wide; About blur orbs removed; sticky "Book an audit" bar
+  below 1280px; fonts self-hosted (Inter variable + Space Mono, Latin), Google Fonts removed.
+- Lighthouse mobile `/` (median of 3, same machine, local build): LCP 3,348 → 2,664 ms, TBT 198 →
+  168 ms, CLS 0 → 0, transfer 215.5 → 234.3 KB, perf 80 → 92.
+- 65/65 control tests pass locally (incl. sticky bar and F1–F3); 20/20 links working (the hidden
+  Field Notes footer link removes one; `/blog` still 200).
+
+NOT done:
+- Not deployed; nothing verified on production. Needs Nick's review of the branch, then a deploy
+  decision (confirm-first).
+- No real-device check (iOS safe-area inset of the sticky bar is CSS-correct but only emulated;
+  `viewport-fit=cover` was deliberately NOT added, so on iOS Safari the inset resolves to 0).
+- Section 02 vignette sits in the sticky left column, not the header's right half the brief named
+  (judgement call — reported).
+- Pricing headings are Title Case strings; CSS removed the forced capitals, so they read Title
+  Case, not strict sentence case (copy change would be needed for that).
+
 ## Session update — 2026-10-01 (audit only, no code changed)
 
 Read-only audit against Nick's new bar (looks like a US$20–50k build). Report:

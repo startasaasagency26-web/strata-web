@@ -29,9 +29,10 @@ export const OperatingLoop = () => {
       tone="surface2"
     >
       <div ref={gridRef} className="relative grid gap-4 md:grid-cols-2 lg:grid-cols-6">
-        <div className="absolute left-[8%] right-[8%] top-9 hidden h-px bg-line lg:block" aria-hidden="true">
+        {/* Connector runs along the cards' top rules and draws left to right once in view. */}
+        <div className="absolute inset-x-0 top-0 z-10 hidden h-px lg:block" aria-hidden="true">
           <motion.div
-            className="h-full w-full origin-left bg-gold/70"
+            className="h-full w-full origin-left bg-gold/80"
             initial={shouldReduceMotion ? false : { scaleX: 0 }}
             animate={shouldReduceMotion || drawn ? { scaleX: 1 } : { scaleX: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : 1.4, ease: [0.22, 1, 0.36, 1] }}
