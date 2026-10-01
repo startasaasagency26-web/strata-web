@@ -31,7 +31,7 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
         <motion.div style={animateStage ? { opacity: contentOpacity } : undefined}>
           <div className="max-w-5xl lg:max-w-none">
           <motion.p {...fadeUp()} className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-accent">
-            BUSINESS OPERATIONS AUDIT · FOR ESTABLISHED SMEs
+            BUSINESS OPERATIONS AUDIT · FOR GROWING BUSINESSES
           </motion.p>
           <motion.h1
             {...fadeUp(0.05)}
@@ -41,7 +41,7 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
             Find the workflow costing your business time, visibility and follow-through.
           </motion.h1>
           <motion.p {...fadeUp(0.1)} className="mt-7 max-w-3xl text-pretty text-base leading-relaxed text-muted md:text-xl">
-            Strata helps established Malaysian businesses map where quotations, orders, service requests and approvals stall—then defines the first controlled workflow worth improving.
+            Strata helps growing businesses map where quotations, orders, service requests and approvals stall—then defines the first controlled workflow worth improving.
           </motion.p>
           <motion.div {...fadeUp(0.15)} className="mt-9 flex flex-col items-start gap-3 sm:flex-row">
             <Button asChild variant="glassStrong" size="lg" className="h-12 rounded-full px-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">

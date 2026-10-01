@@ -15,7 +15,7 @@ export const Footer = () => {
               <Logo variant="lockup" tone="gold" className="mb-6 h-10 w-auto origin-left" />
             </Link>
             <p className="text-muted text-sm font-sans leading-relaxed mb-6">
-              Strata helps established businesses diagnose and improve critical workflows while developing Strata Core as a governed AI Workforce Management platform.
+              Strata helps growing businesses diagnose and improve critical workflows while developing Strata Core as a governed AI Workforce Management platform.
             </p>
             <div className="flex gap-4">
               <a

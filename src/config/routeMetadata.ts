@@ -16,12 +16,12 @@ export const routeMetadata = {
   home: {
     path: "/",
     title: "Business Operations Audit | Strata Growth Technologies",
-    description: "Strata helps established Malaysian businesses find where quotations, orders, service requests and approvals stall, then defines the first controlled workflow worth improving.",
+    description: "Strata helps growing businesses find where quotations, orders, service requests and approvals stall, then defines the first controlled workflow worth improving.",
   },
   about: {
     path: "/about",
     title: "About Strata | Business Systems Built Around Real Work",
-    description: "Founded in mid-2025, Strata helps established businesses diagnose and improve critical workflows while developing Strata Core as an AI Workforce Management platform.",
+    description: "Founded in mid-2025, Strata helps growing businesses diagnose and improve critical workflows while developing Strata Core as an AI Workforce Management platform.",
   },
   pricing: {
     path: "/pricing",
