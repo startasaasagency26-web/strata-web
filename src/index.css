@@ -158,6 +158,20 @@
     transform-origin: top center;
   }
 
+  /* Founder portraits: one treatment for both photos so the two different
+     backdrops (grey studio vs white) read as a single set. Same crop anchor,
+     monochrome, then a warm wash and an edge vignette in the card colour. */
+  .portrait-img {
+    object-position: 50% 30%;
+    filter: grayscale(1) contrast(1.04) brightness(0.86);
+  }
+
+  .portrait-wash {
+    background:
+      radial-gradient(ellipse 78% 62% at 50% 40%, transparent 30%, rgb(var(--surface) / 0.72) 100%),
+      linear-gradient(rgb(var(--champagne) / 0.14), rgb(var(--champagne) / 0.14));
+  }
+
   .final-cta-pulse-ring {
     animation: final-cta-pulse-ring 4.8s ease-in-out infinite;
   }

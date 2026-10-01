@@ -23,6 +23,10 @@ export const Navbar = () => {
     window.setTimeout(() => hamburgerRef.current?.focus(), 0);
   }, []);
 
+  // Stable reference: the chooser opened from the mobile menu returns focus here,
+  // because its own trigger lives inside the menu that has already closed.
+  const getHamburger = useCallback(() => hamburgerRef.current, []);
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -54,18 +58,27 @@ export const Navbar = () => {
 
       if (event.key !== 'Tab' || !mobileOverlayRef.current) return;
 
-      const focusable = Array.from(
-        mobileOverlayRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      // The close (X) control is the header toggle, which sits outside the overlay
+      // in the DOM — include it so keyboard users can reach it inside the trap.
+      const focusable = [
+        ...(hamburgerRef.current ? [hamburgerRef.current] : []),
+        ...Array.from(
+          mobileOverlayRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
         ),
-      );
+      ];
 
       if (focusable.length === 0) return;
 
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
+      const inTrap = focusable.includes(document.activeElement as HTMLElement);
 
-      if (event.shiftKey && document.activeElement === first) {
+      if (!inTrap) {
+        event.preventDefault();
+        first.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -107,7 +120,7 @@ export const Navbar = () => {
         initial={shouldReduceMotion ? false : { y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: shouldReduceMotion ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed left-[calc(0.75rem+1px)] right-[calc(0.75rem+1px)] top-0 z-50 pt-4 md:left-[calc(1.5rem+1px)] md:right-[calc(1.5rem+1px)] md:pt-5 lg:left-[calc(2rem+1px)] lg:right-[calc(2rem+1px)]"
+        className="fixed left-[calc(1.25rem+1px)] right-[calc(1.25rem+1px)] top-0 z-50 pt-4 md:left-[calc(1.5rem+1px)] md:right-[calc(1.5rem+1px)] md:pt-5 lg:left-[calc(2rem+1px)] lg:right-[calc(2rem+1px)]"
       >
         <div
           className={cn(
@@ -123,7 +136,7 @@ export const Navbar = () => {
           <div className="col-start-1 flex min-w-0 items-center justify-self-start">
             <Link
               to="/"
-              className="flex items-center group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
+              className="group flex min-h-11 min-w-11 items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
               aria-label="Strata Growth Technologies Home"
               onClick={mobileMenuOpen ? closeMobileMenu : undefined}
             >
@@ -189,7 +202,7 @@ export const Navbar = () => {
               whileTap={shouldReduceMotion ? undefined : { scale: 0.88 }}
               transition={{ type: 'spring', stiffness: 280, damping: 20 }}
               onClick={() => mobileMenuOpen ? closeMobileMenu() : setMobileMenuOpen(true)}
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-borderStrong bg-surface3 text-text transition-colors duration-200 hover:bg-gold/15 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset xl:hidden"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-borderStrong bg-surface3 text-text transition-colors duration-200 hover:bg-gold/15 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset xl:hidden"
               aria-label="Toggle Menu"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation-overlay"
@@ -256,6 +269,7 @@ export const Navbar = () => {
                       message="Hi Strata — I'd like to book a Business Operations Audit."
                       onClick={closeMobileMenu}
                       onOpenChange={setMobileAuditOpen}
+                      returnFocusTo={getHamburger}
                       source="navbar / mobile-cta"
                     >
                       BUSINESS OPERATIONS AUDIT

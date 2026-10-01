@@ -12,6 +12,8 @@ type WhatsAppChoiceProps = {
   message: string;
   onClick?: () => void;
   onOpenChange?: (isOpen: boolean) => void;
+  /** Where focus goes on close when the trigger itself is gone (e.g. inside a menu that closed). Defaults to the trigger. */
+  returnFocusTo?: () => HTMLElement | null;
   /** Labels which CTA drove the contact, so packages are comparable in Ads Manager. */
   source?: string;
 };
@@ -25,6 +27,7 @@ export const WhatsAppChoice = ({
   message,
   onClick,
   onOpenChange,
+  returnFocusTo,
   source = "unspecified",
 }: WhatsAppChoiceProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,8 +39,8 @@ export const WhatsAppChoice = ({
   const closeDialog = useCallback(() => {
     setIsOpen(false);
     onOpenChange?.(false);
-    window.setTimeout(() => triggerRef.current?.focus(), 0);
-  }, [onOpenChange]);
+    window.setTimeout(() => (returnFocusTo?.() ?? triggerRef.current)?.focus(), 0);
+  }, [onOpenChange, returnFocusTo]);
 
   useEffect(() => {
     if (!isOpen) return;

@@ -184,7 +184,7 @@ export const Pricing = () => {
           <motion.p
             initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4"
+            className="text-[11px] font-mono tracking-[0.3em] text-muted uppercase mb-4"
           >
             SCOPED WORKFLOW IMPLEMENTATION
           </motion.p>
@@ -229,8 +229,8 @@ export const Pricing = () => {
       <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="bg-surface border border-border/60 rounded-[32px] p-8 md:p-14 shadow-sm">
           <div className="max-w-3xl mb-12">
-            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">SCOPED SERVICE</p>
-            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase mb-4">
+            <p className="text-[11px] font-mono tracking-[0.3em] text-muted uppercase mb-3">SCOPED SERVICE</p>
+            <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-text mb-4">
               What Strata Performs
             </h2>
             <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
@@ -245,7 +245,7 @@ export const Pricing = () => {
               {systemFlowSteps.map((step, idx) => (
                 <div key={step} className="relative">
                   <div className="relative z-10 flex min-h-[76px] items-center justify-between rounded-[18px] border border-border/60 bg-surface px-4 py-3 shadow-[0_8px_24px_rgb(var(--scrim)/0.03)] lg:flex-col lg:items-start lg:justify-between">
-                    <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-muted">
+                    <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
                       0{idx + 1}
                     </span>
                     <span className="text-right font-mono text-xs font-bold uppercase tracking-wider text-text lg:text-left leading-snug">
@@ -282,8 +282,8 @@ export const Pricing = () => {
       {/* SECTION 3 - THE WORKFORCE LADDER (MAIN COMMERCIAL ANCHOR) */}
       <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMERCIAL INVESTMENT</p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase mb-4">
+          <p className="text-[11px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMERCIAL INVESTMENT</p>
+          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-text mb-4">
             Scope &amp; Investment
           </h2>
           <p className="text-muted font-sans text-sm md:text-base leading-relaxed">
@@ -307,13 +307,13 @@ export const Pricing = () => {
               )}
             >
               {pkg.featured && (
-                <span className="absolute -top-3 left-7 inline-flex items-center rounded-full bg-gold px-4 py-1.5 font-mono text-[9px] font-bold uppercase tracking-widest text-void">
+                <span className="absolute -top-3 left-7 inline-flex items-center rounded-full bg-gold px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-widest text-void">
                   RECOMMENDED START
                 </span>
               )}
 
               <div className="mb-6 pb-6 border-b border-border/60">
-                <h3 className="text-2xl font-display font-bold uppercase tracking-tight text-text mb-2">
+                <h3 className="text-2xl font-display font-bold tracking-tight text-text mb-2">
                   {pkg.name}
                 </h3>
                 <p className="font-sans text-sm text-text/70 leading-relaxed">{pkg.tagline}</p>
@@ -321,13 +321,13 @@ export const Pricing = () => {
 
               <div className="mb-6 space-y-4">
                 <div>
-                  <span className="block font-mono text-[9px] uppercase tracking-widest text-muted mb-1">MONTHLY</span>
-                  <span className="font-mono text-xl font-bold text-text">{pkg.monthly}</span>
+                  <span className="block font-mono text-[11px] uppercase tracking-widest text-muted mb-1">MONTHLY</span>
+                  <span className="whitespace-nowrap font-mono text-lg font-bold tracking-[-0.03em] text-text md:text-xl xl:text-lg">{pkg.monthly}</span>
                 </div>
                 <div className="pt-3 border-t border-border/40">
-                  <span className="block font-mono text-[9px] uppercase tracking-widest text-muted mb-1">IMPLEMENTATION</span>
+                  <span className="block font-mono text-[11px] uppercase tracking-widest text-muted mb-1">IMPLEMENTATION</span>
                   <span className="font-mono text-base font-bold text-text">{pkg.setup}</span>
-                  <span className="block text-[10px] font-mono text-muted mt-1">One-time, billed separately</span>
+                  <span className="block text-[11px] font-mono text-muted mt-1">One-time, billed separately</span>
                 </div>
               </div>
 
@@ -347,7 +347,7 @@ export const Pricing = () => {
                 ariaLabel={'Ask whether the ' + pkg.name + ' scope fits your business, via WhatsApp'}
                 message={'Hi Strata - I would like to check if ' + pkg.name + ' fits my business, starting with the Business Operations Audit.'}
                 className={cn(
-                  'mt-auto flex h-12 w-full items-center justify-center gap-2 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset',
+                  'mt-auto flex h-12 w-full items-center justify-center gap-2 rounded-full font-mono text-[11px] font-bold uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset',
                   pkg.featured
                     ? 'bg-gold text-void hover:bg-goldHover active:bg-goldActive'
                     : 'border border-border text-text hover:bg-surface3',
@@ -372,8 +372,8 @@ export const Pricing = () => {
       <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
           <div className="max-w-2xl">
-            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-4">PRICING LOGIC</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold leading-none tracking-tight text-text uppercase">
+            <p className="text-[11px] font-mono tracking-[0.3em] text-muted uppercase mb-4">PRICING LOGIC</p>
+            <h2 className="text-4xl md:text-5xl font-display font-black leading-none tracking-tight text-text">
               What Determines Your Investment
             </h2>
           </div>
@@ -381,7 +381,7 @@ export const Pricing = () => {
             <p className="text-sm font-sans text-text font-medium leading-relaxed mb-1">
               "We do not price by niche. We price by value, economics, and delivery complexity."
             </p>
-            <p className="text-[10px] font-mono text-muted uppercase tracking-widest">
+            <p className="text-[11px] font-mono text-muted uppercase tracking-widest">
               Commercial Pricing Principles
             </p>
           </div>
@@ -412,17 +412,17 @@ export const Pricing = () => {
           {/* Summary Card */}
           <div className="bg-surface2 text-text rounded-[28px] border border-gold/25 p-8 flex flex-col justify-between shadow-lg shadow-gold/5">
             <div>
-              <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted block mb-3">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-muted block mb-3">
                 NO RANDOM DISCOUNTS
               </span>
-              <h3 className="text-xl font-bold uppercase tracking-tight text-text mb-3">
+              <h3 className="text-xl font-bold tracking-tight text-text mb-3">
                 Fair &amp; Value-Based
               </h3>
               <p className="text-muted font-sans text-xs md:text-sm leading-relaxed">
                 Your investment is mapped strictly to the required infrastructure scope and commercial value created.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-border font-mono text-[10px] uppercase tracking-widest text-muted">
+            <div className="mt-6 pt-4 border-t border-border font-mono text-[11px] uppercase tracking-widest text-muted">
               Commercial Integrity
             </div>
           </div>
@@ -434,10 +434,10 @@ export const Pricing = () => {
         <div className="bg-surface2 text-text rounded-[32px] border border-gold/30 p-8 md:p-14 shadow-2xl shadow-gold/5 relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 relative z-10 items-center">
             <div>
-              <span className="mb-3 block font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
+              <span className="mb-3 block font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-muted">
                 SCOPE DRIVERS
               </span>
-              <h2 className="mb-6 text-4xl md:text-5xl font-black uppercase leading-tight text-text">
+              <h2 className="mb-6 text-4xl md:text-5xl font-black leading-tight text-text">
                 What Moves You Up
               </h2>
               <p className="mb-8 font-sans text-base md:text-lg text-muted leading-relaxed max-w-lg">
@@ -452,7 +452,7 @@ export const Pricing = () => {
                 asChild
                 variant="glassOnDark"
                 size="lg"
-                className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest"
+                className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[11px] font-bold uppercase tracking-widest"
               >
                 <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="pricing / scope-drivers" className="flex items-center justify-center gap-2">
                   Book a Business Operations Audit
@@ -481,8 +481,8 @@ export const Pricing = () => {
       {/* SECTION 6 — HOW QUOTING WORKS */}
       <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">TRANSPARENT PROCESS</p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase">
+          <p className="text-[11px] font-mono tracking-[0.3em] text-muted uppercase mb-3">TRANSPARENT PROCESS</p>
+          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-text">
             How Quoting Works
           </h2>
         </div>
@@ -491,7 +491,7 @@ export const Pricing = () => {
           {quotingSteps.map((step) => (
             <div key={step.num} className="bg-surface border border-border/60 rounded-[28px] p-8 flex flex-col justify-between">
               <div>
-                <span className="font-mono text-2xl font-bold text-text/20 block mb-4">{step.num}</span>
+                <span className="font-mono text-2xl font-bold text-text/40 block mb-4">{step.num}</span>
                 <h3 className="font-mono text-base font-bold uppercase tracking-wider text-text mb-3">{step.title}</h3>
                 <p className="text-muted font-sans text-sm leading-relaxed">{step.desc}</p>
               </div>
@@ -505,10 +505,10 @@ export const Pricing = () => {
         <div className="rounded-[32px] border border-gold/30 bg-surface2 p-8 text-text shadow-xl shadow-gold/5 md:p-14">
           <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
             <div className="max-w-3xl">
-              <p className="mb-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted">
+              <p className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-muted">
                 STRATA CORE · IN DEVELOPMENT · UNPRICED
               </p>
-              <h2 className="text-3xl font-black uppercase tracking-tight text-text md:text-5xl">
+              <h2 className="text-3xl font-black tracking-tight text-text md:text-5xl">
                 A separate platform vision for connected business operations.
               </h2>
               <p className="mt-6 text-sm leading-relaxed text-muted md:text-base">
@@ -534,8 +534,8 @@ export const Pricing = () => {
       <section className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 mb-24 md:mb-32">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <p className="text-[10px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMON QUESTIONS</p>
-            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-text uppercase">
+            <p className="text-[11px] font-mono tracking-[0.3em] text-muted uppercase mb-3">COMMON QUESTIONS</p>
+            <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-text">
               Commercial FAQ
             </h2>
           </div>
@@ -551,7 +551,7 @@ export const Pricing = () => {
 
           {/* Final Conversion Block */}
           <div className="bg-surface2 text-text rounded-[32px] border border-gold/30 p-8 md:p-14 text-center shadow-xl shadow-gold/5">
-            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight mb-6 text-text">
+            <h3 className="text-3xl md:text-5xl font-black tracking-tight mb-6 text-text">
               Ready to scope the workflow that needs control?
             </h3>
             <p className="text-muted font-sans text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">

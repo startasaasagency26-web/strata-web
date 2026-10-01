@@ -24,7 +24,7 @@ export const BuildWithUs = () => {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.1 }}
-          className="mb-8 text-5xl font-black tracking-tight text-text md:text-7xl lg:text-8xl"
+          className="mb-8 text-[clamp(2.25rem,11vw,3rem)] font-black leading-[1.05] tracking-tight text-text md:text-7xl lg:text-8xl"
         >
           Opportunities Coming Soon
         </motion.h1>
@@ -33,7 +33,7 @@ export const BuildWithUs = () => {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.2 }}
-          className="mx-auto mb-16 max-w-2xl text-lg leading-relaxed text-text/60 md:text-xl"
+          className="mx-auto mb-16 max-w-2xl text-center text-lg leading-relaxed text-text/60 md:text-xl"
         >
           We’re building a space for future collaborators, creatives, developers, strategists, and operators who want to work with Strata. This page is not open yet.
         </motion.p>
@@ -42,17 +42,17 @@ export const BuildWithUs = () => {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.3 }}
-          className="flex flex-wrap justify-center gap-6"
+          className="mx-auto flex w-full max-w-sm flex-col items-stretch justify-center gap-4 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:gap-6"
         >
           <Link 
             to="/" 
-            className="group flex h-14 items-center justify-center gap-3 rounded-full border border-gold/10 bg-surface px-8 text-[11px] font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95"
+            className="group flex h-14 items-center justify-center gap-3 rounded-full border border-gold/10 bg-surface px-5 text-[11px] sm:px-8 font-bold uppercase tracking-widest text-text transition-all hover:bg-gold/5 active:scale-95"
           >
             <ArrowLeft size={16} />
             Back to Home
           </Link>
           <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="build-with-us"
-            className="group flex h-14 items-center justify-center gap-3 rounded-full bg-gold px-8 text-[11px] font-bold uppercase tracking-widest text-void transition-all hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
+            className="group flex h-14 items-center justify-center gap-3 rounded-full bg-gold px-5 text-[11px] sm:px-8 font-bold uppercase tracking-widest text-void transition-all hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset"
           >
             Book Operations Audit
             <ArrowRight size={16} />

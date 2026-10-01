@@ -42,12 +42,19 @@ export const About = () => {
             className="relative"
           >
             <div className="relative overflow-hidden rounded-[32px] border border-gold/5 bg-surface2 p-4 shadow-2xl">
-              <div className="aspect-[3/4] overflow-hidden rounded-[24px]">
-                <img
-                  src="/founder.jpg"
-                  alt="Amirul Afiz / Nick"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                />
+              <div className="relative aspect-[3/4] overflow-hidden rounded-[24px] bg-surface3">
+                <picture className="block h-full w-full">
+                  <source srcSet="/founder.webp" type="image/webp" />
+                  <img
+                    src="/founder.jpg"
+                    alt="Amirul Afiz / Nick"
+                    width={768}
+                    height={1024}
+                    decoding="async"
+                    className="portrait-img h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </picture>
+                <span aria-hidden="true" className="portrait-wash pointer-events-none absolute inset-0" />
               </div>
               <div className="mt-6 flex flex-col items-center text-center">
                 <span className="text-sm font-bold uppercase tracking-widest text-text">
@@ -59,7 +66,7 @@ export const About = () => {
               </div>
             </div>
             {/* Subtle credential label */}
-            <div className="absolute -bottom-4 -right-4 rounded-2xl bg-gold p-4 text-void shadow-xl lg:right-4">
+            <div className="absolute -top-4 -right-4 rounded-2xl bg-gold p-4 text-void shadow-xl lg:right-4">
               <div className="font-mono text-[8px] font-bold uppercase tracking-widest">
                 Founder Role
               </div>
@@ -182,12 +189,20 @@ export const About = () => {
             className="order-1 lg:order-1 relative"
           >
             <div className="relative overflow-hidden rounded-[32px] border border-gold/5 bg-surface p-4 shadow-2xl">
-              <div className="aspect-[3/4] overflow-hidden rounded-[24px]">
-                <img
-                  src="/Khai.jpeg"
-                  alt="Khairul Azril - Sales Specialist & Manager"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                />
+              <div className="relative aspect-[3/4] overflow-hidden rounded-[24px] bg-surface3">
+                <picture className="block h-full w-full">
+                  <source srcSet="/Khai.webp" type="image/webp" />
+                  <img
+                    src="/Khai.jpeg"
+                    alt="Khairul Azril - Sales Specialist & Manager"
+                    width={1254}
+                    height={1254}
+                    loading="lazy"
+                    decoding="async"
+                    className="portrait-img h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </picture>
+                <span aria-hidden="true" className="portrait-wash pointer-events-none absolute inset-0" />
               </div>
               <div className="mt-6 flex flex-col items-center text-center px-4 pb-4">
                 <span className="text-sm font-bold uppercase tracking-widest text-text">
@@ -447,9 +462,6 @@ export const About = () => {
           transition={{ duration: shouldReduceMotion ? 0 : 0.8 }}
           className="relative overflow-hidden rounded-[48px] border border-gold/30 bg-surface2 px-8 py-20 text-center text-text shadow-[0_0_80px_rgb(var(--gold)/0.08)] lg:py-32"
         >
-          {/* Subtle ambient radial glow behind text */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/5 blur-[120px]" />
-
           <div className="relative z-10 mx-auto max-w-4xl">
             <div className="relative mb-8">
               {/* Glow layer duplicate */}
@@ -484,10 +496,6 @@ export const About = () => {
               </WhatsAppChoice>
             </div>
           </div>
-
-          {/* Background decorative elements */}
-          <div className="absolute -left-1/4 -top-1/4 h-[600px] w-[600px] rounded-full bg-gold/5 blur-[120px]" />
-          <div className="absolute -right-1/4 -bottom-1/4 h-[600px] w-[600px] rounded-full bg-gold/5 blur-[120px]" />
         </motion.div>
         </div>
       </section>

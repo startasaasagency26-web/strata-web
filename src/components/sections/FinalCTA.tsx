@@ -39,7 +39,8 @@ export const FinalCTA = () => {
     <section id="final-cta" aria-labelledby="final-cta-heading" className="relative mx-2 overflow-hidden rounded-[32px] border border-gold/30 bg-surface2 py-32 text-text shadow-2xl shadow-gold/5 md:mx-6 md:rounded-[48px] md:py-48">
       {/* Strategy architecture field */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute inset-x-0 top-0 h-[62%] opacity-60 [mask-image:linear-gradient(to_bottom,black_0%,black_45%,transparent_100%)] md:opacity-80">
+        {/* md+: the field is a fixed band that ends above the heading (which starts ~344px down: py-48 + mark + margin), so no node, connector or label can cross the H2 or the "What we map" box at any width. */}
+        <div className="absolute inset-x-0 top-0 h-[62%] opacity-60 [mask-image:linear-gradient(to_bottom,black_0%,black_45%,transparent_100%)] md:h-[20rem] md:opacity-80">
           <div className="final-cta-blueprint absolute left-1/2 top-[-22%] h-[138%] w-[145%] md:w-[118%]" />
 
           <svg

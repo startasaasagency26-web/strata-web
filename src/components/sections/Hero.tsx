@@ -27,7 +27,7 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
       className="relative min-h-[100dvh] w-full scroll-mt-[var(--section-scroll-offset)] overflow-hidden py-24 lg:h-full lg:min-h-0 lg:py-0"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgb(var(--gold)/0.12),transparent_40%)]" aria-hidden="true" />
-      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-7xl flex-col justify-center px-5 sm:px-8 md:px-12 lg:h-full lg:min-h-0 lg:justify-start">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-7xl flex-col justify-center px-5 sm:px-8 md:px-12 lg:h-full lg:min-h-0 lg:justify-start lg:pt-12">
         <motion.div style={animateStage ? { opacity: contentOpacity } : undefined}>
           <div className="max-w-5xl lg:max-w-none">
           <motion.p {...fadeUp()} className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-accent">
@@ -36,9 +36,9 @@ const HeroStageContent = ({ progress }: { progress: MotionValue<number> }) => {
           <motion.h1
             {...fadeUp(0.05)}
             id="hero-heading"
-            className="max-w-6xl text-balance text-[clamp(3rem,7.5vw,7rem)] font-black leading-[0.9] tracking-[-0.055em] text-primary lg:text-[clamp(3rem,min(7.5vw,8vh),7rem)]"
+            className="max-w-6xl text-balance text-[clamp(3rem,7.5vw,7rem)] font-black leading-[0.9] tracking-[-0.055em] text-primary hyphens-none max-[375px]:text-[clamp(2.25rem,11.5vw,3rem)] lg:text-[clamp(3rem,min(7.5vw,8vh),7rem)]"
           >
-            Find the workflow costing your business time, visibility and follow-through.
+            Find the workflow costing your business time, visibility and <span className="whitespace-nowrap">follow-through.</span>
           </motion.h1>
           <motion.p {...fadeUp(0.1)} className="mt-7 max-w-3xl text-pretty text-base leading-relaxed text-muted md:text-xl">
             Strata helps growing businesses map where quotations, orders, service requests and approvals stall—then defines the first controlled workflow worth improving.

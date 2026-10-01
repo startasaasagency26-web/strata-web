@@ -9,33 +9,33 @@ export const Footer = () => {
   return (
     <footer className="bg-background pt-20 pb-10 mt-20 rounded-t-[32px] md:rounded-t-[48px]">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 mb-16">
           <div className="md:col-span-1">
-            <Link to="/">
-              <Logo variant="lockup" tone="gold" className="mb-6 h-10 w-auto origin-left" />
+            <Link to="/" className="mb-6 inline-flex min-h-11 items-center">
+              <Logo variant="lockup" tone="gold" className="h-10 w-auto origin-left" />
             </Link>
             <p className="text-muted text-sm font-sans leading-relaxed mb-6">
               Strata helps growing businesses diagnose and improve critical workflows while developing Strata Core as a governed AI Workforce Management platform.
             </p>
-            <div className="flex gap-4">
+            <div className="-ml-3 flex gap-1">
               <a
                 href={CONTACT.mailto}
                 aria-label={`Email Strata at ${CONTACT.email}`}
-                className="text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
               >
                 <Mail size={20} />
               </a>
               <WhatsAppChoice source="footer"
                 message="Hi Strata — I'd like to book a Business Operations Audit."
                 ariaLabel="Choose a Strata WhatsApp contact"
-                className="text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
               >
                 <Phone size={20} />
               </WhatsAppChoice>
               <Link
                 to="/about"
                 aria-label="View Strata details"
-                className="text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-text hover:text-gold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
               >
                 <MapPin size={20} />
               </Link>
@@ -50,7 +50,7 @@ export const Footer = () => {
               <li><Link to="/#operating-loop" className="text-muted hover:text-gold font-sans transition-colors text-sm">Controlled Workflow</Link></li>
               <li><Link to="/pricing" className="text-muted hover:text-gold font-sans transition-colors text-sm">Pricing &amp; Packages</Link></li>
               <li><Link to="/about" className="text-muted hover:text-gold font-sans transition-colors text-sm">About Strata</Link></li>
-              <li><Link to="/blog" className="text-muted hover:text-gold font-sans transition-colors text-sm">Field Notes</Link></li>
+              {/* Field Notes (/blog) link hidden until notes are published; the /blog route itself stays live. */}
               <li><Link to="/build-with-us" className="text-muted hover:text-gold font-sans transition-colors text-sm">Build With Us</Link></li>
             </ul>
           </div>
@@ -83,7 +83,7 @@ export const Footer = () => {
           </div>
         </div>
         
-        <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-border/50 flex flex-col items-start md:flex-row md:items-center justify-between gap-4">
           <p className="text-muted font-mono text-xs tracking-widest uppercase">
             &copy; {new Date().getFullYear()} Strata Growth Technologies. All rights reserved.
           </p>
