@@ -5,7 +5,15 @@
 **Written:** 2026-09-04
 **By:** Claude (boss)
 
-## Session update — 2026-09-04, latest (full audit + fix pass, verified by Claude)
+## Session update — 2026-10-01 (audit only, no code changed)
+
+Read-only audit against Nick's new bar (looks like a US$20–50k build). Report:
+`vault/brain/strata-website-audit-2026-10-01.md`. No code, deploy or Higgsfield spend.
+Current state: 21/21 links work; rated 5/10; no kit/shop route (ads point to a "shop" that
+redirects home); no Privacy/Terms; Build With Us clipped at 320px; "established" copy still live.
+NOT done: any fix. Awaiting Nick's call on kit page first vs homepage revamp, and master look.
+
+## Session update — 2026-09-04 (full audit + fix pass, verified by Claude)
 
 **This is the newest current state.** Three audits ran (copy, design, technical); every finding
 was re-verified by Claude directly before acting.
