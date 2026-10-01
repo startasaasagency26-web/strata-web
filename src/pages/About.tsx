@@ -29,7 +29,7 @@ export const About = () => {
               Founded in mid-2025, Strata helps growing businesses diagnose and improve critical workflows while developing Strata Core as an AI Workforce Management platform.
             </p>
             <div className="flex flex-wrap gap-4">
-              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="about / hero" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
+              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="about / hero" className="group relative flex min-h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-6 py-3 text-sm sm:px-8 font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
             </div>
@@ -283,7 +283,7 @@ export const About = () => {
               <p className="mb-8 text-sm font-medium italic text-text/70">
                 "Speak with a team that understands both operating workflows and real customer conversations."
               </p>
-              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="about / sales" className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-8 text-sm font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
+              <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="about / sales" className="group relative flex min-h-14 items-center justify-center overflow-hidden rounded-full bg-gold px-6 py-3 text-sm sm:px-8 font-bold uppercase tracking-widest text-void transition-colors hover:bg-goldHover active:bg-goldActive active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset">
                 <span className="relative z-10">Book Operations Audit</span>
               </WhatsAppChoice>
             </div>

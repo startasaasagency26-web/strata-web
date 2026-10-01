@@ -214,7 +214,7 @@ export const Pricing = () => {
             <Button
               asChild
               variant="glassStrong"
-              className="w-full sm:w-auto h-auto rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
+              className="w-full sm:w-auto h-auto rounded-full px-6 sm:px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
               <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="pricing / hero" className="flex items-center justify-center gap-2">
                 Book a Business Operations Audit
@@ -300,7 +300,7 @@ export const Pricing = () => {
               viewport={{ once: true }}
               transition={{ duration: shouldReduceMotion ? 0 : undefined, delay: shouldReduceMotion ? 0 : idx * 0.07 }}
               className={cn(
-                'relative flex flex-col rounded-[32px] bg-surface p-7 md:p-8',
+                'relative flex flex-col rounded-[32px] bg-surface p-7 [container-type:inline-size] md:p-8',
                 pkg.featured
                   ? 'border-2 border-gold shadow-[0_24px_72px_rgb(var(--scrim)/0.08)]'
                   : 'border border-border/60 shadow-sm',
@@ -322,7 +322,8 @@ export const Pricing = () => {
               <div className="mb-6 space-y-4">
                 <div>
                   <span className="block font-mono text-[11px] uppercase tracking-widest text-muted mb-1">MONTHLY</span>
-                  <span className="whitespace-nowrap font-mono text-lg font-bold tracking-[-0.03em] text-text md:text-xl xl:text-lg">{pkg.monthly}</span>
+                  {/* Sized to the card (container query) so the longest price fits on one line at every width. */}
+                  <span className="whitespace-nowrap font-mono text-[clamp(1rem,8.8cqi,1.25rem)] font-bold tracking-[-0.02em] text-text">{pkg.monthly}</span>
                 </div>
                 <div className="pt-3 border-t border-border/40">
                   <span className="block font-mono text-[11px] uppercase tracking-widest text-muted mb-1">IMPLEMENTATION</span>
@@ -452,7 +453,7 @@ export const Pricing = () => {
                 asChild
                 variant="glassOnDark"
                 size="lg"
-                className="w-full sm:w-auto h-auto py-4 px-8 rounded-full font-mono text-[11px] font-bold uppercase tracking-widest"
+                className="w-full sm:w-auto h-auto py-4 px-6 sm:px-8 rounded-full font-mono text-[11px] font-bold uppercase tracking-widest"
               >
                 <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="pricing / scope-drivers" className="flex items-center justify-center gap-2">
                   Book a Business Operations Audit
@@ -519,7 +520,7 @@ export const Pricing = () => {
               asChild
               variant="glassOnDark"
               size="lg"
-              className="h-auto w-full rounded-full px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em] lg:w-auto"
+              className="h-auto w-full rounded-full px-6 sm:px-8 py-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em] lg:w-auto"
             >
               <Link to="/#platform" className="flex items-center justify-center gap-3">
                 <span>View Platform Direction</span>
@@ -561,7 +562,7 @@ export const Pricing = () => {
               asChild
               variant="glassOnDark"
               size="lg"
-              className="w-full sm:w-auto h-auto py-5 px-10 rounded-full font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
+              className="w-full sm:w-auto h-auto py-5 px-6 sm:px-10 rounded-full font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
             >
               <WhatsAppChoice message="Hi Strata — I'd like to book a Business Operations Audit." source="pricing / final-cta" className="flex items-center justify-center gap-3">
                 <span>Book a Business Operations Audit</span>
