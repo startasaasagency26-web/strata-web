@@ -6,9 +6,10 @@ import { FLOOR, Volume, facePoint, line, makeBox, makeIso, poly, type BoxShape, 
  * "The Shift" — the Strata hero scene.
  *
  * An isometric service-business floor. Four carrier units move one job
- * through it: counter -> bench -> shelf -> the dock row. Scroll progress is
- * the only clock for the story; the one exception is the idle light pulse,
- * which runs only while the page sits at the top (progress ~0).
+ * through it: counter -> bench -> shelf -> the dock row. The `progress` motion
+ * value (0 -> 1) is the only clock for the story; the hero plays it once on a
+ * timer. The one exception is the idle light pulse, which loops along the lit
+ * route only after the story has settled (progress 1).
  *
  * Story beat: a job card rides the route, stalls at the bench handoff in an
  * unowned gap (it dims, a dashed gap marker shows), an "Owner" tag slides on,
@@ -78,7 +79,7 @@ const BRANCHES: { d: string; from: number; to: number }[] = [
 
 // ── Carrier choreography ─────────────────────────────────────────────────
 // Each carrier undocks, works the route, and returns home. Coordinates are
-// screen-space keyframes interpolated straight off scroll progress.
+// screen-space keyframes interpolated straight off story progress.
 const HOME: Pt[] = DOCKS.map((d) => deskTop(d.plan));
 
 type Track = { stops: number[]; x: number[]; y: number[] };
@@ -367,13 +368,16 @@ const JobCard = ({ p }: { p: MotionValue<number> }) => {
   );
 };
 
+/** Progress at which the story has finished and holds its final frame. */
+const SETTLED = 1;
+
 /**
- * Idle light pulse: a short bright dash travelling the whole route on a faint
- * track. stroke-dashoffset only (CSS keyframes), paused when off screen or once
- * the visitor starts scrolling the story.
+ * Idle light pulse: once the story has settled, a short bright dash keeps
+ * travelling the lit route. stroke-dashoffset only (CSS keyframes) plus a fade
+ * in; paused until the story settles and whenever the scene is off screen.
  */
 const IdlePulse = ({ p, running }: { p: MotionValue<number>; running: boolean }) => {
-  const opacity = useTransform(p, [0, 0.03], [1, 0]);
+  const opacity = useTransform(p, [SETTLED - 0.02, SETTLED], [0, 1]);
   return (
     <motion.g style={{ opacity }} className="hero-pulse" data-running={running ? 'true' : 'false'} aria-hidden="true">
       <path d={ROUTE_D} className="stroke-accent" fill="none" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" opacity={0.16} />
@@ -475,8 +479,8 @@ const Scene = ({ p, idle }: { p: MotionValue<number>; idle: { running: boolean }
 };
 
 /**
- * @param idle  Render the idle light pulse (desktop scroll stage only). It runs
- *              while progress is ~0 and the scene is on screen.
+ * @param idle  Render the idle light pulse (desktop only). It runs once
+ *              progress has settled at 1 and the scene is on screen.
  */
 export const HeroShift = ({ progress, idle = false }: { progress: MotionValue<number>; idle?: boolean }) => {
   const shouldReduceMotion = useReducedMotion();
@@ -484,12 +488,12 @@ export const HeroShift = ({ progress, idle = false }: { progress: MotionValue<nu
   const p = shouldReduceMotion ? settled : progress;
   const svgRef = useRef<SVGSVGElement>(null);
   const [onScreen, setOnScreen] = useState(true);
-  const [atTop, setAtTop] = useState(() => progress.get() < 0.03);
+  const [settledStory, setSettledStory] = useState(() => progress.get() >= SETTLED);
   const showIdle = idle && !shouldReduceMotion;
 
   useMotionValueEvent(progress, 'change', (v) => {
-    const next = v < 0.03;
-    setAtTop((prev) => (prev === next ? prev : next));
+    const next = v >= SETTLED;
+    setSettledStory((prev) => (prev === next ? prev : next));
   });
 
   useEffect(() => {
@@ -517,7 +521,7 @@ export const HeroShift = ({ progress, idle = false }: { progress: MotionValue<nu
         before continuing. Every route the work travelled stays lit, and an audit trail is written
         along the front edge.
       </desc>
-      <Scene p={p} idle={showIdle ? { running: onScreen && atTop } : null} />
+      <Scene p={p} idle={showIdle ? { running: onScreen && settledStory } : null} />
     </svg>
   );
 };
