@@ -38,6 +38,16 @@ export const routeMetadata = {
     title: "Build With Strata | Opportunities Coming Soon",
     description: "We’re building a space for future collaborators, creatives, developers, strategists, and operators who want to work with Strata. This page is not open yet.",
   },
+  privacy: {
+    path: "/privacy",
+    title: "Privacy Policy | Strata Growth Technologies",
+    description: "What Strata Growth Technologies collects when you visit the site, contact us or buy The Solo Ops Kit, why, who processes it, and the rights you have over it.",
+  },
+  terms: {
+    path: "/terms",
+    title: "Terms of Use | Strata Growth Technologies",
+    description: "The terms for using the Strata website, working with Strata on a done-for-you engagement, and buying The Solo Ops Kit, including the 14-day refund.",
+  },
 } as const satisfies Record<string, RouteMetadata>;
 
 export const routes = Object.values(routeMetadata) satisfies readonly RouteMetadata[];

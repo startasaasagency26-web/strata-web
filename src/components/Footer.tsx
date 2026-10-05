@@ -87,9 +87,11 @@ export const Footer = () => {
           <p className="text-muted font-mono text-xs tracking-widest uppercase">
             &copy; {new Date().getFullYear()} Strata Growth Technologies. All rights reserved.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-x-6 gap-y-3">
             <Link to="/about" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">About Strata</Link>
             <Link to="/pricing" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">How Pricing Works</Link>
+            <Link to="/privacy" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">Privacy</Link>
+            <Link to="/terms" className="text-muted hover:text-gold transition-colors font-mono tracking-widest uppercase text-xs">Terms</Link>
           </div>
         </div>
       </div>

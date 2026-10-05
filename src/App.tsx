@@ -12,6 +12,8 @@ const Pricing = lazy(() => import("./pages/Pricing").then((module) => ({ default
 const BuildWithUs = lazy(() => import("./pages/BuildWithUs").then((module) => ({ default: module.BuildWithUs })));
 const Blog = lazy(() => import("./pages/Blog").then((module) => ({ default: module.Blog })));
 const BlogArticle = lazy(() => import("./pages/BlogArticle").then((module) => ({ default: module.BlogArticle })));
+const Privacy = lazy(() => import("./pages/Privacy").then((module) => ({ default: module.Privacy })));
+const Terms = lazy(() => import("./pages/Terms").then((module) => ({ default: module.Terms })));
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -114,6 +116,8 @@ function App() {
           <Route path="/build-with-us" element={<PublicShell><BuildWithUs /></PublicShell>} />
           <Route path="/blog" element={<PublicShell><Blog /></PublicShell>} />
           <Route path="/blog/:slug" element={<PublicShell><BlogArticle /></PublicShell>} />
+          <Route path="/privacy" element={<PublicShell><Privacy /></PublicShell>} />
+          <Route path="/terms" element={<PublicShell><Terms /></PublicShell>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
