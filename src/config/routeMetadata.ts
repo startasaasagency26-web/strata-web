@@ -38,6 +38,11 @@ export const routeMetadata = {
     title: "Build With Strata | Opportunities Coming Soon",
     description: "We’re building a space for future collaborators, creatives, developers, strategists, and operators who want to work with Strata. This page is not open yet.",
   },
+  kit: {
+    path: "/kit",
+    title: "Solo Ops Kit: Find Where Work Disappears | Strata",
+    description: "A 27-page fillable PDF for owner-operators. Map one workflow, find the step where work disappears, and decide where AI should and shouldn't run. US$99.",
+  },
   privacy: {
     path: "/privacy",
     title: "Privacy Policy | Strata Growth Technologies",

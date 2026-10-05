@@ -1,3 +1,5 @@
+import { KIT } from "./kit.ts";
+
 /**
  * Facts the legal pages state. Verified against the SSM certificate and with
  * Nick (2026-10-05). Deliberately no postal address: the registered address is
@@ -8,9 +10,9 @@ export const LEGAL = {
   registrationNumber: "202603196433 (CA0424990-H)",
   registrationAct: "Registration of Businesses Act 1956",
   kit: {
-    name: "The Solo Ops Kit",
-    gumroadUrl: "https://stratatechnologies.gumroad.com/l/soloopskit",
-    refundDays: 14,
+    name: KIT.name,
+    gumroadUrl: KIT.listingUrl,
+    refundDays: KIT.refundDays,
   },
   lastUpdated: "5 October 2026",
   lastUpdatedIso: "2026-10-05",

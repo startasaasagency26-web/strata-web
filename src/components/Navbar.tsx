@@ -105,6 +105,7 @@ export const Navbar = () => {
     { name: 'WORKFLOWS', href: '/#workflows' },
     { name: 'AUDIT', href: '/#audit-outcome' },
     { name: 'PLATFORM VISION', href: '/#platform' },
+    { name: 'SOLO OPS KIT', href: '/kit' },
     { name: 'PRICING', href: '/pricing' },
     { name: 'ABOUT', href: '/about' },
   ];

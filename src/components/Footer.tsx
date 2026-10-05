@@ -48,6 +48,7 @@ export const Footer = () => {
               <li><Link to="/#workflows" className="text-muted hover:text-gold font-sans transition-colors text-sm">Workflow Examples</Link></li>
               <li><Link to="/#audit-outcome" className="text-muted hover:text-gold font-sans transition-colors text-sm">Business Operations Audit</Link></li>
               <li><Link to="/#operating-loop" className="text-muted hover:text-gold font-sans transition-colors text-sm">Controlled Workflow</Link></li>
+              <li><Link to="/kit" className="text-muted hover:text-gold font-sans transition-colors text-sm">Solo Ops Kit</Link></li>
               <li><Link to="/pricing" className="text-muted hover:text-gold font-sans transition-colors text-sm">Pricing &amp; Packages</Link></li>
               <li><Link to="/about" className="text-muted hover:text-gold font-sans transition-colors text-sm">About Strata</Link></li>
               {/* Field Notes (/blog) link hidden until notes are published; the /blog route itself stays live. */}
