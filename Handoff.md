@@ -26,7 +26,8 @@ Previous handoff (2026-09-04 → 2026-10-02 history) moved unchanged to
 
 - 🔴 Production returns 402 DEPLOYMENT_DISABLED (see above). Nothing on the branch can go live until that is fixed.
 - 🔴 None of the three pages is live. Fixed looks like: `/privacy`, `/terms`, `/kit` return 200 on www.strataagency.tech and Nick has read the legal wording.
-- ⚠️ Not checked by Atlas yet; not reviewed by Nick. Legal pages are a sensible baseline, not legal advice.
+- ✅ Checked by Atlas 2026-10-06 (laptop, local dev server): lint exit 0, build passes (8 routes prerendered); `/kit` text matches the approved copy (spot-checked every claim: 27 pages, 1.5–2 h, 14-day refund, US$99, bike-shop example); both buy buttons go to the Gumroad listing; Privacy and Terms show business name + reg. no. 202603196433 (CA0424990-H), no address, nick@strataagency.tech, 14-day refund; no horizontal scroll at 390 on all three. One unrepeated glitch: a first phone-width load of `/privacy` landed on `/`; reload was correct (likely dev-server first-load, not seen in the built output).
+- ✅ Legal wording approved by Nick 2026-10-06, unchanged (Decision Index). Still a sensible baseline, not legal advice.
 - ⚠️ Kit Gumroad button **clicks are not counted**. Page views are counted by Vercel Web Analytics (`<Analytics />` in `src/App.tsx`) only if Web Analytics is enabled on the Vercel project — not verified (site is down).
 - ⚠️ Privacy page says "no cookies, no advertising pixels". True today: the Meta Pixel code in `src/lib/analytics.ts` is dormant (no `VITE_META_PIXEL_ID` in Vercel env or local `.env`; compiled bundle has the id as `void 0`). **If paid ads turn the pixel on, the Privacy page must be updated and an EU/UK consent banner added first.**
 - ⚠️ Malaysia PDPA s.7(3) expects the privacy notice in Bahasa Malaysia as well as English. Only English exists.
@@ -43,8 +44,8 @@ Previous handoff (2026-09-04 → 2026-10-02 history) moved unchanged to
 ## Next actions, in order
 
 1. Nick fixes the Vercel 402 / DEPLOYMENT_DISABLED state.
-2. Atlas verifies the branch build: lint and build pass, the three routes at 1440 and 390, direct loads, footer and nav links.
-3. Nick reviews the preview and the legal wording. These pages are a sensible baseline, not legal advice.
+2. ~~Atlas verifies the branch build~~ — done 2026-10-06 (see NOT done list).
+3. ~~Nick reviews the legal wording~~ — approved 2026-10-06.
 4. Merge to master, then Nick runs `vercel --prod`. Atlas checks that `/kit`, `/privacy` and `/terms` return 200 live on phone and desktop.
 5. Then point the Instagram bio and the Reel 03/05 captions at `/kit`.
 
