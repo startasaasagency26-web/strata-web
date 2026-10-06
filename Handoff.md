@@ -24,6 +24,8 @@ Previous handoff (2026-09-04 → 2026-10-02 history) moved unchanged to
 
 ## NOT done / known broken
 
+- ⏳ **Social links (2026-10-06):** footer icons for LinkedIn (Nick's founder profile), Instagram, Facebook, X, Threads + JSON-LD `sameAs` + `twitter:site @StrataGrowth`. Commit `662101f` on `dev`. Verified locally by Atlas: lint 0, build passes, all 5 hrefs exact, 44px targets, no horizontal scroll at 1440 and 375, tags present in `dist/`. NOT live: the production push (master) is blocked for Claude; Nick runs it (see main Handoff).
+
 - ✅ `/kit`, `/privacy`, `/terms` LIVE 2026-10-06 (published on Nick's word, verified by Atlas).
 - ✅ Checked by Atlas 2026-10-06 (laptop, local dev server): lint exit 0, build passes (8 routes prerendered); `/kit` text matches the approved copy (spot-checked every claim: 27 pages, 1.5–2 h, 14-day refund, US$99, bike-shop example); both buy buttons go to the Gumroad listing; Privacy and Terms show business name + reg. no. 202603196433 (CA0424990-H), no address, nick@strataagency.tech, 14-day refund; no horizontal scroll at 390 on all three. One unrepeated glitch: a first phone-width load of `/privacy` landed on `/`; reload was correct (likely dev-server first-load, not seen in the built output).
 - ✅ Legal wording approved by Nick 2026-10-06, unchanged (Decision Index). Still a sensible baseline, not legal advice.
