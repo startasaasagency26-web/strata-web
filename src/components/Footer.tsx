@@ -3,6 +3,7 @@ import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CONTACT } from '../config/contact';
 import { WhatsAppChoice } from './WhatsAppChoice';
+import { SocialLinks } from './SocialLinks';
 import { Button } from './ui/liquid-glass-button';
 
 export const Footer = () => {
@@ -40,6 +41,7 @@ export const Footer = () => {
                 <MapPin size={20} />
               </Link>
             </div>
+            <SocialLinks className="-ml-3 mt-1" />
           </div>
           
           <div>
