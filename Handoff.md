@@ -10,8 +10,8 @@ Previous handoff (2026-09-04 → 2026-10-02 history) moved unchanged to
 
 ## Current state
 
-- **Production:** on 2026-10-05 ~21:33 MYT, `https://www.strataagency.tech/` returned **HTTP 402 `DEPLOYMENT_DISABLED`** ("Payment required") from Vercel (observed by Forge with curl). The site is not serving. Cause not investigated (likely Vercel billing/plan on the team). Nick needs to look at the Vercel dashboard.
-- Pushing master does NOT deploy. Production changes only through `vercel --prod`, which Nick runs.
+- **Production (2026-10-06):** LIVE. Nick moved the `strata-web` Vercel project from the Strata Pro team (unpaid invoice, 402) to his free Hobby team `startasaasagency26-webs-projects`. Local `.vercel/project.json` re-linked to it by Atlas (same project ID, new org ID). master `bc1f9b6` (kit + legal pages) is in production; Atlas verified live on desktop and 375px: `/`, `/kit`, `/privacy`, `/terms`, `/pricing` all 200 with correct titles and content, Gumroad buttons, nav and footer links, no horizontal scroll.
+- ⚠️ **Pushing master NOW DEPLOYS TO PRODUCTION** (Git integration on the Hobby project; the `bc1f9b6` push deployed itself in ~20 s). The SGT sync auto-commits and pushes whatever branch is checked out, so the local checkout is parked on branch `dev`. Never leave this checkout on master. Hobby plan = non-commercial use only per Vercel fair-use rules; Strata is commercial, so it can be paused. Move back to Pro once the invoice is paid (Nick).
 - **Branch `feat/legal-pages-2026-10`** (pushed to origin) holds `/privacy`, `/terms` and `/kit`:
   - `a0975d6` chore(sync) checkpoint — auto-commit that captured the Privacy/Terms work (`src/pages/Privacy.tsx`, `src/pages/Terms.tsx`, `src/components/LegalPage.tsx`, `src/config/legal.ts`, routes, footer links).
   - `f813d4e` feat(kit) — `/kit` page (`src/pages/Kit.tsx`), `src/config/kit.ts` (single Gumroad URL constant `KIT.checkoutUrl`), nav + footer "Solo Ops Kit" links.
@@ -24,8 +24,7 @@ Previous handoff (2026-09-04 → 2026-10-02 history) moved unchanged to
 
 ## NOT done / known broken
 
-- 🔴 Production returns 402 DEPLOYMENT_DISABLED (see above). Nothing on the branch can go live until that is fixed.
-- 🔴 None of the three pages is live. Fixed looks like: `/privacy`, `/terms`, `/kit` return 200 on www.strataagency.tech and Nick has read the legal wording.
+- ✅ `/kit`, `/privacy`, `/terms` LIVE 2026-10-06 (published on Nick's word, verified by Atlas).
 - ✅ Checked by Atlas 2026-10-06 (laptop, local dev server): lint exit 0, build passes (8 routes prerendered); `/kit` text matches the approved copy (spot-checked every claim: 27 pages, 1.5–2 h, 14-day refund, US$99, bike-shop example); both buy buttons go to the Gumroad listing; Privacy and Terms show business name + reg. no. 202603196433 (CA0424990-H), no address, nick@strataagency.tech, 14-day refund; no horizontal scroll at 390 on all three. One unrepeated glitch: a first phone-width load of `/privacy` landed on `/`; reload was correct (likely dev-server first-load, not seen in the built output).
 - ✅ Legal wording approved by Nick 2026-10-06, unchanged (Decision Index). Still a sensible baseline, not legal advice.
 - ⚠️ Kit Gumroad button **clicks are not counted**. Page views are counted by Vercel Web Analytics (`<Analytics />` in `src/App.tsx`) only if Web Analytics is enabled on the Vercel project — not verified (site is down).
@@ -43,10 +42,10 @@ Previous handoff (2026-09-04 → 2026-10-02 history) moved unchanged to
 
 ## Next actions, in order
 
-1. Nick fixes the Vercel 402 / DEPLOYMENT_DISABLED state.
+1. Nick pays the overdue Pro invoice, then moves `strata-web` back to the Pro team; Atlas re-links and re-checks.
 2. ~~Atlas verifies the branch build~~ — done 2026-10-06 (see NOT done list).
 3. ~~Nick reviews the legal wording~~ — approved 2026-10-06.
-4. Merge to master, then Nick runs `vercel --prod`. Atlas checks that `/kit`, `/privacy` and `/terms` return 200 live on phone and desktop.
+4. ~~Merge and go live~~ — done 2026-10-06.
 5. Then point the Instagram bio and the Reel 03/05 captions at `/kit`.
 
 ## Verification
