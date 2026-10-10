@@ -54,7 +54,7 @@ const Section = ({ id, heading, tone = "surface", children }: SectionProps) => (
   <section
     id={id}
     aria-labelledby={`${id}-heading`}
-    className={`${tone === "surface2" ? "bg-surface2" : "bg-surface"} scroll-mt-[var(--section-scroll-offset)] border-t border-line py-20 [contain-intrinsic-size:auto_1200px] [content-visibility:auto] md:py-28`}
+    className={`${tone === "surface2" ? "bg-surface2" : "bg-surface"} scroll-mt-[var(--section-scroll-offset)] border-t border-line py-20 [contain-intrinsic-size:auto_1100px] [content-visibility:auto] md:py-28 md:[contain-intrinsic-size:auto_720px]`}
   >
     <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12">
       <h2
