@@ -44,12 +44,17 @@ type SectionProps = {
   children: ReactNode;
 };
 
-/** Same rhythm and heading scale as KitSection in Kit.tsx. */
+/**
+ * Same rhythm and heading scale as KitSection in Kit.tsx. Every Section sits
+ * below the hero, so `content-visibility: auto` lets the browser skip style and
+ * layout for it until it nears the viewport (a measurable cut in main-thread
+ * work on throttled phones). The intrinsic size is remembered once rendered.
+ */
 const Section = ({ id, heading, tone = "surface", children }: SectionProps) => (
   <section
     id={id}
     aria-labelledby={`${id}-heading`}
-    className={`${tone === "surface2" ? "bg-surface2" : "bg-surface"} scroll-mt-[var(--section-scroll-offset)] border-t border-line py-20 md:py-28`}
+    className={`${tone === "surface2" ? "bg-surface2" : "bg-surface"} scroll-mt-[var(--section-scroll-offset)] border-t border-line py-20 [contain-intrinsic-size:auto_1200px] [content-visibility:auto] md:py-28`}
   >
     <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12">
       <h2
