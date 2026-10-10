@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Play, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { WhatsAppChoice } from "../components/WhatsAppChoice";
@@ -296,16 +296,30 @@ const HeroLoop = () => {
 /* ------------------------------------------------------------------ */
 
 /**
- * Native-controls walkthrough. Nothing is fetched until it is needed: the
- * video itself waits for play (preload="none"), and the poster is only set once
- * the player is within ~1.5 screens, so it never competes with the hero paint.
- * Captions are burned into the video; the VTT track is available but off by
- * default to avoid double captions.
+ * Walkthrough player — "silent, tap for sound" (Nick, 2026-10-10).
+ *
+ * - Nothing is fetched until the player is within ~1200 px of the viewport:
+ *   only then do the poster and src get set, so it never competes with the
+ *   hero paint.
+ * - With motion allowed it plays muted and looping while at least half of it
+ *   is on screen, and pauses when it leaves.
+ * - "Tap for sound" unmutes, restarts from 0 so the whole voiceover is heard,
+ *   and hands over to native controls. From then on it is never re-muted and
+ *   only resumes on scroll if we were the ones who paused it.
+ * - Reduced motion: no autoplay; poster plus a "Play with sound" button.
+ * - Captions are burned into the video; the VTT track is there but off by
+ *   default to avoid double captions.
  */
 const WalkthroughVideo = () => {
+  const shouldReduceMotion = useReducedMotion();
   const frameRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const inViewRef = useRef(false);
+  const pausedByScrollRef = useRef(false);
   const [nearViewport, setNearViewport] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
 
+  // Load gate: set poster + src only once the player is within ~1200 px.
   useEffect(() => {
     const frame = frameRef.current;
     if (!frame) return;
@@ -323,24 +337,106 @@ const WalkthroughVideo = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Muted autoplay while in view; pause when it leaves.
+  useEffect(() => {
+    const frame = frameRef.current;
+    const video = videoRef.current;
+    if (!nearViewport || !frame || !video) return;
+
+    if (!soundOn) {
+      // React does not reflect `muted` as an attribute; iOS needs it for inline autoplay.
+      video.muted = true;
+      video.setAttribute("muted", "");
+    }
+
+    const autoplay = !shouldReduceMotion && !soundOn;
+
+    const resume = () => {
+      if (document.visibilityState !== "visible" || !inViewRef.current || !video.paused) return;
+      // Muted preview resumes whenever it is back in view; after the viewer turns
+      // sound on, only resume a pause we caused, never one they chose.
+      if (autoplay || (soundOn && pausedByScrollRef.current)) {
+        pausedByScrollRef.current = false;
+        void video.play().catch(() => undefined);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inViewRef.current = entry.isIntersecting && entry.intersectionRatio >= 0.5;
+        if (inViewRef.current) {
+          resume();
+        } else if (!video.paused) {
+          pausedByScrollRef.current = true;
+          video.pause();
+        }
+      },
+      { threshold: [0, 0.5] },
+    );
+    observer.observe(frame);
+
+    video.addEventListener("loadeddata", resume);
+    video.addEventListener("canplay", resume);
+    document.addEventListener("visibilitychange", resume);
+
+    return () => {
+      observer.disconnect();
+      video.removeEventListener("loadeddata", resume);
+      video.removeEventListener("canplay", resume);
+      document.removeEventListener("visibilitychange", resume);
+    };
+  }, [nearViewport, shouldReduceMotion, soundOn]);
+
+  // Must run inside the click so the unmuted play() counts as a user gesture.
+  const playWithSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    pausedByScrollRef.current = false;
+    video.muted = false;
+    video.removeAttribute("muted");
+    video.loop = false;
+    video.currentTime = 0;
+    void video.play().catch(() => undefined);
+    setSoundOn(true);
+  };
+
+  const buttonLabel = shouldReduceMotion ? "Play with sound" : "Tap for sound";
+  const ButtonIcon = shouldReduceMotion ? Play : Volume2;
+
   return (
     <div
       ref={frameRef}
-      className="overflow-hidden rounded-[28px] border border-gold/25 bg-void shadow-2xl shadow-gold/5 md:rounded-[40px]"
+      className="relative overflow-hidden rounded-[28px] border border-gold/25 bg-void shadow-2xl shadow-gold/5 md:rounded-[40px]"
     >
       <video
+        ref={videoRef}
         className="block aspect-video h-auto w-full"
-        controls
-        preload="none"
+        controls={soundOn}
+        loop={!soundOn}
+        muted={!soundOn}
+        preload={nearViewport && !shouldReduceMotion ? "metadata" : "none"}
         playsInline
         width={1920}
         height={1080}
+        src={nearViewport ? `${VIDEO_DIR}/walkthrough.mp4` : undefined}
         poster={nearViewport ? `${VIDEO_DIR}/walkthrough-poster.jpg` : undefined}
         aria-label="How a build goes, in under a minute"
+        onClick={soundOn ? undefined : playWithSound}
       >
-        <source src={`${VIDEO_DIR}/walkthrough.mp4`} type="video/mp4" />
         <track kind="captions" src={`${VIDEO_DIR}/walkthrough.vtt`} srcLang="en" label="English" />
       </video>
+
+      {!soundOn && (
+        <button
+          type="button"
+          onClick={playWithSound}
+          aria-label={`${buttonLabel}: play the walkthrough from the start with the voiceover`}
+          className="absolute left-3 top-3 inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/50 bg-void/85 px-4 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-gold shadow-lg backdrop-blur-sm transition-colors hover:bg-void hover:text-goldHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset md:left-5 md:top-5 md:px-5"
+        >
+          <ButtonIcon size={16} aria-hidden="true" className="shrink-0" />
+          {buttonLabel}
+        </button>
+      )}
     </div>
   );
 };
