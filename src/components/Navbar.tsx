@@ -104,6 +104,7 @@ export const Navbar = () => {
   const navLinks = [
     { name: 'WORKFLOWS', href: '/#workflows' },
     { name: 'AUDIT', href: '/#audit-outcome' },
+    { name: 'WEBSITES', href: '/websites' },
     { name: 'PLATFORM VISION', href: '/#platform' },
     { name: 'SOLO OPS KIT', href: '/kit' },
     { name: 'PRICING', href: '/pricing' },
@@ -165,7 +166,7 @@ export const Navbar = () => {
                   <Link
                     to={link.href}
                     aria-current={active ? 'page' : undefined}
-                    className={cn("relative z-10 block whitespace-nowrap px-4 py-3 font-mono text-[11px] font-bold tracking-[0.2em] transition-colors duration-200 hover:text-text focus-visible:outline-none focus-visible:text-gold", active ? "text-gold" : "text-muted")}
+                    className={cn("relative z-10 block whitespace-nowrap px-2 py-3 font-mono text-[11px] font-bold tracking-[0.2em] transition-colors duration-200 hover:text-text focus-visible:outline-none focus-visible:text-gold", active ? "text-gold" : "text-muted")}
                     onMouseEnter={() => setHoveredLink(link.name)}
                     onMouseLeave={() => setHoveredLink(null)}
                   >

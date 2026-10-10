@@ -1,72 +1,55 @@
 # Handoff — Strata Web
 
 **Repo root:** `C:\Users\Amirul\Desktop\Strata Growth Technologies\Strata Web`
-**Branch:** `feat/legal-pages-2026-10` (off `master` @ 734b13e) — work in progress
-**Written:** 2026-10-05
-**By:** Claude (boss)
+**Branch:** `feat/websites-page-2026-10` (off `master` @ 6442e8f) — work in progress, not pushed by Forge
+**Written:** 2026-10-10
+**By:** Forge (build) — Atlas verifies next
 
-Previous handoff (2026-09-04 → 2026-10-02 history) moved unchanged to
-`C:\Users\Amirul\Desktop\Strata Growth Technologies\vault\engine\handoff-archive\strata-web-to-2026-10-05.md`.
+Previous handoff (legal pages + kit, 2026-10-05/06) is in this file's git history at `6442e8f`.
 
 ## Current state
 
-- **Production (2026-10-06):** LIVE. Nick moved the `strata-web` Vercel project from the Strata Pro team (unpaid invoice, 402) to his free Hobby team `startasaasagency26-webs-projects`. Local `.vercel/project.json` re-linked to it by Atlas (same project ID, new org ID). master `bc1f9b6` (kit + legal pages) is in production; Atlas verified live on desktop and 375px: `/`, `/kit`, `/privacy`, `/terms`, `/pricing` all 200 with correct titles and content, Gumroad buttons, nav and footer links, no horizontal scroll.
-- ⚠️ **Pushing master NOW DEPLOYS TO PRODUCTION** (Git integration on the Hobby project; the `bc1f9b6` push deployed itself in ~20 s). The SGT sync auto-commits and pushes whatever branch is checked out, so the local checkout is parked on branch `dev`. Never leave this checkout on master. Hobby plan = non-commercial use only per Vercel fair-use rules; Strata is commercial, so it can be paused. Move back to Pro once the invoice is paid (Nick).
-- **Branch `feat/legal-pages-2026-10`** (pushed to origin) holds `/privacy`, `/terms` and `/kit`:
-  - `a0975d6` chore(sync) checkpoint — auto-commit that captured the Privacy/Terms work (`src/pages/Privacy.tsx`, `src/pages/Terms.tsx`, `src/components/LegalPage.tsx`, `src/config/legal.ts`, routes, footer links).
-  - `f813d4e` feat(kit) — `/kit` page (`src/pages/Kit.tsx`), `src/config/kit.ts` (single Gumroad URL constant `KIT.checkoutUrl`), nav + footer "Solo Ops Kit" links.
-  - Observed locally by Forge: `npm run build` passes (8 routes prerendered), `npm run lint` exit 0; all three routes render at 1440, 1280 and 390 with no horizontal scroll; direct load works both as prerendered `dist/<route>/index.html` and via SPA rewrite to `/index.html`; footer, desktop nav and mobile-menu links navigate; both buy buttons point at the Gumroad listing; every body line of the approved kit copy is present on the page.
-- Local env fix (not in git): `node_modules/@esbuild/win32-x64/esbuild.exe` was missing on this Windows machine, so `prerender` failed; restored from the npm tarball of the same version (0.28.2).
+- **Production:** master `6442e8f` (kit, legal pages, social links) is live on the Hobby Vercel team. Pushing master deploys production — Nick pushes. The SGT sync auto-commits and pushes whatever branch is checked out; never leave this checkout on master (park on `dev` when idle).
+- **Branch `feat/websites-page-2026-10`** adds the `/websites` page. Observed by Forge locally on 2026-10-10:
+  - `npm run lint` exit 0; `npm run check:positioning` 0 violations; `npm run build` passes, 9 routes prerendered, `/websites` in `dist/sitemap.xml`, `dist/websites/index.html` carries the approved title, description, canonical and a Service JSON-LD block.
+  - Headless Chrome against a one-off `vite preview` (stopped): no horizontal scroll at 1280, 1440, 390; desktop nav on one line at 1280 and 1440 with no overlap; hero loop plays muted (WebM; 16:9 at ≥768 px, 9:16 below); with reduced motion only the poster shows; walkthrough is `preload="none"`, captions track present and off; both main CTAs and the concept cards open the WhatsApp chooser with the approved messages; "Visit j-armor.net" opens a new tab with `rel="noopener"`.
+  - Every body line of copy §1–9 is present in the rendered page text (scripted check, 67 lines, 0 missing); "Not client work" appears nowhere.
 
 ## Changed this session
 
-- Added `/privacy`, `/terms`, `/kit`; footer links Privacy, Terms, Solo Ops Kit; nav link SOLO OPS KIT. Nothing else changed.
+- `src/pages/Websites.tsx` (new) — the page, mirroring `Kit.tsx` section rhythm, cards, FAQ grid and closing block.
+- `src/App.tsx` — lazy `/websites` route inside `PublicShell`.
+- `src/config/routeMetadata.ts` — `websites` entry (title, description, Service JSON-LD).
+- `src/components/Navbar.tsx` — `WEBSITES` after `AUDIT`; desktop link padding `px-4` → `px-2` (desktop nav only renders at `xl`) so seven links fit beside the CTA at 1280.
+- `src/components/Footer.tsx` — "Websites" under "Solo Ops Kit".
+- `public/video/websites/` — hero loop MP4 (byte copies of the approved v4 renders), VP9 WebMs, first-frame posters, walkthrough MP4 (lossless remux of v6 with faststart, identical decoded frames), walkthrough poster (15.6 s), VTT.
+- `public/images/websites/` — WebP captures of the six concepts (desktop 720/1440, phone 390) and J-Armor (desktop 720/1440 captured fresh from the live site, phone 390/780 from the existing Sapphire Lens capture).
 
 ## NOT done / known broken
 
-- ⏳ **Social links (2026-10-06):** footer icons for LinkedIn (Nick's founder profile), Instagram, Facebook, X, Threads + JSON-LD `sameAs` + `twitter:site @StrataGrowth`. Commit `662101f` on `dev`. Verified locally by Atlas: lint 0, build passes, all 5 hrefs exact, 44px targets, no horizontal scroll at 1440 and 375, tags present in `dist/`. NOT live: the production push (master) is blocked for Claude; Nick runs it (see main Handoff).
-
-- ✅ `/kit`, `/privacy`, `/terms` LIVE 2026-10-06 (published on Nick's word, verified by Atlas).
-- ✅ Checked by Atlas 2026-10-06 (laptop, local dev server): lint exit 0, build passes (8 routes prerendered); `/kit` text matches the approved copy (spot-checked every claim: 27 pages, 1.5–2 h, 14-day refund, US$99, bike-shop example); both buy buttons go to the Gumroad listing; Privacy and Terms show business name + reg. no. 202603196433 (CA0424990-H), no address, nick@strataagency.tech, 14-day refund; no horizontal scroll at 390 on all three. One unrepeated glitch: a first phone-width load of `/privacy` landed on `/`; reload was correct (likely dev-server first-load, not seen in the built output).
-- ✅ Legal wording approved by Nick 2026-10-06, unchanged (Decision Index). Still a sensible baseline, not legal advice.
-- ⚠️ Kit Gumroad button **clicks are not counted**. Page views are counted by Vercel Web Analytics (`<Analytics />` in `src/App.tsx`) only if Web Analytics is enabled on the Vercel project — not verified (site is down).
-- ⚠️ Privacy page says "no cookies, no advertising pixels". True today: the Meta Pixel code in `src/lib/analytics.ts` is dormant (no `VITE_META_PIXEL_ID` in Vercel env or local `.env`; compiled bundle has the id as `void 0`). **If paid ads turn the pixel on, the Privacy page must be updated and an EU/UK consent banner added first.**
-- ⚠️ Malaysia PDPA s.7(3) expects the privacy notice in Bahasa Malaysia as well as English. Only English exists.
-- ⚠️ The site prices the service in RM while buyers are now international. Open flag for Nick. Don't change prices.
-- ⚠️ Carried from 2026-10-02: iOS safe-area under the sticky bar not tested on a real iPhone. `ScrollStage.tsx` is unused and `Hero.tsx.bak-preuifix-20260904` is tracked; both are for a later cleanup.
+- ⚠️ **Not browser-verified by Atlas yet** — no human-eye check on a real phone or Lighthouse run. Fixed looks like: Atlas checks /websites at 1440/1280/390 on the 5173 preview and Lighthouse mobile ≥ 90.
+- ⚠️ **Nav at 1280 is tight:** 3 px between the ABOUT pill and the BUSINESS OPS AUDIT button. No overlap, but visually crowded toward the right. Fixed looks like: Vibe signs off, or the header grid is changed (layout, not padding).
+- ⚠️ **Prices inside images:** the locked concept captures show fictional prices (Lowtide €148 / €90, Ardent Lane S$48,260 / S$31,945), and the locked walkthrough shows, around 24–27 s, a Lorong Table order screen with "RM 14" / "RM 52" next to a Lowtide checkout with euro amounts. Text greps cannot see these. Fixed looks like: Atlas/Nick decide whether that breaks the "no price on the page" rule; if so Vibe re-captures without figures.
+- ⚠️ Branch also edits the menu; unmerged `feat/homepage-revamp-2026-10` does too. Whichever merges second rebases and keeps both.
+- ⚠️ Carried: Meta Pixel dormant — if switched on, Privacy page + consent banner first. PDPA expects a Bahasa Malaysia privacy notice. Site prices in RM for international buyers (Nick's call). iOS safe-area untested on a real iPhone. `ScrollStage.tsx` unused, `Hero.tsx.bak-preuifix-20260904` tracked.
+- ⚠️ Hosting on the free Hobby plan (non-commercial use only); event counts for the new tracking tags need Pro.
 
 ## Named inputs the next agent needs
 
-- `C:\Users\Amirul\Desktop\Strata Growth Technologies\vault\brain\strata-kit-page-copy-2026-10-05.md` — approved /kit copy, to be used word for word.
-- `C:\Users\Amirul\Desktop\Strata Growth Technologies\vault\brain\strata-website-audit-2026-10-01.md` — section 6, stage 0 is the kit and legal page spec.
-- `C:\Users\Amirul\Desktop\Strata Growth Technologies\vault\engine\Decision Index.md` — entry "2026-10-05 — Kit refund 14 days; legal pages show no address": business name STRATA GROWTH TECHNOLOGIES, registration no. 202603196433 (CA0424990-H), **no postal address**, contact nick@strataagency.tech, refund 14 days.
-- Gumroad listing: https://stratatechnologies.gumroad.com/l/soloopskit
+- Approved copy: `C:\Users\Amirul\Desktop\Strata Growth Technologies\vault\brain\strata-websites-page-copy-2026-10-09.md` (§1–9, search listing, WhatsApp messages; "Not client work." dropped 2026-10-10).
+- Plan: `C:\Users\Amirul\.claude\plans\pasted-content-id-7e29-i-kind-floating-grove.md` §3.
+- Source media (locked, untouched): `...\videos\strata-remotion-2026-10-12\websites\out\` (hero v4, walkthrough v6) and `...\websites-page-2026-10\concepts\<slug>\captures\`.
+- Tracking sources: `websites / hero-cta`, `websites / closing-cta`, `websites / concept / <slug>`.
 
 ## Next actions, in order
 
-1. Nick pays the overdue Pro invoice, then moves `strata-web` back to the Pro team; Atlas re-links and re-checks.
-2. ~~Atlas verifies the branch build~~ — done 2026-10-06 (see NOT done list).
-3. ~~Nick reviews the legal wording~~ — approved 2026-10-06.
-4. ~~Merge and go live~~ — done 2026-10-06.
-5. Then point the Instagram bio and the Reel 03/05 captions at `/kit`.
+1. Atlas verifies the branch in the browser + Lighthouse mobile, then returns the checkout to `dev`.
+2. Nick decides on the prices visible inside the concept images and walkthrough.
+3. Nick merges to master and pushes (production).
 
 ## Verification
 
 ```
-cd "C:\Users\Amirul\Desktop\Strata Growth Technologies\Strata Web" && git checkout feat/legal-pages-2026-10 && npm run lint && npm run build
+cd "C:\Users\Amirul\Desktop\Strata Growth Technologies\Strata Web" && git checkout feat/websites-page-2026-10 && npm run lint && npm run build
 ```
-Expected: lint reports no errors; build ends with Vite's "built in" line and no errors.
-
-```
-curl -s -o /dev/null -w "%{http_code}\n" https://www.strataagency.tech/privacy https://www.strataagency.tech/terms https://www.strataagency.tech/kit
-```
-Expected after go-live: `200` three times. Today, before go-live, this is not expected to pass.
-
----
-
-Decision: Build /privacy, /terms and /kit before any paid ads (plan B3, audit stage 0)
-Action: Forge builds on `feat/legal-pages-2026-10`; Atlas verifies; Nick deploys
-Owner: Forge (build), Atlas (verify), Nick (deploy)
-Due date: Not set — needs Nick
-Storage: this repo; copy and decisions in the nick-sgt vault
-Review date: Not set — needs Nick
+Expected: lint silent, build ends "Prerendered 9 routes ... generated dist/sitemap.xml."

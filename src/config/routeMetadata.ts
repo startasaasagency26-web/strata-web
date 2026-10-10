@@ -43,6 +43,21 @@ export const routeMetadata = {
     title: "Solo Ops Kit: Find Where Work Disappears | Strata",
     description: "A 27-page fillable PDF for owner-operators. Map one workflow, find the step where work disappears, and decide where AI should and shouldn't run. US$99.",
   },
+  websites: {
+    path: "/websites",
+    title: "Websites That Bring Enquiries You Follow Up | Strata",
+    description: "Strata designs, builds and sets up business websites, then routes every enquiry to your WhatsApp or email. Quoted per project after a short call.",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${SITE_URL}/websites#service`,
+      name: "Website design, build and setup",
+      serviceType: "Website design and development",
+      url: `${SITE_URL}/websites`,
+      description: "Strata designs, builds and sets up business websites, then routes every enquiry to your WhatsApp or email. Quoted per project after a short call.",
+      provider: { "@id": `${SITE_URL}/#organization` },
+    },
+  },
   privacy: {
     path: "/privacy",
     title: "Privacy Policy | Strata Growth Technologies",
