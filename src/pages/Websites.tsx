@@ -287,6 +287,60 @@ const HeroLoop = () => {
 };
 
 /* ------------------------------------------------------------------ */
+/* Walkthrough                                                         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Native-controls walkthrough. Nothing is fetched until it is needed: the
+ * video itself waits for play (preload="none"), and the poster is only set once
+ * the player is within ~1.5 screens, so it never competes with the hero paint.
+ * Captions are burned into the video; the VTT track is available but off by
+ * default to avoid double captions.
+ */
+const WalkthroughVideo = () => {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [nearViewport, setNearViewport] = useState(false);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setNearViewport(true);
+        observer.disconnect();
+      },
+      { rootMargin: "1200px 0px" },
+    );
+    observer.observe(frame);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={frameRef}
+      className="overflow-hidden rounded-[28px] border border-gold/25 bg-void shadow-2xl shadow-gold/5 md:rounded-[40px]"
+    >
+      <video
+        className="block aspect-video h-auto w-full"
+        controls
+        preload="none"
+        playsInline
+        width={1920}
+        height={1080}
+        poster={nearViewport ? `${VIDEO_DIR}/walkthrough-poster.jpg` : undefined}
+        aria-label="How a build goes, in under a minute"
+      >
+        <source src={`${VIDEO_DIR}/walkthrough.mp4`} type="video/mp4" />
+        <track kind="captions" src={`${VIDEO_DIR}/walkthrough.vtt`} srcLang="en" label="English" />
+      </video>
+    </div>
+  );
+};
+
+/* ------------------------------------------------------------------ */
 /* Page                                                                */
 /* ------------------------------------------------------------------ */
 
@@ -363,22 +417,7 @@ export const Websites = () => (
       <p className={`-mt-4 mb-10 max-w-2xl md:-mt-6 md:mb-12 ${bodyText}`}>
         From a blank page to an enquiry arriving on your phone.
       </p>
-      <div className="overflow-hidden rounded-[28px] border border-gold/25 bg-void shadow-2xl shadow-gold/5 md:rounded-[40px]">
-        {/* Captions are burned into the video; the track is available but off by default to avoid double captions. */}
-        <video
-          className="block aspect-video h-auto w-full"
-          controls
-          preload="none"
-          playsInline
-          width={1920}
-          height={1080}
-          poster={`${VIDEO_DIR}/walkthrough-poster.jpg`}
-          aria-label="How a build goes, in under a minute"
-        >
-          <source src={`${VIDEO_DIR}/walkthrough.mp4`} type="video/mp4" />
-          <track kind="captions" src={`${VIDEO_DIR}/walkthrough.vtt`} srcLang="en" label="English" />
-        </video>
-      </div>
+      <WalkthroughVideo />
     </Section>
 
     {/* 5. Real build */}
