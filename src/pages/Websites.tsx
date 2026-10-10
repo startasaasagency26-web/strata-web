@@ -1,4 +1,4 @@
-import { useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -174,6 +174,8 @@ const HeroLoop = () => {
   const shouldReduceMotion = useReducedMotion();
   const isWide = useSyncExternalStore(subscribeWide, getWide, getWideServer);
   const [loadVideo, setLoadVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -200,11 +202,56 @@ const HeroLoop = () => {
     };
   }, [shouldReduceMotion]);
 
+  /*
+   * Keep the loop playing. Autoplay alone is not enough: a tab opened in the
+   * background mounts the video paused at 0 and never starts it. So retry
+   * play() once data is ready and whenever the tab becomes visible, and pause
+   * while the hero is fully off-screen to save battery.
+   */
   const variant = isWide ? "16x9" : "9x16";
+  const showVideo = loadVideo && !shouldReduceMotion;
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!showVideo || !video) return;
+
+    // React does not reflect `muted` as an attribute; some mobile browsers need it for autoplay.
+    video.muted = true;
+    video.setAttribute("muted", "");
+
+    let inView = true;
+    const tryPlay = () => {
+      if (document.visibilityState !== "visible" || !inView || !video.paused) return;
+      void video.play().catch(() => undefined);
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      if (inView) tryPlay();
+      else video.pause();
+    });
+    if (frameRef.current) observer.observe(frameRef.current);
+
+    video.addEventListener("loadeddata", tryPlay);
+    video.addEventListener("canplay", tryPlay);
+    document.addEventListener("visibilitychange", tryPlay);
+    tryPlay();
+
+    return () => {
+      observer.disconnect();
+      video.removeEventListener("loadeddata", tryPlay);
+      video.removeEventListener("canplay", tryPlay);
+      document.removeEventListener("visibilitychange", tryPlay);
+    };
+  }, [showVideo, variant]);
+
   const poster = `${VIDEO_DIR}/hero-loop-${variant}-poster.jpg`;
 
   return (
-    <div className="relative mx-auto aspect-[9/16] w-full max-w-[22rem] overflow-hidden rounded-[28px] border border-gold/25 bg-void shadow-2xl shadow-gold/5 md:aspect-video md:max-w-none md:rounded-[40px]">
+    <div
+      ref={frameRef}
+      className="relative mx-auto aspect-[9/16] w-full max-w-[22rem] overflow-hidden rounded-[28px] border border-gold/25 bg-void shadow-2xl shadow-gold/5 md:aspect-video md:max-w-none md:rounded-[40px]"
+    >
       <picture>
         <source media={WIDE_QUERY} srcSet={`${VIDEO_DIR}/hero-loop-16x9-poster.jpg`} width={1920} height={1080} />
         <img
@@ -217,16 +264,10 @@ const HeroLoop = () => {
           className="absolute inset-0 h-full w-full object-cover"
         />
       </picture>
-      {loadVideo && !shouldReduceMotion && (
+      {showVideo && (
         <video
           key={variant}
-          ref={(element) => {
-            // React does not reflect `muted` as an attribute; some mobile browsers need it for autoplay.
-            if (!element) return;
-            element.muted = true;
-            element.setAttribute("muted", "");
-            void element.play().catch(() => undefined);
-          }}
+          ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
           muted
