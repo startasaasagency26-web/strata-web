@@ -1,22 +1,22 @@
 # Handoff — Strata Web
 
 **Repo root:** `C:\Users\Amirul\Desktop\Strata Growth Technologies\Strata Web`
-**Branch:** `feat/websites-page-2026-10` (off `master` @ 6442e8f) — built and checked; on origin via the SGT sync (preview deploy only). Local checkout remains on this feature branch with the v7 edits uncommitted; do not switch to master.
+**Branch:** `feat/websites-page-2026-10`; remote master released at `68e3d06`. Local checkout stays off master.
 **Written:** 2026-10-11
 **By:** Windows laptop · Codex (v7 preview update); earlier Forge/Atlas verification retained
 
 Previous handoff (legal pages + kit, 2026-10-05/06) is in this file's git history at `6442e8f`.
 
-## Current v7 preview — 2026-10-11
+## Current production — 2026-10-11
 
-- Nick approved the rendered v7 and authorized replacing the walkthrough on the preview, with autoplay and no native player chrome.
-- New preview: https://strata-h7787957l-startasaasagency26-webs-projects.vercel.app/websites
-- Vercel deployment `dpl_5q7ZUBvhyodSTrmHJCZT7aJhZoWB`: target preview, status Ready (verified with the project team scope). No production deployment, manual commit or push.
-- Updated `src/pages/Websites.tsx`; added versioned `walkthrough-v7.mp4`, `.vtt`, and `-poster.jpg` under `public/video/websites/`. Old media retained. MP4 SHA-256 matches the approved render: `9DA3CC3E59750E6899EF9D03348B46756CA77D8B5203B641DBB18B6187D31C6D`.
-- Playback: lazy load near viewport; muted looping playback while in view; native controls always off. Tap for sound restarts narration at zero. Custom mute and pause/play buttons remain accessible. Manual pause survives scrolling. After narration finishes, default-motion users return to the silent loop. Reduced motion retains explicit play.
-- Verified locally: lint, positioning guard, TypeScript/Vite build, nine prerendered routes; muted/looping playback with controls=false; sound restart near zero with controls=false; pause persistence; mobile 390 CSS px with no horizontal overflow. This machine requests reduced motion, so default-motion behavior was tested using an isolated build-only fixture, not an OS setting change. Fixture was created after deployment upload and is not part of source or the hosted build.
-- NOT done: authenticated browser review of the hosted preview, physical iPhone playback, owner preview approval, production merge/push. Local browser behavior and Vercel Ready status are distinct checks.
-- Source edits are uncommitted on `feat/websites-page-2026-10`; preserve them. Rollback: restore the old three media URLs and prior walkthrough controls from the branch HEAD; old media files remain available.
+- Nick approved the preview and explicitly authorized release to production in this Codex chat.
+- LIVE: https://www.strataagency.tech/websites — production deployment `dpl_Hxad9NvNdrLm1BxMWP2Q5CLh2jfs` / https://strata-phjo1x8u3-startasaasagency26-webs-projects.vercel.app, Ready. Both apex and www domains are assigned.
+- The sync hook committed v7 as `68e3d06`. After checking a clean tree and that current remote master `6442e8f` was an ancestor, Codex fast-forwarded remote master to `68e3d06` with the owner's release authorization. No manual commit was created. Local checkout remains on `feat/websites-page-2026-10`, not master.
+- Verified live: /websites, v7 MP4 and VTT all HTTP 200; MP4 8,476,568 bytes, SHA-256 `9DA3CC3E59750E6899EF9D03348B46756CA77D8B5203B641DBB18B6187D31C6D`, identical to the approved render. Production browser loads the v7 source with native controls=false; sound playback observed at 8.955 seconds, playing, duration 31.8, no media error.
+- Default behavior: muted in-view looping with small sound/pause buttons; native player chrome always hidden. Tap for sound restarts narration. Manual pause persists across scrolling. Reduced-motion devices use explicit play; this machine has reduced motion enabled. Default-motion autoplay and 390px layout were verified in the prior local fixture, not by overriding production preferences.
+- Prior local checks: lint, build, positioning guard, nine prerendered routes, asset identity, autoplay and pause behavior passed. Prior media remains intact.
+- NOT done: physical iPhone check and human audio listening. No production blocker observed.
+- Rollback reference: previous production `dpl_X9zEA7zkkYBtgbsPR7FDcfChtKXs` / https://strata-r9v3xd4q3-startasaasagency26-webs-projects.vercel.app. Roll back through Vercel only if requested; do not force-push master. Source rollback would require an approved revert of the website release.
 ## Prior verified state (2026-10-10)
 
 - **Production:** master `6442e8f` (kit, legal pages, social links) is live on the Hobby Vercel team. Pushing master deploys production — Nick pushes. The SGT sync auto-commits and pushes whatever branch is checked out; never leave this checkout on master (park on `dev` when idle).
