@@ -1,13 +1,23 @@
 # Handoff — Strata Web
 
 **Repo root:** `C:\Users\Amirul\Desktop\Strata Growth Technologies\Strata Web`
-**Branch:** `feat/websites-page-2026-10` (off `master` @ 6442e8f) — built and checked; on origin via the SGT sync (preview deploy only). Local checkout parked back on `dev`.
-**Written:** 2026-10-10
-**By:** Forge (build), Atlas (verification)
+**Branch:** `feat/websites-page-2026-10` (off `master` @ 6442e8f) — built and checked; on origin via the SGT sync (preview deploy only). Local checkout remains on this feature branch with the v7 edits uncommitted; do not switch to master.
+**Written:** 2026-10-11
+**By:** Windows laptop · Codex (v7 preview update); earlier Forge/Atlas verification retained
 
 Previous handoff (legal pages + kit, 2026-10-05/06) is in this file's git history at `6442e8f`.
 
-## Current state
+## Current v7 preview — 2026-10-11
+
+- Nick approved the rendered v7 and authorized replacing the walkthrough on the preview, with autoplay and no native player chrome.
+- New preview: https://strata-h7787957l-startasaasagency26-webs-projects.vercel.app/websites
+- Vercel deployment `dpl_5q7ZUBvhyodSTrmHJCZT7aJhZoWB`: target preview, status Ready (verified with the project team scope). No production deployment, manual commit or push.
+- Updated `src/pages/Websites.tsx`; added versioned `walkthrough-v7.mp4`, `.vtt`, and `-poster.jpg` under `public/video/websites/`. Old media retained. MP4 SHA-256 matches the approved render: `9DA3CC3E59750E6899EF9D03348B46756CA77D8B5203B641DBB18B6187D31C6D`.
+- Playback: lazy load near viewport; muted looping playback while in view; native controls always off. Tap for sound restarts narration at zero. Custom mute and pause/play buttons remain accessible. Manual pause survives scrolling. After narration finishes, default-motion users return to the silent loop. Reduced motion retains explicit play.
+- Verified locally: lint, positioning guard, TypeScript/Vite build, nine prerendered routes; muted/looping playback with controls=false; sound restart near zero with controls=false; pause persistence; mobile 390 CSS px with no horizontal overflow. This machine requests reduced motion, so default-motion behavior was tested using an isolated build-only fixture, not an OS setting change. Fixture was created after deployment upload and is not part of source or the hosted build.
+- NOT done: authenticated browser review of the hosted preview, physical iPhone playback, owner preview approval, production merge/push. Local browser behavior and Vercel Ready status are distinct checks.
+- Source edits are uncommitted on `feat/websites-page-2026-10`; preserve them. Rollback: restore the old three media URLs and prior walkthrough controls from the branch HEAD; old media files remain available.
+## Prior verified state (2026-10-10)
 
 - **Production:** master `6442e8f` (kit, legal pages, social links) is live on the Hobby Vercel team. Pushing master deploys production — Nick pushes. The SGT sync auto-commits and pushes whatever branch is checked out; never leave this checkout on master (park on `dev` when idle).
 - **Branch `feat/websites-page-2026-10`** adds the `/websites` page. Observed by Forge locally on 2026-10-10:

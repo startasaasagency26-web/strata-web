@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Play, Volume2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { WhatsAppChoice } from "../components/WhatsAppChoice";
@@ -304,8 +304,9 @@ const HeroLoop = () => {
  * - With motion allowed it plays muted and looping while at least half of it
  *   is on screen, and pauses when it leaves.
  * - "Tap for sound" unmutes, restarts from 0 so the whole voiceover is heard,
- *   and hands over to native controls. From then on it is never re-muted and
- *   only resumes on scroll if we were the ones who paused it.
+ *   without native player chrome. Small sound and pause buttons remain available.
+ *   A viewer's pause is preserved across scrolling. After narration ends the
+ *   silent loop resumes.
  * - Reduced motion: no autoplay; poster plus a "Play with sound" button.
  * - Captions are burned into the video; the VTT track is there but off by
  *   default to avoid double captions.
@@ -316,8 +317,10 @@ const WalkthroughVideo = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const inViewRef = useRef(false);
   const pausedByScrollRef = useRef(false);
+  const pausedByViewerRef = useRef(false);
   const [nearViewport, setNearViewport] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   // Load gate: set poster + src only once the player is within ~1200 px.
   useEffect(() => {
@@ -352,7 +355,7 @@ const WalkthroughVideo = () => {
     const autoplay = !shouldReduceMotion && !soundOn;
 
     const resume = () => {
-      if (document.visibilityState !== "visible" || !inViewRef.current || !video.paused) return;
+      if (document.visibilityState !== "visible" || !inViewRef.current || !video.paused || pausedByViewerRef.current) return;
       // Muted preview resumes whenever it is back in view; after the viewer turns
       // sound on, only resume a pause we caused, never one they chose.
       if (autoplay || (soundOn && pausedByScrollRef.current)) {
@@ -392,6 +395,7 @@ const WalkthroughVideo = () => {
     const video = videoRef.current;
     if (!video) return;
     pausedByScrollRef.current = false;
+    pausedByViewerRef.current = false;
     video.muted = false;
     video.removeAttribute("muted");
     video.loop = false;
@@ -400,8 +404,26 @@ const WalkthroughVideo = () => {
     setSoundOn(true);
   };
 
-  const buttonLabel = shouldReduceMotion ? "Play with sound" : "Tap for sound";
-  const ButtonIcon = shouldReduceMotion ? Play : Volume2;
+  const toggleSound = () => {
+    if (!soundOn) { playWithSound(); return; }
+    const video = videoRef.current;
+    if (video) video.muted = true;
+    setSoundOn(false);
+  };
+  const togglePlayback = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    pausedByScrollRef.current = false;
+    if (video.paused) {
+      pausedByViewerRef.current = false;
+      void video.play().catch(() => undefined);
+    } else {
+      pausedByViewerRef.current = true;
+      video.pause();
+    }
+  };
+  const buttonLabel = soundOn ? "Mute" : shouldReduceMotion ? "Play with sound" : "Tap for sound";
+  const ButtonIcon = soundOn ? VolumeX : shouldReduceMotion ? Play : Volume2;
 
   return (
     <div
@@ -411,31 +433,44 @@ const WalkthroughVideo = () => {
       <video
         ref={videoRef}
         className="block aspect-video h-auto w-full"
-        controls={soundOn}
+        controls={false}
         loop={!soundOn}
         muted={!soundOn}
         preload={nearViewport && !shouldReduceMotion ? "metadata" : "none"}
         playsInline
         width={1920}
         height={1080}
-        src={nearViewport ? `${VIDEO_DIR}/walkthrough.mp4` : undefined}
-        poster={nearViewport ? `${VIDEO_DIR}/walkthrough-poster.jpg` : undefined}
+        src={nearViewport ? `${VIDEO_DIR}/walkthrough-v7.mp4` : undefined}
+        poster={nearViewport ? `${VIDEO_DIR}/walkthrough-v7-poster.jpg` : undefined}
         aria-label="How a build goes, in under a minute"
         onClick={soundOn ? undefined : playWithSound}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setSoundOn(false)}
       >
-        <track kind="captions" src={`${VIDEO_DIR}/walkthrough.vtt`} srcLang="en" label="English" />
+        <track kind="captions" src={`${VIDEO_DIR}/walkthrough-v7.vtt`} srcLang="en" label="English" />
       </video>
 
-      {!soundOn && (
+      {nearViewport && (
+        <>
         <button
           type="button"
-          onClick={playWithSound}
-          aria-label={`${buttonLabel}: play the walkthrough from the start with the voiceover`}
+          onClick={toggleSound}
+          aria-label={soundOn ? "Mute walkthrough" : `${buttonLabel}: play the walkthrough from the start with the voiceover`}
           className="absolute left-3 top-3 inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/50 bg-void/85 px-4 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-gold shadow-lg backdrop-blur-sm transition-colors hover:bg-void hover:text-goldHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focusOffset md:left-5 md:top-5 md:px-5"
         >
           <ButtonIcon size={16} aria-hidden="true" className="shrink-0" />
           {buttonLabel}
         </button>
+        <button
+          type="button"
+          onClick={togglePlayback}
+          aria-label={playing ? "Pause walkthrough" : "Play walkthrough"}
+          className="absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold/50 bg-void/85 text-gold backdrop-blur-sm hover:bg-void focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus md:right-5 md:top-5"
+        >
+          {playing ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
+        </button>
+        </>
       )}
     </div>
   );
